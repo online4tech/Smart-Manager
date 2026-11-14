@@ -2,8 +2,7 @@ name: Release Online4Tech Windows Bridge
 
 on:
   push:
-    tags:
-      - "v*"
+    branches: ["main"]
 
 permissions:
   contents: write
@@ -35,6 +34,9 @@ jobs:
       - name: Publish GitHub Release
         uses: softprops/action-gh-release@v2
         with:
+          tag_name: bridge-${{ github.run_number }}
+          name: Online4Tech Bridge ${{ github.run_number }}
+          target_commitish: ${{ github.sha }}
           generate_release_notes: true
           files: |
             Online4Tech-Bridge-Windows.zip

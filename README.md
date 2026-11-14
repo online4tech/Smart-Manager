@@ -119,7 +119,7 @@ https://online4tech.github.io/Smart-Manager/
 
 
 ## إصدار Windows الدائم للجسر
-- عند إنشاء Tag إصدار بصيغة `v*`، يبني GitHub Actions حزمة Windows وينشرها كـ GitHub Release دائم.
+- مع كل تحديث ناجح على `main`، يبني GitHub Actions حزمة Windows وينشر إصدارًا جديدًا تلقائيًا، ويحدّث رابط Latest للزوار.
 - يحتوي الإصدار على `Online4TechBridge.exe` وملفي التثبيت والإزالة، بالإضافة إلى `SHA256SUMS.txt` للتحقق من سلامة التنزيل.
 - رابط التحميل الثابت للواجهة: https://github.com/online4tech/Smart-Manager/releases/latest/download/Online4Tech-Bridge-Windows.zip
 - زر تثبيت البلجنات يظل غير مفعّل حتى اعتماد الحزمة والتحقق من توافقها؛ تنزيل الجسر وحده لا يعني أن تثبيت البلجنات أصبح متاحًا.
