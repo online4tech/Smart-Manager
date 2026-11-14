@@ -203,7 +203,7 @@ function PluginStore() {
       <span className="plugin-symbol"><Package size={22}/></span><small>{selected.category}</small><h2>{selected.name}</h2>
       <div className="catalog-detail-path"><span>مسار العنصر</span><code dir="ltr">{selected.path || "—"}</code></div>
       <div className="catalog-related-commands">
-        {commandEntries.filter(item => item.id.startsWith(selected.id) || item.id === selected.id).map(item => <div key={item.id}>
+        {commandEntries.filter(item => item.id === selected.id || item.id === selected.id + "-remove").map(item => <div key={item.id}>
           <div className="catalog-command-head"><strong>{item.typeLabel}</strong><span className={"command-kind " + item.type}>{item.typeLabel}</span></div>
           <code className="catalog-command-code" dir="ltr">{item.command}</code>
           <button className="secondary-button copy-command" onClick={() => copyCommand(item)}><Copy size={14}/>{copiedId === item.id ? "تم النسخ" : "نسخ الأمر"}</button>
