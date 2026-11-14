@@ -58,9 +58,9 @@ def read_receiver_info(host, port, scheme):
     fields = {}
     try:
         if scheme == "https":
-            connection = http.client.HTTPSConnection(host, port, timeout=5, context=ssl.create_default_context())
+            connection = http.client.HTTPSConnection(host, port, timeout=3, context=ssl.create_default_context())
         else:
-            connection = http.client.HTTPConnection(host, port, timeout=5)
+            connection = http.client.HTTPConnection(host, port, timeout=3)
 
         for endpoint in ("/web/deviceinfo", "/web/about"):
             connection.request("GET", endpoint, headers={"Accept": "application/xml, text/xml", "Connection": "close"})
@@ -90,9 +90,9 @@ def read_receiver_info(host, port, scheme):
                 connection.close()
                 if endpoint != "/web/about":
                     if scheme == "https":
-                        connection = http.client.HTTPSConnection(host, port, timeout=5, context=ssl.create_default_context())
+                        connection = http.client.HTTPSConnection(host, port, timeout=3, context=ssl.create_default_context())
                     else:
-                        connection = http.client.HTTPConnection(host, port, timeout=5)
+                        connection = http.client.HTTPConnection(host, port, timeout=3)
 
     except ValueError:
         raise
