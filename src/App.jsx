@@ -104,7 +104,7 @@ function ReceiverDetails() {
       </div>
       <div className="glass panel connection-panel">
         <div className="panel-heading"><div><h3>طبقة الاتصال</h3><p>جاهزية الربط الآمن مستقبلًا</p></div><span className="panel-icon"><LockKeyhole size={19}/></span></div>
-        <div className="connection-state"><span className="offline-status-dot"/><div><strong>{snapshot.connected ? "OpenWebif متصل" : "الجسر غير متصل بالرسيفر"}</strong><small>{snapshot.connected ? "تمت قراءة بيانات الرسيفر" : "لا توجد بيانات حية"}</small></div></div>
+        <div className="connection-state"><span className={snapshot.connected ? "live-dot" : "offline-status-dot"}/><div><strong>{snapshot.connected ? "OpenWebif متصل" : "الجسر غير متصل بالرسيفر"}</strong><small>{snapshot.connected ? "تمت قراءة بيانات الرسيفر" : "لا توجد بيانات حية"}</small></div></div>
         <ul className="capability-list">
           <li><CheckCircle2 size={14}/> قراءة بيانات OpenWebif الفعلية المتاحة</li>
           <li><CheckCircle2 size={14}/> الاتصال المحلي بالرسيفر مفعّل</li>
@@ -442,7 +442,7 @@ export default function App() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scanState, setScanState] = useState("idle");
   const [activeNav, setActiveNav] = useState("AI Doctor");
-    const [activeReport, setActiveReport] = useState(null);
+  const [activeReport, setActiveReport] = useState(null);
   const [scanHistory, setScanHistory] = useState([]);
   const [liveSnapshot, setLiveSnapshot] = useState(null);
 
