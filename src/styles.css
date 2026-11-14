@@ -161,3 +161,14 @@
 .bridge-safety-note{display:flex;align-items:flex-start;gap:8px;padding:10px;border-radius:9px;background:rgba(59,130,246,.055);color:#91abc5;font-size:9px;line-height:1.9}
 .bridge-safety-note svg{color:#79b9f3;flex-shrink:0;margin-top:2px}
 @media(max-width:760px){.bridge-open-button{font-size:0;padding:8px;gap:5px}.bridge-open-button svg{width:17px;height:17px}.bridge-modal{padding:20px}.bridge-actions{flex-direction:column}}
+
+
+/* Read-only receiver connection */
+.bridge-receiver-form{display:grid;gap:9px;padding:12px;border:1px solid rgba(96,165,250,.18);border-radius:11px;background:rgba(59,130,246,.045)}
+.bridge-host-input{font-size:15px;letter-spacing:1px}
+.bridge-scheme-row{display:flex;align-items:center;justify-content:space-between;gap:12px;color:#9bb0c6;font-size:10px}
+.bridge-scheme-row select{background:#101d30;border:1px solid var(--line);border-radius:7px;padding:7px 10px;color:#d8e9fa}
+.bridge-receiver-details{display:grid;gap:7px;padding:11px;border:1px solid rgba(57,214,154,.18);border-radius:9px;background:rgba(57,214,154,.045)}
+.bridge-receiver-details>strong{font-size:11px;color:#9ce8c4;margin-bottom:2px}
+.bridge-receiver-details>div{display:flex;justify-content:space-between;gap:10px;font-size:10px}
+.bridge-receiver-details span{color:#829bb4}.bridge-receiver-details b{color:#d4e7f8;text-align:left;overflow-wrap:anywhere}
