@@ -137,6 +137,7 @@ function PluginStore() {
   const [packageError, setPackageError] = useState("");
   const [installingPackage, setInstallingPackage] = useState(false);
   const [installResult, setInstallResult] = useState(null);
+  const [installRequest, setInstallRequest] = useState(null);
   const categories = ["الكل", ...new Set((view === "plugins" ? catalogEntries : commandEntries).map(item => item.category))];
   const activeFilterCount = (category !== "الكل" ? 1 : 0) + (view === "commands" && commandType !== "الكل" ? 1 : 0);
   const matchingApprovedPackage = stagedPackage ? approvedPackages.find(item => item.package === stagedPackage.package && item.version === stagedPackage.version && item.architecture === stagedPackage.architecture && String(item.sha256 || "").toLowerCase() === String(stagedPackage.sha256 || "").toLowerCase()) : null;
@@ -149,6 +150,16 @@ function PluginStore() {
     (commandType === "الكل" || item.type === commandType) &&
     (item.name + " " + item.category + " " + item.path + " " + item.command).toLowerCase().includes(query.toLowerCase())
   );
+  const requestPluginInstall = (plugin) => {
+    setInstallRequest(plugin);
+    setSelected(null);
+    setView("packages");
+    setCategory("الكل");
+    setQuery("");
+    setInstallResult(null);
+    setPackageError("");
+  };
+
   const uploadPackageToStaging = async () => {
     if (!packageFile) return;
     setStagingPackage(true);
@@ -234,6 +245,7 @@ function PluginStore() {
       </div>}
     </div>}
     {view === "packages" ? <section className="package-center">
+      {installRequest && <div className="glass package-install-request"><div className="package-panel-heading"><span className="plugin-symbol"><Package size={20}/></span><div><h3>طلب تثبيت: {installRequest.name}</h3><p>تم فتح مركز الحزم لهذا البلجن. لن يبدأ أي تثبيت قبل توفير ملف IPK مطابق واعتماده والتحقق من توافقه مع الرسيفر.</p></div></div><div className="package-not-approved"><LockKeyhole size={15}/> لا توجد حزمة معتمدة مرتبطة بهذا العنصر حاليًا. ارفع ملفه من القسم التالي لمراجعته وحفظه محليًا.</div></div>}
       <div className="glass package-upload-panel">
         <div className="package-panel-heading"><span className="plugin-symbol"><ShieldCheck size={20}/></span><div><h3>رفع وفحص حزمة IPK</h3><p>يتم حفظ الملف على هذا الكمبيوتر داخل مجلد staging فقط، ولا يتم إرساله إلى الرسيفر.</p></div></div>
         <div className="package-upload-controls">
@@ -270,7 +282,7 @@ function PluginStore() {
         <div className="catalog-card-head"><span className="plugin-symbol"><Package size={19}/></span><span className="catalog-category">{item.category}</span></div>
         <h3>{item.name}</h3>
         <p className="catalog-path" dir="ltr">{item.path || "—"}</p>
-        <button className="secondary-button catalog-open" onClick={() => setSelected(item)}>التفاصيل <ChevronLeft size={15}/></button>
+        <div className="catalog-card-actions"><button className="secondary-button catalog-open" onClick={() => setSelected(item)}>التفاصيل <ChevronLeft size={15}/></button><button className="primary-button catalog-install-trigger" onClick={() => requestPluginInstall(item)}><Package size={14}/> تثبيت</button></div>
       </article>)}</div>
       {filteredPlugins.length === 0 && <div className="glass empty-state">لا توجد نتائج مطابقة.</div>}
     </> : <>
@@ -290,10 +302,10 @@ function PluginStore() {
       <span className="plugin-symbol"><Package size={22}/></span><small>{selected.category}</small><h2>{selected.name}</h2>
       <div className="catalog-detail-path"><span>مسار العنصر</span><code dir="ltr">{selected.path || "—"}</code></div>
       <div className="catalog-install-actions">
-        <button className="primary-button" disabled title="التثبيت الفعلي غير مفعّل حتى اعتماد الحزمة والتحقق من توافقها">التثبيت غير متاح حاليًا</button>
+        <button className="primary-button" onClick={() => requestPluginInstall(selected)}><Package size={15}/> متابعة تثبيت البلجن</button>
         <a className="secondary-button" href="https://github.com/online4tech/Smart-Manager/releases/latest/download/Online4Tech-Bridge-Windows.zip"><Package size={14}/> تحميل الجسر</a>
       </div>
-      <small className="catalog-install-note">زر التثبيت غير مفعّل حاليًا. سيتم تفعيله فقط للعناصر المعتمدة والمتوافقة، وبعد تأكيد المستخدم.</small>
+      <small className="catalog-install-note">الزر يفتح مسار تجهيز الحزمة. التثبيت الفعلي لا يتم إلا بعد اعتماد ملف IPK والتحقق من توافقه وموافقتك الصريحة.</small>
       <div className="catalog-related-commands">
         {commandEntries.filter(item => item.id === selected.id || item.id === selected.id + "-remove").map(item => <div key={item.id}>
           <div className="catalog-command-head"><strong>{item.typeLabel}</strong><span className={"command-kind " + item.type}>{item.typeLabel}</span></div>
