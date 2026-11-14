@@ -46,3 +46,18 @@ src/
 - لا تعرض بيانات تجريبية على أنها قراءات حقيقية.
 - أي عملية تغيّر حالة الرسيفر تحتاج موافقة صريحة.
 - لا تفتح Bridge أو SSH مباشرة على الإنترنت.
+
+
+## النشر على GitHub Pages
+
+يتم البناء والنشر تلقائياً عند كل تحديث على فرع `main` من خلال GitHub Actions.
+
+- مسار Vite مضبوط على `/Smart-Manager/` ليتوافق مع رابط المشروع.
+- يتم تثبيت الاعتماديات باستخدام `npm ci` ثم تنفيذ `npm run build`.
+- يتم نشر مجلد `dist` كـ GitHub Pages artifact.
+- يمكن تشغيل النشر يدوياً من تبويب Actions عبر Workflow باسم **Deploy Smart Manager to GitHub Pages**.
+
+رابط الموقع المتوقع:
+https://online4tech.github.io/Smart-Manager/
+
+إذا لم تكن Pages مفعّلة بعد، افتح Settings → Pages وتأكد أن Build and deployment → Source مضبوط على **GitHub Actions**.
