@@ -90,11 +90,14 @@ def parse_ipk_metadata(payload):
             raise ValueError("invalid_ipk_archive")
         members[name] = payload[offset + 60:offset + 60 + size]
         offset += 60 + size + (size % 2)
-    if offset != len(payload) or "debian-binary" not in members:
+    if offset != len(payload) or members.get("debian-binary") != b"2.0\n":
         raise ValueError("invalid_ipk_archive")
-    control_name = next((name for name in ("control.tar.gz", "control.tar.xz", "control.tar.zst", "control.tar") if name in members), None)
+    control_name = next((name for name in ("control.tar.gz", "control.tar.xz", "control.tar.bz2", "control.tar") if name in members), None)
+    data_name = next((name for name in ("data.tar.gz", "data.tar.xz", "data.tar.bz2", "data.tar") if name in members), None)
     if not control_name:
         raise ValueError("ipk_control_missing")
+    if not data_name:
+        raise ValueError("ipk_data_missing")
     try:
         with tarfile.open(fileobj=io.BytesIO(members[control_name]), mode="r:*") as archive:
             control_member = None
@@ -108,6 +111,16 @@ def parse_ipk_metadata(payload):
                 raise ValueError("ipk_control_missing")
             stream = archive.extractfile(control_member)
             raw_control = stream.read(MAX_CONTROL_SIZE + 1) if stream else b""
+        with tarfile.open(fileobj=io.BytesIO(members[data_name]), mode="r:*") as archive:
+            for member in archive.getmembers():
+                normalized = posixpath.normpath(member.name)
+                if member.name.startswith("/") or normalized == ".." or normalized.startswith("../"):
+                    raise ValueError("ipk_unsafe_path")
+                if member.issym() or member.islnk():
+                    target = member.linkname
+                    resolved = posixpath.normpath(posixpath.join(posixpath.dirname(member.name), target))
+                    if target.startswith("/") or resolved == ".." or resolved.startswith("../"):
+                        raise ValueError("ipk_unsafe_path")
         if len(raw_control) > MAX_CONTROL_SIZE:
             raise ValueError("ipk_control_too_large")
         control = {}
@@ -116,7 +129,7 @@ def parse_ipk_metadata(payload):
                 key, value = line.split(":", 1)
                 control[key.strip().lower()] = value.strip()
     except (tarfile.TarError, OSError, EOFError):
-        raise ValueError("ipk_control_invalid")
+        raise ValueError("ipk_data_archive_invalid")
     package = control.get("package", "")
     version = control.get("version", "")
     architecture = control.get("architecture", "")
@@ -303,7 +316,7 @@ def read_receiver_dataset(snapshot, dataset):
             connection.close()
 
 class Handler(BaseHTTPRequestHandler):
-    server_version = "O4TLocalBridge/1.2"
+    server_version = "O4TLocalBridge/1.3"
 
     def log_message(self, fmt, *args):
         # Do not log request bodies, pairing codes, or session headers.
@@ -387,6 +400,8 @@ class Handler(BaseHTTPRequestHandler):
                     "ipk_size_invalid": "حجم الملف غير صالح أو يتجاوز 32 ميجابايت.",
                     "invalid_ipk_archive": "بنية ملف IPK غير صالحة.",
                     "ipk_control_missing": "ملف التحكم control غير موجود داخل الحزمة.",
+                    "ipk_data_missing": "ملفات محتوى الحزمة data غير موجودة.",
+                    "ipk_data_archive_invalid": "أرشيف ملفات الحزمة غير صالح أو غير مدعوم.",
                     "ipk_control_invalid": "تعذر قراءة بيانات الحزمة.",
                     "ipk_unsafe_path": "الحزمة تحتوي على مسار داخلي غير آمن وتم رفضها.",
                     "ipk_package_invalid": "اسم الحزمة داخل الملف غير صالح.",
