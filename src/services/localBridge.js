@@ -63,3 +63,32 @@ export async function connectLocalReceiver(credentials, config) {
     csrf: credentials.csrf
   });
 }
+
+export async function getReceiverDataset(credentials, dataset) {
+  if (!credentials?.token || !credentials?.csrf) throw new Error("جلسة الجسر غير متاحة.");
+  const allowed = new Set(["boxinfo", "status", "services", "timers", "recordings"]);
+  if (!allowed.has(dataset)) throw new Error("مجموعة البيانات غير مدعومة.");
+  return bridgeRequest("/api/receiver/data", {
+    body: { dataset },
+    token: credentials.token,
+    csrf: credentials.csrf
+  });
+}
+
+export function getStoredBridgeCredentials() {
+  try {
+    const saved = JSON.parse(localStorage.getItem("o4t-bridge-trust") || "null");
+    return saved?.token && saved?.csrf ? saved : null;
+  } catch {
+    return null;
+  }
+}
+
+export function getStoredReceiverConfig() {
+  try {
+    const saved = JSON.parse(localStorage.getItem("o4t-receiver-config") || "null");
+    return saved?.host ? saved : null;
+  } catch {
+    return null;
+  }
+}
