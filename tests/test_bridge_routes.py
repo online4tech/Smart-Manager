@@ -84,12 +84,12 @@ class IpkInspectionTests(unittest.TestCase):
             parse_ipk_metadata(payload)
 
     def test_rejects_traversal_in_data_archive(self):
-        payload = self.make_ipk("Package: example\\nVersion: 1\\nArchitecture: all\\n", data_member_name="../escape")
+        payload = self.make_ipk("Package: example\nVersion: 1\nArchitecture: all\n", data_member_name="../escape")
         with self.assertRaisesRegex(ValueError, "ipk_unsafe_path"):
             parse_ipk_metadata(payload)
 
     def test_stages_file_locally_without_enabling_install(self):
-        payload = self.make_ipk("Package: example\\nVersion: 1\\nArchitecture: all\\n")
+        payload = self.make_ipk("Package: example\nVersion: 1\nArchitecture: all\n")
         with tempfile.TemporaryDirectory() as directory:
             with patch.object(bridge, "user_data_root", return_value=Path(directory)):
                 result = stage_ipk(payload, "example.ipk")
@@ -100,7 +100,7 @@ class IpkInspectionTests(unittest.TestCase):
                 self.assertEqual(result["status"], "staged-not-approved")
 
     def test_rejects_wrong_filename_extension(self):
-        payload = self.make_ipk("Package: example\\nVersion: 1\\nArchitecture: all\\n")
+        payload = self.make_ipk("Package: example\nVersion: 1\nArchitecture: all\n")
         with self.assertRaisesRegex(ValueError, "ipk_extension_required"):
             stage_ipk(payload, "example.zip")
 
