@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Online4Tech Smart Manager local bridge - authenticated, read-only Enigma2 WebIF probe."""
+"""Online4Tech Smart Manager local bridge - authenticated OpenWebif read and approved-package adapter."""
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 import http.client
 import ipaddress
@@ -281,7 +281,9 @@ def read_receiver_info(host, port, scheme):
         "image": pick("e2imageversion", "e2imagebuild", "e2image"),
         "enigma_version": pick("e2enigmaversion", "e2enigmaversionstring"),
         "kernel": pick("e2kernelversion"),
-        "soc_family": pick("e2socfamily")
+        "soc_family": pick("e2socfamily"),
+        "architecture": pick("e2architecture", "e2arch", "architecture"),
+        "image_family": pick("e2imagefamily", "e2image").lower()
     }
     if not any(device.values()):
         raise ValueError("receiver_webif_unavailable")
@@ -470,6 +472,19 @@ class Handler(BaseHTTPRequestHandler):
                     "receiver_architecture_unverified": "تعذر التأكد من معمارية الرسيفر؛ تم إيقاف التثبيت.",
                     "receiver_ipk_upload_failed": "OpenWebif لم يقبل رفع ملف IPK. راجع إعداد السماح برفع IPK.",
                     "receiver_auth_required": "OpenWebif يطلب تسجيل دخول؛ لم يتم إرسال كلمة مرور.",
+
+                    "approved_package_digest_invalid": "بصمة الحزمة في سجل الاعتماد غير صالحة.",
+                    "approved_receiver_architectures_missing": "سجل الاعتماد لا يحدد معمارية الرسيفر المدعومة.",
+                    "approved_image_families_missing": "سجل الاعتماد لا يحدد عائلات صور النظام المدعومة.",
+                    "approved_image_versions_missing": "سجل الاعتماد لا يحدد إصدارات صور النظام المدعومة.",
+                    "approved_dependencies_invalid": "قائمة الاعتمادات في سجل الحزمة غير صالحة.",
+                    "staged_package_size_mismatch": "حجم ملف IPK لا يطابق سجل الاعتماد.",
+                    "receiver_architecture_not_approved": "معمارية الرسيفر غير مدرجة ضمن توافق الحزمة.",
+                    "receiver_image_family_unverified": "تعذر تحديد عائلة صورة النظام؛ تم إيقاف التثبيت.",
+                    "receiver_image_family_not_approved": "صورة النظام غير مدرجة ضمن توافق الحزمة.",
+                    "receiver_image_version_unverified": "تعذر تحديد إصدار صورة النظام؛ تم إيقاف التثبيت.",
+                    "receiver_image_version_not_approved": "إصدار صورة النظام غير مدرج ضمن توافق الحزمة.",
+                    "package_dependency_missing": "هناك اعتماد مطلوب غير مثبت على الرسيفر.";
                     "package_install_not_verified": "انتهى طلب التثبيت لكن لم يمكن التحقق من ظهور الحزمة كمثبتة.",
                     "receiver_unreachable": "تعذر الوصول للرسيفر أثناء عملية التثبيت.",
                     "receiver_package_api_failed": "واجهة مدير الحزم في OpenWebif لم تُكمل العملية."
