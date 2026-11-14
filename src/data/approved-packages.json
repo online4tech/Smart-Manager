@@ -1,0 +1,5 @@
+{
+  "schemaVersion": 1,
+  "description": "Only packages explicitly reviewed and approved here may be offered for receiver installation.",
+  "packages": []
+}
