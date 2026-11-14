@@ -172,3 +172,13 @@
 .bridge-receiver-details>strong{font-size:11px;color:#9ce8c4;margin-bottom:2px}
 .bridge-receiver-details>div{display:flex;justify-content:space-between;gap:10px;font-size:10px}
 .bridge-receiver-details span{color:#829bb4}.bridge-receiver-details b{color:#d4e7f8;text-align:left;overflow-wrap:anywhere}
+
+
+/* Imported Enigma2 catalog details */
+.catalog-source { overflow-wrap: anywhere; margin: 14px 0; color: var(--muted, #aab7cc); }
+.catalog-source a { color: #7dc8ff; text-decoration: underline; }
+.catalog-command { display: grid; gap: 8px; margin: 14px 0; min-width: 0; }
+.catalog-command strong { font-size: 13px; color: #f4c76b; }
+.catalog-command code { display: block; max-height: 180px; overflow: auto; padding: 12px; border: 1px solid rgba(255,255,255,.1); border-radius: 10px; background: rgba(3,10,24,.72); color: #dce8fb; white-space: pre-wrap; overflow-wrap: anywhere; text-align: left; font-size: 12px; line-height: 1.65; }
+.plugin-card p { overflow-wrap: anywhere; }
+.plugin-meta code { overflow-wrap: anywhere; }
