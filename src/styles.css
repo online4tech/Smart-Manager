@@ -582,3 +582,88 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
   .package-approved-item{align-items:flex-start;flex-direction:column}
   .catalog-type-filter button,.category-pills button{flex:0 0 auto}
 }
+
+
+/* Compact Plugin Store controls: filters open on demand */
+.catalog-toolbar{
+  gap:12px;
+}
+.catalog-filter-toggle{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  width:100%;
+  min-height:48px;
+  padding:11px 15px;
+  border:1px solid rgba(139,196,255,.28);
+  border-radius:11px;
+  color:#eaf4ff;
+  background:linear-gradient(110deg,rgba(27,73,119,.48),rgba(8,35,57,.72));
+  font:700 14px/1.5 Cairo,Tahoma,Arial,sans-serif;
+  cursor:pointer;
+  transition:background .18s ease,border-color .18s ease;
+}
+.catalog-filter-toggle:hover{
+  border-color:rgba(139,196,255,.58);
+  background:linear-gradient(110deg,rgba(35,91,145,.58),rgba(8,45,69,.82));
+}
+.catalog-filter-toggle-label{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+}
+.catalog-filter-toggle-label>b{
+  display:inline-grid;
+  place-items:center;
+  min-width:23px;
+  height:23px;
+  padding:0 6px;
+  border-radius:20px;
+  color:#071a2c;
+  background:#9bd1ff;
+  font:800 12px Inter,Cairo,sans-serif;
+}
+.catalog-filter-chevron{
+  flex:0 0 auto;
+  color:#9bd1ff;
+  transition:transform .18s ease;
+}
+.catalog-filter-toggle.expanded .catalog-filter-chevron{
+  transform:rotate(180deg);
+}
+.catalog-filter-toggle.has-active{
+  border-color:rgba(103,229,242,.55);
+}
+.catalog-filter-panel{
+  display:grid;
+  gap:13px;
+  padding:14px;
+  border:1px solid rgba(190,218,247,.18);
+  border-radius:12px;
+  background:rgba(3,13,25,.56);
+  animation:catalog-filter-reveal .16s ease-out;
+}
+.catalog-filter-panel .catalog-type-filter,
+.catalog-filter-panel .category-pills{
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:8px;
+}
+.catalog-filter-panel .category-pills{
+  padding-top:2px;
+}
+.catalog-filter-panel .category-pills button,
+.catalog-filter-panel .catalog-type-filter button{
+  min-height:40px;
+  padding:8px 13px;
+}
+@keyframes catalog-filter-reveal{
+  from{opacity:0;transform:translateY(-4px)}
+  to{opacity:1;transform:translateY(0)}
+}
+@media(max-width:620px){
+  .catalog-filter-toggle{min-height:46px;padding:10px 12px}
+  .catalog-filter-panel{padding:11px;gap:11px}
+}
