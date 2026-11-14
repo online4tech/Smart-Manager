@@ -99,28 +99,25 @@ def parse_ipk_metadata(payload):
     if not data_name:
         raise ValueError("ipk_data_missing")
     try:
-        with tarfile.open(fileobj=io.BytesIO(members[control_name]), mode="r:*") as archive:
-            control_member = None
-            for member in archive.getmembers():
+        raw_control = None
+        with tarfile.open(fileobj=io.BytesIO(members[control_name]), mode="r|*") as archive:
+            member_count = 0
+            declared_size = 0
+            for member in archive:
+                member_count += 1
+                declared_size += max(0, member.size)
+                if member_count > 2000 or declared_size > 8 * 1024 * 1024:
+                    raise ValueError("ipk_control_archive_too_large")
                 normalized = posixpath.normpath(member.name)
                 if member.name.startswith("/") or normalized == ".." or normalized.startswith("../"):
                     raise ValueError("ipk_unsafe_path")
                 if normalized == "control" and member.isfile():
-                    control_member = member
-            if not control_member or control_member.size > MAX_CONTROL_SIZE:
-                raise ValueError("ipk_control_missing")
-            stream = archive.extractfile(control_member)
-            raw_control = stream.read(MAX_CONTROL_SIZE + 1) if stream else b""
-        with tarfile.open(fileobj=io.BytesIO(members[data_name]), mode="r:*") as archive:
-            for member in archive.getmembers():
-                normalized = posixpath.normpath(member.name)
-                if member.name.startswith("/") or normalized == ".." or normalized.startswith("../"):
-                    raise ValueError("ipk_unsafe_path")
-                if member.issym() or member.islnk():
-                    target = member.linkname
-                    resolved = posixpath.normpath(posixpath.join(posixpath.dirname(member.name), target))
-                    if target.startswith("/") or resolved == ".." or resolved.startswith("../"):
-                        raise ValueError("ipk_unsafe_path")
+                    if member.size > MAX_CONTROL_SIZE:
+                        raise ValueError("ipk_control_too_large")
+                    stream = archive.extractfile(member)
+                    raw_control = stream.read(MAX_CONTROL_SIZE + 1) if stream else b""
+        if raw_control is None:
+            raise ValueError("ipk_control_missing")
         if len(raw_control) > MAX_CONTROL_SIZE:
             raise ValueError("ipk_control_too_large")
         control = {}
@@ -128,6 +125,25 @@ def parse_ipk_metadata(payload):
             if line and not line[0].isspace() and ":" in line:
                 key, value = line.split(":", 1)
                 control[key.strip().lower()] = value.strip()
+        with tarfile.open(fileobj=io.BytesIO(members[data_name]), mode="r|*") as archive:
+            member_count = 0
+            declared_size = 0
+            for member in archive:
+                member_count += 1
+                declared_size += max(0, member.size)
+                if member_count > 20000 or declared_size > 256 * 1024 * 1024:
+                    raise ValueError("ipk_data_archive_too_large")
+                normalized = posixpath.normpath(member.name)
+                if member.name.startswith("/") or normalized == ".." or normalized.startswith("../"):
+                    raise ValueError("ipk_unsafe_path")
+                if member.issym():
+                    target = posixpath.normpath(posixpath.join(posixpath.dirname(member.name), member.linkname))
+                    if member.linkname.startswith("/") or target == ".." or target.startswith("../"):
+                        raise ValueError("ipk_unsafe_path")
+                elif member.islnk():
+                    target = posixpath.normpath(member.linkname)
+                    if member.linkname.startswith("/") or target == ".." or target.startswith("../"):
+                        raise ValueError("ipk_unsafe_path")
     except (tarfile.TarError, OSError, EOFError):
         raise ValueError("ipk_data_archive_invalid")
     package = control.get("package", "")
@@ -402,6 +418,8 @@ class Handler(BaseHTTPRequestHandler):
                     "ipk_control_missing": "ملف التحكم control غير موجود داخل الحزمة.",
                     "ipk_data_missing": "ملفات محتوى الحزمة data غير موجودة.",
                     "ipk_data_archive_invalid": "أرشيف ملفات الحزمة غير صالح أو غير مدعوم.",
+                    "ipk_control_archive_too_large": "أرشيف بيانات التعريف أكبر من الحدود المسموحة.",
+                    "ipk_data_archive_too_large": "محتوى الحزمة يتجاوز حدود الفحص الآمن.",
                     "ipk_control_invalid": "تعذر قراءة بيانات الحزمة.",
                     "ipk_unsafe_path": "الحزمة تحتوي على مسار داخلي غير آمن وتم رفضها.",
                     "ipk_package_invalid": "اسم الحزمة داخل الملف غير صالح.",
