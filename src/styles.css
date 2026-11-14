@@ -230,3 +230,39 @@
 .catalog-install-actions button:disabled{opacity:.55;cursor:not-allowed}
 .catalog-install-note{display:block;margin-top:8px;color:#91a7bf;font-size:9px;line-height:1.8}
 @media(max-width:620px){.bridge-download-strip{align-items:stretch;flex-direction:column}.bridge-download-link{width:100%}.catalog-install-actions>*{flex:1}}
+
+
+/* Approved package staging center */
+.catalog-switcher{display:flex;gap:8px;flex-wrap:wrap;padding:8px;border-radius:13px}
+.catalog-switcher button{display:flex;align-items:center;gap:8px;border:1px solid transparent;background:transparent;color:#91a7bf;border-radius:9px;padding:10px 13px;font-size:10px}
+.catalog-switcher button.active{color:#eaf4ff;background:rgba(59,130,246,.16);border-color:rgba(96,165,250,.2)}
+.catalog-switcher button span{font:700 9px Inter,sans-serif;color:#83b9ef;background:rgba(96,165,250,.1);padding:3px 6px;border-radius:10px}
+.package-center{display:grid;gap:14px}
+.package-upload-panel,.package-approved-panel{padding:18px;border-radius:15px;min-width:0}
+.package-panel-heading{display:flex;align-items:center;gap:12px;margin-bottom:17px}
+.package-panel-heading h3{font-size:13px;margin:0 0 4px}
+.package-panel-heading p{font-size:10px;color:#8fa3bb;margin:0;line-height:1.8}
+.package-upload-controls{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:10px}
+.package-file-picker{position:relative;display:inline-flex;align-items:center;justify-content:center;border:1px solid rgba(96,165,250,.22);background:rgba(59,130,246,.09);border-radius:9px;padding:10px 14px;color:#a9ceef;font-size:10px;cursor:pointer;white-space:nowrap}
+.package-file-picker input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer}
+.package-selected-name{min-width:0;color:#8fa3bb;font-size:10px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.package-upload-controls .primary-button{justify-content:center}
+.package-upload-hint{display:block;color:#7188a2;font-size:9px;margin-top:12px;line-height:1.8}
+.package-error{margin-top:12px;border:1px solid rgba(248,113,113,.2);background:rgba(248,113,113,.07);color:#f3aaaa;border-radius:9px;padding:10px;font-size:10px}
+.package-stage-result{margin-top:15px;padding:14px;border:1px solid rgba(96,165,250,.17);background:rgba(59,130,246,.055);border-radius:11px}
+.package-stage-status{display:flex;align-items:center;gap:8px;color:#a9d5ff;font-size:10px;font-weight:700;margin-bottom:12px}
+.package-metadata-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px}
+.package-metadata-grid>div{display:grid;gap:4px;padding:10px;border:1px solid rgba(180,205,235,.08);border-radius:8px;background:rgba(255,255,255,.025);min-width:0}
+.package-metadata-grid small,.package-hash small{color:#8197af;font-size:9px}
+.package-metadata-grid strong{color:#e2efff;font:600 11px Inter,Cairo,sans-serif;overflow-wrap:anywhere}
+.package-hash{display:grid;gap:5px;margin-top:10px}
+.package-hash code{font:9px/1.7 monospace;color:#9fc6ed;overflow-wrap:anywhere}
+.package-not-approved{display:flex;align-items:flex-start;gap:8px;margin-top:12px;color:#e8c47c;font-size:9px;line-height:1.8}
+.package-not-approved svg{flex-shrink:0;margin-top:2px}
+.package-empty{display:grid;justify-items:center;text-align:center;gap:7px;padding:25px 10px;color:#8298b1}
+.package-empty svg{color:#75baff}
+.package-empty strong{font-size:11px;color:#c9d9eb}
+.package-empty span{font-size:9px;line-height:1.8}
+.package-safety-note{display:flex;align-items:flex-start;gap:8px;padding:11px 13px;border:1px solid rgba(96,165,250,.15);background:rgba(59,130,246,.045);border-radius:10px;color:#8fb8df;font-size:9px;line-height:1.8}
+.package-safety-note svg{flex-shrink:0;margin-top:2px}
+@media(max-width:760px){.catalog-switcher{display:grid;grid-template-columns:1fr}.catalog-switcher button{justify-content:flex-start}.package-upload-controls{grid-template-columns:1fr}.package-selected-name{min-height:18px}.package-upload-controls .primary-button{width:100%}.package-metadata-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
