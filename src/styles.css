@@ -182,3 +182,39 @@
 .catalog-command code { display: block; max-height: 180px; overflow: auto; padding: 12px; border: 1px solid rgba(255,255,255,.1); border-radius: 10px; background: rgba(3,10,24,.72); color: #dce8fb; white-space: pre-wrap; overflow-wrap: anywhere; text-align: left; font-size: 12px; line-height: 1.65; }
 .plugin-card p { overflow-wrap: anywhere; }
 .plugin-meta code { overflow-wrap: anywhere; }
+
+
+/* Enigma2 catalog: compact, separated plugin and command libraries */
+.catalog-page{display:flex;flex-direction:column;gap:12px}
+.catalog-switcher{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding:7px;border-radius:14px}
+.catalog-switcher button{display:flex;align-items:center;justify-content:center;gap:9px;min-width:0;padding:11px 12px;border:1px solid transparent;border-radius:10px;background:transparent;color:#91a7bf;font:600 12px Cairo,sans-serif}
+.catalog-switcher button.active{color:#e4f2ff;background:linear-gradient(120deg,rgba(37,99,235,.23),rgba(34,211,238,.09));border-color:rgba(96,165,250,.3)}
+.catalog-switcher button span{font:700 10px Inter,sans-serif;color:#80bfff}
+.catalog-toolbar{gap:10px}
+.catalog-type-filter{display:flex;gap:6px;flex-wrap:wrap}
+.catalog-type-filter button{border:1px solid var(--line);border-radius:18px;padding:6px 12px;background:rgba(255,255,255,.025);color:#91a7bf;font-size:10px}
+.catalog-type-filter button.selected{color:#e4f2ff;border-color:rgba(96,165,250,.38);background:rgba(59,130,246,.15)}
+.catalog-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-auto-rows:minmax(0,auto);align-content:start;align-items:stretch;gap:10px}
+.catalog-card{min-width:0;min-height:0;padding:13px;border-radius:13px;display:flex;flex-direction:column;gap:8px}
+.catalog-card-head{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.catalog-category{font-size:10px;color:#79b8f0;line-height:1.5}
+.catalog-card h3,.catalog-command-card h3{margin:0;color:#e5f1ff;font:700 13px/1.6 Cairo,sans-serif;overflow-wrap:anywhere}
+.catalog-path{margin:0;color:#8198b2;font:10px/1.6 Inter,sans-serif;overflow-wrap:anywhere;min-height:0}
+.catalog-open{margin-top:auto;align-self:flex-start}
+.catalog-command-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:minmax(0,auto);align-content:start;align-items:stretch;gap:10px}
+.catalog-command-card{min-width:0;min-height:0;padding:13px;border-radius:13px;display:flex;flex-direction:column;gap:9px}
+.catalog-command-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;min-width:0}
+.catalog-command-head>div{min-width:0;display:grid;gap:3px}
+.command-kind{flex:none;border-radius:20px;padding:4px 9px;font-size:9px;background:rgba(59,130,246,.13);color:#9bcfff}
+.command-kind.remove{background:rgba(245,158,11,.12);color:#f5c879}
+.catalog-command-code{display:block;max-height:112px;min-width:0;overflow:auto;padding:10px;border:1px solid rgba(255,255,255,.09);border-radius:9px;background:rgba(3,10,24,.62);color:#cfe2fa;white-space:pre-wrap;overflow-wrap:anywhere;text-align:left;direction:ltr;font:10px/1.65 ui-monospace,SFMono-Regular,Consolas,monospace}
+.catalog-command-footer{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:auto}
+.catalog-command-footer a{display:inline-flex;align-items:center;gap:5px;color:#81bfff;font-size:10px;text-decoration:none}
+.copy-command{display:inline-flex;align-items:center;gap:6px;padding:7px 10px;font-size:10px}
+.catalog-detail-modal{max-height:min(82vh,760px);overflow:auto}
+.catalog-detail-path{width:100%;display:grid;gap:6px;color:#91a7bf;font-size:10px}
+.catalog-detail-path code{padding:10px;border-radius:9px;background:rgba(3,10,24,.6);overflow-wrap:anywhere;text-align:left}
+.catalog-related-commands{width:100%;display:grid;gap:14px}
+.catalog-related-commands>div{display:grid;gap:7px}
+@media(max-width:900px){.catalog-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:620px){.catalog-switcher{grid-template-columns:1fr}.catalog-grid,.catalog-command-grid{grid-template-columns:1fr}.catalog-card,.catalog-command-card{padding:12px}.catalog-toolbar{align-items:stretch}}
