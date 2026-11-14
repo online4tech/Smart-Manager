@@ -15,6 +15,10 @@ PAIR_CODE = secrets.token_urlsafe(6)[:8].upper()
 SESSION_TOKEN = None
 CSRF_TOKEN = None
 PAIR_USED = False
+
+def route_path(request_target):
+    """Return the URL path without query strings or fragments."""
+    return urlsplit(request_target).path
 ATTEMPTS = deque()
 LOCK = Lock()
 
@@ -44,7 +48,7 @@ class Handler(BaseHTTPRequestHandler):
         return self.headers.get("Origin") == ALLOWED_ORIGIN
 
     def do_OPTIONS(self):
-        route = urlsplit(self.path).path
+        route = route_path(self.path)
         if not self.valid_host() or not self.valid_origin() or route not in ("/api/pair", "/api/status"):
             return reply(self, 403, {"ok": False, "error": "request_not_allowed"})
         self.send_response(204)
