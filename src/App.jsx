@@ -197,6 +197,41 @@ function ChannelIntelligence() {
   </section>;
 }
 
+
+const logRules = [
+  { key: "disk", title: "مساحة التخزين", pattern: /no space left|disk full|not enough space|enospc/i, advice: "راجع مساحة التخزين من واجهة الجهاز، ولا تحذف ملفات النظام دون معرفة وظيفتها." },
+  { key: "memory", title: "ضغط الذاكرة", pattern: /out of memory|cannot allocate memory|oom-killer|killed process/i, advice: "قد يكون هناك ضغط على الذاكرة. راجع العمليات والخدمات المفتوحة وسجّل وقت المشكلة." },
+  { key: "plugin", title: "مشكلة إضافة أو اعتماد", pattern: /importerror|modulenotfounderror|no module named|plugin.*(error|failed)|failed to load plugin/i, advice: "قد تكون الإضافة غير متوافقة أو ينقصها اعتماد. تحقق من مصدرها وإصدار صورة النظام." },
+  { key: "service", title: "تعثر خدمة", pattern: /failed to start|service.*failed|segmentation fault|core dumped/i, advice: "توجد إشارة لتعثر خدمة أو عملية. احتفظ بالسجل وراجع السطور المحيطة بالرسالة." },
+  { key: "network", title: "مشكلة اتصال", pattern: /connection timed out|network is unreachable|name or service not known|temporary failure in name resolution/i, advice: "راجع إعدادات الشبكة والاتصال من الجهاز نفسه، وتأكد من وقت حدوث المشكلة." },
+  { key: "tuner", title: "إشارة أو موالف", pattern: /tune failed|no data|frontend.*(error|failed)|lock failed/i, advice: "قد تكون المشكلة مرتبطة بالإشارة أو إعدادات الموالف. تحقق منها يدويًا." }
+];
+
+function LogAnalyzer() {
+  const [logText, setLogText] = useState("");
+  const [analysis, setAnalysis] = useState(null);
+  const analyze = () => {
+    const lines = logText.split(/\r?\n/).map(line => line.trim()).filter(Boolean);
+    const matches = logRules.filter(rule => rule.pattern.test(logText));
+    const errorLines = lines.filter(line => /\b(error|failed|fatal|critical|exception|traceback)\b/i.test(line)).slice(0, 12);
+    setAnalysis({ total: lines.length, matches, errorLines });
+  };
+  return <section className="section-block log-analyzer">
+    <div className="section-heading"><div><h3>محلل سجلات Enigma2</h3><p>الصق جزءًا من السجل للحصول على قراءة أولية محلية</p></div><span className="updated"><ShieldCheck size={14}/> تحليل داخل المتصفح</span></div>
+    <div className="glass log-tool">
+      <div className="demo-notice"><AlertTriangle size={15}/><span>الصق السطور الضرورية فقط بعد إزالة كلمات المرور وعناوين IP العامة وأي بيانات شخصية. التحليل إرشادي ولا يغيّر ملفات الرسيفر.</span></div>
+      <textarea className="log-input" value={logText} onChange={e => {setLogText(e.target.value);setAnalysis(null);}} placeholder="الصق رسائل Enigma2 أو سجل البلجن هنا..." rows={7} />
+      <div className="log-actions"><small>{logText.length.toLocaleString("ar-EG")} حرف</small><button className="secondary-button" onClick={() => {setLogText("");setAnalysis(null);}} disabled={!logText}>مسح النص</button><button className="primary-button" onClick={analyze} disabled={!logText.trim()}><FileSearch size={15}/> حلّل السجل</button></div>
+      {analysis && <div className="log-analysis-result">
+        <div className="log-result-heading"><CheckCircle2 size={16}/><strong>انتهى التحليل المحلي</strong><span>{analysis.total} سطر</span></div>
+        {analysis.matches.length ? analysis.matches.map(item => <article className="log-finding" key={item.key}><strong>{item.title}</strong><p>{item.advice}</p></article>) : <p className="log-empty">لم تظهر أنماط معروفة في النص المدخل. ده لا يثبت خلو السجل من المشاكل.</p>}
+        {analysis.errorLines.length > 0 && <div className="matched-lines"><strong>سطور تستحق المراجعة</strong>{analysis.errorLines.map((line,i)=><code key={i}>{line.slice(0,240)}</code>)}</div>}
+        <small className="log-disclaimer">النتيجة مبنية على مطابقة كلمات مفتاحية فقط، وليست تشخيصًا نهائيًا.</small>
+      </div>}
+    </div>
+  </section>;
+}
+
 export default function App() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scanState, setScanState] = useState("idle");
@@ -321,6 +356,8 @@ export default function App() {
             </div>}
           </div>
         </section>
+
+        <LogAnalyzer/>
 
         <section className="assistant-card glass">
           <div className="assistant-symbol"><Bot size={24}/></div>
