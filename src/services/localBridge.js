@@ -24,9 +24,16 @@ async function bridgeRequest(path, { body, token, csrf } = {}) {
         invalid_or_expired_code: "كود الاقتران غير صحيح أو تم استخدامه من قبل.",
         too_many_attempts: "تم تجاوز عدد المحاولات. انتظر دقيقة ثم حاول مجددًا.",
         unauthorized: "انتهت صلاحية جلسة الاقتران. أعد الاقتران من جديد.",
-        request_not_allowed: "المتصفح أو إعدادات الجسر رفضت الطلب. تأكد من تشغيل النسخة المصححة واسم الموقع."
+        request_not_allowed: "المتصفح أو إعدادات الجسر رفضت الطلب. تأكد من تشغيل النسخة المصححة واسم الموقع.",
+        invalid_receiver_address: "اكتب عنوان IPv4 خاصًا داخل شبكتك المحلية.",
+        invalid_receiver_port: "المنفذ المسموح به هو 80 أو 443 فقط.",
+        invalid_receiver_scheme: "اختيار HTTP/HTTPS غير متوافق مع المنفذ.",
+        receiver_auth_required: "واجهة الرسيفر تطلب تسجيل دخول؛ هذا الإصدار لا يرسل كلمات مرور.",
+        receiver_access_denied: "الرسيفر رفض قراءة معلومات WebIF.",
+        receiver_unreachable: "تعذر الوصول للرسيفر. تحقق من العنوان وتشغيل OpenWebif.",
+        receiver_webif_unavailable: "لم يتم العثور على بيانات OpenWebif بصيغة XML."
       };
-      throw new Error(messages[data.error] || `تعذر إتمام الطلب (رمز ${response.status}).`);
+      throw new Error(data.message || messages[data.error] || `تعذر إتمام الطلب (رمز ${response.status}).`);
     }
     return data;
   } catch (error) {
@@ -46,4 +53,16 @@ export async function pairLocalBridge(code) {
 export async function getLocalBridgeStatus(credentials) {
   if (!credentials?.token || !credentials?.csrf) throw new Error("جلسة الاقتران غير متاحة.");
   return bridgeRequest("/api/status", { token: credentials.token, csrf: credentials.csrf });
+}
+
+
+export async function connectLocalReceiver(credentials, config) {
+  if (!credentials?.token || !credentials?.csrf) throw new Error("اقترن بالجسر المحلي أولاً.");
+  if (!config?.host) throw new Error("اكتب عنوان IP الرسيفر أولاً.");
+  const scheme = config.scheme === "https" ? "https" : "http";
+  return bridgeRequest("/api/receiver/connect", {
+    body: { host: config.host.trim(), scheme, port: scheme === "https" ? 443 : 80 },
+    token: credentials.token,
+    csrf: credentials.csrf
+  });
 }
