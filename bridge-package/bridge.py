@@ -420,6 +420,8 @@ class Handler(BaseHTTPRequestHandler):
                     "ipk_data_archive_invalid": "أرشيف ملفات الحزمة غير صالح أو غير مدعوم.",
                     "ipk_control_archive_too_large": "أرشيف بيانات التعريف أكبر من الحدود المسموحة.",
                     "ipk_data_archive_too_large": "محتوى الحزمة يتجاوز حدود الفحص الآمن.",
+                    "ipk_control_archive_too_large": "أرشيف بيانات التعريف أكبر من الحدود المسموحة.",
+                    "ipk_data_archive_too_large": "محتوى الحزمة يتجاوز حدود الفحص الآمن.",
                     "ipk_control_invalid": "تعذر قراءة بيانات الحزمة.",
                     "ipk_unsafe_path": "الحزمة تحتوي على مسار داخلي غير آمن وتم رفضها.",
                     "ipk_package_invalid": "اسم الحزمة داخل الملف غير صالح.",
