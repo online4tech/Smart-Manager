@@ -9,6 +9,11 @@ import time
 import xml.etree.ElementTree as ET
 import ssl
 import os
+import re
+import tarfile
+import hashlib
+import io
+import posixpath
 from pathlib import Path
 from collections import deque
 from threading import Lock
@@ -19,6 +24,8 @@ PORT = 8765
 ALLOWED_ORIGIN = "https://online4tech.github.io"
 ALLOWED_HOSTS = {f"127.0.0.1:{PORT}", f"localhost:{PORT}"}
 MAX_BODY = 4096
+MAX_PACKAGE_SIZE = 32 * 1024 * 1024
+MAX_CONTROL_SIZE = 65536
 def load_or_create_trust():
     """Persist a per-user local trust token; never expose it in logs."""
     if os.name == "nt":
@@ -51,6 +58,107 @@ LOCK = Lock()
 
 def route_path(request_target):
     return urlsplit(request_target).path
+
+
+def user_data_root():
+    if os.name == "nt":
+        return Path(os.environ.get("LOCALAPPDATA", str(Path.home()))) / "Online4Tech" / "SmartManager"
+    return Path.home() / ".config" / "online4tech-smart-manager"
+
+
+def parse_ipk_metadata(payload):
+    """Inspect an IPK ar archive without extracting or executing package content."""
+    if not payload.startswith(b"!<arch>\\n"):
+        raise ValueError("invalid_ipk_archive")
+    offset = 8
+    members = {}
+    while offset < len(payload):
+        if offset + 60 > len(payload):
+            raise ValueError("invalid_ipk_archive")
+        header = payload[offset:offset + 60]
+        if header[58:60] != b"`\\n":
+            raise ValueError("invalid_ipk_archive")
+        raw_name = header[:16].decode("ascii", "strict").strip()
+        name = raw_name[:-1] if raw_name.endswith("/") else raw_name
+        try:
+            size = int(header[48:58].decode("ascii").strip())
+        except (ValueError, UnicodeDecodeError):
+            raise ValueError("invalid_ipk_archive")
+        if size < 0 or offset + 60 + size > len(payload):
+            raise ValueError("invalid_ipk_archive")
+        if name in members or name in ("", "/", "//") or name.startswith("#1/"):
+            raise ValueError("invalid_ipk_archive")
+        members[name] = payload[offset + 60:offset + 60 + size]
+        offset += 60 + size + (size % 2)
+    if offset != len(payload) or "debian-binary" not in members:
+        raise ValueError("invalid_ipk_archive")
+    control_name = next((name for name in ("control.tar.gz", "control.tar.xz", "control.tar.zst", "control.tar") if name in members), None)
+    if not control_name:
+        raise ValueError("ipk_control_missing")
+    try:
+        with tarfile.open(fileobj=io.BytesIO(members[control_name]), mode="r:*") as archive:
+            control_member = None
+            for member in archive.getmembers():
+                normalized = posixpath.normpath(member.name)
+                if member.name.startswith("/") or normalized == ".." or normalized.startswith("../"):
+                    raise ValueError("ipk_unsafe_path")
+                if normalized == "control" and member.isfile():
+                    control_member = member
+            if not control_member or control_member.size > MAX_CONTROL_SIZE:
+                raise ValueError("ipk_control_missing")
+            stream = archive.extractfile(control_member)
+            raw_control = stream.read(MAX_CONTROL_SIZE + 1) if stream else b""
+        if len(raw_control) > MAX_CONTROL_SIZE:
+            raise ValueError("ipk_control_too_large")
+        control = {}
+        for line in raw_control.decode("utf-8", "replace").splitlines():
+            if line and not line[0].isspace() and ":" in line:
+                key, value = line.split(":", 1)
+                control[key.strip().lower()] = value.strip()
+    except (tarfile.TarError, OSError, EOFError):
+        raise ValueError("ipk_control_invalid")
+    package = control.get("package", "")
+    version = control.get("version", "")
+    architecture = control.get("architecture", "")
+    if not re.fullmatch(r"[a-z0-9][a-z0-9+.-]{0,127}", package):
+        raise ValueError("ipk_package_invalid")
+    if not version or len(version) > 128 or any(ord(ch) < 32 for ch in version):
+        raise ValueError("ipk_version_invalid")
+    if not architecture or len(architecture) > 64 or not re.fullmatch(r"[A-Za-z0-9_.+-]+", architecture):
+        raise ValueError("ipk_architecture_invalid")
+    return {"package": package, "version": version, "architecture": architecture}
+
+
+def stage_ipk(payload, original_name):
+    if not original_name.lower().endswith(".ipk"):
+        raise ValueError("ipk_extension_required")
+    if not payload or len(payload) > MAX_PACKAGE_SIZE:
+        raise ValueError("ipk_size_invalid")
+    metadata = parse_ipk_metadata(payload)
+    digest = hashlib.sha256(payload).hexdigest()
+    staging = user_data_root() / "staging"
+    staging.mkdir(parents=True, exist_ok=True)
+    target = staging / (digest + ".ipk")
+    if not target.exists():
+        temp = staging / (digest + ".tmp")
+        temp.write_bytes(payload)
+        try:
+            os.chmod(temp, 0o600)
+        except OSError:
+            pass
+        temp.replace(target)
+    return {
+        "status": "staged-not-approved",
+        "filename": Path(original_name).name[:120],
+        "size": len(payload),
+        "sha256": digest,
+        "package": metadata["package"],
+        "version": metadata["version"],
+        "architecture": metadata["architecture"],
+        "install_enabled": False
+    }
+
+
 
 def reply(handler, status, payload, cors=False):
     body = json.dumps(payload, ensure_ascii=False).encode("utf-8")
@@ -209,13 +317,13 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_OPTIONS(self):
         route = route_path(self.path)
-        allowed = ("/api/trust", "/api/status", "/api/receiver/connect", "/api/receiver/data")
+        allowed = ("/api/trust", "/api/status", "/api/receiver/connect", "/api/receiver/data", "/api/packages/stage")
         if not self.valid_host() or not self.valid_origin() or route not in allowed:
             return reply(self, 403, {"ok": False, "error": "request_not_allowed"})
         self.send_response(204)
         self.send_header("Access-Control-Allow-Origin", ALLOWED_ORIGIN)
         self.send_header("Access-Control-Allow-Methods", "POST, OPTIONS")
-        self.send_header("Access-Control-Allow-Headers", "Content-Type, X-Bridge-Token, X-CSRF-Token")
+        self.send_header("Access-Control-Allow-Headers", "Content-Type, X-Bridge-Token, X-CSRF-Token, X-Package-Name")
         self.send_header("Access-Control-Allow-Private-Network", "true")
         self.send_header("Access-Control-Max-Age", "300")
         self.send_header("Vary", "Origin")
@@ -227,7 +335,7 @@ class Handler(BaseHTTPRequestHandler):
         if route_path(self.path) == "/health":
             return reply(self, 200, {
                 "ok": True, "service": "Online4Tech Smart Manager Bridge",
-                "version": "1.2.0", "bind": "127.0.0.1",
+                "version": "1.3.0", "bind": "127.0.0.1",
                 "receiver_connected": bool(RECEIVER_SNAPSHOT and RECEIVER_SNAPSHOT.get("connected"))
             })
         return reply(self, 404, {"ok": False, "error": "not_found"})
@@ -259,6 +367,41 @@ class Handler(BaseHTTPRequestHandler):
         data = self.read_json()
         if data is None:
             return reply(self, 400, {"ok": False, "error": "invalid_request"})
+
+
+        if route == "/api/packages/stage":
+            if not self.authorized():
+                return reply(self, 401, {"ok": False, "error": "unauthorized"}, True)
+            try:
+                size = int(self.headers.get("Content-Length", "0"))
+            except ValueError:
+                size = 0
+            if size < 1 or size > MAX_PACKAGE_SIZE:
+                return reply(self, 413, {"ok": False, "error": "ipk_size_invalid"}, True)
+            if self.headers.get("Content-Type", "").split(";", 1)[0].strip().lower() != "application/vnd.debian.binary-package":
+                return reply(self, 415, {"ok": False, "error": "ipk_content_type_invalid"}, True)
+            try:
+                payload = self.rfile.read(size)
+                if len(payload) != size:
+                    raise ValueError("ipk_size_invalid")
+                result = stage_ipk(payload, self.headers.get("X-Package-Name", "upload.ipk"))
+            except (ValueError, UnicodeDecodeError) as exc:
+                error = str(exc) or "ipk_invalid"
+                messages = {
+                    "ipk_extension_required": "ارفع ملفًا بامتداد IPK فقط.",
+                    "ipk_size_invalid": "حجم الملف غير صالح أو يتجاوز 32 ميجابايت.",
+                    "invalid_ipk_archive": "بنية ملف IPK غير صالحة.",
+                    "ipk_control_missing": "ملف التحكم control غير موجود داخل الحزمة.",
+                    "ipk_control_invalid": "تعذر قراءة بيانات الحزمة.",
+                    "ipk_unsafe_path": "الحزمة تحتوي على مسار داخلي غير آمن وتم رفضها.",
+                    "ipk_package_invalid": "اسم الحزمة داخل الملف غير صالح.",
+                    "ipk_version_invalid": "إصدار الحزمة غير صالح.",
+                    "ipk_architecture_invalid": "معمارية الحزمة غير صالحة.",
+                    "ipk_control_too_large": "بيانات التحكم داخل الحزمة أكبر من الحد المسموح.",
+                    "ipk_content_type_invalid": "نوع الملف المرسل غير مدعوم."
+                }
+                return reply(self, 400, {"ok": False, "error": error, "message": messages.get(error, "تم رفض ملف الحزمة.")}, True)
+            return reply(self, 200, {"ok": True, "package": result}, True)
 
         if route == "/api/trust":
             # Trust is initiated only by an explicit click in the official web app.
@@ -334,7 +477,7 @@ def main():
     print(" عنوان التشغيل: http://127.0.0.1:8765")
     print(" يعمل محليًا على هذا الكمبيوتر فقط.")
     print(" الثقة المحلية تُمنح من زر داخل الموقع؛ لا كلمة مرور أو كود ربط.")
-    print(" الوضع الحالي: قراءة OpenWebif فقط؛ لا SSH أو أوامر أو كتابة.")
+    print(" الوضع الحالي: قراءة OpenWebif + حفظ IPK محليًا في staging فقط؛ لا تثبيت أو SSH أو أوامر.")
     print("=" * 58)
     try:
         ThreadingHTTPServer((HOST, PORT), Handler).serve_forever()
