@@ -33,4 +33,13 @@ Any future SSH transport must use a dedicated local key, strict host-key verific
 - The allowlist remains empty until a human review verifies provenance, source, exact digest, receiver architecture, image compatibility, and dependencies.
 
 ## Current capability
-OpenWebif access remains read-only. Local IPK staging is enabled only on the user's computer. SSH, receiver-side upload, package installation/removal, and command execution remain disabled.
+OpenWebif data collection remains read-only. A separate, authenticated package-install endpoint is now implemented using OpenWebif's dedicated IPKG upload and package-manager controllers; it is not a general shell. It requires an explicit browser confirmation, an exact bridge-side allowlist entry, matching staged-file SHA-256/size/control metadata, an approved receiver architecture, an exact supported image family/version, successful dependency checks, and post-install status verification. The receiver must have OpenWebif IPK upload enabled. Requests are rejected if the image or architecture cannot be positively identified.
+
+The website and bridge-side allowlists are both intentionally empty in this change, so **no package can be installed yet**. The next activation step is to review one specific IPK, establish its provenance and compatibility on the target receiver, then add its exact metadata to both registries. SSH, package removal, and general command execution remain disabled.
+
+
+## Approved IPK installation transport
+
+The bridge now has a narrow, authenticated installation endpoint backed by its own adjacent `approved-packages.json` registry. It accepts only a package ID present in that registry, verifies the staged file SHA-256 and embedded package/version/architecture metadata, uploads the exact digest-named IPK through the OpenWebif IPKG upload controller, requests installation for that fixed /tmp path, and verifies the installed package status through OpenWebif.
+
+The registry is intentionally empty in this change. No package can be installed until a specific IPK is reviewed and an exact record is added to both the website registry and the bridge-side registry. Receiver architecture must be positively identified for non-`all` packages. The receiver's OpenWebif configuration must allow IPK uploads. No arbitrary shell, arbitrary package argument, or legacy command-catalog execution is exposed.

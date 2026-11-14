@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Online4Tech Smart Manager local bridge - authenticated, read-only Enigma2 WebIF probe."""
+"""Online4Tech Smart Manager local bridge - authenticated OpenWebif read and approved-package adapter."""
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 import http.client
 import ipaddress
@@ -18,6 +18,7 @@ from pathlib import Path
 from collections import deque
 from threading import Lock
 from urllib.parse import urlsplit, unquote
+import package_installer
 
 HOST = "127.0.0.1"
 PORT = 8765
@@ -280,7 +281,9 @@ def read_receiver_info(host, port, scheme):
         "image": pick("e2imageversion", "e2imagebuild", "e2image"),
         "enigma_version": pick("e2enigmaversion", "e2enigmaversionstring"),
         "kernel": pick("e2kernelversion"),
-        "soc_family": pick("e2socfamily")
+        "soc_family": pick("e2socfamily"),
+        "architecture": pick("e2architecture", "e2arch", "architecture"),
+        "image_family": pick("e2imagefamily", "e2image").lower()
     }
     if not any(device.values()):
         raise ValueError("receiver_webif_unavailable")
@@ -356,7 +359,7 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_OPTIONS(self):
         route = route_path(self.path)
-        allowed = ("/api/trust", "/api/status", "/api/receiver/connect", "/api/receiver/data", "/api/packages/stage")
+        allowed = ("/api/trust", "/api/status", "/api/receiver/connect", "/api/receiver/data", "/api/packages/stage", "/api/packages/install")
         if not self.valid_host() or not self.valid_origin() or route not in allowed:
             return reply(self, 403, {"ok": False, "error": "request_not_allowed"})
         self.send_response(204)
@@ -374,7 +377,7 @@ class Handler(BaseHTTPRequestHandler):
         if route_path(self.path) == "/health":
             return reply(self, 200, {
                 "ok": True, "service": "Online4Tech Smart Manager Bridge",
-                "version": "1.3.0", "bind": "127.0.0.1",
+                "version": "1.4.0", "bind": "127.0.0.1",
                 "receiver_connected": bool(RECEIVER_SNAPSHOT and RECEIVER_SNAPSHOT.get("connected"))
             })
         return reply(self, 404, {"ok": False, "error": "not_found"})
@@ -446,6 +449,48 @@ class Handler(BaseHTTPRequestHandler):
         if data is None:
             return reply(self, 400, {"ok": False, "error": "invalid_request"})
 
+
+        if route == "/api/packages/install":
+            if not self.authorized():
+                return reply(self, 401, {"ok": False, "error": "unauthorized"}, True)
+            if data.get("confirmed") is not True:
+                return reply(self, 400, {"ok": False, "error": "install_confirmation_required"}, True)
+            if not RECEIVER_SNAPSHOT or not RECEIVER_SNAPSHOT.get("connected"):
+                return reply(self, 409, {"ok": False, "error": "receiver_not_connected"}, True)
+            package_id = str(data.get("package_id", "")).strip()
+            try:
+                result = package_installer.install_approved_package(package_id, RECEIVER_SNAPSHOT)
+            except ValueError as exc:
+                error = str(exc) or "package_install_failed"
+                messages = {
+                    "approved_registry_unavailable": "ملف سجل الحزم المعتمدة غير موجود بجانب الجسر.",
+                    "approved_registry_invalid": "سجل الحزم المعتمدة غير صالح.",
+                    "package_not_approved": "الحزمة غير موجودة في سجل الاعتماد المحلي للجسر.",
+                    "staged_package_missing": "ارفع ملف IPK المعتمد إلى staging أولاً.",
+                    "staged_package_digest_mismatch": "بصمة ملف IPK لا تطابق سجل الاعتماد.",
+                    "staged_package_metadata_mismatch": "بيانات ملف IPK لا تطابق سجل الاعتماد.",
+                    "receiver_architecture_unverified": "تعذر التأكد من معمارية الرسيفر؛ تم إيقاف التثبيت.",
+                    "receiver_ipk_upload_failed": "OpenWebif لم يقبل رفع ملف IPK. راجع إعداد السماح برفع IPK.",
+                    "receiver_auth_required": "OpenWebif يطلب تسجيل دخول؛ لم يتم إرسال كلمة مرور.",
+
+                    "approved_package_digest_invalid": "بصمة الحزمة في سجل الاعتماد غير صالحة.",
+                    "approved_receiver_architectures_missing": "سجل الاعتماد لا يحدد معمارية الرسيفر المدعومة.",
+                    "approved_image_families_missing": "سجل الاعتماد لا يحدد عائلات صور النظام المدعومة.",
+                    "approved_image_versions_missing": "سجل الاعتماد لا يحدد إصدارات صور النظام المدعومة.",
+                    "approved_dependencies_invalid": "قائمة الاعتمادات في سجل الحزمة غير صالحة.",
+                    "staged_package_size_mismatch": "حجم ملف IPK لا يطابق سجل الاعتماد.",
+                    "receiver_architecture_not_approved": "معمارية الرسيفر غير مدرجة ضمن توافق الحزمة.",
+                    "receiver_image_family_unverified": "تعذر تحديد عائلة صورة النظام؛ تم إيقاف التثبيت.",
+                    "receiver_image_family_not_approved": "صورة النظام غير مدرجة ضمن توافق الحزمة.",
+                    "receiver_image_version_unverified": "تعذر تحديد إصدار صورة النظام؛ تم إيقاف التثبيت.",
+                    "receiver_image_version_not_approved": "إصدار صورة النظام غير مدرج ضمن توافق الحزمة.",
+                    "package_dependency_missing": "هناك اعتماد مطلوب غير مثبت على الرسيفر.",
+                    "package_install_not_verified": "انتهى طلب التثبيت لكن لم يمكن التحقق من ظهور الحزمة كمثبتة.",
+                    "receiver_unreachable": "تعذر الوصول للرسيفر أثناء عملية التثبيت.",
+                    "receiver_package_api_failed": "واجهة مدير الحزم في OpenWebif لم تُكمل العملية."
+                }
+                return reply(self, 400, {"ok": False, "error": error, "message": messages.get(error, "تم إيقاف تثبيت الحزمة." )}, True)
+            return reply(self, 200, {"ok": True, "result": result}, True)
 
         if route == "/api/trust":
             # Trust is initiated only by an explicit click in the official web app.

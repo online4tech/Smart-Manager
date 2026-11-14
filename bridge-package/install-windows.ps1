@@ -7,6 +7,9 @@ $startupDir = [Environment]::GetFolderPath("Startup")
 $shortcutPath = Join-Path $startupDir "Online4Tech Smart Manager Bridge.lnk"
 New-Item -ItemType Directory -Force -Path $installDir | Out-Null
 Copy-Item -Force $source (Join-Path $installDir "Online4TechBridge.exe")
+$registrySource = Join-Path $PSScriptRoot "approved-packages.json"
+if (-not (Test-Path $registrySource)) { throw "approved-packages.json is missing. Extract the complete package first." }
+Copy-Item -Force $registrySource (Join-Path $installDir "approved-packages.json")
 
 $wsh = New-Object -ComObject WScript.Shell
 $shortcut = $wsh.CreateShortcut($shortcutPath)

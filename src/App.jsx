@@ -8,7 +8,7 @@ import {
 import pluginsData from "./data/plugins.json";
 import commandsData from "./data/commands.json";
 import approvedPackagesData from "./data/approved-packages.json";
-import { trustLocalBridge, getLocalBridgeStatus, connectLocalReceiver, stagePackageUpload } from "./services/localBridge";
+import { trustLocalBridge, getLocalBridgeStatus, connectLocalReceiver, stagePackageUpload, installApprovedPackage } from "./services/localBridge";
 import { getReceiverSnapshot, getConnectionCapabilities } from "./services/receiverAdapter";
 
 const scanLabels = {
@@ -134,7 +134,10 @@ function PluginStore() {
   const [stagingPackage, setStagingPackage] = useState(false);
   const [stagedPackage, setStagedPackage] = useState(null);
   const [packageError, setPackageError] = useState("");
+  const [installingPackage, setInstallingPackage] = useState(false);
+  const [installResult, setInstallResult] = useState(null);
   const categories = ["الكل", ...new Set((view === "plugins" ? catalogEntries : commandEntries).map(item => item.category))];
+  const matchingApprovedPackage = stagedPackage ? approvedPackages.find(item => item.package === stagedPackage.package && item.version === stagedPackage.version && item.architecture === stagedPackage.architecture && String(item.sha256 || "").toLowerCase() === String(stagedPackage.sha256 || "").toLowerCase()) : null;
   const filteredPlugins = catalogEntries.filter(item =>
     (category === "الكل" || item.category === category) &&
     (item.name + " " + item.category + " " + item.path).toLowerCase().includes(query.toLowerCase())
@@ -156,6 +159,24 @@ function PluginStore() {
       setPackageError(error.message || "تعذر فحص الحزمة.");
     } finally {
       setStagingPackage(false);
+    }
+  };
+
+  const installStagedPackage = async () => {
+    if (!matchingApprovedPackage || installingPackage) return;
+    const confirmed = window.confirm(`تأكيد تثبيت الحزمة ${matchingApprovedPackage.package} إصدار ${matchingApprovedPackage.version} على الرسيفر المتصل؟
+سيتم إرسال ملف IPK المطابق للبصمة المعتمدة، وقد يغيّر ذلك برامج النظام.`);
+    if (!confirmed) return;
+    setInstallingPackage(true);
+    setPackageError("");
+    setInstallResult(null);
+    try {
+      const result = await installApprovedPackage(matchingApprovedPackage.package);
+      setInstallResult(result.result || result);
+    } catch (error) {
+      setPackageError(error.message || "تعذر تثبيت الحزمة أو التحقق من النتيجة.");
+    } finally {
+      setInstallingPackage(false);
     }
   };
 
@@ -219,14 +240,16 @@ function PluginStore() {
             <div><small>الحجم</small><strong>{(stagedPackage.size / 1024 / 1024).toFixed(2)} MB</strong></div>
           </div>
           <div className="package-hash"><small>SHA-256</small><code dir="ltr">{stagedPackage.sha256}</code></div>
-          <div className="package-not-approved"><LockKeyhole size={15}/> الحزمة في Staging فقط. لم تتم إضافتها لسجل الاعتماد، وزر التثبيت يظل معطّلًا.</div>
+          <div className="package-not-approved"><LockKeyhole size={15}/> {matchingApprovedPackage ? "الحزمة مطابقة لسجل الاعتماد المحلي للجسر." : "الحزمة في Staging فقط وغير موجودة في سجل الاعتماد؛ لن يتم تثبيتها."}</div>
+          {matchingApprovedPackage && <button className="primary-button package-install-button" onClick={installStagedPackage} disabled={installingPackage}>{installingPackage ? "جاري الرفع والتثبيت والتحقق..." : "تثبيت الحزمة المعتمدة على الرسيفر"}</button>}
+          {installResult && <div className="package-stage-status"><CheckCircle2 size={16}/> تم التثبيت والتحقق من حالة الحزمة على الرسيفر.</div>}
         </div>}
       </div>
       <div className="glass package-approved-panel">
         <div className="section-heading"><div><h3>سجل الحزم المعتمدة</h3><p>لا يظهر زر التثبيت إلا للحزم التي تم اعتمادها ومراجعة توافقها.</p></div><span className="catalog-category">{approvedPackages.length} معتمدة</span></div>
         {approvedPackages.length === 0 ? <div className="package-empty"><ShieldCheck size={24}/><strong>لا توجد حزم معتمدة حتى الآن</strong><span>السجل فارغ عمدًا. رفع ملف لا يعني اعتماده أو السماح بتثبيته.</span></div> : <div className="package-approved-list">{approvedPackages.map(item => <article className="package-approved-item" key={item.id}><strong>{item.name}</strong><span>{item.version} · {item.architecture}</span></article>)}</div>}
       </div>
-      <div className="package-safety-note"><ShieldCheck size={16}/> لا توجد قناة SSH أو تثبيت على الرسيفر مفعّلة في هذا الإصدار. الرفع محلي للفحص والتجهيز فقط.</div>
+      <div className="package-safety-note"><ShieldCheck size={16}/> التثبيت متاح فقط للحزم الموجودة في سجل الاعتماد المحلي للجسر، بعد تطابق SHA-256 والبيانات، وبموافقة صريحة منك. سجل الاعتماد الحالي فارغ.</div>
     </section> : view === "plugins" ? <>
       <div className="module-summary"><strong>{filteredPlugins.length.toLocaleString("ar-EG")}</strong><span>بلجن وأداة</span><small>مرتبة حسب القسم</small></div>
       <div className="catalog-grid">{filteredPlugins.map(item => <article className="glass catalog-card" key={item.id}>

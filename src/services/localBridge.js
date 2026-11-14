@@ -1,8 +1,8 @@
 const BRIDGE_BASE = "http://127.0.0.1:8765";
 
-async function bridgeRequest(path, { body, token, csrf } = {}) {
+async function bridgeRequest(path, { body, token, csrf, timeoutMs = 8000 } = {}) {
   const controller = new AbortController();
-  const timeout = window.setTimeout(() => controller.abort(), 8000);
+  const timeout = window.setTimeout(() => controller.abort(), timeoutMs);
   try {
     const headers = { "Content-Type": "application/json" };
     if (token) headers["X-Bridge-Token"] = token;
@@ -152,4 +152,19 @@ export async function stagePackageUpload(file) {
   } finally {
     window.clearTimeout(timeout);
   }
+}
+
+
+export async function installApprovedPackage(packageId) {
+  const credentials = getStoredBridgeCredentials();
+  if (!credentials?.token || !credentials?.csrf) throw new Error("اتصل بالجسر المحلي أولاً.");
+  if (!/^[a-z0-9][a-z0-9+.-]{0,127}$/.test(String(packageId || ""))) {
+    throw new Error("معرّف الحزمة غير صالح.");
+  }
+  return bridgeRequest("/api/packages/install", {
+    body: { package_id: packageId, confirmed: true },
+    token: credentials.token,
+    csrf: credentials.csrf,
+    timeoutMs: 150000
+  });
 }
