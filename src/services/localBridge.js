@@ -92,3 +92,64 @@ export function getStoredReceiverConfig() {
     return null;
   }
 }
+
+
+export async function stagePackageUpload(file) {
+  const credentials = getStoredBridgeCredentials();
+  if (!credentials?.token || !credentials?.csrf) throw new Error("اتصل بالجسر المحلي أولاً.");
+  if (!(file instanceof File) || !file.name.toLowerCase().endsWith(".ipk")) {
+    throw new Error("اختار ملف IPK فقط.");
+  }
+  if (!file.size || file.size > 32 * 1024 * 1024) {
+    throw new Error("حجم الملف يجب أن يكون أقل من 32 ميجابايت.");
+  }
+  const controller = new AbortController();
+  const timeout = window.setTimeout(() => controller.abort(), 30000);
+  try {
+    const response = await fetch(`${BRIDGE_BASE}/api/packages/stage`, {
+      method: "POST",
+      mode: "cors",
+      credentials: "omit",
+      cache: "no-store",
+      headers: {
+        "Content-Type": "application/vnd.debian.binary-package",
+        "X-Bridge-Token": credentials.token,
+        "X-CSRF-Token": credentials.csrf,
+        "X-Package-Name": encodeURIComponent(file.name)
+      },
+      body: file,
+      signal: controller.signal
+    });
+    let data;
+    try { data = await response.json(); }
+    catch { throw new Error("الجسر أعاد استجابة غير مفهومة."); }
+    if (!response.ok || !data.ok) {
+      const messages = {
+        unauthorized: "انتهت الثقة المحلية. أعد الاتصال بالجسر.",
+        ipk_size_invalid: "حجم الملف غير صالح أو يتجاوز 32 ميجابايت.",
+        staging_quota_exceeded: "مساحة staging المحلية ممتلئة؛ راجع الملفات المحفوظة قبل رفع المزيد.",
+        ipk_content_type_invalid: "نوع الملف غير مدعوم.",
+        invalid_ipk_archive: "الملف ليس حزمة IPK سليمة.",
+        ipk_control_missing: "بيانات تعريف الحزمة غير موجودة داخل الملف.",
+        ipk_data_missing: "ملفات محتوى الحزمة غير موجودة.",
+        ipk_data_archive_invalid: "أرشيف ملفات الحزمة غير صالح أو غير مدعوم.",
+        ipk_control_archive_too_large: "أرشيف بيانات التعريف أكبر من حدود الفحص.",
+        ipk_data_archive_too_large: "محتوى الحزمة يتجاوز حدود الفحص الآمن.",
+        ipk_control_invalid: "تعذر قراءة بيانات تعريف الحزمة.",
+        ipk_control_too_large: "بيانات تعريف الحزمة أكبر من الحد المسموح.",
+        ipk_unsafe_path: "الملف يحتوي على مسار داخلي غير آمن وتم رفضه.",
+        ipk_package_invalid: "اسم الحزمة داخل الملف غير صالح.",
+        ipk_version_invalid: "إصدار الحزمة غير صالح.",
+        ipk_architecture_invalid: "معمارية الحزمة غير صالحة."
+      };
+      throw new Error(data.message || messages[data.error] || "تعذر فحص ملف الحزمة.");
+    }
+    return data.package;
+  } catch (error) {
+    if (error.name === "AbortError") throw new Error("انتهت مهلة رفع وفحص الحزمة.");
+    if (error instanceof TypeError) throw new Error("تعذر الوصول للجسر المحلي. تأكد من تشغيله.");
+    throw error;
+  } finally {
+    window.clearTimeout(timeout);
+  }
+}
