@@ -227,37 +227,68 @@ function PluginStore() {
   </section>;
 }
 
-const demoChannels = [
-  { id: 1, name: "Demo News HD", satellite: "Astra 19.2°E", frequency: "11000", polarization: "H", symbolRate: "22000", type: "أخبار", quality: "HD" },
-  { id: 2, name: "Demo Sports", satellite: "Hotbird 13°E", frequency: "11585", polarization: "V", symbolRate: "27500", type: "رياضة", quality: "HD" },
-  { id: 3, name: "Demo Cinema", satellite: "Nilesat 7°W", frequency: "11727", polarization: "H", symbolRate: "27500", type: "أفلام", quality: "SD" },
-  { id: 4, name: "Demo Documentary", satellite: "Badr 26°E", frequency: "11919", polarization: "V", symbolRate: "27500", type: "وثائقي", quality: "HD" },
-  { id: 5, name: "Demo Kids", satellite: "Nilesat 7°W", frequency: "12015", polarization: "H", symbolRate: "27500", type: "أطفال", quality: "HD" },
-  { id: 6, name: "Demo Music", satellite: "Hotbird 13°E", frequency: "12149", polarization: "V", symbolRate: "27500", type: "موسيقى", quality: "SD" }
-];
-
 function ChannelIntelligence() {
+  const [snapshot, setSnapshot] = useState(null);
   const [query, setQuery] = useState("");
-  const [type, setType] = useState("الكل");
-  const [selected, setSelected] = useState(null);
-  const types = ["الكل", ...new Set(demoChannels.map(item => item.type))];
-  const filtered = demoChannels.filter(item => (type === "الكل" || item.type === type) && (item.name + " " + item.satellite + " " + item.frequency).toLowerCase().includes(query.toLowerCase()));
+  const [selectedBouquet, setSelectedBouquet] = useState("الكل");
+  const [refreshing, setRefreshing] = useState(false);
+  const [error, setError] = useState("");
+
+  const refreshChannels = async () => {
+    setRefreshing(true);
+    setError("");
+    try {
+      const data = await getReceiverSnapshot();
+      setSnapshot(data);
+      if (!data.connected) setError(data.message || "اتصل بالرسيفر أولاً.");
+    } catch (err) {
+      setError(err.message || "تعذر قراءة قائمة القنوات.");
+    } finally {
+      setRefreshing(false);
+    }
+  };
+
+  useEffect(() => {
+    refreshChannels();
+    const handle = () => refreshChannels();
+    window.addEventListener("o4t-receiver-updated", handle);
+    return () => window.removeEventListener("o4t-receiver-updated", handle);
+  }, []);
+
+  const bouquets = snapshot?.datasets?.services?.services || [];
+  const bouquetNames = ["الكل", ...bouquets.map(item => item.servicename || "Bouquet")];
+  const channels = bouquets.flatMap(bouquet => (bouquet.subservices || []).map(service => ({
+    id: service.servicereference,
+    name: service.servicename || "قناة بدون اسم",
+    reference: service.servicereference || "",
+    bouquet: bouquet.servicename || "غير مصنف"
+  })));
+  const filtered = channels.filter(item =>
+    (selectedBouquet === "الكل" || item.bouquet === selectedBouquet) &&
+    (item.name + " " + item.reference + " " + item.bouquet).toLowerCase().includes(query.toLowerCase())
+  );
+
   return <section className="module-page">
-    <div className="demo-notice"><AlertTriangle size={16}/><span>قائمة قنوات وهمية للتجربة فقط؛ لا يوجد اتصال بالرسيفر ولا يتم تعديل أو تصدير أي ملف قنوات.</span></div>
+    {!snapshot?.connected && <div className="demo-notice"><AlertTriangle size={16}/><span>{error || "جاري التحقق من اتصال الرسيفر..."}</span></div>}
+    {snapshot?.connected && <div className="section-heading"><div><h3>قائمة القنوات الحقيقية</h3><p>مقروءة من باقات الرسيفر عبر OpenWebif · بدون تعديل</p></div><span className="updated"><Database size={14}/> Live data</span></div>}
     <div className="module-toolbar glass">
-      <div className="module-search"><Search size={17}/><input value={query} onChange={e => setQuery(e.target.value)} placeholder="ابحث باسم القناة أو القمر أو التردد..." /></div>
-      <div className="category-pills">{types.map(item => <button key={item} className={type === item ? "selected" : ""} onClick={() => setType(item)}>{item}</button>)}</div>
+      <div className="module-search"><Search size={17}/><input value={query} onChange={e => setQuery(e.target.value)} placeholder="ابحث باسم القناة أو مرجع الخدمة..." /></div>
+      <div className="category-pills">{bouquetNames.map(item => <button key={item} className={selectedBouquet === item ? "selected" : ""} onClick={() => setSelectedBouquet(item)}>{item}</button>)}</div>
     </div>
-    <div className="channel-stats"><article className="glass"><strong>{filtered.length}</strong><span>قناة في النتائج</span></article><article className="glass"><strong>{new Set(filtered.map(item => item.satellite)).size}</strong><span>أقمار صناعية</span></article><article className="glass"><strong>{new Set(filtered.map(item => item.type)).size}</strong><span>تصنيفات</span></article></div>
-    <div className="glass channel-table-wrap"><div className="table-heading"><div><h3>قائمة القنوات التجريبية</h3><p>بيانات عرض قابلة للبحث والتصفية</p></div><span className="demo-tag">DEMO DATA</span></div>
-      <div className="channel-table-scroll"><table className="channel-table"><thead><tr><th>اسم القناة</th><th>القمر</th><th>التردد</th><th>الاستقطاب</th><th>الترميز</th><th>التصنيف</th><th>الجودة</th><th></th></tr></thead>
-      <tbody>{filtered.map(item => <tr key={item.id}><td>{item.name}</td><td>{item.satellite}</td><td dir="ltr">{item.frequency}</td><td dir="ltr">{item.polarization}</td><td dir="ltr">{item.symbolRate}</td><td>{item.type}</td><td><span className="quality-tag">{item.quality}</span></td><td><button className="table-action" onClick={() => setSelected(item)}>تفاصيل</button></td></tr>)}</tbody></table></div>
-      {filtered.length === 0 && <div className="empty-state">لا توجد قنوات مطابقة للبحث.</div>}
+    <div className="channel-stats">
+      <article className="glass"><strong>{filtered.length.toLocaleString("ar-EG")}</strong><span>قناة في النتائج</span></article>
+      <article className="glass"><strong>{bouquets.length.toLocaleString("ar-EG")}</strong><span>باقة / قائمة</span></article>
+      <article className="glass"><strong>{snapshot?.connected ? "فعلي" : "—"}</strong><span>مصدر البيانات</span></article>
     </div>
-    {selected && <div className="modal-backdrop" onClick={() => setSelected(null)}><section className="glass plugin-modal" onClick={e => e.stopPropagation()}><button className="modal-close" onClick={() => setSelected(null)} aria-label="إغلاق"><X size={18}/></button><span className="plugin-symbol"><Tv size={22}/></span><small>تفاصيل قناة تجريبية</small><h2>{selected.name}</h2><p>{selected.satellite} · {selected.type} · {selected.quality}</p><div className="plugin-meta"><span>التردد: {selected.frequency} MHz</span><span>الاستقطاب: {selected.polarization}</span><span>معدل الترميز: {selected.symbolRate}</span></div></section></div>}
+    <div className="glass channel-table-wrap">
+      <div className="table-heading"><div><h3>قنوات الرسيفر</h3><p>الأسماء ومراجع الخدمة التي وفرها OpenWebif</p></div><button className="secondary-button" onClick={refreshChannels} disabled={refreshing}><RefreshCw size={14}/>{refreshing ? "جاري التحديث" : "تحديث"}</button></div>
+      <div className="channel-table-scroll"><table className="channel-table"><thead><tr><th>اسم القناة</th><th>الباقة</th><th>مرجع الخدمة</th></tr></thead>
+        <tbody>{filtered.map(item => <tr key={item.id}><td>{item.name}</td><td>{item.bouquet}</td><td dir="ltr">{item.reference}</td></tr>)}</tbody>
+      </table></div>
+      {snapshot?.connected && filtered.length === 0 && <div className="empty-state">لا توجد قنوات متاحة في الاستجابة الحالية أو لا توجد نتائج مطابقة.</div>}
+    </div>
   </section>;
 }
-
 
 const logRules = [
   { key: "disk", title: "مساحة التخزين", pattern: /no space left|disk full|not enough space|enospc/i, advice: "راجع مساحة التخزين من واجهة الجهاز، ولا تحذف ملفات النظام دون معرفة وظيفتها." },
