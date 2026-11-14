@@ -277,7 +277,7 @@
   --blue:#8bc4ff;
   --cyan:#67e5f2;
 }
-html{font-size:16px;text-size-adjust:200%;-webkit-text-size-adjust:200%}
+html{font-size:16px;text-size-adjust:100%;-webkit-text-size-adjust:100%}
 body{
   color:#f4f8ff;
   font-family:"Cairo",Tahoma,Arial,sans-serif;
