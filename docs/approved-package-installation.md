@@ -33,7 +33,9 @@ Any future SSH transport must use a dedicated local key, strict host-key verific
 - The allowlist remains empty until a human review verifies provenance, source, exact digest, receiver architecture, image compatibility, and dependencies.
 
 ## Current capability
-OpenWebif access remains read-only. Local IPK staging is enabled only on the user's computer. SSH, receiver-side upload, package installation/removal, and command execution remain disabled.
+OpenWebif data collection remains read-only. A separate, authenticated package-install endpoint is now implemented using OpenWebif's dedicated IPKG upload and package-manager controllers; it is not a general shell. It requires an explicit browser confirmation, an exact bridge-side allowlist entry, matching staged-file SHA-256/size/control metadata, an approved receiver architecture, an exact supported image family/version, successful dependency checks, and post-install status verification. The receiver must have OpenWebif IPK upload enabled. Requests are rejected if the image or architecture cannot be positively identified.
+
+The website and bridge-side allowlists are both intentionally empty in this change, so **no package can be installed yet**. The next activation step is to review one specific IPK, establish its provenance and compatibility on the target receiver, then add its exact metadata to both registries. SSH, package removal, and general command execution remain disabled.
 
 
 ## Approved IPK installation transport
