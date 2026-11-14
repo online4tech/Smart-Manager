@@ -6,9 +6,9 @@ import sys
 import unittest
 from pathlib import Path
 from unittest.mock import patch
-import bridge
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "bridge-package"))
+import bridge
 from bridge import route_path, read_receiver_info, parse_ipk_metadata, stage_ipk
 
 class RoutePathTests(unittest.TestCase):
