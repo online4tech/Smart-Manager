@@ -10,35 +10,11 @@ import commandsData from "./data/commands.json";
 import { trustLocalBridge, getLocalBridgeStatus, connectLocalReceiver } from "./services/localBridge";
 import { getReceiverSnapshot, getConnectionCapabilities } from "./services/receiverAdapter";
 
-const scanReports = {
-  full: {
-    title: "الفحص الشامل للنظام",
-    status: "مراجعة عامة",
-    summary: "المؤشرات الأساسية مستقرة في العينة التجريبية، مع ملاحظة تستحق المتابعة لمساحة التخزين.",
-    recommendation: "راجع الملفات الكبيرة وسجلات التسجيل القديمة يدويًا قبل اتخاذ قرار بالحذف.",
-    checks: ["مؤشرات المعالج والذاكرة", "مساحة التخزين", "حالة الخدمات الأساسية", "مراجعة التنبيهات التجريبية"]
-  },
-  logs: {
-    title: "تحليل سجلات الأخطاء",
-    status: "لا توجد عينة حرجة",
-    summary: "لا تحتوي بيانات العرض الحالية على أخطاء حرجة. لا يعني ذلك فحص سجلات الرسيفر الفعلية.",
-    recommendation: "عند ربط الجهاز مستقبلًا، راجع السجل الأصلي مع الاحتفاظ بنسخة منه وعدم مشاركة بيانات حساسة.",
-    checks: ["عينة أخطاء النظام", "مستوى الخطورة", "تكرار التنبيه", "مصدر الرسالة"]
-  },
-  plugins: {
-    title: "فحص البلجنات",
-    status: "مراجعة توضيحية",
-    summary: "لا تتوفر حاليًا قائمة بلجنات فعلية؛ النتيجة توضح فقط شكل تقرير التوافق القادم.",
-    recommendation: "قبل تحديث أي بلجن، تحقق من توافقه مع إصدار Enigma2 وخذ نسخة احتياطية من الإعدادات.",
-    checks: ["قائمة الإضافات (غير متصلة)", "معلومات الإصدار", "مراجعة التوافق", "تنبيهات التحديث"]
-  },
-  safety: {
-    title: "فحص سلامة النظام",
-    status: "لا توجد تغييرات",
-    summary: "الفحص الحالي للعرض فقط ولا يقرأ الملفات أو يغيّر الإعدادات أو ينفذ أوامر.",
-    recommendation: "احتفظ بنسخة احتياطية حديثة قبل أي صيانة فعلية، ونفّذ التغييرات يدويًا بعد فهم أثرها.",
-    checks: ["حدود وضع العرض", "عدم تنفيذ أوامر", "عدم تعديل الملفات", "إرشادات النسخ الاحتياطي"]
-  }
+const scanLabels = {
+  full: "قراءة بيانات الجهاز",
+  logs: "توفر سجلات النظام",
+  plugins: "توفر قائمة البلجنات",
+  safety: "حدود سلامة القراءة"
 };
 
 const nav = [
@@ -70,11 +46,25 @@ function ReceiverDetails() {
 
   const refreshDemo = async () => {
     setRefreshing(true);
-    try { setSnapshot(await getReceiverSnapshot()); }
-    finally { setRefreshing(false); }
+    try {
+      setSnapshot(await getReceiverSnapshot());
+    } catch {
+      setSnapshot(null);
+    } finally {
+      setRefreshing(false);
+    }
   };
 
-  useEffect(() => { refreshDemo(); }, []);
+  useEffect(() => {
+    refreshDemo();
+    const handle = () => refreshDemo();
+    window.addEventListener("o4t-receiver-updated", handle);
+    const interval = window.setInterval(refreshDemo, 30000);
+    return () => {
+      window.clearInterval(interval);
+      window.removeEventListener("o4t-receiver-updated", handle);
+    };
+  }, []);
 
   if (!snapshot) return <div className="glass receiver-details-loading">جاري قراءة بيانات الرسيفر...</div>;
 
@@ -98,7 +88,7 @@ function ReceiverDetails() {
         <article className="glass info-tile"><small>صورة النظام</small><strong>{snapshot.device.image}</strong></article>
         <article className="glass info-tile"><small>معمارية المعالج</small><strong>{snapshot.device.architecture}</strong></article>
         <article className="glass info-tile"><small>مدة التشغيل</small><strong>{snapshot.device.uptime}</strong></article>
-        <article className="glass info-tile"><small>عنوان الشبكة (تجريبي)</small><strong dir="ltr">{snapshot.device.ip}</strong></article>
+        <article className="glass info-tile"><small>عنوان الشبكة (من إعداد الاتصال)</small><strong dir="ltr">{snapshot.device.ip}</strong></article>
         <article className="glass info-tile"><small>آخر تحديث للبيانات</small><strong>{snapshot.device.lastSeen}</strong></article>
       </div>
     </section>
@@ -117,8 +107,8 @@ function ReceiverDetails() {
         <div className="panel-heading"><div><h3>طبقة الاتصال</h3><p>جاهزية الربط الآمن مستقبلًا</p></div><span className="panel-icon"><LockKeyhole size={19}/></span></div>
         <div className="connection-state"><span className="demo-status-dot"/><div><strong>{snapshot.connected ? "OpenWebif متصل" : "الجسر غير متصل بالرسيفر"}</strong><small>{snapshot.connected ? "تمت قراءة بيانات الرسيفر" : "لا توجد بيانات حية"}</small></div></div>
         <ul className="capability-list">
-          <li><CheckCircle2 size={14}/> قراءة بيانات العرض المحلية</li>
-          <li><X size={14}/> الاتصال بالشبكة غير مفعّل</li>
+          <li><CheckCircle2 size={14}/> قراءة بيانات OpenWebif الفعلية المتاحة</li>
+          <li><CheckCircle2 size={14}/> الاتصال المحلي بالرسيفر مفعّل</li>
           <li><X size={14}/> تنفيذ الأوامر وتعديل الملفات معطّل</li>
         </ul>
         <button className="secondary-button refresh-demo" onClick={refreshDemo} disabled={refreshing}><RefreshCw size={15}/>{refreshing ? "جاري التحديث..." : "تحديث البيانات الحقيقية"}</button>
@@ -486,33 +476,118 @@ export default function App() {
     { key: "storage", label: "التخزين", value: liveSnapshot?.resources?.[2]?.value || "غير متاح", detail: "حسب البيانات التي يوفرها OpenWebif", amount: 0, tone: "amber" },
     { key: "services", label: "القنوات", value: liveSnapshot?.counts?.bouquets == null ? "غير متاح" : String(liveSnapshot.counts.bouquets), detail: "عدد الباقات المقروءة", amount: 0, tone: "green" }
   ];
-  const liveFindings = liveSnapshot?.connected
-    ? [{ title: "اتصال OpenWebif نشط", description: "تمت قراءة بيانات الجهاز من الرسيفر مباشرة.", severity: "متصل", tone: "success", evidence: liveSnapshot.source }]
-    : [{ title: "لا توجد بيانات رسيفر حية", description: "اربط الجسر والرسيفر لعرض حالة فعلية بدلًا من عينات العرض.", severity: "بانتظار الاتصال", tone: "warning", evidence: "OpenWebif connection required" }];
+  const liveFindings = (() => {
+    if (!liveSnapshot?.connected) return [{
+      title: "الرسيفر غير متصل",
+      description: "لا توجد جلسة قراءة ناجحة حاليًا. لا يمكن إصدار تشخيص للجهاز قبل الاتصال.",
+      severity: "بانتظار الاتصال",
+      tone: "warning",
+      evidence: liveSnapshot?.message || "OpenWebif connection unavailable"
+    }];
+    const datasets = liveSnapshot.datasets || {};
+    const findings = [{
+      title: "اتصال OpenWebif نشط",
+      description: "تم الوصول إلى الرسيفر وقراءة بيانات التعريف.",
+      severity: "متصل",
+      tone: "success",
+      evidence: liveSnapshot.source
+    }];
+    const available = ["boxinfo", "status", "services", "timers", "recordings"].filter(key => datasets[key] != null);
+    const unavailable = ["boxinfo", "status", "services", "timers", "recordings"].filter(key => datasets[key] == null);
+    findings.push({
+      title: "تغطية مصادر البيانات",
+      description: `تمت قراءة ${available.length} من 5 مجموعات بيانات مسموح بها.`,
+      severity: unavailable.length ? "قراءة جزئية" : "مكتمل",
+      tone: unavailable.length ? "warning" : "success",
+      evidence: `المتاح: ${available.join("، ") || "لا شيء"} · غير المتاح: ${unavailable.join("، ") || "لا شيء"}`
+    });
+    if (liveSnapshot.counts?.bouquets != null) findings.push({
+      title: "قوائم القنوات",
+      description: `OpenWebif أعاد ${liveSnapshot.counts.bouquets} قائمة/باقة.`,
+      severity: "مقروء",
+      tone: "success",
+      evidence: "GET /api/getallservices"
+    });
+    return findings;
+  })();
 
   const startScan = async (type = "full") => {
-    const snapshot = await getReceiverSnapshot();
-    setLiveSnapshot(snapshot);
-    const report = snapshot.connected
-      ? {
-          title: type === "full" ? "تحديث بيانات الجهاز" : scanReports[type]?.title || "قراءة بيانات الجهاز",
-          status: "تمت القراءة الفعلية",
-          summary: "تم تحديث بيانات OpenWebif المتاحة. هذا الفحص لا يدّعي قراءة السجلات أو قائمة البلجنات أو ملفات النظام.",
-          recommendation: "البيانات غير المتاحة عبر OpenWebif تظل معلّمة كغير متاحة، ولا يتم تنفيذ أي تغييرات على الرسيفر.",
-          checks: ["معلومات الجهاز", "حالة OpenWebif", "قوائم القنوات", "المؤقتات والتسجيلات المتاحة"]
-        }
-      : {
-          title: "تعذر بدء الفحص",
+    setScanState("running");
+    try {
+      const snapshot = await getReceiverSnapshot();
+      setLiveSnapshot(snapshot);
+      const connected = snapshot.connected === true;
+      const datasets = snapshot.datasets || {};
+      const dataNames = ["boxinfo", "status", "services", "timers", "recordings"];
+      const available = dataNames.filter(key => datasets[key] != null);
+      const missing = dataNames.filter(key => datasets[key] == null);
+      let report;
+
+      if (type === "logs") {
+        report = {
+          title: scanLabels.logs,
+          status: "غير متاح عبر واجهة القراءة الحالية",
+          summary: "OpenWebif في هذا الربط لا يوفّر سجلات النظام. لم يتم الادعاء بفحصها أو استنتاج عدم وجود أخطاء.",
+          recommendation: "استخدم محلل السجلات اليدوي أسفل الصفحة بعد الحصول على سجل من واجهة الرسيفر، مع حذف أي بيانات شخصية.",
+          checks: ["اتصال الرسيفر: " + (connected ? "ناجح" : "غير متصل"), "قراءة سجلات النظام: غير مدعومة حاليًا", "لم يتم فحص ملفات السجل"]
+        };
+      } else if (type === "plugins") {
+        report = {
+          title: scanLabels.plugins,
+          status: "قائمة البلجنات غير متاحة",
+          summary: "لم يتمكن الربط الحالي من قراءة قائمة الحزم المثبتة من OpenWebif. كتالوج Plugin Store ليس دليلًا على ما هو مثبت على هذا الرسيفر.",
+          recommendation: "لا تعتبر عناصر الكتالوج مثبتة على الجهاز. يلزم مصدر قراءة مخصص للحزم قبل تقرير التوافق.",
+          checks: ["اتصال الرسيفر: " + (connected ? "ناجح" : "غير متصل"), "قائمة البلجنات المثبتة: غير متاحة", "فحص التوافق: لم يُنفذ"]
+        };
+      } else if (type === "safety") {
+        report = {
+          title: scanLabels.safety,
+          status: "نطاق قراءة فقط",
+          summary: "تم التحقق من حالة الاتصال ومجموعات البيانات التي يتيحها OpenWebif فقط. لم يتم فحص ملفات النظام أو سلامة الحزم.",
+          recommendation: "لا تستخدم التقرير كإثبات لسلامة النظام بالكامل؛ فهو لا يقرأ الملفات أو سجلات النظام ولا ينفذ تغييرات.",
+          checks: ["SSH وتنفيذ الأوامر: معطّل", "تعديل الملفات: معطّل", "تثبيت أو إزالة الحزم: معطّل"]
+        };
+      } else {
+        report = connected ? {
+          title: scanLabels.full,
+          status: "اكتملت القراءة الفعلية",
+          summary: `الاتصال ناجح. تمت قراءة ${available.length} من 5 مجموعات بيانات OpenWebif المتاحة في هذا الربط.`,
+          recommendation: missing.length
+            ? "بعض واجهات البيانات لم تستجب أو غير مدعومة في صورة النظام الحالية. راجع تفاصيل التغطية قبل الاعتماد على أي استنتاج."
+            : "البيانات الخمس المتاحة تمت قراءتها. هذا لا يشمل سجلات النظام أو قائمة البلجنات المثبتة أو فحص ملفات النظام.",
+          checks: [
+            "معلومات الجهاز: " + (datasets.boxinfo ? "مقروءة" : "غير متاحة"),
+            "الحالة الحالية: " + (datasets.status ? "مقروءة" : "غير متاحة"),
+            "قوائم القنوات: " + (datasets.services ? "مقروءة" : "غير متاحة"),
+            "مؤقتات التسجيل: " + (datasets.timers ? "مقروءة" : "غير متاحة"),
+            "التسجيلات: " + (datasets.recordings ? "مقروءة" : "غير متاحة")
+          ]
+        } : {
+          title: "تعذر بدء القراءة",
           status: "الرسيفر غير متصل",
           summary: snapshot.message || "لم يتم العثور على اتصال محفوظ بالرسيفر.",
           recommendation: "افتح اتصال الجسر المحلي وأعد اختبار اتصال الرسيفر.",
-          checks: ["لم يتم تنفيذ فحص", "لا توجد بيانات فعلية"]
+          checks: ["لم يتم تنفيذ قراءة", "لا توجد بيانات حية"]
         };
-    const record = { ...report, id: Date.now(), time: new Date().toLocaleTimeString("ar-EG", { hour: "2-digit", minute: "2-digit" }) };
-    setActiveReport(record);
-    setScanHistory(previous => [record, ...previous].slice(0, 4));
-    setScanState("complete");
-    setShowDemo(false);
+      }
+
+      const record = { ...report, id: Date.now(), time: new Date().toLocaleTimeString("ar-EG", { hour: "2-digit", minute: "2-digit" }) };
+      setActiveReport(record);
+      setScanHistory(previous => [record, ...previous].slice(0, 4));
+      setScanState("complete");
+      setShowDemo(false);
+    } catch (error) {
+      setActiveReport({
+        id: Date.now(),
+        title: scanLabels[type] || "قراءة بيانات الجهاز",
+        status: "فشلت القراءة",
+        summary: error.message || "تعذر الوصول إلى الجسر المحلي أو الرسيفر.",
+        recommendation: "تأكد من تشغيل الجسر ومن حفظ اتصال الرسيفر، ثم أعد المحاولة.",
+        checks: ["لم تكتمل القراءة", "لم يتم تنفيذ أي تغيير على الرسيفر"],
+        time: new Date().toLocaleTimeString("ar-EG", { hour: "2-digit", minute: "2-digit" })
+      });
+      setScanState("complete");
+    }
   };
 
   return <div className="app-shell">
@@ -569,7 +644,7 @@ export default function App() {
             <h1>{activeNav === "AI Doctor" ? <>AI Doctor <span className="title-ar">طبيب الرسيفر الذكي</span></> : activeNav === "Smart Manager" ? <>Smart Manager <span className="title-ar">إدارة الجهاز</span></> : activeNav}</h1>
             <p>{activeNav === "AI Doctor" ? "افحص جهازك، افهم المشاكل، واعرف الخطوة المناسبة قبل تنفيذ أي إصلاح." : activeNav === "Smart Manager" ? "تفاصيل الجهاز ومؤشرات النظام وحالة طبقة الاتصال." : activeNav === "Plugin Store" ? "استكشف كتالوج الإضافات وصنّفها وراجع معلوماتها." : activeNav === "Channel Intelligence" ? "ابحث في باقات وقنوات الرسيفر المقروءة عبر OpenWebif." : "القسم قيد التجهيز ضمن منظومة Online4Tech."}</p>
           </div>
-          {activeNav === "AI Doctor" && <button className="primary-button" onClick={() => startScan("full")}><Activity size={17}/>{scanState === "complete" ? "تحديث الفحص" : "قراءة بيانات الجهاز"}</button>}
+          {activeNav === "AI Doctor" && <button className="primary-button" onClick={() => startScan("full")}><Activity size={17}/>{scanState === "running" ? "جاري القراءة..." : scanState === "complete" ? "تحديث الفحص" : "قراءة بيانات الجهاز"}</button>}
         </section>
         {activeNav === "Smart Manager" ? <ReceiverDetails/> : activeNav === "Plugin Store" ? <PluginStore/> : activeNav === "Channel Intelligence" ? <ChannelIntelligence/> : activeNav !== "AI Doctor" ? <section className="glass module-placeholder"><Package size={28}/><h2>{activeNav}</h2><p>سيتم تجهيز هذا القسم في المرحلة التالية مع الحفاظ على نفس واجهة المنظومة.</p><span>قيد التطوير · Demo Mode</span></section> : <>
 
@@ -593,10 +668,10 @@ export default function App() {
           <div className="glass panel">
             <div className="panel-heading"><div><h3>مركز التشخيص</h3><p>اختر نوع الفحص المطلوب</p></div><span className="panel-icon"><Stethoscope size={19}/></span></div>
             <div className="scan-options">
-              <button className="scan-option" onClick={() => startScan("full")}><span className="scan-icon blue"><Activity size={18}/></span><span><strong>فحص شامل للنظام</strong><small>فحص مؤشرات الجهاز والخدمات</small></span><ChevronLeft size={17}/></button>
-              <button className="scan-option" onClick={() => startScan("logs")}><span className="scan-icon cyan"><FileSearch size={18}/></span><span><strong>تحليل سجلات الأخطاء</strong><small>مراجعة سجلات النظام المتاحة</small></span><ChevronLeft size={17}/></button>
-              <button className="scan-option" onClick={() => startScan("plugins")}><span className="scan-icon violet"><Package size={18}/></span><span><strong>فحص البلجنات</strong><small>مراجعة معلومات الإضافات والتوافق</small></span><ChevronLeft size={17}/></button>
-              <button className="scan-option" onClick={() => startScan("safety")}><span className="scan-icon green"><ShieldCheck size={18}/></span><span><strong>سلامة النظام</strong><small>مراجعة مؤشرات الملفات والإعدادات</small></span><ChevronLeft size={17}/></button>
+              <button className="scan-option" onClick={() => startScan("full")}><span className="scan-icon blue"><Activity size={18}/></span><span><strong>فحص شامل للنظام</strong><small>قراءة مجموعات OpenWebif المتاحة</small></span><ChevronLeft size={17}/></button>
+              <button className="scan-option" onClick={() => startScan("logs")}><span className="scan-icon cyan"><FileSearch size={18}/></span><span><strong>تحليل سجلات الأخطاء</strong><small>التحقق من توفر السجلات؛ التحليل اليدوي بالأسفل</small></span><ChevronLeft size={17}/></button>
+              <button className="scan-option" onClick={() => startScan("plugins")}><span className="scan-icon violet"><Package size={18}/></span><span><strong>فحص البلجنات</strong><small>التحقق من توفر قائمة البلجنات المثبتة</small></span><ChevronLeft size={17}/></button>
+              <button className="scan-option" onClick={() => startScan("safety")}><span className="scan-icon green"><ShieldCheck size={18}/></span><span><strong>سلامة النظام</strong><small>عرض حدود الاتصال والقراءة فقط</small></span><ChevronLeft size={17}/></button>
             </div>
           </div>
 
