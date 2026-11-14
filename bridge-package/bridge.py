@@ -484,7 +484,7 @@ class Handler(BaseHTTPRequestHandler):
                     "receiver_image_family_not_approved": "صورة النظام غير مدرجة ضمن توافق الحزمة.",
                     "receiver_image_version_unverified": "تعذر تحديد إصدار صورة النظام؛ تم إيقاف التثبيت.",
                     "receiver_image_version_not_approved": "إصدار صورة النظام غير مدرج ضمن توافق الحزمة.",
-                    "package_dependency_missing": "هناك اعتماد مطلوب غير مثبت على الرسيفر.";
+                    "package_dependency_missing": "هناك اعتماد مطلوب غير مثبت على الرسيفر.",
                     "package_install_not_verified": "انتهى طلب التثبيت لكن لم يمكن التحقق من ظهور الحزمة كمثبتة.",
                     "receiver_unreachable": "تعذر الوصول للرسيفر أثناء عملية التثبيت.",
                     "receiver_package_api_failed": "واجهة مدير الحزم في OpenWebif لم تُكمل العملية."
