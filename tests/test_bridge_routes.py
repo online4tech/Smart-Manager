@@ -100,7 +100,7 @@ class IpkInspectionTests(unittest.TestCase):
                 self.assertEqual(result["status"], "staged-not-approved")
 
     def test_rejects_when_staging_package_count_limit_is_reached(self):
-        payload = self.make_ipk("Package: example\\nVersion: 1\\nArchitecture: all\\n")
+        payload = self.make_ipk("Package: example\nVersion: 1\nArchitecture: all\n")
         with tempfile.TemporaryDirectory() as directory:
             staging = Path(directory) / "staging"
             staging.mkdir()
