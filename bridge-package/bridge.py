@@ -137,7 +137,62 @@ def read_receiver_info(host, port, scheme):
     }
     if not any(device.values()):
         raise ValueError("receiver_webif_unavailable")
-    return {"connected": True, "host": host, "scheme": scheme, "device": device, "source": "OpenWebif read-only XML"}
+    return {"connected": True, "host": host, "port": port, "scheme": scheme, "device": device, "source": "OpenWebif read-only XML"}
+
+
+READ_DATASETS = {
+    # Fixed GET-only OpenWebif endpoints. No arbitrary path or query is accepted.
+    "boxinfo": "/api/boxinfo",
+    "status": "/api/statusinfo",
+    "services": "/api/getallservices",
+    "timers": "/api/timerlist",
+    "recordings": "/api/movielist",
+}
+
+def read_receiver_dataset(snapshot, dataset):
+    if dataset not in READ_DATASETS:
+        raise ValueError("dataset_not_allowed")
+    host = snapshot.get("host", "")
+    port = int(snapshot.get("port", 80 if snapshot.get("scheme") == "http" else 443))
+    scheme = snapshot.get("scheme", "http")
+    address = ipaddress.ip_address(host)
+    if address.version != 4 or not address.is_private or address.is_loopback or address.is_link_local or address.is_multicast or address.is_reserved:
+        raise ValueError("invalid_receiver_address")
+    if port not in (80, 443) or scheme not in ("http", "https"):
+        raise ValueError("invalid_receiver_port")
+    connection = None
+    try:
+        if scheme == "https":
+            connection = http.client.HTTPSConnection(host, port, timeout=5, context=ssl.create_default_context())
+        else:
+            connection = http.client.HTTPConnection(host, port, timeout=5)
+        connection.request("GET", READ_DATASETS[dataset], headers={"Accept": "application/json", "Connection": "close"})
+        response = connection.getresponse()
+        payload = response.read(1048577)
+        if len(payload) > 1048576:
+            raise ValueError("receiver_response_too_large")
+        if response.status in (301, 302, 303, 307, 308):
+            raise ValueError("receiver_redirect_blocked")
+        if response.status == 404:
+            raise ValueError("dataset_unavailable")
+        if response.status == 401:
+            raise ValueError("receiver_auth_required")
+        if response.status == 403:
+            raise ValueError("receiver_access_denied")
+        if response.status != 200:
+            raise ValueError("receiver_webif_unavailable")
+        try:
+            data = json.loads(payload.decode("utf-8"))
+        except (ValueError, UnicodeDecodeError):
+            raise ValueError("receiver_invalid_json")
+        return {"dataset": dataset, "available": True, "data": data, "source": READ_DATASETS[dataset]}
+    except ValueError:
+        raise
+    except (OSError, http.client.HTTPException, ssl.SSLError):
+        raise ValueError("receiver_unreachable")
+    finally:
+        if connection:
+            connection.close()
 
 class Handler(BaseHTTPRequestHandler):
     server_version = "O4TLocalBridge/1.1"
@@ -154,7 +209,7 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_OPTIONS(self):
         route = route_path(self.path)
-        allowed = ("/api/trust", "/api/status", "/api/receiver/connect")
+        allowed = ("/api/trust", "/api/status", "/api/receiver/connect", "/api/receiver/data")
         if not self.valid_host() or not self.valid_origin() or route not in allowed:
             return reply(self, 403, {"ok": False, "error": "request_not_allowed"})
         self.send_response(204)
@@ -212,7 +267,7 @@ class Handler(BaseHTTPRequestHandler):
                 "mode": "local-user-trust", "capabilities": "read-only-webif"
             }, True)
 
-        if route in ("/api/status", "/api/receiver/connect"):
+        if route in ("/api/status", "/api/receiver/connect", "/api/receiver/data"):
             if not self.authorized():
                 return reply(self, 401, {"ok": False, "error": "unauthorized"}, True)
 
@@ -227,6 +282,27 @@ class Handler(BaseHTTPRequestHandler):
                         "file_write": False, "backup": False
                     }
                 }, True)
+
+            if route == "/api/receiver/data":
+                if not RECEIVER_SNAPSHOT or not RECEIVER_SNAPSHOT.get("connected"):
+                    return reply(self, 409, {"ok": False, "error": "receiver_not_connected"}, True)
+                dataset = str(data.get("dataset", "")).strip()
+                try:
+                    result = read_receiver_dataset(RECEIVER_SNAPSHOT, dataset)
+                except ValueError as exc:
+                    error = str(exc) or "receiver_webif_unavailable"
+                    messages = {
+                        "dataset_not_allowed": "مجموعة البيانات المطلوبة غير مسموح بها.",
+                        "dataset_unavailable": "الرسيفر أو إصدار OpenWebif لا يوفر مجموعة البيانات دي.",
+                        "receiver_invalid_json": "استجابة OpenWebif ليست JSON صالحًا.",
+                        "receiver_response_too_large": "استجابة الرسيفر أكبر من الحد المسموح.",
+                        "receiver_redirect_blocked": "تم رفض إعادة التوجيه لحماية الاتصال المحلي.",
+                        "receiver_auth_required": "واجهة الرسيفر تطلب تسجيل دخول؛ هذا الإصدار لا يرسل كلمات مرور.",
+                        "receiver_access_denied": "الرسيفر رفض قراءة البيانات.",
+                        "receiver_unreachable": "تعذر الوصول للرسيفر."
+                    }
+                    return reply(self, 400, {"ok": False, "error": error, "message": messages.get(error, "تعذر قراءة بيانات الرسيفر.")}, True)
+                return reply(self, 200, {"ok": True, "result": result}, True)
 
             host = str(data.get("host", "")).strip()
             scheme = str(data.get("scheme", "http")).lower()
