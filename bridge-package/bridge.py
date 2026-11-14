@@ -26,6 +26,8 @@ ALLOWED_HOSTS = {f"127.0.0.1:{PORT}", f"localhost:{PORT}"}
 MAX_BODY = 4096
 MAX_PACKAGE_SIZE = 32 * 1024 * 1024
 MAX_CONTROL_SIZE = 65536
+MAX_STAGING_TOTAL = 256 * 1024 * 1024
+MAX_STAGED_PACKAGES = 50
 def load_or_create_trust():
     """Persist a per-user local trust token; never expose it in logs."""
     if os.name == "nt":
@@ -151,7 +153,7 @@ def parse_ipk_metadata(payload):
     architecture = control.get("architecture", "")
     if not re.fullmatch(r"[a-z0-9][a-z0-9+.-]{0,127}", package):
         raise ValueError("ipk_package_invalid")
-    if not version or len(version) > 128 or any(ord(ch) < 32 for ch in version):
+    if not re.fullmatch(r"[A-Za-z0-9.+:~_-]{1,128}", version):
         raise ValueError("ipk_version_invalid")
     if not architecture or len(architecture) > 64 or not re.fullmatch(r"[A-Za-z0-9_.+-]+", architecture):
         raise ValueError("ipk_architecture_invalid")
@@ -167,8 +169,16 @@ def stage_ipk(payload, original_name):
     digest = hashlib.sha256(payload).hexdigest()
     staging = user_data_root() / "staging"
     staging.mkdir(parents=True, exist_ok=True)
+    try:
+        os.chmod(staging, 0o700)
+    except OSError:
+        pass
     target = staging / (digest + ".ipk")
     if not target.exists():
+        staged_files = list(staging.glob("*.ipk"))
+        staged_total = sum(item.stat().st_size for item in staged_files if item.is_file())
+        if len(staged_files) >= MAX_STAGED_PACKAGES or staged_total + len(payload) > MAX_STAGING_TOTAL:
+            raise ValueError("staging_quota_exceeded")
         temp = staging / (digest + ".tmp")
         temp.write_bytes(payload)
         try:
@@ -414,6 +424,7 @@ class Handler(BaseHTTPRequestHandler):
                 messages = {
                     "ipk_extension_required": "ارفع ملفًا بامتداد IPK فقط.",
                     "ipk_size_invalid": "حجم الملف غير صالح أو يتجاوز 32 ميجابايت.",
+                    "staging_quota_exceeded": "مساحة staging المحلية ممتلئة؛ راجع ملفات الحزم المحفوظة قبل رفع المزيد.",
                     "invalid_ipk_archive": "بنية ملف IPK غير صالحة.",
                     "ipk_control_missing": "ملف التحكم control غير موجود داخل الحزمة.",
                     "ipk_data_missing": "ملفات محتوى الحزمة data غير موجودة.",
