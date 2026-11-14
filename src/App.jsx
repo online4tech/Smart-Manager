@@ -44,7 +44,7 @@ function ReceiverDetails() {
   const [refreshing, setRefreshing] = useState(false);
   const capabilities = getConnectionCapabilities();
 
-  const refreshDemo = async () => {
+  const refreshReceiverData = async () => {
     setRefreshing(true);
     try {
       setSnapshot(await getReceiverSnapshot());
@@ -56,10 +56,10 @@ function ReceiverDetails() {
   };
 
   useEffect(() => {
-    refreshDemo();
-    const handle = () => refreshDemo();
+    refreshReceiverData();
+    const handle = () => refreshReceiverData();
     window.addEventListener("o4t-receiver-updated", handle);
-    const interval = window.setInterval(refreshDemo, 30000);
+    const interval = window.setInterval(refreshReceiverData, 30000);
     return () => {
       window.clearInterval(interval);
       window.removeEventListener("o4t-receiver-updated", handle);
@@ -79,7 +79,7 @@ function ReceiverDetails() {
       <div className="device-status"><span className={snapshot.connected ? "live-dot" : "demo-status-dot"}/><div><strong>{snapshot.connected ? "متصل فعليًا" : "غير متصل"}</strong><small>{snapshot.connected ? "OpenWebif · قراءة فقط" : "لا توجد جلسة رسيفر محفوظة"}</small></div></div>
     </section>
 
-    {!snapshot.connected && <div className="demo-notice"><AlertTriangle size={16}/><span>اتصل بالرسيفر من زر الجسر المحلي لعرض بياناته الحقيقية.</span></div>}
+    {!snapshot.connected && <div className="connection-notice"><AlertTriangle size={16}/><span>اتصل بالرسيفر من زر الجسر المحلي لعرض بياناته الحقيقية.</span></div>}
 
     <section className="section-block">
       <div className="section-heading"><div><h3>معلومات الجهاز</h3><p>بيانات التعريف والإصدار من OpenWebif</p></div><span className="updated"><Database size={14}/> Live Snapshot</span></div>
@@ -97,7 +97,6 @@ function ReceiverDetails() {
       <div className="section-heading"><div><h3>موارد النظام</h3><p>القيم التي لا يوفرها OpenWebif ستظهر كغير متاحة</p></div></div>
       <div className="resource-grid">{snapshot.resources.map(item => <article className="glass resource-tile" key={item.label}><span>{item.label}</span><strong>{item.value}</strong><small>{item.detail}</small></article>)}</div>
     </section>
-
     <section className="lower-grid receiver-lower-grid">
       <div className="glass panel">
         <div className="panel-heading"><div><h3>الخدمات الأساسية</h3><p>الحالة المقروءة من الجهاز</p></div><span className="panel-icon"><Server size={19}/></span></div>
@@ -105,13 +104,13 @@ function ReceiverDetails() {
       </div>
       <div className="glass panel connection-panel">
         <div className="panel-heading"><div><h3>طبقة الاتصال</h3><p>جاهزية الربط الآمن مستقبلًا</p></div><span className="panel-icon"><LockKeyhole size={19}/></span></div>
-        <div className="connection-state"><span className="demo-status-dot"/><div><strong>{snapshot.connected ? "OpenWebif متصل" : "الجسر غير متصل بالرسيفر"}</strong><small>{snapshot.connected ? "تمت قراءة بيانات الرسيفر" : "لا توجد بيانات حية"}</small></div></div>
+        <div className="connection-state"><span className="offline-status-dot"/><div><strong>{snapshot.connected ? "OpenWebif متصل" : "الجسر غير متصل بالرسيفر"}</strong><small>{snapshot.connected ? "تمت قراءة بيانات الرسيفر" : "لا توجد بيانات حية"}</small></div></div>
         <ul className="capability-list">
           <li><CheckCircle2 size={14}/> قراءة بيانات OpenWebif الفعلية المتاحة</li>
           <li><CheckCircle2 size={14}/> الاتصال المحلي بالرسيفر مفعّل</li>
           <li><X size={14}/> تنفيذ الأوامر وتعديل الملفات معطّل</li>
         </ul>
-        <button className="secondary-button refresh-demo" onClick={refreshDemo} disabled={refreshing}><RefreshCw size={15}/>{refreshing ? "جاري التحديث..." : "تحديث البيانات الحقيقية"}</button>
+        <button className="secondary-button refresh-data" onClick={refreshReceiverData} disabled={refreshing}><RefreshCw size={15}/>{refreshing ? "جاري التحديث..." : "تحديث البيانات الحقيقية"}</button>
         <small className="adapter-note">Provider: {capabilities.provider} · Network: read-only · Commands: disabled</small>
       </div>
     </section>
@@ -201,7 +200,7 @@ function PluginStore() {
       <span className="plugin-symbol"><Package size={22}/></span><small>{selected.category}</small><h2>{selected.name}</h2>
       <div className="catalog-detail-path"><span>مسار العنصر</span><code dir="ltr">{selected.path || "—"}</code></div>
       <div className="catalog-install-actions">
-        <button className="primary-button" disabled title="التثبيت الفعلي غير مفعّل حتى اعتماد الحزمة والتحقق من توافقها">تثبيت على الرسيفر · قريبًا</button>
+        <button className="primary-button" disabled title="التثبيت الفعلي غير مفعّل حتى اعتماد الحزمة والتحقق من توافقها">التثبيت غير متاح حاليًا</button>
         <a className="secondary-button" href="https://github.com/online4tech/Smart-Manager/releases/latest/download/Online4Tech-Bridge-Windows.zip"><Package size={14}/> تحميل الجسر</a>
       </div>
       <small className="catalog-install-note">زر التثبيت غير مفعّل حاليًا. سيتم تفعيله فقط للعناصر المعتمدة والمتوافقة، وبعد تأكيد المستخدم.</small>
@@ -258,7 +257,7 @@ function ChannelIntelligence() {
   );
 
   return <section className="module-page">
-    {!snapshot?.connected && <div className="demo-notice"><AlertTriangle size={16}/><span>{error || "جاري التحقق من اتصال الرسيفر..."}</span></div>}
+    {!snapshot?.connected && <div className="connection-notice"><AlertTriangle size={16}/><span>{error || "جاري التحقق من اتصال الرسيفر..."}</span></div>}
     {snapshot?.connected && <div className="section-heading"><div><h3>قائمة القنوات الحقيقية</h3><p>مقروءة من باقات الرسيفر عبر OpenWebif · بدون تعديل</p></div><span className="updated"><Database size={14}/> Live data</span></div>}
     <div className="module-toolbar glass">
       <div className="module-search"><Search size={17}/><input value={query} onChange={e => setQuery(e.target.value)} placeholder="ابحث باسم القناة أو مرجع الخدمة..." /></div>
@@ -300,7 +299,7 @@ function LogAnalyzer() {
   return <section className="section-block log-analyzer">
     <div className="section-heading"><div><h3>محلل سجلات Enigma2</h3><p>الصق جزءًا من السجل للحصول على قراءة أولية محلية</p></div><span className="updated"><ShieldCheck size={14}/> تحليل داخل المتصفح</span></div>
     <div className="glass log-tool">
-      <div className="demo-notice"><AlertTriangle size={15}/><span>الصق السطور الضرورية فقط بعد إزالة كلمات المرور وعناوين IP العامة وأي بيانات شخصية. التحليل إرشادي ولا يغيّر ملفات الرسيفر.</span></div>
+      <div className="connection-notice"><AlertTriangle size={15}/><span>الصق السطور الضرورية فقط بعد إزالة كلمات المرور وعناوين IP العامة وأي بيانات شخصية. التحليل إرشادي ولا يغيّر ملفات الرسيفر.</span></div>
       <textarea className="log-input" value={logText} onChange={e => {setLogText(e.target.value);setAnalysis(null);}} placeholder="الصق رسائل Enigma2 أو سجل البلجن هنا..." rows={7} />
       <div className="log-actions"><small>{logText.length.toLocaleString("ar-EG")} حرف</small><button className="secondary-button" onClick={() => {setLogText("");setAnalysis(null);}} disabled={!logText}>مسح النص</button><button className="primary-button" onClick={analyze} disabled={!logText.trim()}><FileSearch size={15}/> حلّل السجل</button></div>
       {analysis && <div className="log-analysis-result">
@@ -443,8 +442,7 @@ export default function App() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scanState, setScanState] = useState("idle");
   const [activeNav, setActiveNav] = useState("AI Doctor");
-  const [showDemo, setShowDemo] = useState(true);
-  const [activeReport, setActiveReport] = useState(null);
+    const [activeReport, setActiveReport] = useState(null);
   const [scanHistory, setScanHistory] = useState([]);
   const [liveSnapshot, setLiveSnapshot] = useState(null);
 
@@ -575,7 +573,6 @@ export default function App() {
       setActiveReport(record);
       setScanHistory(previous => [record, ...previous].slice(0, 4));
       setScanState("complete");
-      setShowDemo(false);
     } catch (error) {
       setActiveReport({
         id: Date.now(),
@@ -615,7 +612,7 @@ export default function App() {
       <button className="nav-item compact"><span className="nav-icon"><CircleHelp size={18}/></span><span className="nav-copy"><strong>المساعدة والتوثيق</strong></span></button>
       <div className="sidebar-spacer"/>
       <div className="receiver-mini glass">
-        <div className="receiver-mini-top"><span className={liveSnapshot?.connected ? "live-dot" : "demo-status-dot"}/><span>{liveSnapshot?.connected ? "جهاز متصل" : "بانتظار الاتصال"}</span><span className="demo-tag">{liveSnapshot?.connected ? "LIVE" : "OFFLINE"}</span></div>
+        <div className="receiver-mini-top"><span className={liveSnapshot?.connected ? "live-dot" : "demo-status-dot"}/><span>{liveSnapshot?.connected ? "جهاز متصل" : "بانتظار الاتصال"}</span><span className="connection-status-tag">{liveSnapshot?.connected ? "LIVE" : "OFFLINE"}</span></div>
         <strong>{device.name}</strong>
         <small>{device.image}</small>
         <div className="receiver-ip"><Wifi size={13}/> {device.ip}</div>
@@ -646,7 +643,7 @@ export default function App() {
           </div>
           {activeNav === "AI Doctor" && <button className="primary-button" onClick={() => startScan("full")}><Activity size={17}/>{scanState === "running" ? "جاري القراءة..." : scanState === "complete" ? "تحديث الفحص" : "قراءة بيانات الجهاز"}</button>}
         </section>
-        {activeNav === "Smart Manager" ? <ReceiverDetails/> : activeNav === "Plugin Store" ? <PluginStore/> : activeNav === "Channel Intelligence" ? <ChannelIntelligence/> : activeNav !== "AI Doctor" ? <section className="glass module-placeholder"><Package size={28}/><h2>{activeNav}</h2><p>سيتم تجهيز هذا القسم في المرحلة التالية مع الحفاظ على نفس واجهة المنظومة.</p><span>قيد التطوير · Demo Mode</span></section> : <>
+        {activeNav === "Smart Manager" ? <ReceiverDetails/> : activeNav === "Plugin Store" ? <PluginStore/> : activeNav === "Channel Intelligence" ? <ChannelIntelligence/> : activeNav !== "AI Doctor" ? <section className="glass module-placeholder"><Package size={28}/><h2>{activeNav}</h2><p>سيتم تجهيز هذا القسم في المرحلة التالية مع الحفاظ على نفس واجهة المنظومة.</p><span>القسم غير متاح حاليًا</span></section> : <>
 
         <section className="device-banner glass">
           <div className="device-identity">
@@ -654,10 +651,9 @@ export default function App() {
             <div><div className="device-overline">الجهاز المحدد</div><h2>{device.name}</h2><div className="device-meta"><span>{device.image}</span><i/> <span>{device.enigmaVersion}</span><i/> <span>{device.ip}</span></div></div>
           </div>
           <div className="device-status"><span className={liveSnapshot?.connected ? "live-dot" : "demo-status-dot"}/><div><strong>{liveSnapshot?.connected ? "متصل فعليًا" : "غير متصل"}</strong><small>{liveSnapshot?.connected ? "OpenWebif · قراءة فقط" : "لا توجد بيانات حية"}</small></div></div>
-          <button className="text-button" onClick={() => setShowDemo(!showDemo)}>{showDemo ? "إخفاء التنبيه" : "عرض التنبيه"} <ArrowUpLeft size={15}/></button>
         </section>
 
-        {!liveSnapshot?.connected && <div className="demo-notice"><AlertTriangle size={16}/><span>لا توجد بيانات رسيفر حية حاليًا. اتصل بالجسر المحلي لقراءة المعلومات الفعلية.</span></div>}
+        {!liveSnapshot?.connected && <div className="connection-notice"><AlertTriangle size={16}/><span>لا توجد بيانات رسيفر حية حاليًا. اتصل بالجسر المحلي لقراءة المعلومات الفعلية.</span></div>}
 
         <section className="section-block">
           <div className="section-heading"><div><h3>نظرة عامة على حالة الجهاز</h3><p>مؤشرات النظام الأساسية</p></div><span className="updated"><Clock3 size={14}/> {liveSnapshot?.connected ? "بيانات OpenWebif" : "لا توجد بيانات حية"}</span></div>
@@ -697,13 +693,12 @@ export default function App() {
             </div>}
           </div>
         </section>
-
         <LogAnalyzer/>
 
         <section className="assistant-card glass">
           <div className="assistant-symbol"><Bot size={24}/></div>
-          <div className="assistant-copy"><span className="assistant-label">COMING IN NEXT PHASE</span><h3>المساعد الذكي قادم قريباً</h3><p>اسأل عن أخطاء Enigma2 واحصل على شرح مبسط وتوصيات مبنية على بيانات التشخيص.</p></div>
-          <button className="secondary-button" disabled>قريباً <ArrowDownLeft size={15}/></button>
+          <div className="assistant-copy"><span className="assistant-label">ميزة غير مفعّلة</span><h3>المساعد الذكي غير متاح حاليًا</h3><p>اسأل عن أخطاء Enigma2 واحصل على شرح مبسط وتوصيات مبنية على بيانات التشخيص.</p></div>
+          <button className="secondary-button" disabled>غير متاح <ArrowDownLeft size={15}/></button>
         </section>
 
         </>}
