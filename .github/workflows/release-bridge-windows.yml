@@ -26,6 +26,7 @@ jobs:
         run: |
           New-Item -ItemType Directory -Force package | Out-Null
           Copy-Item dist/Online4TechBridge.exe package/
+          Copy-Item bridge-package/approved-packages.json package/
           Copy-Item bridge-package/install-windows.ps1 package/
           Copy-Item bridge-package/uninstall-windows.ps1 package/
           Compress-Archive -Path package/* -DestinationPath Online4Tech-Bridge-Windows.zip -Force
