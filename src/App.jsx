@@ -71,30 +71,29 @@ function ReceiverDetails() {
 
   const refreshDemo = async () => {
     setRefreshing(true);
-    const data = await getReceiverSnapshot();
-    setSnapshot(data);
-    setRefreshing(false);
+    try { setSnapshot(await getReceiverSnapshot()); }
+    finally { setRefreshing(false); }
   };
 
   useEffect(() => { refreshDemo(); }, []);
 
-  if (!snapshot) return <div className="glass receiver-details-loading">جاري تحميل بيانات العرض...</div>;
+  if (!snapshot) return <div className="glass receiver-details-loading">جاري قراءة بيانات الرسيفر...</div>;
 
   return <div className="receiver-details-page">
     <section className="device-banner glass receiver-detail-hero">
       <div className="device-identity">
         <div className="device-visual"><Tv size={29}/><span className="device-signal"/></div>
-        <div><div className="device-overline">ملف الجهاز · وضع تجريبي</div><h2>{snapshot.device.name}</h2>
+        <div><div className="device-overline">ملف الجهاز · قراءة فعلية</div><h2>{snapshot.device.name}</h2>
           <div className="device-meta"><span>{snapshot.device.image}</span><i/><span>{snapshot.device.enigmaVersion}</span><i/><span>{snapshot.device.ip}</span></div>
         </div>
       </div>
-      <div className="device-status"><span className="demo-status-dot"/><div><strong>غير متصل فعليًا</strong><small>بيانات محلية للعرض فقط</small></div></div>
+      <div className="device-status"><span className={snapshot.connected ? "live-dot" : "demo-status-dot"}/><div><strong>{snapshot.connected ? "متصل فعليًا" : "غير متصل"}</strong><small>{snapshot.connected ? "OpenWebif · قراءة فقط" : "لا توجد جلسة رسيفر محفوظة"}</small></div></div>
     </section>
 
-    <div className="demo-notice"><AlertTriangle size={16}/><span>كل المعلومات في الصفحة أمثلة توضيحية. عنوان IP المعروض تجريبي ولا تتم محاولة الوصول إليه.</span></div>
+    {!snapshot.connected && <div className="demo-notice"><AlertTriangle size={16}/><span>اتصل بالرسيفر من زر الجسر المحلي لعرض بياناته الحقيقية.</span></div>}
 
     <section className="section-block">
-      <div className="section-heading"><div><h3>معلومات الجهاز</h3><p>بيانات التعريف والإصدار</p></div><span className="updated"><Database size={14}/> Demo Snapshot</span></div>
+      <div className="section-heading"><div><h3>معلومات الجهاز</h3><p>بيانات التعريف والإصدار من OpenWebif</p></div><span className="updated"><Database size={14}/> Live Snapshot</span></div>
       <div className="device-info-grid">
         <article className="glass info-tile"><small>اسم الجهاز</small><strong>{snapshot.device.model}</strong></article>
         <article className="glass info-tile"><small>صورة النظام</small><strong>{snapshot.device.image}</strong></article>
@@ -106,25 +105,25 @@ function ReceiverDetails() {
     </section>
 
     <section className="section-block">
-      <div className="section-heading"><div><h3>موارد النظام</h3><p>مؤشرات توضيحية وليست قراءة مباشرة</p></div></div>
+      <div className="section-heading"><div><h3>موارد النظام</h3><p>القيم التي لا يوفرها OpenWebif ستظهر كغير متاحة</p></div></div>
       <div className="resource-grid">{snapshot.resources.map(item => <article className="glass resource-tile" key={item.label}><span>{item.label}</span><strong>{item.value}</strong><small>{item.detail}</small></article>)}</div>
     </section>
 
     <section className="lower-grid receiver-lower-grid">
       <div className="glass panel">
-        <div className="panel-heading"><div><h3>الخدمات الأساسية</h3><p>حالة افتراضية للشرح</p></div><span className="panel-icon"><Server size={19}/></span></div>
+        <div className="panel-heading"><div><h3>الخدمات الأساسية</h3><p>الحالة المقروءة من الجهاز</p></div><span className="panel-icon"><Server size={19}/></span></div>
         <div className="service-list">{snapshot.services.map(service => <div className="service-row" key={service.name}><span>{service.name}</span><small>{service.state}</small></div>)}</div>
       </div>
       <div className="glass panel connection-panel">
         <div className="panel-heading"><div><h3>طبقة الاتصال</h3><p>جاهزية الربط الآمن مستقبلًا</p></div><span className="panel-icon"><LockKeyhole size={19}/></span></div>
-        <div className="connection-state"><span className="demo-status-dot"/><div><strong>Demo Adapter نشط</strong><small>لا يوجد اتصال شبكي أو Bridge</small></div></div>
+        <div className="connection-state"><span className="demo-status-dot"/><div><strong>{snapshot.connected ? "OpenWebif متصل" : "الجسر غير متصل بالرسيفر"}</strong><small>{snapshot.connected ? "تمت قراءة بيانات الرسيفر" : "لا توجد بيانات حية"}</small></div></div>
         <ul className="capability-list">
           <li><CheckCircle2 size={14}/> قراءة بيانات العرض المحلية</li>
           <li><X size={14}/> الاتصال بالشبكة غير مفعّل</li>
           <li><X size={14}/> تنفيذ الأوامر وتعديل الملفات معطّل</li>
         </ul>
-        <button className="secondary-button refresh-demo" onClick={refreshDemo} disabled={refreshing}><RefreshCw size={15}/>{refreshing ? "جاري التحديث..." : "تحديث بيانات العرض"}</button>
-        <small className="adapter-note">Provider: {capabilities.provider} · Network: disabled · Commands: disabled</small>
+        <button className="secondary-button refresh-demo" onClick={refreshDemo} disabled={refreshing}><RefreshCw size={15}/>{refreshing ? "جاري التحديث..." : "تحديث البيانات الحقيقية"}</button>
+        <small className="adapter-note">Provider: {capabilities.provider} · Network: read-only · Commands: disabled</small>
       </div>
     </section>
   </div>;
