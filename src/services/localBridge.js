@@ -21,9 +21,7 @@ async function bridgeRequest(path, { body, token, csrf } = {}) {
     catch { throw new Error("الجسر أعاد استجابة غير مفهومة."); }
     if (!response.ok || !data.ok) {
       const messages = {
-        invalid_or_expired_code: "كود الاقتران غير صحيح أو تم استخدامه من قبل.",
-        too_many_attempts: "تم تجاوز عدد المحاولات. انتظر دقيقة ثم حاول مجددًا.",
-        unauthorized: "انتهت صلاحية جلسة الاقتران. أعد الاقتران من جديد.",
+        unauthorized: "تعذر التحقق من الثقة المحلية. اضغط اتصال الجسر مرة أخرى.",
         request_not_allowed: "المتصفح أو إعدادات الجسر رفضت الطلب. تأكد من تشغيل النسخة المصححة واسم الموقع.",
         invalid_receiver_address: "اكتب عنوان IPv4 خاصًا داخل شبكتك المحلية.",
         invalid_receiver_port: "المنفذ المسموح به هو 80 أو 443 فقط.",
@@ -45,9 +43,8 @@ async function bridgeRequest(path, { body, token, csrf } = {}) {
   }
 }
 
-export async function pairLocalBridge(code) {
-  if (!code) throw new Error("اكتب كود الاقتران أولاً.");
-  return bridgeRequest("/api/pair", { body: { code } });
+export async function trustLocalBridge() {
+  return bridgeRequest("/api/trust", { body: {} });
 }
 
 export async function getLocalBridgeStatus(credentials) {
