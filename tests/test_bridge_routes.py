@@ -40,7 +40,13 @@ class IpkInspectionTests(unittest.TestCase):
             info = tarfile.TarInfo(member_name)
             info.size = len(data)
             archive.addfile(info, io.BytesIO(data))
-        members = [("debian-binary", b"2.0\n"), ("control.tar.gz", tar_buffer.getvalue())]
+        data_buffer = io.BytesIO()
+        with tarfile.open(fileobj=data_buffer, mode="w:gz") as data_archive:
+            data = b"package payload"
+            info = tarfile.TarInfo("usr/share/example.txt")
+            info.size = len(data)
+            data_archive.addfile(info, io.BytesIO(data))
+        members = [("debian-binary", b"2.0\n"), ("control.tar.gz", tar_buffer.getvalue()), ("data.tar.gz", data_buffer.getvalue())]
         output = bytearray(b"!<arch>\n")
         for name, data in members:
             header = (
