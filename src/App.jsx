@@ -7,7 +7,8 @@ import {
 } from "lucide-react";
 import pluginsData from "./data/plugins.json";
 import commandsData from "./data/commands.json";
-import { trustLocalBridge, getLocalBridgeStatus, connectLocalReceiver } from "./services/localBridge";
+import approvedPackagesData from "./data/approved-packages.json";
+import { trustLocalBridge, getLocalBridgeStatus, connectLocalReceiver, stagePackageUpload } from "./services/localBridge";
 import { getReceiverSnapshot, getConnectionCapabilities } from "./services/receiverAdapter";
 
 const scanLabels = {
@@ -120,6 +121,7 @@ function ReceiverDetails() {
 
 const catalogEntries = pluginsData.items || [];
 const commandEntries = commandsData.items || [];
+const approvedPackages = approvedPackagesData.packages || [];
 
 function PluginStore() {
   const [view, setView] = useState("plugins");
@@ -128,6 +130,10 @@ function PluginStore() {
   const [commandType, setCommandType] = useState("الكل");
   const [selected, setSelected] = useState(null);
   const [copiedId, setCopiedId] = useState("");
+  const [packageFile, setPackageFile] = useState(null);
+  const [stagingPackage, setStagingPackage] = useState(false);
+  const [stagedPackage, setStagedPackage] = useState(null);
+  const [packageError, setPackageError] = useState("");
   const categories = ["الكل", ...new Set((view === "plugins" ? catalogEntries : commandEntries).map(item => item.category))];
   const filteredPlugins = catalogEntries.filter(item =>
     (category === "الكل" || item.category === category) &&
@@ -138,6 +144,21 @@ function PluginStore() {
     (commandType === "الكل" || item.type === commandType) &&
     (item.name + " " + item.category + " " + item.path + " " + item.command).toLowerCase().includes(query.toLowerCase())
   );
+  const uploadPackageToStaging = async () => {
+    if (!packageFile) return;
+    setStagingPackage(true);
+    setPackageError("");
+    setStagedPackage(null);
+    try {
+      const result = await stagePackageUpload(packageFile);
+      setStagedPackage(result);
+    } catch (error) {
+      setPackageError(error.message || "تعذر فحص الحزمة.");
+    } finally {
+      setStagingPackage(false);
+    }
+  };
+
   const copyCommand = async (item) => {
     try {
       await navigator.clipboard.writeText(item.command);
@@ -166,15 +187,47 @@ function PluginStore() {
       <button className={view === "commands" ? "active" : ""} onClick={() => { setView("commands"); setCategory("الكل"); setQuery(""); }}>
         <Terminal size={17}/> مكتبة الأوامر <span>{commandEntries.length.toLocaleString("ar-EG")}</span>
       </button>
+      <button className={view === "packages" ? "active" : ""} onClick={() => { setView("packages"); setCategory("الكل"); setQuery(""); }}>
+        <ShieldCheck size={17}/> مركز الحزم <span>{approvedPackages.length.toLocaleString("ar-EG")}</span>
+      </button>
     </div>
-    <div className="module-toolbar glass catalog-toolbar">
+    {view !== "packages" && <div className="module-toolbar glass catalog-toolbar">
       <div className="module-search"><Search size={17}/><input value={query} onChange={e => setQuery(e.target.value)} placeholder={view === "plugins" ? "ابحث باسم البلجن أو الأداة أو المسار..." : "ابحث باسم البلجن أو الأمر أو القسم..."}/></div>
       {view === "commands" && <div className="catalog-type-filter">
         {[["الكل","الكل"],["install","التثبيت"],["remove","الإزالة"]].map(([value,label]) => <button key={value} className={commandType === value ? "selected" : ""} onClick={() => setCommandType(value)}>{label}</button>)}
       </div>}
       <div className="category-pills">{categories.map(item => <button key={item} className={category === item ? "selected" : ""} onClick={() => setCategory(item)}>{item}</button>)}</div>
-    </div>
-    {view === "plugins" ? <>
+    </div>}
+    {view === "packages" ? <section className="package-center">
+      <div className="glass package-upload-panel">
+        <div className="package-panel-heading"><span className="plugin-symbol"><ShieldCheck size={20}/></span><div><h3>رفع وفحص حزمة IPK</h3><p>يتم حفظ الملف على هذا الكمبيوتر داخل مجلد staging فقط، ولا يتم إرساله إلى الرسيفر.</p></div></div>
+        <div className="package-upload-controls">
+          <label className="package-file-picker">اختيار ملف IPK
+            <input type="file" accept=".ipk,application/vnd.debian.binary-package" onChange={event => { setPackageFile(event.target.files?.[0] || null); setStagedPackage(null); setPackageError(""); }}/>
+          </label>
+          <span className="package-selected-name">{packageFile ? packageFile.name : "لم يتم اختيار ملف"}</span>
+          <button className="primary-button" onClick={uploadPackageToStaging} disabled={!packageFile || stagingPackage}>{stagingPackage ? "جاري الفحص والحفظ..." : "فحص وحفظ محليًا"}</button>
+        </div>
+        <small className="package-upload-hint">الحد الأقصى 32 ميجابايت · امتداد IPK · قراءة بيانات control وحساب SHA-256 · لا تشغيل لمحتويات الحزمة</small>
+        {packageError && <div className="package-error" role="alert">{packageError}</div>}
+        {stagedPackage && <div className="package-stage-result">
+          <div className="package-stage-status"><CheckCircle2 size={16}/> تم الفحص والحفظ المحلي — الحزمة غير معتمدة</div>
+          <div className="package-metadata-grid">
+            <div><small>اسم الحزمة</small><strong dir="ltr">{stagedPackage.package}</strong></div>
+            <div><small>الإصدار</small><strong dir="ltr">{stagedPackage.version}</strong></div>
+            <div><small>المعمارية</small><strong dir="ltr">{stagedPackage.architecture}</strong></div>
+            <div><small>الحجم</small><strong>{(stagedPackage.size / 1024 / 1024).toFixed(2)} MB</strong></div>
+          </div>
+          <div className="package-hash"><small>SHA-256</small><code dir="ltr">{stagedPackage.sha256}</code></div>
+          <div className="package-not-approved"><LockKeyhole size={15}/> الحزمة في Staging فقط. لم تتم إضافتها لسجل الاعتماد، وزر التثبيت يظل معطّلًا.</div>
+        </div>}
+      </div>
+      <div className="glass package-approved-panel">
+        <div className="section-heading"><div><h3>سجل الحزم المعتمدة</h3><p>لا يظهر زر التثبيت إلا للحزم التي تم اعتمادها ومراجعة توافقها.</p></div><span className="catalog-category">{approvedPackages.length} معتمدة</span></div>
+        {approvedPackages.length === 0 ? <div className="package-empty"><ShieldCheck size={24}/><strong>لا توجد حزم معتمدة حتى الآن</strong><span>السجل فارغ عمدًا. رفع ملف لا يعني اعتماده أو السماح بتثبيته.</span></div> : <div className="package-approved-list">{approvedPackages.map(item => <article className="package-approved-item" key={item.id}><strong>{item.name}</strong><span>{item.version} · {item.architecture}</span></article>)}</div>}
+      </div>
+      <div className="package-safety-note"><ShieldCheck size={16}/> لا توجد قناة SSH أو تثبيت على الرسيفر مفعّلة في هذا الإصدار. الرفع محلي للفحص والتجهيز فقط.</div>
+    </section> : view === "plugins" ? <>
       <div className="module-summary"><strong>{filteredPlugins.length.toLocaleString("ar-EG")}</strong><span>بلجن وأداة</span><small>مرتبة حسب القسم</small></div>
       <div className="catalog-grid">{filteredPlugins.map(item => <article className="glass catalog-card" key={item.id}>
         <div className="catalog-card-head"><span className="plugin-symbol"><Package size={19}/></span><span className="catalog-category">{item.category}</span></div>
