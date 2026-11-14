@@ -1,0 +1,6731 @@
+{
+  "categories": [
+    "My Favourites",
+    "Update Dependencic",
+    "Backup Images",
+    "Panels",
+    "Plugins",
+    "Novaler",
+    "Channels",
+    "other channels",
+    "ciefp channels",
+    "morph883 channels",
+    "vaninbal channels",
+    "Feeds",
+    "Ciefp",
+    "Bootlogos",
+    "Spinners",
+    "Tools",
+    "System",
+    "Media",
+    "Multiboot",
+    "Softcams",
+    "Backup",
+    "Restore",
+    "Skins",
+    "openatv skins",
+    "teamnitro skins",
+    "openbh skins",
+    "egami skins",
+    "openpli py3 skins",
+    "openspa skins",
+    "openvix skins",
+    "pure2 skins",
+    "openpli py2 skins",
+    "display skins",
+    "plugin xtreamity skins",
+    "Images",
+    "Picons",
+    "Remove"
+  ],
+  "items": [
+    {
+      "id": "favourites-0",
+      "section": "favourites",
+      "category": "My Favourites",
+      "name": "Ajpanel (إدارة الملفات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/AJPan",
+      "icon": ""
+    },
+    {
+      "id": "favourites-1",
+      "section": "favourites",
+      "category": "My Favourites",
+      "name": "ArabicSavior (مصحح اللغة العربية)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/ArabicSavior",
+      "icon": ""
+    },
+    {
+      "id": "favourites-2",
+      "section": "favourites",
+      "category": "My Favourites",
+      "name": "BootlogoSwapper V2.4 (بوت لوجو متعدد)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/BootLogoSwapper",
+      "icon": ""
+    },
+    {
+      "id": "favourites-3",
+      "section": "favourites",
+      "category": "My Favourites",
+      "name": "BouquetMakerXtream (تحويل iptv الي المفضلات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/BouquetMakerXtream",
+      "icon": ""
+    },
+    {
+      "id": "favourites-4",
+      "section": "favourites",
+      "category": "My Favourites",
+      "name": "Cccaminfo_All-Python (بيانات الـ CCCam)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/CCcamInfo",
+      "icon": ""
+    },
+    {
+      "id": "favourites-5",
+      "section": "favourites",
+      "category": "My Favourites",
+      "name": "CrashLogoViewer_1.9 (تصفح الكراشات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/CrashlogViewer",
+      "icon": ""
+    },
+    {
+      "id": "favourites-6",
+      "section": "favourites",
+      "category": "My Favourites",
+      "name": "Epg Grabber (دليل القنوات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/EPGGrabber",
+      "icon": ""
+    },
+    {
+      "id": "favourites-7",
+      "section": "favourites",
+      "category": "My Favourites",
+      "name": "FuryBissPro (جالب الفيدات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/FuryBiss",
+      "icon": ""
+    },
+    {
+      "id": "favourites-8",
+      "section": "favourites",
+      "category": "My Favourites",
+      "name": "KeyAdder (مفاتيح الشفرات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/KeyAdder",
+      "icon": ""
+    },
+    {
+      "id": "favourites-9",
+      "section": "favourites",
+      "category": "My Favourites",
+      "name": "RaedQuickSignal (بيان إشارة للقنوات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal",
+      "icon": ""
+    },
+    {
+      "id": "favourites-10",
+      "section": "favourites",
+      "category": "My Favourites",
+      "name": "SetPicon - modded by Emil (مدير البيكونات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/SetPicon",
+      "icon": ""
+    },
+    {
+      "id": "favourites-11",
+      "section": "favourites",
+      "category": "My Favourites",
+      "name": "SubsSupportPro-By-Mohammed-Nasr (ترجمة الأفلام)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/SubsSupport",
+      "icon": ""
+    },
+    {
+      "id": "favourites-12",
+      "section": "favourites",
+      "category": "My Favourites",
+      "name": "Xstreamity (مشغل iptv)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/XStreamity",
+      "icon": ""
+    },
+    {
+      "id": "favourites-13",
+      "section": "favourites",
+      "category": "My Favourites",
+      "name": "xtraevent_By-M-Nasr (لوجو البرامج)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/xtraEvent",
+      "icon": ""
+    },
+    {
+      "id": "favourites-14",
+      "section": "favourites",
+      "category": "My Favourites",
+      "name": "Cccam",
+      "path": "/usr/bin/CCcamm",
+      "icon": ""
+    },
+    {
+      "id": "favourites-15",
+      "section": "favourites",
+      "category": "My Favourites",
+      "name": "Ncam_v15.7",
+      "path": "/usr/bin/ncamm",
+      "icon": ""
+    },
+    {
+      "id": "favourites-16",
+      "section": "favourites",
+      "category": "My Favourites",
+      "name": "Oscam By Levi45",
+      "path": "/usr/bin/oscamm",
+      "icon": ""
+    },
+    {
+      "id": "updated-dependencic-0",
+      "section": "updated-dependencic",
+      "category": "Update Dependencic",
+      "name": "Updated-All-Dependencic (تحميل الحزم المهمة)",
+      "path": "/usr/bin/wgett",
+      "icon": ""
+    },
+    {
+      "id": "updated-dependencic-1",
+      "section": "updated-dependencic",
+      "category": "Update Dependencic",
+      "name": "Wget (أداة تحميل مهمة جداً)",
+      "path": "/usr/bin/wget",
+      "icon": ""
+    },
+    {
+      "id": "updated-dependencic-2",
+      "section": "updated-dependencic",
+      "category": "Update Dependencic",
+      "name": "Curl (أداة تحميل مهمة جداً)",
+      "path": "/usr/bin/curl",
+      "icon": ""
+    },
+    {
+      "id": "updated-dependencic-3",
+      "section": "updated-dependencic",
+      "category": "Update Dependencic",
+      "name": "Opkg Tools_1.4 (حزمة مهمة للصورة)",
+      "path": "/usr/bin/opkg",
+      "icon": ""
+    },
+    {
+      "id": "updated-dependencic-4",
+      "section": "updated-dependencic",
+      "category": "Update Dependencic",
+      "name": "Opkg Tools_1.5 (حزمة مهمة للصورة)",
+      "path": "/usr/bin/opkg",
+      "icon": ""
+    },
+    {
+      "id": "updated-dependencic-5",
+      "section": "updated-dependencic",
+      "category": "Update Dependencic",
+      "name": "Update-Astra-sm Plugin (حزمة مهمة للبث المتعدد)",
+      "path": "/usr/bin/astra-sm",
+      "icon": ""
+    },
+    {
+      "id": "updated-dependencic-6",
+      "section": "updated-dependencic",
+      "category": "Update Dependencic",
+      "name": "Update-Astra-sm-Config (حزمة مهمة للبث المتعدد)",
+      "path": "/etc/astra/script",
+      "icon": ""
+    },
+    {
+      "id": "backupimages-0",
+      "section": "backupimages",
+      "category": "Backup Images",
+      "name": "EGAMI (تحديث الحزم وتحميل إضافات مهمة)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensionss/AutomaticFullBackup",
+      "icon": ""
+    },
+    {
+      "id": "backupimages-1",
+      "section": "backupimages",
+      "category": "Backup Images",
+      "name": "OpenATV (تحديث الحزم وتحميل إضافات مهمة)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensionss/AutomaticFullBackup",
+      "icon": ""
+    },
+    {
+      "id": "backupimages-2",
+      "section": "backupimages",
+      "category": "Backup Images",
+      "name": "OpenBH (تحديث الحزم وتحميل إضافات مهمة)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensionss/AutomaticFullBackup",
+      "icon": ""
+    },
+    {
+      "id": "backupimages-3",
+      "section": "backupimages",
+      "category": "Backup Images",
+      "name": "OpenPli Py3 (تحديث الحزم وتحميل إضافات مهمة)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensionss/AutomaticFullBackup",
+      "icon": ""
+    },
+    {
+      "id": "backupimages-4",
+      "section": "backupimages",
+      "category": "Backup Images",
+      "name": "OpenVix (تحديث الحزم وتحميل إضافات مهمة)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensionss/AutomaticFullBackup",
+      "icon": ""
+    },
+    {
+      "id": "backupimages-5",
+      "section": "backupimages",
+      "category": "Backup Images",
+      "name": "OpenDroid (تحديث الحزم وتحميل إضافات مهمة)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensionss/AutomaticFullBackup",
+      "icon": ""
+    },
+    {
+      "id": "backupimages-6",
+      "section": "backupimages",
+      "category": "Backup Images",
+      "name": "OpenSpa (تحديث الحزم وتحميل إضافات مهمة)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensionss/AutomaticFullBackup",
+      "icon": ""
+    },
+    {
+      "id": "backupimages-7",
+      "section": "backupimages",
+      "category": "Backup Images",
+      "name": "Pure2 (تحديث الحزم وتحميل إضافات مهمة)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensionss/AutomaticFullBackup",
+      "icon": ""
+    },
+    {
+      "id": "backupimages-8",
+      "section": "backupimages",
+      "category": "Backup Images",
+      "name": "OpenPli Py2 (تحديث الحزم وتحميل إضافات مهمة)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensionss/AutomaticFullBackup",
+      "icon": ""
+    },
+    {
+      "id": "panels-0",
+      "section": "panels",
+      "category": "Panels",
+      "name": "Ajpanel (إدارة الملفات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/AJPan",
+      "icon": ""
+    },
+    {
+      "id": "panels-1",
+      "section": "panels",
+      "category": "Panels",
+      "name": "dreamosat-downloader (لوحة تحميل الإضافات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/DreamOSatDownloader",
+      "icon": ""
+    },
+    {
+      "id": "panels-2",
+      "section": "panels",
+      "category": "Panels",
+      "name": "EmilPanelPro (لوحة تحميل الإضافات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/EmilStore",
+      "icon": ""
+    },
+    {
+      "id": "panels-3",
+      "section": "panels",
+      "category": "Panels",
+      "name": "EnigmaPlay (متجر اضافات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/EnigmaPlay",
+      "icon": ""
+    },
+    {
+      "id": "panels-4",
+      "section": "panels",
+      "category": "Panels",
+      "name": "Epanel (لوحة تحميل الإضافات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/epanel",
+      "icon": ""
+    },
+    {
+      "id": "panels-5",
+      "section": "panels",
+      "category": "Panels",
+      "name": "linuxsat-panel (لوحة تحميل الإضافات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/LinuxsatPanel",
+      "icon": ""
+    },
+    {
+      "id": "panels-6",
+      "section": "panels",
+      "category": "Panels",
+      "name": "levi45emulator (لوحة تحكم السوفت كام)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/Levi45Emulator",
+      "icon": ""
+    },
+    {
+      "id": "panels-7",
+      "section": "panels",
+      "category": "Panels",
+      "name": "levi45-AddonsManager (لوحة تحميل الإضافات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/Levi45Addons",
+      "icon": ""
+    },
+    {
+      "id": "panels-8",
+      "section": "panels",
+      "category": "Panels",
+      "name": "Levi45MulticamManager (لوحة تحميل الكامات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/Levi45MulticamManager",
+      "icon": ""
+    },
+    {
+      "id": "panels-9",
+      "section": "panels",
+      "category": "Panels",
+      "name": "MohamedStore (لوحة تحميل الإضافات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/MohamedStore",
+      "icon": ""
+    },
+    {
+      "id": "panels-10",
+      "section": "panels",
+      "category": "Panels",
+      "name": "Novaler-Store (لوحة تحميل الإضافات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/NovalerStore",
+      "icon": ""
+    },
+    {
+      "id": "panels-11",
+      "section": "panels",
+      "category": "Panels",
+      "name": "Panelaio (لوحة تحميل أضافات)",
+      "path": "/usr/lib/enigma2/python/Plugins/SystemPlugins/PanelAIO",
+      "icon": ""
+    },
+    {
+      "id": "panels-12",
+      "section": "panels",
+      "category": "Panels",
+      "name": "S4a Updater (لوحة تحميل الإضافات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/SatVenusPanel",
+      "icon": ""
+    },
+    {
+      "id": "panels-13",
+      "section": "panels",
+      "category": "Panels",
+      "name": "SatVenusPanel (لوحة تحميل الإضافات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/SatVenusPanel",
+      "icon": ""
+    },
+    {
+      "id": "panels-14",
+      "section": "panels",
+      "category": "Panels",
+      "name": "Tspanel (لوحة تحميل الإضافات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/TSpanel",
+      "icon": ""
+    },
+    {
+      "id": "panels-15",
+      "section": "panels",
+      "category": "Panels",
+      "name": "TvAddon-Panel (لوحة تحميل الإضافات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/tvaddon",
+      "icon": ""
+    },
+    {
+      "id": "plugins-0",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "ArabicSavior (مصحح اللغة العربية)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/ArabicSavior",
+      "icon": ""
+    },
+    {
+      "id": "plugins-1",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "Abertis-Auto-Switcher (تشغيل باقة ابيرنس المالتي ستريم علي الهسباسات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/AbertisAutoSwitcher",
+      "icon": ""
+    },
+    {
+      "id": "plugins-2",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "AdenChManager (مدير القنوات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/AdenChManager",
+      "icon": ""
+    },
+    {
+      "id": "plugins-3",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "AiSubtitles (خاص بالترجمة)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/AISubtitles",
+      "icon": ""
+    },
+    {
+      "id": "plugins-4",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "Acherone (تصفح السكريبتات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/Acherone",
+      "icon": ""
+    },
+    {
+      "id": "plugins-5",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "AdvancedBootLogoSwapper-By-M-Nasr (صانع بوت لوجو)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/AdvancedBootLogoSwapper",
+      "icon": ""
+    },
+    {
+      "id": "plugins-6",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "Advanced-Screen-Shot (أخذ لقطة للشاشة)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/AdvancedScreenshot",
+      "icon": ""
+    },
+    {
+      "id": "plugins-7",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "Alajre (الأجر)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/ALAJRE",
+      "icon": ""
+    },
+    {
+      "id": "plugins-8",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "AlternativeSoftcamManager (ادارة الايميوهات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/AlternativeSoftCamManager",
+      "icon": ""
+    },
+    {
+      "id": "plugins-9",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "AlternativeSoftCamManager_iet5 (ادارة الايميوهات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/AlternativeSoftCamManager",
+      "icon": ""
+    },
+    {
+      "id": "plugins-10",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "AlMoaddin Modded by Emil (المؤذن)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/AlMuaddhin",
+      "icon": ""
+    },
+    {
+      "id": "plugins-11",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "Ansite (أنصت)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/Ansite",
+      "icon": ""
+    },
+    {
+      "id": "plugins-12",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "Apod (معلومات عن كوكب الأرض)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/apod",
+      "icon": ""
+    },
+    {
+      "id": "plugins-13",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "Apsattv",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/Apsattv",
+      "icon": ""
+    },
+    {
+      "id": "plugins-14",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "Astronomy (حركة الكواكب)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/Astronomy",
+      "icon": ""
+    },
+    {
+      "id": "plugins-15",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "Athan Times (مواقيت الصلاة)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/AthanTimes",
+      "icon": ""
+    },
+    {
+      "id": "plugins-16",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "Atilehd (مدير الثيمات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/AtileHD",
+      "icon": ""
+    },
+    {
+      "id": "plugins-17",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "AutoBiss (جلب شفرات بيس اوتوماتيك)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/AutoBiss",
+      "icon": ""
+    },
+    {
+      "id": "plugins-18",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "AutoSub (مترجم البث المباشر للقنوات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/AutoSub",
+      "icon": ""
+    },
+    {
+      "id": "plugins-19",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "AutoZap Recovery (تصحيح بث القنوات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/AutoZap_AhmadAlamri",
+      "icon": ""
+    },
+    {
+      "id": "plugins-20",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "automatic-fullbackup (نسخ احتياطي للصورة)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/FullBackup",
+      "icon": ""
+    },
+    {
+      "id": "plugins-21",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "Auto-DCW-Key-Add (مفاتيح الشفرات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/DCWKeyAdd",
+      "icon": ""
+    },
+    {
+      "id": "plugins-22",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "Azkar Almuslim (أذكار المسلم)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/Azkar_AlMuslim",
+      "icon": ""
+    },
+    {
+      "id": "plugins-23",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "BackupAndFlash-mod-Emil (نسخ احتياطي للصورة)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/backupflashe",
+      "icon": ""
+    },
+    {
+      "id": "plugins-24",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "BackupSuite (نسخ احتياطي للصورة)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/BackupSuite",
+      "icon": ""
+    },
+    {
+      "id": "plugins-25",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "BissFeedAutoKey (مفاتيح بيس)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/BissFeedAutoKey",
+      "icon": ""
+    },
+    {
+      "id": "plugins-26",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "Bitrate (معدل البث)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/Bitrate",
+      "icon": ""
+    },
+    {
+      "id": "plugins-27",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "Bitrate-mod-ariad (معدل البث)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/Bitrate",
+      "icon": ""
+    },
+    {
+      "id": "plugins-28",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "Bundesliga-Permanent-Clock (ساعة رقمية)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/BundesligaPermanentClock",
+      "icon": ""
+    },
+    {
+      "id": "plugins-29",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "CacheFlush (مسح الكاش)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/CacheFlush",
+      "icon": ""
+    },
+    {
+      "id": "plugins-30",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "Calculator-E2 (الآلة الحاسبة)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/calculatorE2",
+      "icon": ""
+    },
+    {
+      "id": "plugins-31",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "Calendar (التقويم)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/Calendar",
+      "icon": ""
+    },
+    {
+      "id": "plugins-32",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "Cccaminfo-py2 (بيانات الـ CCCam)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/CCcamInfo",
+      "icon": ""
+    },
+    {
+      "id": "plugins-33",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "Cccaminfo-py3 (بيانات الـ CCCam)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/CCcamInfo",
+      "icon": ""
+    },
+    {
+      "id": "plugins-34",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "Ciplushelper (تشغيل الكامات الرسمية)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/Ciplushelper",
+      "icon": ""
+    },
+    {
+      "id": "plugins-35",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "CommandCenter",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/CommandCenter",
+      "icon": ""
+    },
+    {
+      "id": "plugins-36",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "CrondManager (تحديد وقت للسكريبت)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/CrondManager",
+      "icon": ""
+    },
+    {
+      "id": "plugins-37",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "CFG_ZOOM_FINAL (سيرفرات مجانية)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/OpenPanel",
+      "icon": ""
+    },
+    {
+      "id": "plugins-38",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "chocholousek-picons (تحميل البيكونات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/ChocholousekPicons",
+      "icon": ""
+    },
+    {
+      "id": "plugins-39",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "CHLogoChanger (تخصيص الشعار)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/CHLogoChanger",
+      "icon": ""
+    },
+    {
+      "id": "plugins-40",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "CrashLogoViewer_1.6 (تصفح الكراشات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/CrashlogViewer",
+      "icon": ""
+    },
+    {
+      "id": "plugins-41",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "CrashLogoViewer_1.8 (تصفح الكراشات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/CrashlogViewer",
+      "icon": ""
+    },
+    {
+      "id": "plugins-42",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "CrashLogoViewer_1.9 (تصفح الكراشات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/CrashlogViewer",
+      "icon": ""
+    },
+    {
+      "id": "plugins-43",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "Custom Channel Selection-By-M-Nasr (قائمة للقنوات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/CustomChannelSelection",
+      "icon": ""
+    },
+    {
+      "id": "plugins-44",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "CutsClear (حذف الأفلام)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/CutsClear",
+      "icon": ""
+    },
+    {
+      "id": "plugins-45",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "Disk_And_CPU_Temperature (حرارة القرص الصلب)",
+      "path": "/usr/lib/enigma2/python/Plugins/SystemPlugins/DiskCpuTemp",
+      "icon": ""
+    },
+    {
+      "id": "plugins-46",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "DreamExplorer (تصفح الملفات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/DreamExplorer",
+      "icon": ""
+    },
+    {
+      "id": "plugins-47",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "DreamOSatCamManager (تحميل الايميوهات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/DreamOSatcamManager",
+      "icon": ""
+    },
+    {
+      "id": "plugins-48",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "Easy-Cccam (إدخال CCCam)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/ECCcam",
+      "icon": ""
+    },
+    {
+      "id": "plugins-49",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "E2BissKeysEditor (تعديل الشفرات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/E2BissKeyEditor",
+      "icon": ""
+    },
+    {
+      "id": "plugins-50",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "E2-Duplicate-Channels-Manager (مدير القنوات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/E2DuplicateChannelsManager",
+      "icon": ""
+    },
+    {
+      "id": "plugins-51",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "Emil BootLogos (بوت لوجو)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/EmilBootLogos",
+      "icon": ""
+    },
+    {
+      "id": "plugins-52",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "Emil Channels (تحميل ملفات القنوات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/EmilChannels",
+      "icon": ""
+    },
+    {
+      "id": "plugins-53",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "EmilRemovePackage (حذف الإضافات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/EmilRemovePackage",
+      "icon": ""
+    },
+    {
+      "id": "plugins-54",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "EnigmaPrayer (مواقيت الصلاة بدون انترنت)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/EnigmaPrayer",
+      "icon": ""
+    },
+    {
+      "id": "plugins-55",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "enigma2readeradder (إدخال CCCam)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/Enigma2ReaderAdder",
+      "icon": ""
+    },
+    {
+      "id": "plugins-56",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "Enigma2uninstaller (حذف البلجنات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/Uninstaller",
+      "icon": ""
+    },
+    {
+      "id": "plugins-57",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "Epg Grabber (دليل القنوات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/EPGGrabber",
+      "icon": ""
+    },
+    {
+      "id": "plugins-58",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "EPGImport (دليل القنوات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/EPGImport",
+      "icon": ""
+    },
+    {
+      "id": "plugins-59",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "EPGImport-auto - iet5 (دليل القنوات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/EPGImport",
+      "icon": ""
+    },
+    {
+      "id": "plugins-60",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "EPGImport-99 (دليل القنوات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/EPGImport",
+      "icon": ""
+    },
+    {
+      "id": "plugins-61",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "EPGTranslator (مترجم دليل القنوات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/EPGTranslator",
+      "icon": ""
+    },
+    {
+      "id": "plugins-62",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "EvgQuickSignal (بيان إشارة الترددات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/EvgQuickSignal",
+      "icon": ""
+    },
+    {
+      "id": "plugins-63",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "Feeds-Finder (بحث الفيدات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/FeedsFinder",
+      "icon": ""
+    },
+    {
+      "id": "plugins-64",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "Filmon",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/Filmon",
+      "icon": ""
+    },
+    {
+      "id": "plugins-65",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "Foreca1",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/Foreca1",
+      "icon": ""
+    },
+    {
+      "id": "plugins-66",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "Footonsat (مواعيد مباريات الكرة)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/FootOnSat",
+      "icon": ""
+    },
+    {
+      "id": "plugins-67",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "FreeCCcamServer (CCCam مجاني)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/FreeServer",
+      "icon": ""
+    },
+    {
+      "id": "plugins-68",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "FuryBissPro (جالب الفيدات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/FuryBiss",
+      "icon": ""
+    },
+    {
+      "id": "plugins-69",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "GeminiPatcher",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/GeminiPatcher",
+      "icon": ""
+    },
+    {
+      "id": "plugins-70",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "gioppygio",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/GioppyGio",
+      "icon": ""
+    },
+    {
+      "id": "plugins-71",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "hardwareinfo (معلومات الهاردوير)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/hardware_info",
+      "icon": ""
+    },
+    {
+      "id": "plugins-72",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "HisnMuslim (حصن المسلم)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/HisnMuslim",
+      "icon": ""
+    },
+    {
+      "id": "plugins-73",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "HistoryZapSelector (تصفح آخر القنوات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/HistoryZapSelector",
+      "icon": ""
+    },
+    {
+      "id": "plugins-74",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "horoscope (الأبراج)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/horoscope",
+      "icon": ""
+    },
+    {
+      "id": "plugins-75",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "HolidayCountdown (خاص بالأعياد)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/HolidayCountdown",
+      "icon": ""
+    },
+    {
+      "id": "plugins-76",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "ImagesDownloader - Mod Emil Nabil (تحميل الصور)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/ImagesDownloader",
+      "icon": ""
+    },
+    {
+      "id": "plugins-77",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "Internet-SpeedTest (اختبار الإنترنت)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/InternetSpeedTest",
+      "icon": ""
+    },
+    {
+      "id": "plugins-78",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "Infobar Weather (انفوبار ثاني به الطقس)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/InfoBarWeather",
+      "icon": ""
+    },
+    {
+      "id": "plugins-79",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "IP_Checker (معلومات IP الإنترنت)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/IP_Checker",
+      "icon": ""
+    },
+    {
+      "id": "plugins-80",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "KeyAdder (مفاتيح الشفرات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/KeyAdder",
+      "icon": ""
+    },
+    {
+      "id": "plugins-81",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "LiveFeed",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/LiveFeed",
+      "icon": ""
+    },
+    {
+      "id": "plugins-82",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "levi45-freeserver (CCCam مجاني)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/Levi45FreeServer",
+      "icon": ""
+    },
+    {
+      "id": "plugins-83",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "levi45-free-iptv (IPTV مجاني)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/Levi45FreeIPTV",
+      "icon": ""
+    },
+    {
+      "id": "plugins-84",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "LiveMatch (عرض نتائج الرياضة)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/Levi45Setting",
+      "icon": ""
+    },
+    {
+      "id": "plugins-85",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "levi45-settings (ملف القنوات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/Levi45Setting",
+      "icon": ""
+    },
+    {
+      "id": "plugins-86",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "Mawaqit (مواقيت الصلاة)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/Mawaqit",
+      "icon": ""
+    },
+    {
+      "id": "plugins-87",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "MenuSort (ترتيب القائمة)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/MenuSort",
+      "icon": ""
+    },
+    {
+      "id": "plugins-88",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "MmPicons (تحميل البيكونات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/mmPicons",
+      "icon": ""
+    },
+    {
+      "id": "plugins-89",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "MyCam-Plugin (إدخال سيرفر CCCam)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/mycam7",
+      "icon": ""
+    },
+    {
+      "id": "plugins-90",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "MultiCamAdder_By-Emil (كتابة سيرفر CCCam)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/MultiCamAdder",
+      "icon": ""
+    },
+    {
+      "id": "plugins-91",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "Multi-Iptv-Adder_By-Emil (إدخال IPTV)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/MultiIptvAdder",
+      "icon": ""
+    },
+    {
+      "id": "plugins-92",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "my translator_By Ismail elkhooly (مترجم)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/MyTranslator",
+      "icon": ""
+    },
+    {
+      "id": "plugins-93",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "Net Usage Pro (معلومات الإنترنت)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/NetUsagePro",
+      "icon": ""
+    },
+    {
+      "id": "plugins-94",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "NewVirtualkeyBoard (كيبورد متقدم)",
+      "path": "/usr/lib/enigma2/python/Plugins/SystemPlugins/NewVirtualKeyBoard",
+      "icon": ""
+    },
+    {
+      "id": "plugins-95",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "NumberZapExt (أرقام للقنوات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/NumberZapExt",
+      "icon": ""
+    },
+    {
+      "id": "plugins-96",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "ONEupdater",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/ONEupdater",
+      "icon": ""
+    },
+    {
+      "id": "plugins-97",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "Oaweather (معلومات الطقس)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/OAWeather",
+      "icon": ""
+    },
+    {
+      "id": "plugins-98",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "Ozeta-Skins-Setup (إعدادات الثيم)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/oZsetup",
+      "icon": ""
+    },
+    {
+      "id": "plugins-99",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "PiconsRename (تحويل البيكونات بالاسم)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/PiconsRename",
+      "icon": ""
+    },
+    {
+      "id": "plugins-100",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "PluginBrowser-Grid-V2_All-Py3 (OpenBH-Vix-Pli)",
+      "path": "/usr/lib/enigma2/python/Plugins/SystemPlugins/PluginBrowser",
+      "icon": ""
+    },
+    {
+      "id": "plugins-101",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "PluginBrowser-Grid-Pli_8.3",
+      "path": "/usr/lib/enigma2/python/Plugins/SystemPlugins/PluginBrowser",
+      "icon": ""
+    },
+    {
+      "id": "plugins-102",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "PluginMover (نقل الإضافات للخارجي)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/PluginMover",
+      "icon": ""
+    },
+    {
+      "id": "plugins-103",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "PluginSkinMover (نقل الثيمات للخارجي)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/PluginSkinMover",
+      "icon": ""
+    },
+    {
+      "id": "plugins-104",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "QuadPip (متابعة أكثر من قناة)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/QuadPip",
+      "icon": ""
+    },
+    {
+      "id": "plugins-105",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "Quran-karem (القرآن الكريم)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/Quran",
+      "icon": ""
+    },
+    {
+      "id": "plugins-106",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "Quran-karem_v2.2 (القرآن الكريم)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/Quran",
+      "icon": ""
+    },
+    {
+      "id": "plugins-107",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "Quran Kareem-By-M-Nasr (القرآن الكريم)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/qurankareem",
+      "icon": ""
+    },
+    {
+      "id": "plugins-108",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "QuickSignal - iet5 (بيان إشارة للقنوات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/QuickSignalIet5",
+      "icon": ""
+    },
+    {
+      "id": "plugins-109",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "RaedQuickSignal (بيان إشارة للقنوات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal",
+      "icon": ""
+    },
+    {
+      "id": "plugins-110",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "ReaderManager (مدير السيرفرات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/ReaderManager",
+      "icon": ""
+    },
+    {
+      "id": "plugins-111",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "SatelliWebLiveFeeds_py3.12 (فيدات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/Fatima",
+      "icon": ""
+    },
+    {
+      "id": "plugins-112",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "SatelliWebLiveFeeds_py3.13 (فيدات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/Fatima",
+      "icon": ""
+    },
+    {
+      "id": "plugins-113",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "ScreenNames (اسم الشاشة)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/ScreenNames",
+      "icon": ""
+    },
+    {
+      "id": "plugins-114",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "Screen-Recorder-By-Emil (تسجيل الشاشة)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/ScreenRecorder",
+      "icon": ""
+    },
+    {
+      "id": "plugins-115",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "ServerColoring (تلوين القنوات المشفرة)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/ServerColoring",
+      "icon": ""
+    },
+    {
+      "id": "plugins-116",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "ServiceScanUpdates (معلومات بحث القنوات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/ServiceScanUpdates",
+      "icon": ""
+    },
+    {
+      "id": "plugins-117",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "ServiceScanUpdates - iet5 (معلومات بحث القنوات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/ServiceScanUpdates",
+      "icon": ""
+    },
+    {
+      "id": "plugins-118",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "SetPicon - modded by Emil (مدير البيكونات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/SetPicon",
+      "icon": ""
+    },
+    {
+      "id": "plugins-119",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "scriptexecuter (تشغيل السكريبت)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/ScriptExecuter",
+      "icon": ""
+    },
+    {
+      "id": "plugins-120",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "ShiaVoice (اصوات قرأن وادعية)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/Shiavoice",
+      "icon": ""
+    },
+    {
+      "id": "plugins-121",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "showclock (ساعة)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/ShowClock",
+      "icon": ""
+    },
+    {
+      "id": "plugins-122",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "Sherlockmod (أضافة انفوبار 2 به معلومات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/Sherlockmod",
+      "icon": ""
+    },
+    {
+      "id": "plugins-123",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "SilentRunner (تشغيل سكريبتات صامت)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/SilentRunner",
+      "icon": ""
+    },
+    {
+      "id": "plugins-124",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "SimplySports (معلومات رياضة)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/SimplySports",
+      "icon": ""
+    },
+    {
+      "id": "plugins-125",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "SLwebcams",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/SLwebcams",
+      "icon": ""
+    },
+    {
+      "id": "plugins-126",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "SuperBackupImages_by Emil Nabil (تحميل الإضافات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/SuperBackupImages",
+      "icon": ""
+    },
+    {
+      "id": "plugins-127",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "Simple-Zoom-Panel (سيرفرات مجانية)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/SimpleZOOMPanel",
+      "icon": ""
+    },
+    {
+      "id": "plugins-128",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "Spinner-Selector-All-Python (تحميل الدوار)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/SpinnerSelector",
+      "icon": ""
+    },
+    {
+      "id": "plugins-129",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "SubExtractorLite (ترجمة الأفلام)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/SubExtractorLite",
+      "icon": ""
+    },
+    {
+      "id": "plugins-130",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "SubsSupport_1.5.8-r9 (ترجمة الأفلام)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/SubsSupport",
+      "icon": ""
+    },
+    {
+      "id": "plugins-131",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "SubsSupport_by-m.nasr (ترجمة الأفلام)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/SubsSupport",
+      "icon": ""
+    },
+    {
+      "id": "plugins-132",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "SubsSupport_2.1 (ترجمة الأفلام)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/SubsSupport",
+      "icon": ""
+    },
+    {
+      "id": "plugins-133",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "SubsSupportPro-By-Mohammed-Nasr (ترجمة الأفلام)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/SubsSupport",
+      "icon": ""
+    },
+    {
+      "id": "plugins-134",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "TMBD (خاص بالترجمة)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/TMBD",
+      "icon": ""
+    },
+    {
+      "id": "plugins-135",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "Tmdb (خاص بالترجمة)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/tmdb",
+      "icon": ""
+    },
+    {
+      "id": "plugins-136",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "TheWeather-iet5 (الطقس)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/TheWeatherIet5",
+      "icon": ""
+    },
+    {
+      "id": "plugins-137",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "TvManager (مدير القنوات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/tvManager",
+      "icon": ""
+    },
+    {
+      "id": "plugins-138",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "uninstaller-Plugins (حذف الإضافات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/Uninstaller",
+      "icon": ""
+    },
+    {
+      "id": "plugins-139",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "Wireguard-Vpn",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/Wireguard",
+      "icon": ""
+    },
+    {
+      "id": "plugins-140",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "Wifi-Manager (مدير الواي فاي)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/WiFiManager",
+      "icon": ""
+    },
+    {
+      "id": "plugins-141",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "WeatherMsn (الطقس)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/WeatherMSN",
+      "icon": ""
+    },
+    {
+      "id": "plugins-142",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "WeatherPlugin (الطقس)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/WeatherPlugin",
+      "icon": ""
+    },
+    {
+      "id": "plugins-143",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "WorldCam (كاميرات حول العالم)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/WorldCam",
+      "icon": ""
+    },
+    {
+      "id": "plugins-144",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "XmlUpdate by iet5 (تحديث الترددات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/XMLupdatebyiet5",
+      "icon": ""
+    },
+    {
+      "id": "plugins-145",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "Xtraevent_4.6 (لوجو البرامج)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/xtraEvent",
+      "icon": ""
+    },
+    {
+      "id": "plugins-146",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "xtraevent_6.890_All-Python (لوجو البرامج)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/xtraEvent",
+      "icon": ""
+    },
+    {
+      "id": "plugins-147",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "xtraevent_By-M-Nasr (لوجو البرامج)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/xtraEvent",
+      "icon": ""
+    },
+    {
+      "id": "plugins-148",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "YoureWatching (معلومات الفيلم)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/YoureWatching",
+      "icon": ""
+    },
+    {
+      "id": "plugins-149",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "Zip2Pkg-Converter (عمل باكاج للإضافة)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/Zip2Pkg",
+      "icon": ""
+    },
+    {
+      "id": "plugins-150",
+      "section": "plugins",
+      "category": "Plugins",
+      "name": "Zoom_1.1.2-Py3 (سيرفرات مجانية)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/Zoom",
+      "icon": ""
+    },
+    {
+      "id": "novaler-0",
+      "section": "novaler",
+      "category": "Novaler",
+      "name": "novalerStore",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/NovalerStore",
+      "icon": ""
+    },
+    {
+      "id": "novaler-1",
+      "section": "novaler",
+      "category": "Novaler",
+      "name": "Airnet-Fn",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/AirnetFn",
+      "icon": ""
+    },
+    {
+      "id": "novaler-2",
+      "section": "novaler",
+      "category": "Novaler",
+      "name": "Beengo",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/Beengo",
+      "icon": ""
+    },
+    {
+      "id": "novaler-3",
+      "section": "novaler",
+      "category": "Novaler",
+      "name": "ipaudioplus",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/IPaudioPlus",
+      "icon": ""
+    },
+    {
+      "id": "novaler-4",
+      "section": "novaler",
+      "category": "Novaler",
+      "name": "ipsat",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/IPSAT",
+      "icon": ""
+    },
+    {
+      "id": "novaler-5",
+      "section": "novaler",
+      "category": "Novaler",
+      "name": "Novaler Downloader",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/NovalerDownloader",
+      "icon": ""
+    },
+    {
+      "id": "novaler-6",
+      "section": "novaler",
+      "category": "Novaler",
+      "name": "NovaCamPro",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/NovacamPro",
+      "icon": ""
+    },
+    {
+      "id": "novaler-7",
+      "section": "novaler",
+      "category": "Novaler",
+      "name": "NovalerTv",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/NovalerTV",
+      "icon": ""
+    },
+    {
+      "id": "novaler-8",
+      "section": "novaler",
+      "category": "Novaler",
+      "name": "NovaTv",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/NovaTV",
+      "icon": ""
+    },
+    {
+      "id": "novaler-9",
+      "section": "novaler",
+      "category": "Novaler",
+      "name": "SupTv",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/suptv",
+      "icon": ""
+    },
+    {
+      "id": "novaler-10",
+      "section": "novaler",
+      "category": "Novaler",
+      "name": "Total90",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/Total90",
+      "icon": ""
+    },
+    {
+      "id": "novaler-11",
+      "section": "novaler",
+      "category": "Novaler",
+      "name": "Ultracam",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/UltraCam",
+      "icon": ""
+    },
+    {
+      "id": "channels-0",
+      "section": "channels",
+      "category": "Channels",
+      "name": "عنصر بدون اسم",
+      "path": "",
+      "icon": "channel.png"
+    },
+    {
+      "id": "channels-1",
+      "section": "channels",
+      "category": "Channels",
+      "name": "عنصر بدون اسم",
+      "path": "",
+      "icon": "ciefp.png"
+    },
+    {
+      "id": "channels-2",
+      "section": "channels",
+      "category": "Channels",
+      "name": "عنصر بدون اسم",
+      "path": "",
+      "icon": "morpheus883.png"
+    },
+    {
+      "id": "channels-3",
+      "section": "channels",
+      "category": "Channels",
+      "name": "عنصر بدون اسم",
+      "path": "",
+      "icon": "vhannibal.png"
+    },
+    {
+      "id": "other_channels-0",
+      "section": "other_channels",
+      "category": "other channels",
+      "name": "FIFA WORLD CUP 2026_By Hazem-Wahba",
+      "path": "/etc/enigma2/fifa",
+      "icon": ""
+    },
+    {
+      "id": "other_channels-1",
+      "section": "other_channels",
+      "category": "other channels",
+      "name": "Modded By Emil Nabil",
+      "path": "/etc/enigma2/emil",
+      "icon": ""
+    },
+    {
+      "id": "other_channels-2",
+      "section": "other_channels",
+      "category": "other channels",
+      "name": "Ahmed-Mosaad Modded",
+      "path": "/etc/enigma2/emil",
+      "icon": ""
+    },
+    {
+      "id": "other_channels-3",
+      "section": "other_channels",
+      "category": "other channels",
+      "name": "Ahmed Romeh",
+      "path": "/etc/enigma2/ahmed",
+      "icon": ""
+    },
+    {
+      "id": "other_channels-4",
+      "section": "other_channels",
+      "category": "other channels",
+      "name": "Hazem-Wahba",
+      "path": "/etc/enigma2/hazem",
+      "icon": ""
+    },
+    {
+      "id": "other_channels-5",
+      "section": "other_channels",
+      "category": "other channels",
+      "name": "Khaled Ali",
+      "path": "/etc/enigma2/Khalid",
+      "icon": ""
+    },
+    {
+      "id": "other_channels-6",
+      "section": "other_channels",
+      "category": "other channels",
+      "name": "Mohamed Goda",
+      "path": "/etc/enigma2/goda",
+      "icon": ""
+    },
+    {
+      "id": "other_channels-7",
+      "section": "other_channels",
+      "category": "other channels",
+      "name": "Mohamed-Nasr",
+      "path": "/etc/enigma2/nasr",
+      "icon": ""
+    },
+    {
+      "id": "other_channels-8",
+      "section": "other_channels",
+      "category": "other channels",
+      "name": "Sayed Refaey",
+      "path": "/etc/enigma2/sayed",
+      "icon": ""
+    },
+    {
+      "id": "other_channels-9",
+      "section": "other_channels",
+      "category": "other channels",
+      "name": "Tarek Ashry",
+      "path": "/etc/enigma2/tarek",
+      "icon": ""
+    },
+    {
+      "id": "other_channels-10",
+      "section": "other_channels",
+      "category": "other channels",
+      "name": "Elsafty-Tv-Radio-Steaming",
+      "path": "/etc/enigma2/safty",
+      "icon": ""
+    },
+    {
+      "id": "other_channels-11",
+      "section": "other_channels",
+      "category": "other channels",
+      "name": "Tuner_Backup_By-Emil-Nabil",
+      "path": "/etc/enigma2/tuner",
+      "icon": ""
+    },
+    {
+      "id": "other_channels-12",
+      "section": "other_channels",
+      "category": "other channels",
+      "name": "Tuner_Backup_By-M-Goda",
+      "path": "/etc/enigma2/tuner",
+      "icon": ""
+    },
+    {
+      "id": "ciefp_channels-0",
+      "section": "ciefp_channels",
+      "category": "ciefp channels",
+      "name": "ciefp-channels-e2-75e-34w",
+      "path": "/etc/enigma2/ciefp",
+      "icon": ""
+    },
+    {
+      "id": "ciefp_channels-1",
+      "section": "ciefp_channels",
+      "category": "ciefp channels",
+      "name": "1sat-19E",
+      "path": "/etc/enigma2/ciefp",
+      "icon": ""
+    },
+    {
+      "id": "ciefp_channels-2",
+      "section": "ciefp_channels",
+      "category": "ciefp channels",
+      "name": "2satA-19E-13E",
+      "path": "/etc/enigma2/ciefp",
+      "icon": ""
+    },
+    {
+      "id": "ciefp_channels-3",
+      "section": "ciefp_channels",
+      "category": "ciefp channels",
+      "name": "2satB-19E-16E",
+      "path": "/etc/enigma2/ciefp",
+      "icon": ""
+    },
+    {
+      "id": "ciefp_channels-4",
+      "section": "ciefp_channels",
+      "category": "ciefp channels",
+      "name": "3satA-9E-10E-13E",
+      "path": "/etc/enigma2/ciefp",
+      "icon": ""
+    },
+    {
+      "id": "ciefp_channels-5",
+      "section": "ciefp_channels",
+      "category": "ciefp channels",
+      "name": "3satB-19E-16E-13E",
+      "path": "/etc/enigma2/ciefp",
+      "icon": ""
+    },
+    {
+      "id": "ciefp_channels-6",
+      "section": "ciefp_channels",
+      "category": "ciefp channels",
+      "name": "4satA-28E-19E-13E-30W",
+      "path": "/etc/enigma2/ciefp",
+      "icon": ""
+    },
+    {
+      "id": "ciefp_channels-7",
+      "section": "ciefp_channels",
+      "category": "ciefp channels",
+      "name": "4satB-19E-16E-13E-0.8W",
+      "path": "/etc/enigma2/ciefp",
+      "icon": ""
+    },
+    {
+      "id": "ciefp_channels-8",
+      "section": "ciefp_channels",
+      "category": "ciefp channels",
+      "name": "5sat-19E-16E-13E-1.9E-0.8W",
+      "path": "/etc/enigma2/ciefp",
+      "icon": ""
+    },
+    {
+      "id": "ciefp_channels-9",
+      "section": "ciefp_channels",
+      "category": "ciefp channels",
+      "name": "6sat-23E-19E-16E-13E-1.9E-0.8W",
+      "path": "/etc/enigma2/ciefp",
+      "icon": ""
+    },
+    {
+      "id": "ciefp_channels-10",
+      "section": "ciefp_channels",
+      "category": "ciefp channels",
+      "name": "7sat-23E-19E-16E-13E-4.8E-1.9E-0.8W",
+      "path": "/etc/enigma2/ciefp",
+      "icon": ""
+    },
+    {
+      "id": "ciefp_channels-11",
+      "section": "ciefp_channels",
+      "category": "ciefp channels",
+      "name": "8sat-28E-23E-19E-16E-13E-4.8E-1.9E-0.8W",
+      "path": "/etc/enigma2/ciefp",
+      "icon": ""
+    },
+    {
+      "id": "ciefp_channels-12",
+      "section": "ciefp_channels",
+      "category": "ciefp channels",
+      "name": "9sat-28E-23E-19E-16E-13E-9E-1.9E-0.8W-5W",
+      "path": "/etc/enigma2/ciefp",
+      "icon": ""
+    },
+    {
+      "id": "ciefp_channels-13",
+      "section": "ciefp_channels",
+      "category": "ciefp channels",
+      "name": "10sat-39E-28E-23E-19E-16E-13E-9E-4.8E-1.9E-0.8W",
+      "path": "/etc/enigma2/ciefp",
+      "icon": ""
+    },
+    {
+      "id": "ciefp_channels-14",
+      "section": "ciefp_channels",
+      "category": "ciefp channels",
+      "name": "13sat-42E-39E-28E-23E-19E-16E-13E-9E-7E-4.8E-1.9E-0.8w-5w",
+      "path": "/etc/enigma2/ciefp",
+      "icon": ""
+    },
+    {
+      "id": "ciefp_channels-15",
+      "section": "ciefp_channels",
+      "category": "ciefp channels",
+      "name": "16sat-42E-39E-28E-26E-23E-19E-16E-13E-10E-9E-7E-4.8E-1.9E-0.8w-4W-5w",
+      "path": "/etc/enigma2/ciefp",
+      "icon": ""
+    },
+    {
+      "id": "ciefp_channels-16",
+      "section": "ciefp_channels",
+      "category": "ciefp channels",
+      "name": "18sat-42E-39E-36E-33E-28E-26E-23E-19E-16E-13E-10E-9E-7E-4.8E-1.9E-0.8w-4w-5w",
+      "path": "/etc/enigma2/ciefp",
+      "icon": ""
+    },
+    {
+      "id": "morph883_channels-0",
+      "section": "morph883_channels",
+      "category": "morph883 channels",
+      "name": "Morph883_0.8W-4.8E-13E",
+      "path": "/etc/enigma2/ciefp",
+      "icon": ""
+    },
+    {
+      "id": "morph883_channels-1",
+      "section": "morph883_channels",
+      "category": "morph883 channels",
+      "name": "Morph883_0.8W-13E-19.2E-28.2E",
+      "path": "/etc/enigma2/ciefp",
+      "icon": ""
+    },
+    {
+      "id": "morph883_channels-2",
+      "section": "morph883_channels",
+      "category": "morph883 channels",
+      "name": "Morph883_0.8W-13E-19.2E",
+      "path": "/etc/enigma2/ciefp",
+      "icon": ""
+    },
+    {
+      "id": "morph883_channels-3",
+      "section": "morph883_channels",
+      "category": "morph883 channels",
+      "name": "Morph883_0.8W-13E",
+      "path": "/etc/enigma2/ciefp",
+      "icon": ""
+    },
+    {
+      "id": "morph883_channels-4",
+      "section": "morph883_channels",
+      "category": "morph883 channels",
+      "name": "Morph883_4.8E-13E-19.2E",
+      "path": "/etc/enigma2/ciefp",
+      "icon": ""
+    },
+    {
+      "id": "morph883_channels-5",
+      "section": "morph883_channels",
+      "category": "morph883 channels",
+      "name": "Morph883_4.8E-13E",
+      "path": "/etc/enigma2/ciefp",
+      "icon": ""
+    },
+    {
+      "id": "morph883_channels-6",
+      "section": "morph883_channels",
+      "category": "morph883 channels",
+      "name": "Morph883_9E-13E-19.2E",
+      "path": "/etc/enigma2/ciefp",
+      "icon": ""
+    },
+    {
+      "id": "morph883_channels-7",
+      "section": "morph883_channels",
+      "category": "morph883 channels",
+      "name": "Morph883_9E-13E",
+      "path": "/etc/enigma2/ciefp",
+      "icon": ""
+    },
+    {
+      "id": "morph883_channels-8",
+      "section": "morph883_channels",
+      "category": "morph883 channels",
+      "name": "Morph883_13E-16E-19.2E",
+      "path": "/etc/enigma2/ciefp",
+      "icon": ""
+    },
+    {
+      "id": "morph883_channels-9",
+      "section": "morph883_channels",
+      "category": "morph883 channels",
+      "name": "Morph883_13E-16E",
+      "path": "/etc/enigma2/ciefp",
+      "icon": ""
+    },
+    {
+      "id": "morph883_channels-10",
+      "section": "morph883_channels",
+      "category": "morph883 channels",
+      "name": "Morph883_13E-19.2E-23.5E-28.2E",
+      "path": "/etc/enigma2/ciefp",
+      "icon": ""
+    },
+    {
+      "id": "morph883_channels-11",
+      "section": "morph883_channels",
+      "category": "morph883 channels",
+      "name": "Morph883_13E-19.2E-23.5E",
+      "path": "/etc/enigma2/ciefp",
+      "icon": ""
+    },
+    {
+      "id": "morph883_channels-12",
+      "section": "morph883_channels",
+      "category": "morph883 channels",
+      "name": "Morph883_13E-19.2E-28.2E",
+      "path": "/etc/enigma2/ciefp",
+      "icon": ""
+    },
+    {
+      "id": "morph883_channels-13",
+      "section": "morph883_channels",
+      "category": "morph883 channels",
+      "name": "Morph883_13E-19.2E-42E",
+      "path": "/etc/enigma2/ciefp",
+      "icon": ""
+    },
+    {
+      "id": "morph883_channels-14",
+      "section": "morph883_channels",
+      "category": "morph883 channels",
+      "name": "Morph883_13E-19.2E",
+      "path": "/etc/enigma2/ciefp",
+      "icon": ""
+    },
+    {
+      "id": "morph883_channels-15",
+      "section": "morph883_channels",
+      "category": "morph883 channels",
+      "name": "Morph883_13E-23.5E",
+      "path": "/etc/enigma2/ciefp",
+      "icon": ""
+    },
+    {
+      "id": "morph883_channels-16",
+      "section": "morph883_channels",
+      "category": "morph883 channels",
+      "name": "Morph883_13E-28.2E",
+      "path": "/etc/enigma2/ciefp",
+      "icon": ""
+    },
+    {
+      "id": "morph883_channels-17",
+      "section": "morph883_channels",
+      "category": "morph883 channels",
+      "name": "Morph883_13E-42E",
+      "path": "/etc/enigma2/ciefp",
+      "icon": ""
+    },
+    {
+      "id": "morph883_channels-18",
+      "section": "morph883_channels",
+      "category": "morph883 channels",
+      "name": "Morph883_13E",
+      "path": "/etc/enigma2/ciefp",
+      "icon": ""
+    },
+    {
+      "id": "morph883_channels-19",
+      "section": "morph883_channels",
+      "category": "morph883 channels",
+      "name": "Morph883_30W-13E-19.2E",
+      "path": "/etc/enigma2/ciefp",
+      "icon": ""
+    },
+    {
+      "id": "morph883_channels-20",
+      "section": "morph883_channels",
+      "category": "morph883 channels",
+      "name": "Morph883_30W-13E",
+      "path": "/etc/enigma2/ciefp",
+      "icon": ""
+    },
+    {
+      "id": "morph883_channels-21",
+      "section": "morph883_channels",
+      "category": "morph883 channels",
+      "name": "Morph883_Motor",
+      "path": "/etc/enigma2/ciefp",
+      "icon": ""
+    },
+    {
+      "id": "morph883_channels-22",
+      "section": "morph883_channels",
+      "category": "morph883 channels",
+      "name": "Morph883_Settings",
+      "path": "/etc/enigma2/ciefp",
+      "icon": ""
+    },
+    {
+      "id": "vaninbal_channels-0",
+      "section": "vaninbal_channels",
+      "category": "vaninbal channels",
+      "name": "Vhaninbal-Dual-13-19E",
+      "path": "/etc/enigma2/ciefp",
+      "icon": ""
+    },
+    {
+      "id": "vaninbal_channels-1",
+      "section": "vaninbal_channels",
+      "category": "vaninbal channels",
+      "name": "Vhaninbal-Dual-DTT-Campania",
+      "path": "/etc/enigma2/ciefp",
+      "icon": ""
+    },
+    {
+      "id": "vaninbal_channels-2",
+      "section": "vaninbal_channels",
+      "category": "vaninbal channels",
+      "name": "Vhaninbal-Dual-DTT-Italia",
+      "path": "/etc/enigma2/ciefp",
+      "icon": ""
+    },
+    {
+      "id": "vaninbal_channels-3",
+      "section": "vaninbal_channels",
+      "category": "vaninbal channels",
+      "name": "Vhaninbal-Dual-DTT-Lazio",
+      "path": "/etc/enigma2/ciefp",
+      "icon": ""
+    },
+    {
+      "id": "vaninbal_channels-4",
+      "section": "vaninbal_channels",
+      "category": "vaninbal channels",
+      "name": "Vhaninbal-Dual-DTT-Lombardia",
+      "path": "/etc/enigma2/ciefp",
+      "icon": ""
+    },
+    {
+      "id": "vaninbal_channels-5",
+      "section": "vaninbal_channels",
+      "category": "vaninbal channels",
+      "name": "Vhaninbal-Dual-DTT-Piemonte",
+      "path": "/etc/enigma2/ciefp",
+      "icon": ""
+    },
+    {
+      "id": "vaninbal_channels-6",
+      "section": "vaninbal_channels",
+      "category": "vaninbal channels",
+      "name": "Vhaninbal-HotBird-13E",
+      "path": "/etc/enigma2/ciefp",
+      "icon": ""
+    },
+    {
+      "id": "vaninbal_channels-7",
+      "section": "vaninbal_channels",
+      "category": "vaninbal channels",
+      "name": "Vhaninbal-HotBird-DTT-Campania",
+      "path": "/etc/enigma2/ciefp",
+      "icon": ""
+    },
+    {
+      "id": "vaninbal_channels-8",
+      "section": "vaninbal_channels",
+      "category": "vaninbal channels",
+      "name": "Vhaninbal-HotBird-DTT-Italia",
+      "path": "/etc/enigma2/ciefp",
+      "icon": ""
+    },
+    {
+      "id": "vaninbal_channels-9",
+      "section": "vaninbal_channels",
+      "category": "vaninbal channels",
+      "name": "Vhaninbal-HotBird-DTT-Lazio",
+      "path": "/etc/enigma2/ciefp",
+      "icon": ""
+    },
+    {
+      "id": "vaninbal_channels-10",
+      "section": "vaninbal_channels",
+      "category": "vaninbal channels",
+      "name": "Vhaninbal-HotBird-DTT-Lombardia",
+      "path": "/etc/enigma2/ciefp",
+      "icon": ""
+    },
+    {
+      "id": "vaninbal_channels-11",
+      "section": "vaninbal_channels",
+      "category": "vaninbal channels",
+      "name": "Vhaninbal-HotBird-DTT-Piemonte",
+      "path": "/etc/enigma2/ciefp",
+      "icon": ""
+    },
+    {
+      "id": "vaninbal_channels-12",
+      "section": "vaninbal_channels",
+      "category": "vaninbal channels",
+      "name": "Vhaninbal-Motor-70E-45W",
+      "path": "/etc/enigma2/ciefp",
+      "icon": ""
+    },
+    {
+      "id": "vaninbal_channels-13",
+      "section": "vaninbal_channels",
+      "category": "vaninbal channels",
+      "name": "Vhaninbal-Motor-DTT-Campania",
+      "path": "/etc/enigma2/ciefp",
+      "icon": ""
+    },
+    {
+      "id": "vaninbal_channels-14",
+      "section": "vaninbal_channels",
+      "category": "vaninbal channels",
+      "name": "Vhaninbal-Motor-DTT-Italia",
+      "path": "/etc/enigma2/ciefp",
+      "icon": ""
+    },
+    {
+      "id": "vaninbal_channels-15",
+      "section": "vaninbal_channels",
+      "category": "vaninbal channels",
+      "name": "Vhaninbal-Motor-DTT-Lazio",
+      "path": "/etc/enigma2/ciefp",
+      "icon": ""
+    },
+    {
+      "id": "vaninbal_channels-16",
+      "section": "vaninbal_channels",
+      "category": "vaninbal channels",
+      "name": "Vhaninbal-Motor-DTT-Lombardia",
+      "path": "/etc/enigma2/ciefp",
+      "icon": ""
+    },
+    {
+      "id": "vaninbal_channels-17",
+      "section": "vaninbal_channels",
+      "category": "vaninbal channels",
+      "name": "Vhaninbal-Motor-DTT-Piemonte",
+      "path": "/etc/enigma2/ciefp",
+      "icon": ""
+    },
+    {
+      "id": "vaninbal_channels-18",
+      "section": "vaninbal_channels",
+      "category": "vaninbal channels",
+      "name": "Vhaninbal-Motor-DTT-Romagna",
+      "path": "/etc/enigma2/ciefp",
+      "icon": ""
+    },
+    {
+      "id": "vaninbal_channels-19",
+      "section": "vaninbal_channels",
+      "category": "vaninbal channels",
+      "name": "Vhaninbal-Motor-DTT-Sardegna",
+      "path": "/etc/enigma2/ciefp",
+      "icon": ""
+    },
+    {
+      "id": "vaninbal_channels-20",
+      "section": "vaninbal_channels",
+      "category": "vaninbal channels",
+      "name": "Vhaninbal-Motor-DTT-Sicilia",
+      "path": "/etc/enigma2/ciefp",
+      "icon": ""
+    },
+    {
+      "id": "vaninbal_channels-21",
+      "section": "vaninbal_channels",
+      "category": "vaninbal channels",
+      "name": "Vhaninbal-Quadri-9-13-16-19-23E",
+      "path": "/etc/enigma2/ciefp",
+      "icon": ""
+    },
+    {
+      "id": "vaninbal_channels-22",
+      "section": "vaninbal_channels",
+      "category": "vaninbal channels",
+      "name": "Vhaninbal-Quadri-13-19-5E-1W",
+      "path": "/etc/enigma2/ciefp",
+      "icon": ""
+    },
+    {
+      "id": "vaninbal_channels-23",
+      "section": "vaninbal_channels",
+      "category": "vaninbal channels",
+      "name": "Vhaninbal-Quadri-13-19-9E-5W",
+      "path": "/etc/enigma2/ciefp",
+      "icon": ""
+    },
+    {
+      "id": "vaninbal_channels-24",
+      "section": "vaninbal_channels",
+      "category": "vaninbal channels",
+      "name": "Vhaninbal-Quadri-13-19-23-28E",
+      "path": "/etc/enigma2/ciefp",
+      "icon": ""
+    },
+    {
+      "id": "vaninbal_channels-25",
+      "section": "vaninbal_channels",
+      "category": "vaninbal channels",
+      "name": "Vhaninbal-Trial-13-19E-5W",
+      "path": "/etc/enigma2/ciefp",
+      "icon": ""
+    },
+    {
+      "id": "vaninbal_channels-26",
+      "section": "vaninbal_channels",
+      "category": "vaninbal channels",
+      "name": "Vhaninbal-Trial-13-19E-30W",
+      "path": "/etc/enigma2/ciefp",
+      "icon": ""
+    },
+    {
+      "id": "feeds-0",
+      "section": "feeds",
+      "category": "Feeds",
+      "name": "Eliesat (فيد اضافي للصورة)",
+      "path": "/etc/opkg/eliesat-feed.conf",
+      "icon": ""
+    },
+    {
+      "id": "feeds-1",
+      "section": "feeds",
+      "category": "Feeds",
+      "name": "Emil (فيد أضافي للصورة)",
+      "path": "/etc/opkg/emil-dream-feed.conf",
+      "icon": ""
+    },
+    {
+      "id": "feeds-2",
+      "section": "feeds",
+      "category": "Feeds",
+      "name": "Jungle (فيد أضافي للصورة)",
+      "path": "/etc/opkg/jungle-feed.conf",
+      "icon": ""
+    },
+    {
+      "id": "feeds-3",
+      "section": "feeds",
+      "category": "Feeds",
+      "name": "Libraries_3.12.4",
+      "path": "/etc/opkg/library-feed.conf",
+      "icon": ""
+    },
+    {
+      "id": "feeds-4",
+      "section": "feeds",
+      "category": "Feeds",
+      "name": "Libraries_3.12.6",
+      "path": "/etc/opkg/library-feed.conf",
+      "icon": ""
+    },
+    {
+      "id": "feeds-5",
+      "section": "feeds",
+      "category": "Feeds",
+      "name": "Oe-alliance-Picons (فيد به بايكونات)",
+      "path": "/etc/opkg/oe-alliance-picon-feed.conf",
+      "icon": ""
+    },
+    {
+      "id": "feeds-6",
+      "section": "feeds",
+      "category": "Feeds",
+      "name": "Oe-alliance-Settings (فيد به ملفات قنوات)",
+      "path": "/etc/opkg/oe-alliance-settings-feed.conf",
+      "icon": ""
+    },
+    {
+      "id": "feeds-7",
+      "section": "feeds",
+      "category": "Feeds",
+      "name": "Openatv-Deval (فيد صورة openatv للمطورين)",
+      "path": "/etc/opkg/devel-feed",
+      "icon": ""
+    },
+    {
+      "id": "feeds-8",
+      "section": "feeds",
+      "category": "Feeds",
+      "name": "OpenPicons (فيد بايكونات)",
+      "path": "/etc/opkg/snp-feed.conf",
+      "icon": ""
+    },
+    {
+      "id": "feeds-9",
+      "section": "feeds",
+      "category": "Feeds",
+      "name": "Softcams-Feed-Openatv (اضافة سوفتكام لفيد الصورة)",
+      "path": "/etc/opkg/softcam",
+      "icon": ""
+    },
+    {
+      "id": "feeds-10",
+      "section": "feeds",
+      "category": "Feeds",
+      "name": "OpenDroid-softcam (اضافة سوفتكام لفيد الصورة)",
+      "path": "/etc/opkg/softcam",
+      "icon": ""
+    },
+    {
+      "id": "feeds-11",
+      "section": "feeds",
+      "category": "Feeds",
+      "name": "OpenEight-softcam (اضافة سوفتكام لفيد الصورة)",
+      "path": "/etc/opkg/team",
+      "icon": ""
+    },
+    {
+      "id": "feeds-12",
+      "section": "feeds",
+      "category": "Feeds",
+      "name": "TeamBlue-softcam (اضافة سوتكام لفيد الصورة)",
+      "path": "/etc/opkg/softcam",
+      "icon": ""
+    },
+    {
+      "id": "feeds-13",
+      "section": "feeds",
+      "category": "Feeds",
+      "name": "Softcams-Feed-Pure2 (اضافة سوفتكام لفيد الصورة)",
+      "path": "/etc/opkg/softcam",
+      "icon": ""
+    },
+    {
+      "id": "feeds-14",
+      "section": "feeds",
+      "category": "Feeds",
+      "name": "Tarek-Hanfy (فيد اضافي للصورة)",
+      "path": "/etc/opkg/tarek-feed.conf",
+      "icon": ""
+    },
+    {
+      "id": "ciefp-0",
+      "section": "ciefp",
+      "category": "Ciefp",
+      "name": "CiefpBootlogo",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/CiefpBootlogo",
+      "icon": ""
+    },
+    {
+      "id": "ciefp-1",
+      "section": "ciefp",
+      "category": "Ciefp",
+      "name": "CiefpBouquetUpdater",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/CiefpBouquetUpdater",
+      "icon": ""
+    },
+    {
+      "id": "ciefp-2",
+      "section": "ciefp",
+      "category": "Ciefp",
+      "name": "CiefpChannelManager",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/CiefpChannelManager",
+      "icon": ""
+    },
+    {
+      "id": "ciefp-3",
+      "section": "ciefp",
+      "category": "Ciefp",
+      "name": "CiefpE2Converter",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/CiefpE2Converter",
+      "icon": ""
+    },
+    {
+      "id": "ciefp-4",
+      "section": "ciefp",
+      "category": "Ciefp",
+      "name": "CiefpE2editor",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/CiefpE2editor",
+      "icon": ""
+    },
+    {
+      "id": "ciefp-5",
+      "section": "ciefp",
+      "category": "Ciefp",
+      "name": "CiefpEasySetup",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/CiefpEasySetup",
+      "icon": ""
+    },
+    {
+      "id": "ciefp-6",
+      "section": "ciefp",
+      "category": "Ciefp",
+      "name": "CiefpEPGshare",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/CiefpEPGshare",
+      "icon": ""
+    },
+    {
+      "id": "ciefp-7",
+      "section": "ciefp",
+      "category": "Ciefp",
+      "name": "CiefpIPTVBouquets",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/CiefpIPTVBouquets",
+      "icon": ""
+    },
+    {
+      "id": "ciefp-8",
+      "section": "ciefp",
+      "category": "Ciefp",
+      "name": "CiefpKingSat",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/CiefpKingSat",
+      "icon": ""
+    },
+    {
+      "id": "ciefp-9",
+      "section": "ciefp",
+      "category": "Ciefp",
+      "name": "CiefpMojTvEPG",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/CiefpMojTvEPG",
+      "icon": ""
+    },
+    {
+      "id": "ciefp-10",
+      "section": "ciefp",
+      "category": "Ciefp",
+      "name": "CiefpOpenDirectories",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/CiefpOpenDirectories",
+      "icon": ""
+    },
+    {
+      "id": "ciefp-11",
+      "section": "ciefp",
+      "category": "Ciefp",
+      "name": "CiefpOpenSubtitles",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/CiefpOpenSubtitles",
+      "icon": ""
+    },
+    {
+      "id": "ciefp-12",
+      "section": "ciefp",
+      "category": "Ciefp",
+      "name": "CiefpOscamEditor",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/CiefpOscamEditor",
+      "icon": ""
+    },
+    {
+      "id": "ciefp-13",
+      "section": "ciefp",
+      "category": "Ciefp",
+      "name": "CiefpParabolaCZ",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/CiefpParabolaCZ",
+      "icon": ""
+    },
+    {
+      "id": "ciefp-14",
+      "section": "ciefp",
+      "category": "Ciefp",
+      "name": "CiefpPiconManager",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/CiefpPiconManager",
+      "icon": ""
+    },
+    {
+      "id": "ciefp-15",
+      "section": "ciefp",
+      "category": "Ciefp",
+      "name": "CiefpPicturePlayer",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/CiefpPicturePlayer",
+      "icon": ""
+    },
+    {
+      "id": "ciefp-16",
+      "section": "ciefp",
+      "category": "Ciefp",
+      "name": "CiefpPlugins",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/CiefpPlugins",
+      "icon": ""
+    },
+    {
+      "id": "ciefp-17",
+      "section": "ciefp",
+      "category": "Ciefp",
+      "name": "CiefpRottenTomatoes",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/CiefpRottenTomatoes",
+      "icon": ""
+    },
+    {
+      "id": "ciefp-18",
+      "section": "ciefp",
+      "category": "Ciefp",
+      "name": "CiefpSatelliteAnalyzer",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/CiefpSatelliteAnalyzer",
+      "icon": ""
+    },
+    {
+      "id": "ciefp-19",
+      "section": "ciefp",
+      "category": "Ciefp",
+      "name": "CiefpSatellitesXmlEditor",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/CiefpSatelliteXmlEditor",
+      "icon": ""
+    },
+    {
+      "id": "ciefp-20",
+      "section": "ciefp",
+      "category": "Ciefp",
+      "name": "CiefpScreenGrab",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/CiefpScreenGrab",
+      "icon": ""
+    },
+    {
+      "id": "ciefp-21",
+      "section": "ciefp",
+      "category": "Ciefp",
+      "name": "CiefpSelectSatellite",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/CiefpSelectSatellite",
+      "icon": ""
+    },
+    {
+      "id": "ciefp-22",
+      "section": "ciefp",
+      "category": "Ciefp",
+      "name": "CiefpSettingsDownloader",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/CiefpSettingsDownloader",
+      "icon": ""
+    },
+    {
+      "id": "ciefp-23",
+      "section": "ciefp",
+      "category": "Ciefp",
+      "name": "CiefpSettingsPanel",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/CiefpsettingsPanel",
+      "icon": ""
+    },
+    {
+      "id": "ciefp-24",
+      "section": "ciefp",
+      "category": "Ciefp",
+      "name": "CiefpSettingsStreamrelay PY2",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/CiefpSettingsStreamrelayPY2",
+      "icon": ""
+    },
+    {
+      "id": "ciefp-25",
+      "section": "ciefp",
+      "category": "Ciefp",
+      "name": "CiefpSettingsStreamrelay PY3",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/CiefpSettingsStreamrelay",
+      "icon": ""
+    },
+    {
+      "id": "ciefp-26",
+      "section": "ciefp",
+      "category": "Ciefp",
+      "name": "CiefpSettingsT2miAbertis",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/CiefpSettingsT2miAbertis",
+      "icon": ""
+    },
+    {
+      "id": "ciefp-27",
+      "section": "ciefp",
+      "category": "Ciefp",
+      "name": "CiefpSettingsT2miAbertisOpenPLi",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/CiefpSettingsT2miAbertisOpenPLi",
+      "icon": ""
+    },
+    {
+      "id": "ciefp-28",
+      "section": "ciefp",
+      "category": "Ciefp",
+      "name": "CiefpsettingsMotor",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/CiefpsettingsMotor",
+      "icon": ""
+    },
+    {
+      "id": "ciefp-29",
+      "section": "ciefp",
+      "category": "Ciefp",
+      "name": "CiefpTMDBSearch",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/CiefpTMDBSearch",
+      "icon": ""
+    },
+    {
+      "id": "ciefp-30",
+      "section": "ciefp",
+      "category": "Ciefp",
+      "name": "CiefpTvProgram",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/CiefpTvProgram",
+      "icon": ""
+    },
+    {
+      "id": "ciefp-31",
+      "section": "ciefp",
+      "category": "Ciefp",
+      "name": "CiefpTvProgramA1HR",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/CiefpTvProgramA1HR",
+      "icon": ""
+    },
+    {
+      "id": "ciefp-32",
+      "section": "ciefp",
+      "category": "Ciefp",
+      "name": "CiefpTvProgramSBB",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/CiefpTvProgramSBB",
+      "icon": ""
+    },
+    {
+      "id": "ciefp-33",
+      "section": "ciefp",
+      "category": "Ciefp",
+      "name": "CiefpTvProgramSK",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/CiefpTvProgramSK",
+      "icon": ""
+    },
+    {
+      "id": "ciefp-34",
+      "section": "ciefp",
+      "category": "Ciefp",
+      "name": "CiefpTvTodayDE",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/CiefpTvTodayDE",
+      "icon": ""
+    },
+    {
+      "id": "ciefp-35",
+      "section": "ciefp",
+      "category": "Ciefp",
+      "name": "CiefpVibes",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/CiefpVibes",
+      "icon": ""
+    },
+    {
+      "id": "ciefp-36",
+      "section": "ciefp",
+      "category": "Ciefp",
+      "name": "CiefpVideoPlayer",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/CiefpVideoPlayer",
+      "icon": ""
+    },
+    {
+      "id": "ciefp-37",
+      "section": "ciefp",
+      "category": "Ciefp",
+      "name": "CiefpWhitelistStreamrelay",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/CiefpWhitelistStreamrelay",
+      "icon": ""
+    },
+    {
+      "id": "ciefp-38",
+      "section": "ciefp",
+      "category": "Ciefp",
+      "name": "CiefpYouTube",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/CiefpYouTube",
+      "icon": ""
+    },
+    {
+      "id": "ciefp-39",
+      "section": "ciefp",
+      "category": "Ciefp",
+      "name": "TitloviBrowser",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/TitloviBrowser",
+      "icon": ""
+    },
+    {
+      "id": "ciefp-40",
+      "section": "ciefp",
+      "category": "Ciefp",
+      "name": "WebCamE2PrenjSF",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/WebCamE2PrenjSF",
+      "icon": ""
+    },
+    {
+      "id": "bootlogos-0",
+      "section": "bootlogos",
+      "category": "Bootlogos",
+      "name": "BootlogoSwapper Egami (بوت لوجو متعدد)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/BootLogoSwapperEgami",
+      "icon": ""
+    },
+    {
+      "id": "bootlogos-1",
+      "section": "bootlogos",
+      "category": "Bootlogos",
+      "name": "BootlogoSwapper Atv (بوت لوجو متعدد)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/BootLogoSwapperATV",
+      "icon": ""
+    },
+    {
+      "id": "bootlogos-2",
+      "section": "bootlogos",
+      "category": "Bootlogos",
+      "name": "BootlogoSwapper Pli (بوت لوجو متعدد)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/BootLogoSwapperOpenpli",
+      "icon": ""
+    },
+    {
+      "id": "bootlogos-3",
+      "section": "bootlogos",
+      "category": "Bootlogos",
+      "name": "BootlogoSwapper OpenBH (بوت لوجو متعدد)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/BootLogoSwapperOpenBh",
+      "icon": ""
+    },
+    {
+      "id": "bootlogos-4",
+      "section": "bootlogos",
+      "category": "Bootlogos",
+      "name": "BootlogoSwapper OpenSpa (بوت لوجو متعدد)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/BootLogoSwapperSPA",
+      "icon": ""
+    },
+    {
+      "id": "bootlogos-5",
+      "section": "bootlogos",
+      "category": "Bootlogos",
+      "name": "BootlogoSwapper OpenVix (بوت لوجو متعدد)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/BootLogoSwapper-openvix",
+      "icon": ""
+    },
+    {
+      "id": "bootlogos-6",
+      "section": "bootlogos",
+      "category": "Bootlogos",
+      "name": "BootlogoSwapper-PURE2 (بوت لوجو متعدد)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/BootLogoSwapperPure2",
+      "icon": ""
+    },
+    {
+      "id": "bootlogos-7",
+      "section": "bootlogos",
+      "category": "Bootlogos",
+      "name": "BootlogoSwapper Christmas (بوت لوجو متعدد)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/BootLogo-Swapper-Christmas",
+      "icon": ""
+    },
+    {
+      "id": "bootlogos-8",
+      "section": "bootlogos",
+      "category": "Bootlogos",
+      "name": "BootlogoSwapper Kids (بوت لوجو متعدد)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/BootLogoSwapper",
+      "icon": ""
+    },
+    {
+      "id": "bootlogos-9",
+      "section": "bootlogos",
+      "category": "Bootlogos",
+      "name": "BootlogoSwapper Ramadan (بوت لوجو متعدد)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/BootLogoSwapper",
+      "icon": ""
+    },
+    {
+      "id": "bootlogos-10",
+      "section": "bootlogos",
+      "category": "Bootlogos",
+      "name": "BootlogoSwapper Eid-Aldha (بوت لوجو متعدد)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/BootLogoSwapper",
+      "icon": ""
+    },
+    {
+      "id": "bootlogos-11",
+      "section": "bootlogos",
+      "category": "Bootlogos",
+      "name": "BootlogoSwapper V2.1 (بوت لوجو متعدد)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/BootLogoSwapper",
+      "icon": ""
+    },
+    {
+      "id": "bootlogos-12",
+      "section": "bootlogos",
+      "category": "Bootlogos",
+      "name": "BootlogoSwapper V2.3 (بوت لوجو متعدد)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/BootLogoSwapper",
+      "icon": ""
+    },
+    {
+      "id": "bootlogos-13",
+      "section": "bootlogos",
+      "category": "Bootlogos",
+      "name": "BootlogoSwapper V2.4 (بوت لوجو متعدد)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/BootLogoSwapper",
+      "icon": ""
+    },
+    {
+      "id": "spinners-0",
+      "section": "spinners",
+      "category": "Spinners",
+      "name": "Spinner-Circle",
+      "path": "/usr/share/enigma/spinnerr",
+      "icon": ""
+    },
+    {
+      "id": "spinners-1",
+      "section": "spinners",
+      "category": "Spinners",
+      "name": "Spinner-Barcelona",
+      "path": "/usr/share/enigma/spinnerr",
+      "icon": ""
+    },
+    {
+      "id": "spinners-2",
+      "section": "spinners",
+      "category": "Spinners",
+      "name": "Spinner-Bayern-Munich",
+      "path": "/usr/share/enigma/spinnerr",
+      "icon": ""
+    },
+    {
+      "id": "spinners-3",
+      "section": "spinners",
+      "category": "Spinners",
+      "name": "Spinner-Chelsea",
+      "path": "/usr/share/enigma/spinnerr",
+      "icon": ""
+    },
+    {
+      "id": "spinners-4",
+      "section": "spinners",
+      "category": "Spinners",
+      "name": "Spinner-Liverpool",
+      "path": "/usr/share/enigma/spinnerr",
+      "icon": ""
+    },
+    {
+      "id": "spinners-5",
+      "section": "spinners",
+      "category": "Spinners",
+      "name": "Spinner-MadMax",
+      "path": "/usr/share/enigma/spinnerr",
+      "icon": ""
+    },
+    {
+      "id": "spinners-6",
+      "section": "spinners",
+      "category": "Spinners",
+      "name": "Spinner-Pigeon",
+      "path": "/usr/share/enigma/spinnerr",
+      "icon": ""
+    },
+    {
+      "id": "spinners-7",
+      "section": "spinners",
+      "category": "Spinners",
+      "name": "Spinner-Pingu",
+      "path": "/usr/share/enigma/spinnerr",
+      "icon": ""
+    },
+    {
+      "id": "spinners-8",
+      "section": "spinners",
+      "category": "Spinners",
+      "name": "Spinner-TS",
+      "path": "/usr/share/enigma/spinnerr",
+      "icon": ""
+    },
+    {
+      "id": "spinners-9",
+      "section": "spinners",
+      "category": "Spinners",
+      "name": "Spinner-Revolution",
+      "path": "/usr/share/enigma/spinnerr",
+      "icon": ""
+    },
+    {
+      "id": "spinners-10",
+      "section": "spinners",
+      "category": "Spinners",
+      "name": "Spinner-Circle-Brown",
+      "path": "/usr/share/enigma/spinnerr",
+      "icon": ""
+    },
+    {
+      "id": "spinners-11",
+      "section": "spinners",
+      "category": "Spinners",
+      "name": "Spinner-Collar",
+      "path": "/usr/share/enigma/spinnerr",
+      "icon": ""
+    },
+    {
+      "id": "spinners-12",
+      "section": "spinners",
+      "category": "Spinners",
+      "name": "Spinner-Colored-Rings",
+      "path": "/usr/share/enigma/spinnerr",
+      "icon": ""
+    },
+    {
+      "id": "spinners-13",
+      "section": "spinners",
+      "category": "Spinners",
+      "name": "Spinner-Fan",
+      "path": "/usr/share/enigma/spinnerr",
+      "icon": ""
+    },
+    {
+      "id": "spinners-14",
+      "section": "spinners",
+      "category": "Spinners",
+      "name": "Spinner-kare-dugmeler",
+      "path": "/usr/share/enigma/spinnerr",
+      "icon": ""
+    },
+    {
+      "id": "spinners-15",
+      "section": "spinners",
+      "category": "Spinners",
+      "name": "Spinner-Kum-saati-kare",
+      "path": "/usr/share/enigma/spinnerr",
+      "icon": ""
+    },
+    {
+      "id": "spinners-16",
+      "section": "spinners",
+      "category": "Spinners",
+      "name": "Spinner-kupler",
+      "path": "/usr/share/enigma/spinnerr",
+      "icon": ""
+    },
+    {
+      "id": "spinners-17",
+      "section": "spinners",
+      "category": "Spinners",
+      "name": "Spinner-Number-Counter",
+      "path": "/usr/share/enigma/spinnerr",
+      "icon": ""
+    },
+    {
+      "id": "spinners-18",
+      "section": "spinners",
+      "category": "Spinners",
+      "name": "Spinner-Xdreamy",
+      "path": "/usr/share/enigma/spinnerr",
+      "icon": ""
+    },
+    {
+      "id": "spinners-19",
+      "section": "spinners",
+      "category": "Spinners",
+      "name": "Spinner-Renkli-donen-cemberler",
+      "path": "/usr/share/enigma/spinnerr",
+      "icon": ""
+    },
+    {
+      "id": "spinners-20",
+      "section": "spinners",
+      "category": "Spinners",
+      "name": "Spinner-Wheel",
+      "path": "/usr/share/enigma/spinnerr",
+      "icon": ""
+    },
+    {
+      "id": "spinners-21",
+      "section": "spinners",
+      "category": "Spinners",
+      "name": "Spinner-3d",
+      "path": "/usr/share/enigma/spinnerr",
+      "icon": ""
+    },
+    {
+      "id": "spinners-22",
+      "section": "spinners",
+      "category": "Spinners",
+      "name": "Spinner-Aglare",
+      "path": "/usr/share/enigma/spinnerr",
+      "icon": ""
+    },
+    {
+      "id": "spinners-23",
+      "section": "spinners",
+      "category": "Spinners",
+      "name": "Spinner-Dance",
+      "path": "/usr/share/enigma/spinnerr",
+      "icon": ""
+    },
+    {
+      "id": "spinners-24",
+      "section": "spinners",
+      "category": "Spinners",
+      "name": "Spinner-Dart",
+      "path": "/usr/share/enigma/spinnerr",
+      "icon": ""
+    },
+    {
+      "id": "spinners-25",
+      "section": "spinners",
+      "category": "Spinners",
+      "name": "Spinner-Echse",
+      "path": "/usr/share/enigma/spinnerr",
+      "icon": ""
+    },
+    {
+      "id": "spinners-26",
+      "section": "spinners",
+      "category": "Spinners",
+      "name": "Spinner-Girls",
+      "path": "/usr/share/enigma/spinnerr",
+      "icon": ""
+    },
+    {
+      "id": "spinners-27",
+      "section": "spinners",
+      "category": "Spinners",
+      "name": "Spinner-Girls-Dance",
+      "path": "/usr/share/enigma/spinnerr",
+      "icon": ""
+    },
+    {
+      "id": "spinners-28",
+      "section": "spinners",
+      "category": "Spinners",
+      "name": "Spinner-Jack-Sparrow",
+      "path": "/usr/share/enigma/spinnerr",
+      "icon": ""
+    },
+    {
+      "id": "spinners-29",
+      "section": "spinners",
+      "category": "Spinners",
+      "name": "Spinner-Nasht",
+      "path": "/usr/share/enigma/spinnerr",
+      "icon": ""
+    },
+    {
+      "id": "spinners-30",
+      "section": "spinners",
+      "category": "Spinners",
+      "name": "Spinner-PapaSchlumpf",
+      "path": "/usr/share/enigma/spinnerr",
+      "icon": ""
+    },
+    {
+      "id": "spinners-31",
+      "section": "spinners",
+      "category": "Spinners",
+      "name": "Spinner-presupaci-hodiny",
+      "path": "/usr/share/enigma/spinnerr",
+      "icon": ""
+    },
+    {
+      "id": "spinners-32",
+      "section": "spinners",
+      "category": "Spinners",
+      "name": "Spinner-Simba",
+      "path": "/usr/share/enigma/spinnerr",
+      "icon": ""
+    },
+    {
+      "id": "spinners-33",
+      "section": "spinners",
+      "category": "Spinners",
+      "name": "Spinner-SylvesterTweety",
+      "path": "/usr/share/enigma/spinnerr",
+      "icon": ""
+    },
+    {
+      "id": "spinners-34",
+      "section": "spinners",
+      "category": "Spinners",
+      "name": "Spinner-Vu+",
+      "path": "/usr/share/enigma/spinnerr",
+      "icon": ""
+    },
+    {
+      "id": "spinners-35",
+      "section": "spinners",
+      "category": "Spinners",
+      "name": "Spinner-Window",
+      "path": "/usr/share/enigma/spinnerr",
+      "icon": ""
+    },
+    {
+      "id": "tools-0",
+      "section": "tools",
+      "category": "Tools",
+      "name": "Wget (أداة تحميل مهمة)",
+      "path": "/usr/bin/wget",
+      "icon": ""
+    },
+    {
+      "id": "tools-1",
+      "section": "tools",
+      "category": "Tools",
+      "name": "Curl (أداة تحميل مهمة)",
+      "path": "/usr/bin/curl",
+      "icon": ""
+    },
+    {
+      "id": "tools-2",
+      "section": "tools",
+      "category": "Tools",
+      "name": "Update Enigma2 All Python (تحميل الحزم المهمة)",
+      "path": "/usr/bin/python3",
+      "icon": ""
+    },
+    {
+      "id": "tools-3",
+      "section": "tools",
+      "category": "Tools",
+      "name": "Opkg Tools_1.4 (حزمة مهمة للصورة)",
+      "path": "/usr/bin/opkg",
+      "icon": ""
+    },
+    {
+      "id": "tools-4",
+      "section": "tools",
+      "category": "Tools",
+      "name": "Opkg Tools_1.5 (حزمة مهمة للصورة)",
+      "path": "/usr/bin/opkg",
+      "icon": ""
+    },
+    {
+      "id": "tools-5",
+      "section": "tools",
+      "category": "Tools",
+      "name": "EPG-khaled (دليل للقنوات)",
+      "path": "/etc/epgimport/khaled.epg.sources.xml",
+      "icon": ""
+    },
+    {
+      "id": "tools-6",
+      "section": "tools",
+      "category": "Tools",
+      "name": "Free Server Cccam (سيرفرات cccam مجانية)",
+      "path": "/etc/free/CCcam.cfg",
+      "icon": ""
+    },
+    {
+      "id": "tools-7",
+      "section": "tools",
+      "category": "Tools",
+      "name": "arabic-language_for-egami-image (ملف تعريب للصورة)",
+      "path": "/usr/share/enigma2/po/ar/ar",
+      "icon": ""
+    },
+    {
+      "id": "tools-8",
+      "section": "tools",
+      "category": "Tools",
+      "name": "arabic-language_for-openatv-image (ملف تعريب للصورة)",
+      "path": "/usr/share/enigma2/po/ar/ar",
+      "icon": ""
+    },
+    {
+      "id": "tools-9",
+      "section": "tools",
+      "category": "Tools",
+      "name": "arabic-language_for-openbh-image (ملف تعريب للصورة)",
+      "path": "/usr/share/enigma2/po/ar/ar",
+      "icon": ""
+    },
+    {
+      "id": "tools-10",
+      "section": "tools",
+      "category": "Tools",
+      "name": "arabic-language_for-openhdf-image (ملف تعريب للصورة)",
+      "path": "/usr/share/enigma2/po/ar/ar",
+      "icon": ""
+    },
+    {
+      "id": "tools-11",
+      "section": "tools",
+      "category": "Tools",
+      "name": "arabic-language_for-openpli-image (ملف تعريب للصورة)",
+      "path": "/usr/share/enigma2/po/ar/ar",
+      "icon": ""
+    },
+    {
+      "id": "tools-12",
+      "section": "tools",
+      "category": "Tools",
+      "name": "arabic-language_for-openvix-image (ملف تعريب للصورة)",
+      "path": "/usr/share/enigma2/po/ar/ar",
+      "icon": ""
+    },
+    {
+      "id": "tools-13",
+      "section": "tools",
+      "category": "Tools",
+      "name": "Installer plugin from-tmp (تحميل البلجنات من tmp)",
+      "path": "/tmp/ipk",
+      "icon": ""
+    },
+    {
+      "id": "tools-14",
+      "section": "tools",
+      "category": "Tools",
+      "name": "Script package (تحميل حزمة السكريبتات)",
+      "path": "/usr/script/EMU-ncam.sh",
+      "icon": ""
+    },
+    {
+      "id": "tools-15",
+      "section": "tools",
+      "category": "Tools",
+      "name": "Super Script (تحديث الصورة وتحميل بلجنات مهمة)",
+      "path": "/usr/script/script/scrip",
+      "icon": ""
+    },
+    {
+      "id": "tools-16",
+      "section": "tools",
+      "category": "Tools",
+      "name": "Delete-password",
+      "path": "/etc/passwd/pass",
+      "icon": ""
+    },
+    {
+      "id": "tools-17",
+      "section": "tools",
+      "category": "Tools",
+      "name": "Change-Password-To-root",
+      "path": "/etc/passwd/pass",
+      "icon": ""
+    },
+    {
+      "id": "tools-18",
+      "section": "tools",
+      "category": "Tools",
+      "name": "CAM-abertis-astra-sm",
+      "path": "/etc/astra/astra.conf",
+      "icon": ""
+    },
+    {
+      "id": "tools-19",
+      "section": "tools",
+      "category": "Tools",
+      "name": "FORMAT_HDD_TO-Ext4",
+      "path": "/media/hdd/hdd/hd",
+      "icon": ""
+    },
+    {
+      "id": "tools-20",
+      "section": "tools",
+      "category": "Tools",
+      "name": "Repair-Inodes-From-Hdd",
+      "path": "/media/hdd/hdd/hd",
+      "icon": ""
+    },
+    {
+      "id": "tools-21",
+      "section": "tools",
+      "category": "Tools",
+      "name": "Fix-Time-Shift-Openatv",
+      "path": "/etc/opkg/time",
+      "icon": ""
+    },
+    {
+      "id": "tools-22",
+      "section": "tools",
+      "category": "Tools",
+      "name": "FIX-ipk-package-installation",
+      "path": "/usr/bin/opkg/fix",
+      "icon": ""
+    },
+    {
+      "id": "tools-23",
+      "section": "tools",
+      "category": "Tools",
+      "name": "Fix-Xtraevent-Download",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/XtraEvent/fix",
+      "icon": ""
+    },
+    {
+      "id": "tools-24",
+      "section": "tools",
+      "category": "Tools",
+      "name": "Fix Softcam Atv",
+      "path": "/etc/opkg/fix",
+      "icon": ""
+    },
+    {
+      "id": "tools-25",
+      "section": "tools",
+      "category": "Tools",
+      "name": "Fix Softcam OpenPli",
+      "path": "/etc/opkg/fix",
+      "icon": ""
+    },
+    {
+      "id": "tools-26",
+      "section": "tools",
+      "category": "Tools",
+      "name": "Picons-Convert2Snp",
+      "path": "/usr/share/enigma2/picons/picon",
+      "icon": ""
+    },
+    {
+      "id": "tools-27",
+      "section": "tools",
+      "category": "Tools",
+      "name": "Feed OpenPicons",
+      "path": "/etc/opkg/picons",
+      "icon": ""
+    },
+    {
+      "id": "tools-28",
+      "section": "tools",
+      "category": "Tools",
+      "name": "Remove-Cache",
+      "path": "/var/cache/opkg/cache",
+      "icon": ""
+    },
+    {
+      "id": "tools-29",
+      "section": "tools",
+      "category": "Tools",
+      "name": "Set_Time_NTP-Google",
+      "path": "/etc/timezone/times",
+      "icon": ""
+    },
+    {
+      "id": "tools-30",
+      "section": "tools",
+      "category": "Tools",
+      "name": "UpdateSatellitesOealliance",
+      "path": "/etc/tuxbox/satellites/satellites",
+      "icon": ""
+    },
+    {
+      "id": "tools-31",
+      "section": "tools",
+      "category": "Tools",
+      "name": "UpdateSatellitesOpenPli",
+      "path": "/etc/tuxbox/satellites/satellites",
+      "icon": ""
+    },
+    {
+      "id": "tools-32",
+      "section": "tools",
+      "category": "Tools",
+      "name": "DNS Google",
+      "path": "/etc/resolv/resolv.conf",
+      "icon": ""
+    },
+    {
+      "id": "tools-33",
+      "section": "tools",
+      "category": "Tools",
+      "name": "DNS Control",
+      "path": "/etc/resolv/resolv.conf",
+      "icon": ""
+    },
+    {
+      "id": "tools-34",
+      "section": "tools",
+      "category": "Tools",
+      "name": "DNS Cloudflare",
+      "path": "/etc/resolv/resolv.conf",
+      "icon": ""
+    },
+    {
+      "id": "tools-35",
+      "section": "tools",
+      "category": "Tools",
+      "name": "DNS CleanBrowsing",
+      "path": "/etc/resolv/resolv.conf",
+      "icon": ""
+    },
+    {
+      "id": "tools-36",
+      "section": "tools",
+      "category": "Tools",
+      "name": "DNS Quad9",
+      "path": "/etc/resolv/resolv.conf",
+      "icon": ""
+    },
+    {
+      "id": "tools-37",
+      "section": "tools",
+      "category": "Tools",
+      "name": "DNS Open-Home",
+      "path": "/etc/resolv/resolv.conf",
+      "icon": ""
+    },
+    {
+      "id": "tools-38",
+      "section": "tools",
+      "category": "Tools",
+      "name": "DNS Comodo",
+      "path": "/etc/resolv/resolv.conf",
+      "icon": ""
+    },
+    {
+      "id": "tools-39",
+      "section": "tools",
+      "category": "Tools",
+      "name": "DNS Alternate",
+      "path": "/etc/resolv/resolv.conf",
+      "icon": ""
+    },
+    {
+      "id": "tools-40",
+      "section": "tools",
+      "category": "Tools",
+      "name": "DNS AdGuard",
+      "path": "/etc/resolv/resolv.conf",
+      "icon": ""
+    },
+    {
+      "id": "tools-41",
+      "section": "tools",
+      "category": "Tools",
+      "name": "Zip2ipk",
+      "path": "/usr/script/zip",
+      "icon": ""
+    },
+    {
+      "id": "system-0",
+      "section": "system",
+      "category": "System",
+      "name": "AutomaticVolumeAdjustment-ALL Python",
+      "path": "/usr/lib/enigma2/python/Plugins/SystemPlugins/AutomaticVolumeAdjustment",
+      "icon": ""
+    },
+    {
+      "id": "system-1",
+      "section": "system",
+      "category": "System",
+      "name": "3gmodemmanager-ALL Python",
+      "path": "/usr/lib/enigma2/python/Plugins/SystemPlugins/3GModemManager",
+      "icon": ""
+    },
+    {
+      "id": "system-2",
+      "section": "system",
+      "category": "System",
+      "name": "Disk_and_CPU_Temperature",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/DiskAndCpuTemp",
+      "icon": ""
+    },
+    {
+      "id": "system-3",
+      "section": "system",
+      "category": "System",
+      "name": "devicemanager-All Python",
+      "path": "/usr/lib/enigma2/python/Plugins/SystemPlugins/DeviceManager",
+      "icon": ""
+    },
+    {
+      "id": "system-4",
+      "section": "system",
+      "category": "System",
+      "name": "extnumberzap",
+      "path": "/usr/lib/enigma2/python/Plugins/SystemPlugins/NumberZapExt",
+      "icon": ""
+    },
+    {
+      "id": "system-5",
+      "section": "system",
+      "category": "System",
+      "name": "mountmanager-All Python",
+      "path": "/usr/lib/enigma2/python/Plugins/SystemPlugins/MountManager",
+      "icon": ""
+    },
+    {
+      "id": "system-6",
+      "section": "system",
+      "category": "System",
+      "name": "Setpasswd-ALL Python",
+      "path": "/usr/lib/enigma2/python/Plugins/SystemPlugins/SetPasswd",
+      "icon": ""
+    },
+    {
+      "id": "system-7",
+      "section": "system",
+      "category": "System",
+      "name": "Signalfinder-ALL Python",
+      "path": "/usr/lib/enigma2/python/Plugins/SystemPlugins/SignalFinder",
+      "icon": ""
+    },
+    {
+      "id": "system-8",
+      "section": "system",
+      "category": "System",
+      "name": "SoftwareManager-ALL Python",
+      "path": "/usr/lib/enigma2/python/Plugins/SystemPlugins/SoftwareManager",
+      "icon": ""
+    },
+    {
+      "id": "system-9",
+      "section": "system",
+      "category": "System",
+      "name": "Ts-SatEditor-ALL Python",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/TsSatEditor",
+      "icon": ""
+    },
+    {
+      "id": "system-10",
+      "section": "system",
+      "category": "System",
+      "name": "Xmlupdate-ALL Python",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/XmlUpdate",
+      "icon": ""
+    },
+    {
+      "id": "media-0",
+      "section": "media",
+      "category": "Media",
+      "name": "ArabicPlayer (تشغيل ال iptv)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/ArabicPlayer",
+      "icon": ""
+    },
+    {
+      "id": "media-1",
+      "section": "media",
+      "category": "Media",
+      "name": "Alkuds-IpAudio (أضافة صوتيات علي قنوات السات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/Alkuds",
+      "icon": ""
+    },
+    {
+      "id": "media-2",
+      "section": "media",
+      "category": "Media",
+      "name": "AudioMerge (دمح صوتيات قناتين)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/AudioMerge",
+      "icon": ""
+    },
+    {
+      "id": "media-3",
+      "section": "media",
+      "category": "Media",
+      "name": "AudioShift (أضافة صوتيات علي قنوات السات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/AudioShift",
+      "icon": ""
+    },
+    {
+      "id": "media-4",
+      "section": "media",
+      "category": "Media",
+      "name": "AudioSelectionPatcher-By-M-Nasr (صوتيات فوكس مع تايم شفت)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/AudioSelectionPatcher",
+      "icon": ""
+    },
+    {
+      "id": "media-5",
+      "section": "media",
+      "category": "Media",
+      "name": "BouquetMakerXtream (تحويل iptv الي المفضلات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/BouquetMakerXtream",
+      "icon": ""
+    },
+    {
+      "id": "media-6",
+      "section": "media",
+      "category": "Media",
+      "name": "CustomIptvArchiveMakerpro (أضافة اشتراكات iptv)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/CustomIPTVArchiveMakerPro",
+      "icon": ""
+    },
+    {
+      "id": "media-7",
+      "section": "media",
+      "category": "Media",
+      "name": "E2-Tube (يوتيوب)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/E2Tube",
+      "icon": ""
+    },
+    {
+      "id": "media-8",
+      "section": "media",
+      "category": "Media",
+      "name": "E2m3ubouquet (تحويل iptv m3u الي المفضلات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/E2m3u2bouquet",
+      "icon": ""
+    },
+    {
+      "id": "media-9",
+      "section": "media",
+      "category": "Media",
+      "name": "E2Player-Angel_Heart (برنامج مشاهدة)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer",
+      "icon": ""
+    },
+    {
+      "id": "media-10",
+      "section": "media",
+      "category": "Media",
+      "name": "E2IplayerUpdater-Angel_Heart (تحديث السبرفرات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/E2iPlayerUpdater",
+      "icon": ""
+    },
+    {
+      "id": "media-11",
+      "section": "media",
+      "category": "Media",
+      "name": "E2Player-Biko (برنامج مشاهدة)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer",
+      "icon": ""
+    },
+    {
+      "id": "media-12",
+      "section": "media",
+      "category": "Media",
+      "name": "E2Player-MAXBAMBY (برنامج مشاهدة)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer",
+      "icon": ""
+    },
+    {
+      "id": "media-13",
+      "section": "media",
+      "category": "Media",
+      "name": "E2Player-ZADMARIO (برنامج مشاهدة)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer",
+      "icon": ""
+    },
+    {
+      "id": "media-14",
+      "section": "media",
+      "category": "Media",
+      "name": "Estalker (مشغل بورتلات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/EStalker",
+      "icon": ""
+    },
+    {
+      "id": "media-15",
+      "section": "media",
+      "category": "Media",
+      "name": "EstalkerWebControl (التحكم في اضافة بورتلات والحذف)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/EStalkerWebControl",
+      "icon": ""
+    },
+    {
+      "id": "media-16",
+      "section": "media",
+      "category": "Media",
+      "name": "Filmxy",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/filmxy",
+      "icon": ""
+    },
+    {
+      "id": "media-17",
+      "section": "media",
+      "category": "Media",
+      "name": "Freearhey",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/freearhey",
+      "icon": ""
+    },
+    {
+      "id": "media-18",
+      "section": "media",
+      "category": "Media",
+      "name": "GT IPTV Player Pro (مشغل اكستريم iptv و بورتلات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/GTIPTVPlayerPro",
+      "icon": ""
+    },
+    {
+      "id": "media-19",
+      "section": "media",
+      "category": "Media",
+      "name": "HasBahCa (iptv مجاني)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/HasBahCa",
+      "icon": ""
+    },
+    {
+      "id": "media-20",
+      "section": "media",
+      "category": "Media",
+      "name": "Ip2sat-By-Mosaad (مشاهدة iptv علي قنوات السات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/IP2SAT",
+      "icon": ""
+    },
+    {
+      "id": "media-21",
+      "section": "media",
+      "category": "Media",
+      "name": "IpAudio 6.7 (py2) (مشغل صوتيات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/IPAudio",
+      "icon": ""
+    },
+    {
+      "id": "media-22",
+      "section": "media",
+      "category": "Media",
+      "name": "IpAudio 7.4 (py3) (مشغل صوتيات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/IPAudio",
+      "icon": ""
+    },
+    {
+      "id": "media-23",
+      "section": "media",
+      "category": "Media",
+      "name": "IpAudio 8.02 By-M-Nasr (All python) ( مشغل صوتيات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/IPAudio",
+      "icon": ""
+    },
+    {
+      "id": "media-24",
+      "section": "media",
+      "category": "Media",
+      "name": "IpAudio By-M-Nasr (Py3) (مشغل صوتيات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/IPAudio",
+      "icon": ""
+    },
+    {
+      "id": "media-25",
+      "section": "media",
+      "category": "Media",
+      "name": "IpAudioPro_1.5 (مشغل صوتيات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/IPaudioPro",
+      "icon": ""
+    },
+    {
+      "id": "media-26",
+      "section": "media",
+      "category": "Media",
+      "name": "IpAudioPro Latest Version (مشغل صوتيات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/IPaudioPro",
+      "icon": ""
+    },
+    {
+      "id": "media-27",
+      "section": "media",
+      "category": "Media",
+      "name": "IpStreamer By-M-Nasr (Py3) (مشغل صوتيات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/IPStreamer",
+      "icon": ""
+    },
+    {
+      "id": "media-28",
+      "section": "media",
+      "category": "Media",
+      "name": "Iptosat_v1.8 (مشاهدة iptv علي قنوات السات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/IPtoSAT",
+      "icon": ""
+    },
+    {
+      "id": "media-29",
+      "section": "media",
+      "category": "Media",
+      "name": "Iptosat_v1.9-Modded-by-Emil (مشاهدة iptv علي قنوات السات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/IPtoSAT",
+      "icon": ""
+    },
+    {
+      "id": "media-30",
+      "section": "media",
+      "category": "Media",
+      "name": "Iptv-Org-Playlists",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/iptv-org-playlists",
+      "icon": ""
+    },
+    {
+      "id": "media-31",
+      "section": "media",
+      "category": "Media",
+      "name": "iptvdream (مشغل m3u)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/iptvdream",
+      "icon": ""
+    },
+    {
+      "id": "media-32",
+      "section": "media",
+      "category": "Media",
+      "name": "IptvPlayer (مشغل ،iptv)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer",
+      "icon": ""
+    },
+    {
+      "id": "media-33",
+      "section": "media",
+      "category": "Media",
+      "name": "JediEpgExtream (نقل الدليل الي ال iptv)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/JediEPGXtream",
+      "icon": ""
+    },
+    {
+      "id": "media-34",
+      "section": "media",
+      "category": "Media",
+      "name": "jedimakerxtream (تحويل ال iptv الي مفضلات السات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream",
+      "icon": ""
+    },
+    {
+      "id": "media-35",
+      "section": "media",
+      "category": "Media",
+      "name": "m3uconverter (تحويل m3u الي مفضلات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/M3UConverter",
+      "icon": ""
+    },
+    {
+      "id": "media-36",
+      "section": "media",
+      "category": "Media",
+      "name": "Moviebrowser",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/MovieBrowser",
+      "icon": ""
+    },
+    {
+      "id": "media-37",
+      "section": "media",
+      "category": "Media",
+      "name": "MoviesManager (مدير افلام)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/MoviesManager",
+      "icon": ""
+    },
+    {
+      "id": "media-38",
+      "section": "media",
+      "category": "Media",
+      "name": "MultiStalkerPro (مشغل بورتلات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/MultiStalkerPro",
+      "icon": ""
+    },
+    {
+      "id": "media-39",
+      "section": "media",
+      "category": "Media",
+      "name": "multistalker (مشغل بورتلات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/MultiStalker",
+      "icon": ""
+    },
+    {
+      "id": "media-40",
+      "section": "media",
+      "category": "Media",
+      "name": "MyStreamer (برنامج مشاهدة اونلاين)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/MyStreamer",
+      "icon": ""
+    },
+    {
+      "id": "media-41",
+      "section": "media",
+      "category": "Media",
+      "name": "MyHits-By-M-Nasr (مشغل اغاني)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/MyHits",
+      "icon": ""
+    },
+    {
+      "id": "media-42",
+      "section": "media",
+      "category": "Media",
+      "name": "OrangeAudioPlugin-By-M-Nasr (اضافة صوتيات اورانج و فاميلي)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/OrangeAudio",
+      "icon": ""
+    },
+    {
+      "id": "media-43",
+      "section": "media",
+      "category": "Media",
+      "name": "Plutotv",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/PlutoTV",
+      "icon": ""
+    },
+    {
+      "id": "media-44",
+      "section": "media",
+      "category": "Media",
+      "name": "Quarter pounder (تنشيط قنوات ال iptv)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/QuarterPounder",
+      "icon": ""
+    },
+    {
+      "id": "media-45",
+      "section": "media",
+      "category": "Media",
+      "name": "Radio-80-s (راديو)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/RadioM",
+      "icon": ""
+    },
+    {
+      "id": "media-46",
+      "section": "media",
+      "category": "Media",
+      "name": "Radio-Stream-Relay (راديو و استريم)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/radiorelay",
+      "icon": ""
+    },
+    {
+      "id": "media-47",
+      "section": "media",
+      "category": "Media",
+      "name": "RadioGit (ستريم محطات راديو)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/RadioGit",
+      "icon": ""
+    },
+    {
+      "id": "media-48",
+      "section": "media",
+      "category": "Media",
+      "name": "Radiom (ستريم محطات راديو)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/RadioM",
+      "icon": ""
+    },
+    {
+      "id": "media-49",
+      "section": "media",
+      "category": "Media",
+      "name": "Rakutentv",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/RakutenTV",
+      "icon": ""
+    },
+    {
+      "id": "media-50",
+      "section": "media",
+      "category": "Media",
+      "name": "SamsungTvPlus (iptv مجاني)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/SamsungTVPlus",
+      "icon": ""
+    },
+    {
+      "id": "media-51",
+      "section": "media",
+      "category": "Media",
+      "name": "ScSearch (مشاهدة الافلام)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/scsearch",
+      "icon": ""
+    },
+    {
+      "id": "media-52",
+      "section": "media",
+      "category": "Media",
+      "name": "StalkerPortalConverter (تحويل بورتلات لمفضلات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/StalkerPortalConverter",
+      "icon": ""
+    },
+    {
+      "id": "media-53",
+      "section": "media",
+      "category": "Media",
+      "name": "Suptv",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/suptv",
+      "icon": ""
+    },
+    {
+      "id": "media-54",
+      "section": "media",
+      "category": "Media",
+      "name": "Timeshift Delay (تايم شفت)",
+      "path": "/etc/enigma2/time",
+      "icon": ""
+    },
+    {
+      "id": "media-55",
+      "section": "media",
+      "category": "Media",
+      "name": "TiviMateE2 (مشغل اشتراكات iptv)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/TiviMateE2",
+      "icon": ""
+    },
+    {
+      "id": "media-56",
+      "section": "media",
+      "category": "Media",
+      "name": "Transmission_E2 (iptv مجاني)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/Transmission",
+      "icon": ""
+    },
+    {
+      "id": "media-57",
+      "section": "media",
+      "category": "Media",
+      "name": "TvDream",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/tvDream",
+      "icon": ""
+    },
+    {
+      "id": "media-58",
+      "section": "media",
+      "category": "Media",
+      "name": "TvGarden (iptv مجاني)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/TVGarden",
+      "icon": ""
+    },
+    {
+      "id": "media-59",
+      "section": "media",
+      "category": "Media",
+      "name": "TvParsa",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/parsatv",
+      "icon": ""
+    },
+    {
+      "id": "media-60",
+      "section": "media",
+      "category": "Media",
+      "name": "TvRaiPreview",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/RaiPlay",
+      "icon": ""
+    },
+    {
+      "id": "media-61",
+      "section": "media",
+      "category": "Media",
+      "name": "vavoo",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/vavoo",
+      "icon": ""
+    },
+    {
+      "id": "media-62",
+      "section": "media",
+      "category": "Media",
+      "name": "Xc_Plugin_Forever (مشغل iptv)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/XCplugin",
+      "icon": ""
+    },
+    {
+      "id": "media-63",
+      "section": "media",
+      "category": "Media",
+      "name": "Xklass-iptv (مشغل iptv)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/XKlass",
+      "icon": ""
+    },
+    {
+      "id": "media-64",
+      "section": "media",
+      "category": "Media",
+      "name": "XPortal (مشغل iptv)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/XPortal",
+      "icon": ""
+    },
+    {
+      "id": "media-65",
+      "section": "media",
+      "category": "Media",
+      "name": "Xstreamity (مشغل iptv)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/XStreamity",
+      "icon": ""
+    },
+    {
+      "id": "media-66",
+      "section": "media",
+      "category": "Media",
+      "name": "XtreamNew (مشغل اكستريم iptv و بورتلات)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/XtreamNew",
+      "icon": ""
+    },
+    {
+      "id": "media-67",
+      "section": "media",
+      "category": "Media",
+      "name": "Xtream2Audio-By-Emil (أضافة صوتيات من iptv)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/Xtream2Audio",
+      "icon": ""
+    },
+    {
+      "id": "media-68",
+      "section": "media",
+      "category": "Media",
+      "name": "Youtube (مشاهدة اليوتيوب)",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/YouTube",
+      "icon": ""
+    },
+    {
+      "id": "multiboot-0",
+      "section": "multiboot",
+      "category": "Multiboot",
+      "name": "EgamiBoot 10.5",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/EgamiBoot",
+      "icon": ""
+    },
+    {
+      "id": "multiboot-1",
+      "section": "multiboot",
+      "category": "Multiboot",
+      "name": "EgamiBoot 10.6",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/EgamiBoot",
+      "icon": ""
+    },
+    {
+      "id": "multiboot-2",
+      "section": "multiboot",
+      "category": "Multiboot",
+      "name": "Neoboot 9.65 VIP",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/NeoBoot",
+      "icon": ""
+    },
+    {
+      "id": "multiboot-3",
+      "section": "multiboot",
+      "category": "Multiboot",
+      "name": "Neoboot 9.65 Mod-ElSafty VIP",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/NeoBoot",
+      "icon": ""
+    },
+    {
+      "id": "multiboot-4",
+      "section": "multiboot",
+      "category": "Multiboot",
+      "name": "Neoboot 9.60 VIP",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/NeoBoot",
+      "icon": ""
+    },
+    {
+      "id": "multiboot-5",
+      "section": "multiboot",
+      "category": "Multiboot",
+      "name": "Neoboot 9.58 VIP",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/NeoBoot",
+      "icon": ""
+    },
+    {
+      "id": "multiboot-6",
+      "section": "multiboot",
+      "category": "Multiboot",
+      "name": "Neoboot 9.54 VIP",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/NeoBoot",
+      "icon": ""
+    },
+    {
+      "id": "multiboot-7",
+      "section": "multiboot",
+      "category": "Multiboot",
+      "name": "OpenMultiboot 1.3",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/OpenMultiboot",
+      "icon": ""
+    },
+    {
+      "id": "multiboot-8",
+      "section": "multiboot",
+      "category": "Multiboot",
+      "name": "OpenMultiboot-E2turk",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/OpenMultiboot",
+      "icon": ""
+    },
+    {
+      "id": "multiboot-9",
+      "section": "multiboot",
+      "category": "Multiboot",
+      "name": "Multiboot-FlashOnline",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/MultibootFlashOnline",
+      "icon": ""
+    },
+    {
+      "id": "softcams-0",
+      "section": "softcams",
+      "category": "Softcams",
+      "name": "Cccam",
+      "path": "/usr/bin/CCcamm",
+      "icon": ""
+    },
+    {
+      "id": "softcams-1",
+      "section": "softcams",
+      "category": "Softcams",
+      "name": "gosatplus-ncam",
+      "path": "/usr/bin/goncam",
+      "icon": ""
+    },
+    {
+      "id": "softcams-2",
+      "section": "softcams",
+      "category": "Softcams",
+      "name": "gosatplus-oscam",
+      "path": "/usr/bin/gooscam",
+      "icon": ""
+    },
+    {
+      "id": "softcams-3",
+      "section": "softcams",
+      "category": "Softcams",
+      "name": "gosatplus_v3_arm",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/Gosatplus",
+      "icon": ""
+    },
+    {
+      "id": "softcams-4",
+      "section": "softcams",
+      "category": "Softcams",
+      "name": "gosatplus_v3_mips",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/Gosatplus",
+      "icon": ""
+    },
+    {
+      "id": "softcams-5",
+      "section": "softcams",
+      "category": "Softcams",
+      "name": "gosatplus_v3_Fix",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/Gosatplus",
+      "icon": ""
+    },
+    {
+      "id": "softcams-6",
+      "section": "softcams",
+      "category": "Softcams",
+      "name": "Hold-flag-ncam",
+      "path": "/usr/bin/ncamm",
+      "icon": ""
+    },
+    {
+      "id": "softcams-7",
+      "section": "softcams",
+      "category": "Softcams",
+      "name": "Hold-flag-Oscam",
+      "path": "/usr/bin/oscamm",
+      "icon": ""
+    },
+    {
+      "id": "softcams-8",
+      "section": "softcams",
+      "category": "Softcams",
+      "name": "Ncam_v15.7",
+      "path": "/usr/bin/ncamm",
+      "icon": ""
+    },
+    {
+      "id": "softcams-9",
+      "section": "softcams",
+      "category": "Softcams",
+      "name": "Ncam_v15.8",
+      "path": "/usr/bin/ncamm",
+      "icon": ""
+    },
+    {
+      "id": "softcams-10",
+      "section": "softcams",
+      "category": "Softcams",
+      "name": "Oscam_By-Mohamed-Os",
+      "path": "/usr/bin/oscamm",
+      "icon": ""
+    },
+    {
+      "id": "softcams-11",
+      "section": "softcams",
+      "category": "Softcams",
+      "name": "Oscam-11.726-By-lenuxsat",
+      "path": "/usr/bin/oscamm",
+      "icon": ""
+    },
+    {
+      "id": "softcams-12",
+      "section": "softcams",
+      "category": "Softcams",
+      "name": "Oscam By Levi45",
+      "path": "/usr/bin/oscamm",
+      "icon": ""
+    },
+    {
+      "id": "softcams-13",
+      "section": "softcams",
+      "category": "Softcams",
+      "name": "oscamicam",
+      "path": "/usr/bin/oscamicamm",
+      "icon": ""
+    },
+    {
+      "id": "softcams-14",
+      "section": "softcams",
+      "category": "Softcams",
+      "name": "powercam_v2-icam-arm",
+      "path": "/usr/bin/powercamm",
+      "icon": ""
+    },
+    {
+      "id": "softcams-15",
+      "section": "softcams",
+      "category": "Softcams",
+      "name": "powercam-Ncam",
+      "path": "/usr/bin/powercamm",
+      "icon": ""
+    },
+    {
+      "id": "softcams-16",
+      "section": "softcams",
+      "category": "Softcams",
+      "name": "powercam-Oscam",
+      "path": "/usr/bin/powercamm",
+      "icon": ""
+    },
+    {
+      "id": "softcams-17",
+      "section": "softcams",
+      "category": "Softcams",
+      "name": "Restore-flag-ncam",
+      "path": "/usr/bin/ncamm",
+      "icon": ""
+    },
+    {
+      "id": "softcams-18",
+      "section": "softcams",
+      "category": "Softcams",
+      "name": "Restore-flag-oscam",
+      "path": "/usr/bin/oscamm",
+      "icon": ""
+    },
+    {
+      "id": "softcams-19",
+      "section": "softcams",
+      "category": "Softcams",
+      "name": "Revcam-Ncam",
+      "path": "/usr/bin/revcamm",
+      "icon": ""
+    },
+    {
+      "id": "softcams-20",
+      "section": "softcams",
+      "category": "Softcams",
+      "name": "Revcam-Oscam",
+      "path": "/usr/bin/revcamm",
+      "icon": ""
+    },
+    {
+      "id": "softcams-21",
+      "section": "softcams",
+      "category": "Softcams",
+      "name": "Revcam",
+      "path": "/usr/bin/revcamm",
+      "icon": ""
+    },
+    {
+      "id": "softcams-22",
+      "section": "softcams",
+      "category": "Softcams",
+      "name": "Supcam-Ncam",
+      "path": "/usr/bin/supcamm",
+      "icon": ""
+    },
+    {
+      "id": "softcams-23",
+      "section": "softcams",
+      "category": "Softcams",
+      "name": "Supcam-Oscam",
+      "path": "/usr/bin/supcamm",
+      "icon": ""
+    },
+    {
+      "id": "softcams-24",
+      "section": "softcams",
+      "category": "Softcams",
+      "name": "Ultracam-Ncam",
+      "path": "/usr/bin/ultracamm",
+      "icon": ""
+    },
+    {
+      "id": "softcams-25",
+      "section": "softcams",
+      "category": "Softcams",
+      "name": "Ultracam-Oscam",
+      "path": "/usr/bin/ultracamm",
+      "icon": ""
+    },
+    {
+      "id": "softcams-26",
+      "section": "softcams",
+      "category": "Softcams",
+      "name": "Ultracam",
+      "path": "/usr/bin/ultracamm",
+      "icon": ""
+    },
+    {
+      "id": "backup-0",
+      "section": "backup",
+      "category": "Backup",
+      "name": "Backup-my-Channels",
+      "path": "/media/hdd/backup/backup",
+      "icon": ""
+    },
+    {
+      "id": "backup-1",
+      "section": "backup",
+      "category": "Backup",
+      "name": "Full-Backup-Image",
+      "path": "/media/hdd/backup/backup",
+      "icon": ""
+    },
+    {
+      "id": "backup-2",
+      "section": "backup",
+      "category": "Backup",
+      "name": "Backup-hotkey",
+      "path": "/media/hdd/backup/backup",
+      "icon": ""
+    },
+    {
+      "id": "backup-3",
+      "section": "backup",
+      "category": "Backup",
+      "name": "Backup-network",
+      "path": "/media/hdd/backup/backup",
+      "icon": ""
+    },
+    {
+      "id": "backup-4",
+      "section": "backup",
+      "category": "Backup",
+      "name": "Backup-softcams",
+      "path": "/media/hdd/backup/backup",
+      "icon": ""
+    },
+    {
+      "id": "backup-5",
+      "section": "backup",
+      "category": "Backup",
+      "name": "Backup-tuner",
+      "path": "/media/hdd/backup/backup",
+      "icon": ""
+    },
+    {
+      "id": "backup-6",
+      "section": "backup",
+      "category": "Backup",
+      "name": "Backup-my-bouquetmakerxtream",
+      "path": "/media/hdd/backup/backup",
+      "icon": ""
+    },
+    {
+      "id": "backup-7",
+      "section": "backup",
+      "category": "Backup",
+      "name": "Backup-my-ip2sat-server",
+      "path": "/media/hdd/backup/backup",
+      "icon": ""
+    },
+    {
+      "id": "backup-8",
+      "section": "backup",
+      "category": "Backup",
+      "name": "Backup-my-ipaudio-server",
+      "path": "/media/hdd/backup/backup",
+      "icon": ""
+    },
+    {
+      "id": "backup-9",
+      "section": "backup",
+      "category": "Backup",
+      "name": "Backup-my-ipaudiopro-server",
+      "path": "/media/hdd/backup/backup",
+      "icon": ""
+    },
+    {
+      "id": "backup-10",
+      "section": "backup",
+      "category": "Backup",
+      "name": "Backup-my-jediplaylists",
+      "path": "/media/hdd/backup/backup",
+      "icon": ""
+    },
+    {
+      "id": "backup-11",
+      "section": "backup",
+      "category": "Backup",
+      "name": "Backup-my-multistalkerpro",
+      "path": "/media/hdd/backup/backup",
+      "icon": ""
+    },
+    {
+      "id": "backup-12",
+      "section": "backup",
+      "category": "Backup",
+      "name": "Backup-my-Subtitle-Setting",
+      "path": "/media/hdd/backup/backup",
+      "icon": ""
+    },
+    {
+      "id": "backup-13",
+      "section": "backup",
+      "category": "Backup",
+      "name": "Backup-my-xstreamity-servers",
+      "path": "/media/hdd/backup/backup",
+      "icon": ""
+    },
+    {
+      "id": "backup-14",
+      "section": "backup",
+      "category": "Backup",
+      "name": "Backup-sittings-xtraevent",
+      "path": "/media/hdd/backup/backup",
+      "icon": ""
+    },
+    {
+      "id": "restore-0",
+      "section": "restore",
+      "category": "Restore",
+      "name": "Restore-my-Channels",
+      "path": "/etc/enigma2/backup/backup",
+      "icon": ""
+    },
+    {
+      "id": "restore-1",
+      "section": "restore",
+      "category": "Restore",
+      "name": "Restore-hotkey",
+      "path": "/etc/enigma2/backup/backup",
+      "icon": ""
+    },
+    {
+      "id": "restore-2",
+      "section": "restore",
+      "category": "Restore",
+      "name": "Restore-network",
+      "path": "/etc/enigma2/backup/backup",
+      "icon": ""
+    },
+    {
+      "id": "restore-3",
+      "section": "restore",
+      "category": "Restore",
+      "name": "Restore-softcams",
+      "path": "/etc/enigma2/backup/backup",
+      "icon": ""
+    },
+    {
+      "id": "restore-4",
+      "section": "restore",
+      "category": "Restore",
+      "name": "Restore-tuner",
+      "path": "/etc/enigma2/backup/backup",
+      "icon": ""
+    },
+    {
+      "id": "restore-5",
+      "section": "restore",
+      "category": "Restore",
+      "name": "Restore-my-bouquetmakerxtream",
+      "path": "/etc/enigma2/backup/backup",
+      "icon": ""
+    },
+    {
+      "id": "restore-6",
+      "section": "restore",
+      "category": "Restore",
+      "name": "Restore-my-ip2sat-server",
+      "path": "/etc/enigma2/backup/backup",
+      "icon": ""
+    },
+    {
+      "id": "restore-7",
+      "section": "restore",
+      "category": "Restore",
+      "name": "Restore-my-ipaudio-server",
+      "path": "/etc/enigma2/backup/backup",
+      "icon": ""
+    },
+    {
+      "id": "restore-8",
+      "section": "restore",
+      "category": "Restore",
+      "name": "Restore-my-ipaudiopro-server",
+      "path": "/etc/enigma2/backup/backup",
+      "icon": ""
+    },
+    {
+      "id": "restore-9",
+      "section": "restore",
+      "category": "Restore",
+      "name": "Restore-my-jediplaylists",
+      "path": "/etc/enigma2/backup/backup",
+      "icon": ""
+    },
+    {
+      "id": "restore-10",
+      "section": "restore",
+      "category": "Restore",
+      "name": "Restore-my-multistalkerpro",
+      "path": "/etc/enigma2/backup/backup",
+      "icon": ""
+    },
+    {
+      "id": "restore-11",
+      "section": "restore",
+      "category": "Restore",
+      "name": "Restore-My-Subtitle-Setting",
+      "path": "/etc/enigma2/backup/backup",
+      "icon": ""
+    },
+    {
+      "id": "restore-12",
+      "section": "restore",
+      "category": "Restore",
+      "name": "Restore-my-xstreamity-servers",
+      "path": "/etc/enigma2/backup/backup",
+      "icon": ""
+    },
+    {
+      "id": "restore-13",
+      "section": "restore",
+      "category": "Restore",
+      "name": "Restore-sittings-xtraevent",
+      "path": "/etc/enigma2/backup/backup",
+      "icon": ""
+    },
+    {
+      "id": "skins-0",
+      "section": "skins",
+      "category": "Skins",
+      "name": "عنصر بدون اسم",
+      "path": "",
+      "icon": "openatv.png"
+    },
+    {
+      "id": "skins-1",
+      "section": "skins",
+      "category": "Skins",
+      "name": "عنصر بدون اسم",
+      "path": "",
+      "icon": "teamnitro.png"
+    },
+    {
+      "id": "skins-2",
+      "section": "skins",
+      "category": "Skins",
+      "name": "عنصر بدون اسم",
+      "path": "",
+      "icon": "openbh.png"
+    },
+    {
+      "id": "skins-3",
+      "section": "skins",
+      "category": "Skins",
+      "name": "عنصر بدون اسم",
+      "path": "",
+      "icon": "egami.png"
+    },
+    {
+      "id": "skins-4",
+      "section": "skins",
+      "category": "Skins",
+      "name": "عنصر بدون اسم",
+      "path": "",
+      "icon": "openpli.png"
+    },
+    {
+      "id": "skins-5",
+      "section": "skins",
+      "category": "Skins",
+      "name": "عنصر بدون اسم",
+      "path": "",
+      "icon": "openspa.png"
+    },
+    {
+      "id": "skins-6",
+      "section": "skins",
+      "category": "Skins",
+      "name": "عنصر بدون اسم",
+      "path": "",
+      "icon": "openvix.png"
+    },
+    {
+      "id": "skins-7",
+      "section": "skins",
+      "category": "Skins",
+      "name": "عنصر بدون اسم",
+      "path": "",
+      "icon": "openpli.png"
+    },
+    {
+      "id": "skins-8",
+      "section": "skins",
+      "category": "Skins",
+      "name": "عنصر بدون اسم",
+      "path": "",
+      "icon": "pure2.png"
+    },
+    {
+      "id": "skins-9",
+      "section": "skins",
+      "category": "Skins",
+      "name": "عنصر بدون اسم",
+      "path": "",
+      "icon": "display.png"
+    },
+    {
+      "id": "skins-10",
+      "section": "skins",
+      "category": "Skins",
+      "name": "عنصر بدون اسم",
+      "path": "",
+      "icon": "xstreamity.png"
+    },
+    {
+      "id": "openatv_skins-0",
+      "section": "openatv_skins",
+      "category": "openatv skins",
+      "name": "Aglare-FHD",
+      "path": "/usr/share/enigma2/Aglare-FHD",
+      "icon": ""
+    },
+    {
+      "id": "openatv_skins-1",
+      "section": "openatv_skins",
+      "category": "openatv skins",
+      "name": "Areadeltasat_fhd",
+      "path": "/usr/share/enigma2/AreaDeltasSat_FHD_Full",
+      "icon": ""
+    },
+    {
+      "id": "openatv_skins-2",
+      "section": "openatv_skins",
+      "category": "openatv skins",
+      "name": "Barby-Black-py3-FHD",
+      "path": "/usr/share/enigma2/Barby-Black",
+      "icon": ""
+    },
+    {
+      "id": "openatv_skins-3",
+      "section": "openatv_skins",
+      "category": "openatv skins",
+      "name": "Barby-Green-py3-FHD",
+      "path": "/usr/share/enigma2/Barby-Green",
+      "icon": ""
+    },
+    {
+      "id": "openatv_skins-4",
+      "section": "openatv_skins",
+      "category": "openatv skins",
+      "name": "Barby-purple-py3-FHD",
+      "path": "/usr/share/enigma2/Barby-purple",
+      "icon": ""
+    },
+    {
+      "id": "openatv_skins-5",
+      "section": "openatv_skins",
+      "category": "openatv skins",
+      "name": "Barby-py3-FHD",
+      "path": "/usr/share/enigma2/Barby",
+      "icon": ""
+    },
+    {
+      "id": "openatv_skins-6",
+      "section": "openatv_skins",
+      "category": "openatv skins",
+      "name": "BLACKNEON-XP-FHD-V2_ArabicDiscription",
+      "path": "/usr/share/enigma2/BLACKNEON-XP-FHD",
+      "icon": ""
+    },
+    {
+      "id": "openatv_skins-7",
+      "section": "openatv_skins",
+      "category": "openatv skins",
+      "name": "CineView-FHD",
+      "path": "/usr/share/enigma2/CineView_FHD_MLA",
+      "icon": ""
+    },
+    {
+      "id": "openatv_skins-8",
+      "section": "openatv_skins",
+      "category": "openatv skins",
+      "name": "Fury-FHD",
+      "path": "/usr/share/enigma2/Fury-FHD",
+      "icon": ""
+    },
+    {
+      "id": "openatv_skins-9",
+      "section": "openatv_skins",
+      "category": "openatv skins",
+      "name": "Gradient-fhd",
+      "path": "/usr/share/enigma2/GradientFHD",
+      "icon": ""
+    },
+    {
+      "id": "openatv_skins-10",
+      "section": "openatv_skins",
+      "category": "openatv skins",
+      "name": "Maxy-FHD",
+      "path": "/usr/share/enigma2/Maxy-FHD",
+      "icon": ""
+    },
+    {
+      "id": "openatv_skins-11",
+      "section": "openatv_skins",
+      "category": "openatv skins",
+      "name": "Mohammed Skin",
+      "path": "/usr/share/enigma2/MohammedSkin",
+      "icon": ""
+    },
+    {
+      "id": "openatv_skins-12",
+      "section": "openatv_skins",
+      "category": "openatv skins",
+      "name": "Full HD Glass17",
+      "path": "/usr/share/enigma2/hd_glass17",
+      "icon": ""
+    },
+    {
+      "id": "openatv_skins-13",
+      "section": "openatv_skins",
+      "category": "openatv skins",
+      "name": "MyMetrixLiteBackup",
+      "path": "/etc/enigma2/MyMetrixLiteBackup.dat",
+      "icon": ""
+    },
+    {
+      "id": "openatv_skins-14",
+      "section": "openatv_skins",
+      "category": "openatv skins",
+      "name": "MetrixFHD-Extraevent-PosterXD",
+      "path": "/usr/share/enigma2/MetrixHD/border",
+      "icon": ""
+    },
+    {
+      "id": "openatv_skins-15",
+      "section": "openatv_skins",
+      "category": "openatv skins",
+      "name": "MetrixPoster-By_MNASR",
+      "path": "/usr/share/enigma2/MetrixHD/border",
+      "icon": ""
+    },
+    {
+      "id": "openatv_skins-16",
+      "section": "openatv_skins",
+      "category": "openatv skins",
+      "name": "malek-fhd",
+      "path": "/usr/share/enigma2/Malek-FHD",
+      "icon": ""
+    },
+    {
+      "id": "openatv_skins-17",
+      "section": "openatv_skins",
+      "category": "openatv skins",
+      "name": "Nacht_1.7.3",
+      "path": "/usr/share/enigma2/Nacht",
+      "icon": ""
+    },
+    {
+      "id": "openatv_skins-18",
+      "section": "openatv_skins",
+      "category": "openatv skins",
+      "name": "Nacht_7.1",
+      "path": "/usr/share/enigma2/Nacht",
+      "icon": ""
+    },
+    {
+      "id": "openatv_skins-19",
+      "section": "openatv_skins",
+      "category": "openatv skins",
+      "name": "Op-Artkoala-FHD",
+      "path": "/usr/share/enigma2/OP-ARTKOALA",
+      "icon": ""
+    },
+    {
+      "id": "openatv_skins-20",
+      "section": "openatv_skins",
+      "category": "openatv skins",
+      "name": "Ozeta-Xtra",
+      "path": "/usr/share/enigma2/oZeta-FHD",
+      "icon": ""
+    },
+    {
+      "id": "openatv_skins-21",
+      "section": "openatv_skins",
+      "category": "openatv skins",
+      "name": "Premium-Magenta-Fhd",
+      "path": "/usr/share/enigma2/Premium-FHD-Magenta",
+      "icon": ""
+    },
+    {
+      "id": "openatv_skins-22",
+      "section": "openatv_skins",
+      "category": "openatv skins",
+      "name": "Premium-Black-Fhd",
+      "path": "/usr/share/enigma2/Premium-FHD-Black",
+      "icon": ""
+    },
+    {
+      "id": "openatv_skins-23",
+      "section": "openatv_skins",
+      "category": "openatv skins",
+      "name": "Premium-Blue-Fhd",
+      "path": "/usr/share/enigma2/Premium-FHD-Blue",
+      "icon": ""
+    },
+    {
+      "id": "openatv_skins-24",
+      "section": "openatv_skins",
+      "category": "openatv skins",
+      "name": "XDreamy-FHD",
+      "path": "/usr/share/enigma2/xDreamy",
+      "icon": ""
+    },
+    {
+      "id": "teamnitro_skins-0",
+      "section": "teamnitro_skins",
+      "category": "teamnitro skins",
+      "name": "TeamNitro Control",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/TeamNitro",
+      "icon": ""
+    },
+    {
+      "id": "teamnitro_skins-1",
+      "section": "teamnitro_skins",
+      "category": "teamnitro skins",
+      "name": "AlAyam-FHD",
+      "path": "/usr/share/enigma2/AL_AYAM_FHD",
+      "icon": ""
+    },
+    {
+      "id": "teamnitro_skins-2",
+      "section": "teamnitro_skins",
+      "category": "teamnitro skins",
+      "name": "Desert-FHD",
+      "path": "/usr/share/enigma2/DesertFHD",
+      "icon": ""
+    },
+    {
+      "id": "teamnitro_skins-3",
+      "section": "teamnitro_skins",
+      "category": "teamnitro skins",
+      "name": "BoHLALA-FHD",
+      "path": "/usr/share/enigma2/BoHLALA_FHD",
+      "icon": ""
+    },
+    {
+      "id": "teamnitro_skins-4",
+      "section": "teamnitro_skins",
+      "category": "teamnitro skins",
+      "name": "Dragon-FHD",
+      "path": "/usr/share/enigma2/BLACK_DRAGON_FHD",
+      "icon": ""
+    },
+    {
+      "id": "teamnitro_skins-5",
+      "section": "teamnitro_skins",
+      "category": "teamnitro skins",
+      "name": "NitroAdvance-FHD",
+      "path": "/usr/share/enigma2/NitroAdvanceFHD",
+      "icon": ""
+    },
+    {
+      "id": "teamnitro_skins-6",
+      "section": "teamnitro_skins",
+      "category": "teamnitro skins",
+      "name": "Klll-Pro-FHD",
+      "path": "/usr/share/enigma2/Klll-Pro",
+      "icon": ""
+    },
+    {
+      "id": "openbh_skins-0",
+      "section": "openbh_skins",
+      "category": "openbh skins",
+      "name": "Aglare-fhd",
+      "path": "/usr/share/enigma2/Aglare-FHD-PLI",
+      "icon": ""
+    },
+    {
+      "id": "openbh_skins-1",
+      "section": "openbh_skins",
+      "category": "openbh skins",
+      "name": "BlackShadow_X2P_OBH",
+      "path": "/usr/share/enigma2/BlackShadow_X2P",
+      "icon": ""
+    },
+    {
+      "id": "openbh_skins-2",
+      "section": "openbh_skins",
+      "category": "openbh skins",
+      "name": "CineView-FHD",
+      "path": "/usr/share/enigma2/CineView_FHD_MLA",
+      "icon": ""
+    },
+    {
+      "id": "openbh_skins-3",
+      "section": "openbh_skins",
+      "category": "openbh skins",
+      "name": "EclipseFHD_OBH",
+      "path": "/usr/share/enigma2/EclipseFHD",
+      "icon": ""
+    },
+    {
+      "id": "openbh_skins-4",
+      "section": "openbh_skins",
+      "category": "openbh skins",
+      "name": "EclipseFire_OBH",
+      "path": "/usr/share/enigma2/EclipseFire",
+      "icon": ""
+    },
+    {
+      "id": "openbh_skins-5",
+      "section": "openbh_skins",
+      "category": "openbh skins",
+      "name": "Fury-FHD",
+      "path": "/usr/share/enigma2/Fury-FHD",
+      "icon": ""
+    },
+    {
+      "id": "openbh_skins-6",
+      "section": "openbh_skins",
+      "category": "openbh skins",
+      "name": "MX_BlackSea",
+      "path": "/usr/share/enigma2/MX_BlackSea",
+      "icon": ""
+    },
+    {
+      "id": "openbh_skins-7",
+      "section": "openbh_skins",
+      "category": "openbh skins",
+      "name": "MX-Sline-Black-Red-Gradient",
+      "path": "/usr/share/enigma2/MX_Sline-BlackRedGradient",
+      "icon": ""
+    },
+    {
+      "id": "openbh_skins-8",
+      "section": "openbh_skins",
+      "category": "openbh skins",
+      "name": "MX_GrayDots_X2B_OBH",
+      "path": "/usr/share/enigma2/MX_GrayDots_X2B",
+      "icon": ""
+    },
+    {
+      "id": "openbh_skins-9",
+      "section": "openbh_skins",
+      "category": "openbh skins",
+      "name": "MX_GreenDots_OBH",
+      "path": "/usr/share/enigma2/MX_GreenDots",
+      "icon": ""
+    },
+    {
+      "id": "openbh_skins-10",
+      "section": "openbh_skins",
+      "category": "openbh skins",
+      "name": "MX_HQ7_OBH",
+      "path": "/usr/share/enigma2/MX_HQ7",
+      "icon": ""
+    },
+    {
+      "id": "openbh_skins-11",
+      "section": "openbh_skins",
+      "category": "openbh skins",
+      "name": "MX_Maestra_Black_OBH",
+      "path": "/usr/share/enigma2/MX_Maestra_Black",
+      "icon": ""
+    },
+    {
+      "id": "openbh_skins-12",
+      "section": "openbh_skins",
+      "category": "openbh skins",
+      "name": "MX_Maestra2b_weather",
+      "path": "/usr/share/enigma2/MX_Maestra2b_weather",
+      "icon": ""
+    },
+    {
+      "id": "openbh_skins-13",
+      "section": "openbh_skins",
+      "category": "openbh skins",
+      "name": "MX_Sline-Blue",
+      "path": "/usr/share/enigma2/MX_Sline-Blue",
+      "icon": ""
+    },
+    {
+      "id": "openbh_skins-14",
+      "section": "openbh_skins",
+      "category": "openbh skins",
+      "name": "Mx-Sline-Glass-Gradient",
+      "path": "/usr/share/enigma2/MX_Sline-GlassGradient",
+      "icon": ""
+    },
+    {
+      "id": "openbh_skins-15",
+      "section": "openbh_skins",
+      "category": "openbh skins",
+      "name": "MX_Sline-Red_X2",
+      "path": "/usr/share/enigma2/MX_Sline-Red_X2",
+      "icon": ""
+    },
+    {
+      "id": "openbh_skins-16",
+      "section": "openbh_skins",
+      "category": "openbh skins",
+      "name": "OpenBhGreenFHD",
+      "path": "/usr/share/enigma2/OpenBhGreenFHD",
+      "icon": ""
+    },
+    {
+      "id": "openbh_skins-17",
+      "section": "openbh_skins",
+      "category": "openbh skins",
+      "name": "Waves4_Fire_weather_OBH",
+      "path": "/usr/share/enigma2/Waves4_Fire_weather",
+      "icon": ""
+    },
+    {
+      "id": "openbh_skins-18",
+      "section": "openbh_skins",
+      "category": "openbh skins",
+      "name": "Waves4_weather_OBH",
+      "path": "/usr/share/enigma2/Waves4_weather",
+      "icon": ""
+    },
+    {
+      "id": "openbh_skins-19",
+      "section": "openbh_skins",
+      "category": "openbh skins",
+      "name": "XDreamy-FHD",
+      "path": "/usr/share/enigma2/xDreamy",
+      "icon": ""
+    },
+    {
+      "id": "openbh_skins-20",
+      "section": "openbh_skins",
+      "category": "openbh skins",
+      "name": "Youchie-OBH-FHD",
+      "path": "/usr/share/enigma2/Youchie-FHD",
+      "icon": ""
+    },
+    {
+      "id": "egami_skins-0",
+      "section": "egami_skins",
+      "category": "egami skins",
+      "name": "Aglare-FHD",
+      "path": "/usr/share/enigma2/Aglare-FHD",
+      "icon": ""
+    },
+    {
+      "id": "egami_skins-1",
+      "section": "egami_skins",
+      "category": "egami skins",
+      "name": "CineView-FHD",
+      "path": "/usr/share/enigma2/CineView_FHD_MLA",
+      "icon": ""
+    },
+    {
+      "id": "egami_skins-2",
+      "section": "egami_skins",
+      "category": "egami skins",
+      "name": "Fury-FHD",
+      "path": "/usr/share/enigma2/Fury-FHD",
+      "icon": ""
+    },
+    {
+      "id": "egami_skins-3",
+      "section": "egami_skins",
+      "category": "egami skins",
+      "name": "Premium-Magenta-Fhd",
+      "path": "/usr/share/enigma2/Premium-FHD-Magenta",
+      "icon": ""
+    },
+    {
+      "id": "egami_skins-4",
+      "section": "egami_skins",
+      "category": "egami skins",
+      "name": "Premium-Black-Fhd",
+      "path": "/usr/share/enigma2/Premium-FHD-Black",
+      "icon": ""
+    },
+    {
+      "id": "egami_skins-5",
+      "section": "egami_skins",
+      "category": "egami skins",
+      "name": "Premium-Blue-Fhd",
+      "path": "/usr/share/enigma2/Premium-FHD-Blue",
+      "icon": ""
+    },
+    {
+      "id": "egami_skins-6",
+      "section": "egami_skins",
+      "category": "egami skins",
+      "name": "XDreamy-FHD",
+      "path": "/usr/share/enigma2/xDreamy",
+      "icon": ""
+    },
+    {
+      "id": "openpli_py3_skins-0",
+      "section": "openpli_py3_skins",
+      "category": "openpli py3 skins",
+      "name": "Aglare-FHD",
+      "path": "/usr/share/enigma2/Aglare-FHD-PLI",
+      "icon": ""
+    },
+    {
+      "id": "openpli_py3_skins-1",
+      "section": "openpli_py3_skins",
+      "category": "openpli py3 skins",
+      "name": "BARDO-FHD",
+      "path": "/usr/share/enigma2/Bardo FHD",
+      "icon": ""
+    },
+    {
+      "id": "openpli_py3_skins-2",
+      "section": "openpli_py3_skins",
+      "category": "openpli py3 skins",
+      "name": "BLACKNEON-XP_Mod_M-Nasr",
+      "path": "/usr/share/enigma2/BLACKNEON-XP-FHD",
+      "icon": ""
+    },
+    {
+      "id": "openpli_py3_skins-3",
+      "section": "openpli_py3_skins",
+      "category": "openpli py3 skins",
+      "name": "CineView-FHD",
+      "path": "/usr/share/enigma2/CineView_FHD_MLA",
+      "icon": ""
+    },
+    {
+      "id": "openpli_py3_skins-4",
+      "section": "openpli_py3_skins",
+      "category": "openpli py3 skins",
+      "name": "malek-fhd",
+      "path": "/usr/share/enigma2/Malek-FHD",
+      "icon": ""
+    },
+    {
+      "id": "openpli_py3_skins-5",
+      "section": "openpli_py3_skins",
+      "category": "openpli py3 skins",
+      "name": "Ozeta-Xtra",
+      "path": "/usr/share/enigma2/oZeta-FHD",
+      "icon": ""
+    },
+    {
+      "id": "openpli_py3_skins-6",
+      "section": "openpli_py3_skins",
+      "category": "openpli py3 skins",
+      "name": "XDreamy-FHD",
+      "path": "/usr/share/enigma2/xDreamy",
+      "icon": ""
+    },
+    {
+      "id": "openpli_py3_skins-7",
+      "section": "openpli_py3_skins",
+      "category": "openpli py3 skins",
+      "name": "Youchie-PLI-FHD",
+      "path": "/usr/share/enigma2/Youchie-PLI-FHD",
+      "icon": ""
+    },
+    {
+      "id": "openspa_skins-0",
+      "section": "openspa_skins",
+      "category": "openspa skins",
+      "name": "Aglare-FHD",
+      "path": "/usr/share/enigma2/Aglare-FHD",
+      "icon": ""
+    },
+    {
+      "id": "openspa_skins-1",
+      "section": "openspa_skins",
+      "category": "openspa skins",
+      "name": "Fury-FHD",
+      "path": "/usr/share/enigma2/Fury-FHD",
+      "icon": ""
+    },
+    {
+      "id": "openspa_skins-2",
+      "section": "openspa_skins",
+      "category": "openspa skins",
+      "name": "estuary-1080-FHD",
+      "path": "/usr/share/enigma2/estuaryHD_openspa",
+      "icon": ""
+    },
+    {
+      "id": "openspa_skins-3",
+      "section": "openspa_skins",
+      "category": "openspa skins",
+      "name": "Skyline",
+      "path": "/usr/share/enigma2/Skyline",
+      "icon": ""
+    },
+    {
+      "id": "openvix_skins-0",
+      "section": "openvix_skins",
+      "category": "openvix skins",
+      "name": "Aglare-FHD",
+      "path": "/usr/share/enigma2/Aglare-FHD-PLI",
+      "icon": ""
+    },
+    {
+      "id": "openvix_skins-1",
+      "section": "openvix_skins",
+      "category": "openvix skins",
+      "name": "CineView-FHD",
+      "path": "/usr/share/enigma2/CineView_FHD_MLA",
+      "icon": ""
+    },
+    {
+      "id": "openvix_skins-2",
+      "section": "openvix_skins",
+      "category": "openvix skins",
+      "name": "E2-darkos-FHD",
+      "path": "/usr/share/enigma2/E2-E2-DarkOS",
+      "icon": ""
+    },
+    {
+      "id": "openvix_skins-3",
+      "section": "openvix_skins",
+      "category": "openvix skins",
+      "name": "Fury-FHD",
+      "path": "/usr/share/enigma2/Fury-FHD",
+      "icon": ""
+    },
+    {
+      "id": "openvix_skins-4",
+      "section": "openvix_skins",
+      "category": "openvix skins",
+      "name": "Magic-FHD",
+      "path": "/usr/share/enigma2/Magic-FHD",
+      "icon": ""
+    },
+    {
+      "id": "openvix_skins-5",
+      "section": "openvix_skins",
+      "category": "openvix skins",
+      "name": "Vixbmc-1080-Confluence-FHD",
+      "path": "/usr/share/enigma2/ViXBMC_1080_Confluence",
+      "icon": ""
+    },
+    {
+      "id": "openvix_skins-6",
+      "section": "openvix_skins",
+      "category": "openvix skins",
+      "name": "XDreamy-FHD",
+      "path": "/usr/share/enigma2/xDreamy",
+      "icon": ""
+    },
+    {
+      "id": "openvix_skins-7",
+      "section": "openvix_skins",
+      "category": "openvix skins",
+      "name": "Youchie-OpenVix-FHD",
+      "path": "/usr/share/enigma2/Youchie-PLI-FHD",
+      "icon": ""
+    },
+    {
+      "id": "pure2_skins-0",
+      "section": "pure2_skins",
+      "category": "pure2 skins",
+      "name": "Aglare-FHD",
+      "path": "/usr/share/enigma2/Aglare-FHD",
+      "icon": ""
+    },
+    {
+      "id": "pure2_skins-1",
+      "section": "pure2_skins",
+      "category": "pure2 skins",
+      "name": "CineView-FHD",
+      "path": "/usr/share/enigma2/CineView_FHD_MLA",
+      "icon": ""
+    },
+    {
+      "id": "pure2_skins-2",
+      "section": "pure2_skins",
+      "category": "pure2 skins",
+      "name": "Fury-FHD",
+      "path": "/usr/share/enigma2/Fury-FHD",
+      "icon": ""
+    },
+    {
+      "id": "pure2_skins-3",
+      "section": "pure2_skins",
+      "category": "pure2 skins",
+      "name": "Premium-Magenta-Fhd",
+      "path": "/usr/share/enigma2/Premium-FHD-Magenta",
+      "icon": ""
+    },
+    {
+      "id": "pure2_skins-4",
+      "section": "pure2_skins",
+      "category": "pure2 skins",
+      "name": "Premium-Black-Fhd",
+      "path": "/usr/share/enigma2/Premium-FHD-Black",
+      "icon": ""
+    },
+    {
+      "id": "pure2_skins-5",
+      "section": "pure2_skins",
+      "category": "pure2 skins",
+      "name": "Premium-Blue-Fhd",
+      "path": "/usr/share/enigma2/Premium-FHD-Blue",
+      "icon": ""
+    },
+    {
+      "id": "pure2_skins-6",
+      "section": "pure2_skins",
+      "category": "pure2 skins",
+      "name": "XDreamy-FHD",
+      "path": "/usr/share/enigma2/xDreamy",
+      "icon": ""
+    },
+    {
+      "id": "openpli_py2_skins-0",
+      "section": "openpli_py2_skins",
+      "category": "openpli py2 skins",
+      "name": "Bluemetal-FHD",
+      "path": "/usr/share/enigma2/BlueMetalFHD",
+      "icon": ""
+    },
+    {
+      "id": "openpli_py2_skins-1",
+      "section": "openpli_py2_skins",
+      "category": "openpli py2 skins",
+      "name": "CH.LEAGUE-FHD",
+      "path": "/usr/share/enigma2/CH.LEAGUE-FHD",
+      "icon": ""
+    },
+    {
+      "id": "openpli_py2_skins-2",
+      "section": "openpli_py2_skins",
+      "category": "openpli py2 skins",
+      "name": "Maxy-FHD",
+      "path": "/usr/share/enigma2/Maxy-FHD",
+      "icon": ""
+    },
+    {
+      "id": "openpli_py2_skins-3",
+      "section": "openpli_py2_skins",
+      "category": "openpli py2 skins",
+      "name": "Ozeta-Xtra",
+      "path": "/usr/share/enigma2/oZeta-FHD",
+      "icon": ""
+    },
+    {
+      "id": "openpli_py2_skins-4",
+      "section": "openpli_py2_skins",
+      "category": "openpli py2 skins",
+      "name": "QATAR-2022-V3-FHD",
+      "path": "/usr/share/enigma2/QATAR-2022-V3-FHD",
+      "icon": ""
+    },
+    {
+      "id": "openpli_py2_skins-5",
+      "section": "openpli_py2_skins",
+      "category": "openpli py2 skins",
+      "name": "SPIDERMAN-FHD",
+      "path": "/usr/share/enigma2/SPIDERMAN-FHD",
+      "icon": ""
+    },
+    {
+      "id": "openpli_py2_skins-6",
+      "section": "openpli_py2_skins",
+      "category": "openpli py2 skins",
+      "name": "WAR-S-FHD",
+      "path": "/usr/share/enigma2/WAR-S-FHD",
+      "icon": ""
+    },
+    {
+      "id": "openpli_py2_skins-7",
+      "section": "openpli_py2_skins",
+      "category": "openpli py2 skins",
+      "name": "BLACKSKY-S-HD",
+      "path": "/usr/share/enigma2/BLACKSKY-S-HD",
+      "icon": ""
+    },
+    {
+      "id": "openpli_py2_skins-8",
+      "section": "openpli_py2_skins",
+      "category": "openpli py2 skins",
+      "name": "BATMAN-MP-HD",
+      "path": "/usr/share/enigma2/BATMAN-MP-HD",
+      "icon": ""
+    },
+    {
+      "id": "openpli_py2_skins-9",
+      "section": "openpli_py2_skins",
+      "category": "openpli py2 skins",
+      "name": "TOKYO2020-FHD",
+      "path": "/usr/share/enigma2/TOKYO2020-FHD",
+      "icon": ""
+    },
+    {
+      "id": "display_skins-0",
+      "section": "display_skins",
+      "category": "display skins",
+      "name": "display-oe-a-lcdskin-1",
+      "path": "/usr/share/enigma2/display/OE-A_LCDSkin_1",
+      "icon": ""
+    },
+    {
+      "id": "display_skins-1",
+      "section": "display_skins",
+      "category": "display skins",
+      "name": "display-oe-a-lcdskin-2",
+      "path": "/usr/share/enigma2/display/OE-A_LCDSkin_2",
+      "icon": ""
+    },
+    {
+      "id": "display_skins-2",
+      "section": "display_skins",
+      "category": "display skins",
+      "name": "display-oe-a-lcdskin-3",
+      "path": "/usr/share/enigma2/display/OE-A_LCDSkin_3",
+      "icon": ""
+    },
+    {
+      "id": "display_skins-3",
+      "section": "display_skins",
+      "category": "display skins",
+      "name": "display-oe-a-lcdskin-4",
+      "path": "/usr/share/enigma2/display/OE-A_LCDSkin_4",
+      "icon": ""
+    },
+    {
+      "id": "display_skins-4",
+      "section": "display_skins",
+      "category": "display skins",
+      "name": "display-oe-a-lcdskin-5",
+      "path": "/usr/share/enigma2/display/OE-A_LCDSkin_5",
+      "icon": ""
+    },
+    {
+      "id": "display_skins-5",
+      "section": "display_skins",
+      "category": "display skins",
+      "name": "display-oe-a-lcdskin-6",
+      "path": "/usr/share/enigma2/display/OE-A_LCDSkin_6",
+      "icon": ""
+    },
+    {
+      "id": "display_skins-6",
+      "section": "display_skins",
+      "category": "display skins",
+      "name": "display-oe-a-lcdskin-7",
+      "path": "/usr/share/enigma2/display/OE-A_LCDSkin_7",
+      "icon": ""
+    },
+    {
+      "id": "display_skins-7",
+      "section": "display_skins",
+      "category": "display skins",
+      "name": "display-oe-a-lcdskin-8",
+      "path": "/usr/share/enigma2/display/OE-A_LCDSkin_8",
+      "icon": ""
+    },
+    {
+      "id": "display_skins-8",
+      "section": "display_skins",
+      "category": "display skins",
+      "name": "display-oe-a-lcdskin-9",
+      "path": "/usr/share/enigma2/display/OE-A_LCDSkin_9",
+      "icon": ""
+    },
+    {
+      "id": "display_skins-9",
+      "section": "display_skins",
+      "category": "display skins",
+      "name": "display-oe-a-lcdskin-10",
+      "path": "/usr/share/enigma2/display/OE-A_LCDSkin_10",
+      "icon": ""
+    },
+    {
+      "id": "display_skins-10",
+      "section": "display_skins",
+      "category": "display skins",
+      "name": "display-oe-a-lcdskin-11",
+      "path": "/usr/share/enigma2/display/OE-A_LCDSkin_11",
+      "icon": ""
+    },
+    {
+      "id": "display_skins-11",
+      "section": "display_skins",
+      "category": "display skins",
+      "name": "display-oe-a-lcdskin-12",
+      "path": "/usr/share/enigma2/display/OE-A_LCDSkin_12",
+      "icon": ""
+    },
+    {
+      "id": "display_skins-12",
+      "section": "display_skins",
+      "category": "display skins",
+      "name": "display-oe-a-lcdskin-13",
+      "path": "/usr/share/enigma2/display/OE-A_LCDSkin_13",
+      "icon": ""
+    },
+    {
+      "id": "plugin-xtreamity_skins-0",
+      "section": "plugin-xtreamity_skins",
+      "category": "plugin xtreamity skins",
+      "name": "Abstract",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/XStreamity/skins/Abstract",
+      "icon": ""
+    },
+    {
+      "id": "plugin-xtreamity_skins-1",
+      "section": "plugin-xtreamity_skins",
+      "category": "plugin xtreamity skins",
+      "name": "qatar2022",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/XStreamity/skins/qatar2022",
+      "icon": ""
+    },
+    {
+      "id": "plugin-xtreamity_skins-2",
+      "section": "plugin-xtreamity_skins",
+      "category": "plugin xtreamity skins",
+      "name": "Toys",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/XStreamity/skins/Toys",
+      "icon": ""
+    },
+    {
+      "id": "images-0",
+      "section": "images",
+      "category": "Images",
+      "name": "BlackHole 3.1.0",
+      "path": "/media/hdd/images/open",
+      "icon": ""
+    },
+    {
+      "id": "images-1",
+      "section": "images",
+      "category": "Images",
+      "name": "Egami 10.4",
+      "path": "/media/hdd/images/open",
+      "icon": ""
+    },
+    {
+      "id": "images-2",
+      "section": "images",
+      "category": "Images",
+      "name": "OpenATV 6.4",
+      "path": "/media/hdd/images/open",
+      "icon": ""
+    },
+    {
+      "id": "images-3",
+      "section": "images",
+      "category": "Images",
+      "name": "OpenATV 7.0",
+      "path": "/media/hdd/images/open",
+      "icon": ""
+    },
+    {
+      "id": "images-4",
+      "section": "images",
+      "category": "Images",
+      "name": "OpenATV 7.1",
+      "path": "/media/hdd/images/open",
+      "icon": ""
+    },
+    {
+      "id": "images-5",
+      "section": "images",
+      "category": "Images",
+      "name": "OpenATV 7.2",
+      "path": "/media/hdd/images/open",
+      "icon": ""
+    },
+    {
+      "id": "images-6",
+      "section": "images",
+      "category": "Images",
+      "name": "OpenATV 7.3",
+      "path": "/media/hdd/images/open",
+      "icon": ""
+    },
+    {
+      "id": "images-7",
+      "section": "images",
+      "category": "Images",
+      "name": "OpenATV 7.4",
+      "path": "/media/hdd/images/open",
+      "icon": ""
+    },
+    {
+      "id": "images-8",
+      "section": "images",
+      "category": "Images",
+      "name": "OpenATV 7.5",
+      "path": "/media/hdd/images/open",
+      "icon": ""
+    },
+    {
+      "id": "images-9",
+      "section": "images",
+      "category": "Images",
+      "name": "OpenATV 7.5.1",
+      "path": "/media/hdd/images/open",
+      "icon": ""
+    },
+    {
+      "id": "images-10",
+      "section": "images",
+      "category": "Images",
+      "name": "OpenATV 7.6",
+      "path": "/media/hdd/images/open",
+      "icon": ""
+    },
+    {
+      "id": "images-11",
+      "section": "images",
+      "category": "Images",
+      "name": "OpenATV 8.0",
+      "path": "/media/hdd/images/open",
+      "icon": ""
+    },
+    {
+      "id": "images-12",
+      "section": "images",
+      "category": "Images",
+      "name": "OpenBlackHole 4.4",
+      "path": "/media/hdd/images/open",
+      "icon": ""
+    },
+    {
+      "id": "images-13",
+      "section": "images",
+      "category": "Images",
+      "name": "OpenBlackHole 5.0",
+      "path": "/media/hdd/images/open",
+      "icon": ""
+    },
+    {
+      "id": "images-14",
+      "section": "images",
+      "category": "Images",
+      "name": "OpenBlackHole 5.1",
+      "path": "/media/hdd/images/open",
+      "icon": ""
+    },
+    {
+      "id": "images-15",
+      "section": "images",
+      "category": "Images",
+      "name": "OpenBlackHole 5.2",
+      "path": "/media/hdd/images/open",
+      "icon": ""
+    },
+    {
+      "id": "images-16",
+      "section": "images",
+      "category": "Images",
+      "name": "OpenBlackHole 5.3",
+      "path": "/media/hdd/images/open",
+      "icon": ""
+    },
+    {
+      "id": "images-17",
+      "section": "images",
+      "category": "Images",
+      "name": "OpenBlackHole 5.4",
+      "path": "/media/hdd/images/open",
+      "icon": ""
+    },
+    {
+      "id": "images-18",
+      "section": "images",
+      "category": "Images",
+      "name": "OpenBlackHole 5.5.1",
+      "path": "/media/hdd/images/open",
+      "icon": ""
+    },
+    {
+      "id": "images-19",
+      "section": "images",
+      "category": "Images",
+      "name": "OpenBlackHole 5.6",
+      "path": "/media/hdd/images/open",
+      "icon": ""
+    },
+    {
+      "id": "images-20",
+      "section": "images",
+      "category": "Images",
+      "name": "OpenBlackHole 6.0",
+      "path": "/media/hdd/images/open",
+      "icon": ""
+    },
+    {
+      "id": "images-21",
+      "section": "images",
+      "category": "Images",
+      "name": "OpenDroid",
+      "path": "/media/hdd/images/open",
+      "icon": ""
+    },
+    {
+      "id": "images-22",
+      "section": "images",
+      "category": "Images",
+      "name": "OpenPLi 7.3",
+      "path": "/media/hdd/images/open",
+      "icon": ""
+    },
+    {
+      "id": "images-23",
+      "section": "images",
+      "category": "Images",
+      "name": "OpenPLi 8.3",
+      "path": "/media/hdd/images/open",
+      "icon": ""
+    },
+    {
+      "id": "images-24",
+      "section": "images",
+      "category": "Images",
+      "name": "OpenPLi 8.3 Time Shift",
+      "path": "/media/hdd/images/open",
+      "icon": ""
+    },
+    {
+      "id": "images-25",
+      "section": "images",
+      "category": "Images",
+      "name": "OpenPLi 9.0 Time Shift",
+      "path": "/media/hdd/images/open",
+      "icon": ""
+    },
+    {
+      "id": "images-26",
+      "section": "images",
+      "category": "Images",
+      "name": "OpenPLi 9.0",
+      "path": "/media/hdd/images/open",
+      "icon": ""
+    },
+    {
+      "id": "images-27",
+      "section": "images",
+      "category": "Images",
+      "name": "OpenPLi 9.1",
+      "path": "/media/hdd/images/open",
+      "icon": ""
+    },
+    {
+      "id": "images-28",
+      "section": "images",
+      "category": "Images",
+      "name": "OpenPLi 9.2",
+      "path": "/media/hdd/images/open",
+      "icon": ""
+    },
+    {
+      "id": "images-29",
+      "section": "images",
+      "category": "Images",
+      "name": "OpenSpa 7.5",
+      "path": "/media/hdd/images/open",
+      "icon": ""
+    },
+    {
+      "id": "images-30",
+      "section": "images",
+      "category": "Images",
+      "name": "OpenSpa 8.0",
+      "path": "/media/hdd/images/open",
+      "icon": ""
+    },
+    {
+      "id": "images-31",
+      "section": "images",
+      "category": "Images",
+      "name": "OpenSpa 8.1",
+      "path": "/media/hdd/images/open",
+      "icon": ""
+    },
+    {
+      "id": "images-32",
+      "section": "images",
+      "category": "Images",
+      "name": "OpenSpa 8.3",
+      "path": "/media/hdd/images/open",
+      "icon": ""
+    },
+    {
+      "id": "images-33",
+      "section": "images",
+      "category": "Images",
+      "name": "OpenSpa 8.4",
+      "path": "/media/hdd/images/open",
+      "icon": ""
+    },
+    {
+      "id": "images-34",
+      "section": "images",
+      "category": "Images",
+      "name": "OpenSpa 8.5",
+      "path": "/media/hdd/images/open",
+      "icon": ""
+    },
+    {
+      "id": "images-35",
+      "section": "images",
+      "category": "Images",
+      "name": "OpenVIX 6.6.004",
+      "path": "/media/hdd/images/open",
+      "icon": ""
+    },
+    {
+      "id": "images-36",
+      "section": "images",
+      "category": "Images",
+      "name": "OpenVIX Latest Version",
+      "path": "/media/hdd/images/open",
+      "icon": ""
+    },
+    {
+      "id": "images-37",
+      "section": "images",
+      "category": "Images",
+      "name": "OpenVision py2 10.3 r395",
+      "path": "/media/hdd/images/open",
+      "icon": ""
+    },
+    {
+      "id": "images-38",
+      "section": "images",
+      "category": "Images",
+      "name": "Pure2 7.4",
+      "path": "/media/hdd/images/open",
+      "icon": ""
+    },
+    {
+      "id": "images-39",
+      "section": "images",
+      "category": "Images",
+      "name": "Pure2 7.6",
+      "path": "/media/hdd/images/open",
+      "icon": ""
+    },
+    {
+      "id": "images-40",
+      "section": "images",
+      "category": "Images",
+      "name": "VTI 15.0.02",
+      "path": "/media/hdd/images/open",
+      "icon": ""
+    },
+    {
+      "id": "picons-0",
+      "section": "picons",
+      "category": "Picons",
+      "name": "Intelsat 31.5W",
+      "path": "/usr/share/enigma2/picons/picons",
+      "icon": ""
+    },
+    {
+      "id": "picons-1",
+      "section": "picons",
+      "category": "Picons",
+      "name": "Hispasat 30.0W",
+      "path": "/usr/share/enigma2/picons/picons",
+      "icon": ""
+    },
+    {
+      "id": "picons-2",
+      "section": "picons",
+      "category": "Picons",
+      "name": "Intelsat 27.5W",
+      "path": "/usr/share/enigma2/picons/picons",
+      "icon": ""
+    },
+    {
+      "id": "picons-3",
+      "section": "picons",
+      "category": "Picons",
+      "name": "Intelsat 24.5W",
+      "path": "/usr/share/enigma2/picons/picons",
+      "icon": ""
+    },
+    {
+      "id": "picons-4",
+      "section": "picons",
+      "category": "Picons",
+      "name": "SES 4 22.0W",
+      "path": "/usr/share/enigma2/picons/picons",
+      "icon": ""
+    },
+    {
+      "id": "picons-5",
+      "section": "picons",
+      "category": "Picons",
+      "name": "NSS 7 20.0W",
+      "path": "/usr/share/enigma2/picons/picons",
+      "icon": ""
+    },
+    {
+      "id": "picons-6",
+      "section": "picons",
+      "category": "Picons",
+      "name": "Telstar 15.0W",
+      "path": "/usr/share/enigma2/picons/picons",
+      "icon": ""
+    },
+    {
+      "id": "picons-7",
+      "section": "picons",
+      "category": "Picons",
+      "name": "Express 14W",
+      "path": "/usr/share/enigma2/picons/picons",
+      "icon": ""
+    },
+    {
+      "id": "picons-8",
+      "section": "picons",
+      "category": "Picons",
+      "name": "Express 11.0W-14.0W",
+      "path": "/usr/share/enigma2/picons/picons",
+      "icon": ""
+    },
+    {
+      "id": "picons-9",
+      "section": "picons",
+      "category": "Picons",
+      "name": "Nilesat 7W-8W",
+      "path": "/usr/share/enigma2/picons/picons",
+      "icon": ""
+    },
+    {
+      "id": "picons-10",
+      "section": "picons",
+      "category": "Picons",
+      "name": "Eutelsat 5.0W",
+      "path": "/usr/share/enigma2/picons/picons",
+      "icon": ""
+    },
+    {
+      "id": "picons-11",
+      "section": "picons",
+      "category": "Picons",
+      "name": "Amos 4.0W",
+      "path": "/usr/share/enigma2/picons/picons",
+      "icon": ""
+    },
+    {
+      "id": "picons-12",
+      "section": "picons",
+      "category": "Picons",
+      "name": "ABS 3.0W",
+      "path": "/usr/share/enigma2/picons/picons",
+      "icon": ""
+    },
+    {
+      "id": "picons-13",
+      "section": "picons",
+      "category": "Picons",
+      "name": "Thor 0.8W",
+      "path": "/usr/share/enigma2/picons/picons",
+      "icon": ""
+    },
+    {
+      "id": "picons-14",
+      "section": "picons",
+      "category": "Picons",
+      "name": "BulgariaSat 1.9E",
+      "path": "/usr/share/enigma2/picons/picons",
+      "icon": ""
+    },
+    {
+      "id": "picons-15",
+      "section": "picons",
+      "category": "Picons",
+      "name": "Eutelsat 3.0E",
+      "path": "/usr/share/enigma2/picons/picons",
+      "icon": ""
+    },
+    {
+      "id": "picons-16",
+      "section": "picons",
+      "category": "Picons",
+      "name": "Astra 4.8E",
+      "path": "/usr/share/enigma2/picons/picons",
+      "icon": ""
+    },
+    {
+      "id": "picons-17",
+      "section": "picons",
+      "category": "Picons",
+      "name": "Eutelsat 7.0E",
+      "path": "/usr/share/enigma2/picons/picons",
+      "icon": ""
+    },
+    {
+      "id": "picons-18",
+      "section": "picons",
+      "category": "Picons",
+      "name": "Eutelsat 9.0E",
+      "path": "/usr/share/enigma2/picons/picons",
+      "icon": ""
+    },
+    {
+      "id": "picons-19",
+      "section": "picons",
+      "category": "Picons",
+      "name": "Eutelsat 10.0E",
+      "path": "/usr/share/enigma2/picons/picons",
+      "icon": ""
+    },
+    {
+      "id": "picons-20",
+      "section": "picons",
+      "category": "Picons",
+      "name": "Hotbird 13.0E",
+      "path": "/usr/share/enigma2/picons/picons",
+      "icon": ""
+    },
+    {
+      "id": "picons-21",
+      "section": "picons",
+      "category": "Picons",
+      "name": "Eutelsat 16.0E",
+      "path": "/usr/share/enigma2/picons/picons",
+      "icon": ""
+    },
+    {
+      "id": "picons-22",
+      "section": "picons",
+      "category": "Picons",
+      "name": "Astra 19.2E",
+      "path": "/usr/share/enigma2/picons/picons",
+      "icon": ""
+    },
+    {
+      "id": "picons-23",
+      "section": "picons",
+      "category": "Picons",
+      "name": "Eutelsat 21.6E",
+      "path": "/usr/share/enigma2/picons/picons",
+      "icon": ""
+    },
+    {
+      "id": "picons-24",
+      "section": "picons",
+      "category": "Picons",
+      "name": "Astra 23.5E",
+      "path": "/usr/share/enigma2/picons/picons",
+      "icon": ""
+    },
+    {
+      "id": "picons-25",
+      "section": "picons",
+      "category": "Picons",
+      "name": "Eshail 25.5E",
+      "path": "/usr/share/enigma2/picons/picons",
+      "icon": ""
+    },
+    {
+      "id": "picons-26",
+      "section": "picons",
+      "category": "Picons",
+      "name": "Badr 26.0E",
+      "path": "/usr/share/enigma2/picons/picons",
+      "icon": ""
+    },
+    {
+      "id": "picons-27",
+      "section": "picons",
+      "category": "Picons",
+      "name": "Astra 28.2E",
+      "path": "/usr/share/enigma2/picons/picons",
+      "icon": ""
+    },
+    {
+      "id": "picons-28",
+      "section": "picons",
+      "category": "Picons",
+      "name": "Arabsat 30.5E",
+      "path": "/usr/share/enigma2/picons/picons",
+      "icon": ""
+    },
+    {
+      "id": "picons-29",
+      "section": "picons",
+      "category": "Picons",
+      "name": "Astra 31.5E",
+      "path": "/usr/share/enigma2/picons/picons",
+      "icon": ""
+    },
+    {
+      "id": "picons-30",
+      "section": "picons",
+      "category": "Picons",
+      "name": "Intelsat 33.0E",
+      "path": "/usr/share/enigma2/picons/picons",
+      "icon": ""
+    },
+    {
+      "id": "picons-31",
+      "section": "picons",
+      "category": "Picons",
+      "name": "Eutelsat 36.0E",
+      "path": "/usr/share/enigma2/picons/picons",
+      "icon": ""
+    },
+    {
+      "id": "picons-32",
+      "section": "picons",
+      "category": "Picons",
+      "name": "Hellas-Sat 39.0E",
+      "path": "/usr/share/enigma2/picons/picons",
+      "icon": ""
+    },
+    {
+      "id": "picons-33",
+      "section": "picons",
+      "category": "Picons",
+      "name": "Turksat 42.0E",
+      "path": "/usr/share/enigma2/picons/picons",
+      "icon": ""
+    },
+    {
+      "id": "picons-34",
+      "section": "picons",
+      "category": "Picons",
+      "name": "AzerSpace 45.0E",
+      "path": "/usr/share/enigma2/picons/picons",
+      "icon": ""
+    },
+    {
+      "id": "picons-35",
+      "section": "picons",
+      "category": "Picons",
+      "name": "AzerSpace 46.0E",
+      "path": "/usr/share/enigma2/picons/picons",
+      "icon": ""
+    },
+    {
+      "id": "picons-36",
+      "section": "picons",
+      "category": "Picons",
+      "name": "Turksat 50.0E-57E",
+      "path": "/usr/share/enigma2/picons/picons",
+      "icon": ""
+    },
+    {
+      "id": "picons-37",
+      "section": "picons",
+      "category": "Picons",
+      "name": "Belintersat 51.5E",
+      "path": "/usr/share/enigma2/picons/picons",
+      "icon": ""
+    },
+    {
+      "id": "picons-38",
+      "section": "picons",
+      "category": "Picons",
+      "name": "TurkmenAlem 52.0E",
+      "path": "/usr/share/enigma2/picons/picons",
+      "icon": ""
+    },
+    {
+      "id": "picons-39",
+      "section": "picons",
+      "category": "Picons",
+      "name": "Yahsat 52.5E",
+      "path": "/usr/share/enigma2/picons/picons",
+      "icon": ""
+    },
+    {
+      "id": "picons-40",
+      "section": "picons",
+      "category": "Picons",
+      "name": "Express 53.0E",
+      "path": "/usr/share/enigma2/picons/picons",
+      "icon": ""
+    },
+    {
+      "id": "picons-41",
+      "section": "picons",
+      "category": "Picons",
+      "name": "Yamal 54.9E",
+      "path": "/usr/share/enigma2/picons/picons",
+      "icon": ""
+    },
+    {
+      "id": "picons-42",
+      "section": "picons",
+      "category": "Picons",
+      "name": "Intelsat 60.0E-68.0E",
+      "path": "/usr/share/enigma2/picons/picons",
+      "icon": ""
+    },
+    {
+      "id": "picons-43",
+      "section": "picons",
+      "category": "Picons",
+      "name": "Intelsat 62.0E",
+      "path": "/usr/share/enigma2/picons/picons",
+      "icon": ""
+    },
+    {
+      "id": "picons-44",
+      "section": "picons",
+      "category": "Picons",
+      "name": "Eutelsat 70.0E-75.0E",
+      "path": "/usr/share/enigma2/picons/picons",
+      "icon": ""
+    },
+    {
+      "id": "picons-45",
+      "section": "picons",
+      "category": "Picons",
+      "name": "Intelsat 72.1E",
+      "path": "/usr/share/enigma2/picons/picons",
+      "icon": ""
+    },
+    {
+      "id": "picons-46",
+      "section": "picons",
+      "category": "Picons",
+      "name": "ABS 75.0E",
+      "path": "/usr/share/enigma2/picons/picons",
+      "icon": ""
+    },
+    {
+      "id": "picons-47",
+      "section": "picons",
+      "category": "Picons",
+      "name": "Picons Other",
+      "path": "/usr/share/enigma2/picons/picons",
+      "icon": ""
+    },
+    {
+      "id": "picons-48",
+      "section": "picons",
+      "category": "Picons",
+      "name": "Chocholousek Picons",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/ChocholousekPicons",
+      "icon": ""
+    },
+    {
+      "id": "remove-0",
+      "section": "remove",
+      "category": "Remove",
+      "name": "Remove all_Crashlogs",
+      "path": "/home/root/logs/playlists/playlists",
+      "icon": ""
+    },
+    {
+      "id": "remove-1",
+      "section": "remove",
+      "category": "Remove",
+      "name": "Remove-Ajpanel",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/AJPanel/playlists/playlists",
+      "icon": ""
+    },
+    {
+      "id": "remove-2",
+      "section": "remove",
+      "category": "Remove",
+      "name": "Remove BouquetMakerXtream",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/BouquetMakerXtream/playlists/playlists",
+      "icon": ""
+    },
+    {
+      "id": "remove-3",
+      "section": "remove",
+      "category": "Remove",
+      "name": "Remove Feed-Dreamarapia",
+      "path": "/etc/opkg/playlists/playlists",
+      "icon": ""
+    },
+    {
+      "id": "remove-4",
+      "section": "remove",
+      "category": "Remove",
+      "name": "Remove Feed-geminilocale",
+      "path": "/etc/opkg/playlists/playlists",
+      "icon": ""
+    },
+    {
+      "id": "remove-5",
+      "section": "remove",
+      "category": "Remove",
+      "name": "Remove all Neoboot",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/NeoBoot/playlists/playlists",
+      "icon": ""
+    },
+    {
+      "id": "remove-6",
+      "section": "remove",
+      "category": "Remove",
+      "name": "Remove Oscam_Supcam",
+      "path": "/usr/bin/oscam/playlists/playlists",
+      "icon": ""
+    },
+    {
+      "id": "remove-7",
+      "section": "remove",
+      "category": "Remove",
+      "name": "Remove CCcamFinder",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/CCcamFinder/playlists/playlists",
+      "icon": ""
+    },
+    {
+      "id": "remove-8",
+      "section": "remove",
+      "category": "Remove",
+      "name": "Remove-Channels",
+      "path": "/etc/enigma2/playlists/playlists",
+      "icon": ""
+    },
+    {
+      "id": "remove-9",
+      "section": "remove",
+      "category": "Remove",
+      "name": "Remove-E2iplayer",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/E2IPlayer/playlists/playlists",
+      "icon": ""
+    },
+    {
+      "id": "remove-10",
+      "section": "remove",
+      "category": "Remove",
+      "name": "Remove-Emu-All",
+      "path": "/usr/bin/playlists/playlists",
+      "icon": ""
+    },
+    {
+      "id": "remove-11",
+      "section": "remove",
+      "category": "Remove",
+      "name": "Remove-Emu-Ncam",
+      "path": "/usr/bin/ncam/playlists/playlists",
+      "icon": ""
+    },
+    {
+      "id": "remove-12",
+      "section": "remove",
+      "category": "Remove",
+      "name": "Remove-Emu-Oscam",
+      "path": "/usr/bin/oscam/playlists/playlists",
+      "icon": ""
+    },
+    {
+      "id": "remove-13",
+      "section": "remove",
+      "category": "Remove",
+      "name": "Remove-Emus-Config-Files",
+      "path": "/etc/tuxbox/config/playlists/playlists",
+      "icon": ""
+    },
+    {
+      "id": "remove-14",
+      "section": "remove",
+      "category": "Remove",
+      "name": "Remove-Jedimaker-playlists",
+      "path": "/etc/enigma2/jedimakerxtream/playlists/playlists",
+      "icon": ""
+    },
+    {
+      "id": "remove-15",
+      "section": "remove",
+      "category": "Remove",
+      "name": "Remove-Plugin-mediaplayer2",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/MediaPlayer2/playlists/playlists",
+      "icon": ""
+    },
+    {
+      "id": "remove-16",
+      "section": "remove",
+      "category": "Remove",
+      "name": "Remove-Plugin-NetSpeedTest",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/NetSpeedTest/playlists/playlists",
+      "icon": ""
+    },
+    {
+      "id": "remove-17",
+      "section": "remove",
+      "category": "Remove",
+      "name": "Remove-Plugin-OscamFinder",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/OscamFinder/playlists/playlists",
+      "icon": ""
+    },
+    {
+      "id": "remove-18",
+      "section": "remove",
+      "category": "Remove",
+      "name": "Remove-Plugin-alternativesoftcammanager",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/AlternativeSoftCamManager/playlists/playlists",
+      "icon": ""
+    },
+    {
+      "id": "remove-19",
+      "section": "remove",
+      "category": "Remove",
+      "name": "Remove-Plugin-Plugin-FreeServer",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/FreeServer/playlists/playlists",
+      "icon": ""
+    },
+    {
+      "id": "remove-20",
+      "section": "remove",
+      "category": "Remove",
+      "name": "Remove-Plugin-levi45-addonsmanager",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/Levi45AddonsManager/playlists/playlists",
+      "icon": ""
+    },
+    {
+      "id": "remove-21",
+      "section": "remove",
+      "category": "Remove",
+      "name": "Remove-Plugin-m3u-converter",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/M3UConverter/playlists/playlists",
+      "icon": ""
+    },
+    {
+      "id": "remove-22",
+      "section": "remove",
+      "category": "Remove",
+      "name": "Remove-Plugin-SatVenusPANEL",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/SatVenusPanel/playlists/playlists",
+      "icon": ""
+    },
+    {
+      "id": "remove-23",
+      "section": "remove",
+      "category": "Remove",
+      "name": "Remove-Plugin-tvpanel",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/TvPanel/playlists/playlists",
+      "icon": ""
+    },
+    {
+      "id": "remove-24",
+      "section": "remove",
+      "category": "Remove",
+      "name": "Remove-Plugin-XCplugin",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/XCPlugin/playlists/playlists",
+      "icon": ""
+    },
+    {
+      "id": "remove-25",
+      "section": "remove",
+      "category": "Remove",
+      "name": "Remove-Plugin-Xstreamity",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/XStreamity/playlists/playlists",
+      "icon": ""
+    },
+    {
+      "id": "remove-26",
+      "section": "remove",
+      "category": "Remove",
+      "name": "Remove-Plugin-youtube",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/YouTube/playlists/playlists",
+      "icon": ""
+    },
+    {
+      "id": "remove-27",
+      "section": "remove",
+      "category": "Remove",
+      "name": "Remove-Plugin-SoftCam_Manager",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/SoftCamManager/playlists/playlists",
+      "icon": ""
+    },
+    {
+      "id": "remove-28",
+      "section": "remove",
+      "category": "Remove",
+      "name": "Remove-Plugin-Subssupport",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/SubsSupport/playlists/playlists",
+      "icon": ""
+    },
+    {
+      "id": "remove-29",
+      "section": "remove",
+      "category": "Remove",
+      "name": "Remove-Plugin-Tvpanel",
+      "path": "/usr/lib/enigma2/python/Plugins/Extensions/TvPanel/playlists/playlists",
+      "icon": ""
+    },
+    {
+      "id": "remove-30",
+      "section": "remove",
+      "category": "Remove",
+      "name": "Remove-Tuner-Settings",
+      "path": "/etc/enigma2/settings/playlists",
+      "icon": ""
+    },
+    {
+      "id": "remove-31",
+      "section": "remove",
+      "category": "Remove",
+      "name": "Remove-Xstreamity-playlists",
+      "path": "/etc/enigma2/playlists/playlists",
+      "icon": ""
+    }
+  ]
+}

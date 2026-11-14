@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import {
   Activity, AlertTriangle, ArrowDownLeft, ArrowUpLeft, Bot, CheckCircle2,
-  ChevronLeft, CircleHelp, Clock3, Cpu, Database, FileSearch, HardDrive,
+  ChevronLeft, CircleHelp, Clock3, Cpu, Database, FileSearch, HardDrive, Copy, Terminal,
   LayoutDashboard, ListVideo, MemoryStick, Menu, Package, Search, Settings,
   ShieldCheck, Stethoscope, Tv, Wifi, X, Server, RefreshCw, LockKeyhole, Link2
 } from "lucide-react";
 import { demoDevice, metrics, findings } from "./data/demo";
+import pluginsData from "./data/plugins.json";
+import commandsData from "./data/commands.json";
 import { pairLocalBridge, getLocalBridgeStatus, connectLocalReceiver } from "./services/localBridge";
 import { getReceiverSnapshot, getConnectionCapabilities } from "./services/receiverAdapter";
 
@@ -129,40 +131,84 @@ function ReceiverDetails() {
 }
 
 
-const demoPlugins = [
-  { id: 1, name: "AutoBouquetsMaker", category: "القنوات", version: "3.1.2", compatibility: "يتطلب التحقق", description: "أداة لتنظيم الباقات وتحديث ترتيب القنوات.", tags: ["تنظيم", "قنوات"] },
-  { id: 2, name: "EPGImport", category: "دليل البرامج", version: "1.0.4", compatibility: "يتطلب التحقق", description: "إدارة مصادر دليل البرامج الإلكتروني EPG.", tags: ["EPG", "دليل البرامج"] },
-  { id: 3, name: "OpenWebif", category: "أدوات النظام", version: "مكوّن نظام", compatibility: "معلومات توضيحية", description: "واجهة ويب لإدارة بعض وظائف Enigma2 عند تفعيلها.", tags: ["واجهة ويب", "إدارة"] },
-  { id: 4, name: "SubtitlePlayer", category: "الوسائط", version: "غير محدد", compatibility: "يتطلب التحقق", description: "عرض وإدارة ملفات الترجمة أثناء تشغيل الوسائط.", tags: ["ترجمة", "وسائط"] },
-  { id: 5, name: "MediaPlayer", category: "الوسائط", version: "مكوّن نظام", compatibility: "معلومات توضيحية", description: "مشغل وسائط ضمن بيئة Enigma2.", tags: ["فيديو", "صوت"] },
-  { id: 6, name: "Backup Suite", category: "النسخ الاحتياطي", version: "1.0", compatibility: "يتطلب التحقق", description: "مفهوم توضيحي لإدارة النسخ الاحتياطية قبل الصيانة.", tags: ["نسخ احتياطي", "صيانة"] }
-];
+const catalogEntries = pluginsData.items || [];
+const commandEntries = commandsData.items || [];
 
 function PluginStore() {
+  const [view, setView] = useState("plugins");
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState("الكل");
+  const [commandType, setCommandType] = useState("الكل");
   const [selected, setSelected] = useState(null);
-  const categories = ["الكل", ...new Set(demoPlugins.map(item => item.category))];
-  const filtered = demoPlugins.filter(item => (category === "الكل" || item.category === category) && (item.name + " " + item.description + " " + item.tags.join(" ")).toLowerCase().includes(query.toLowerCase()));
-  return <section className="module-page">
-    <div className="demo-notice"><AlertTriangle size={16}/><span>كتالوج تجريبي للعرض فقط؛ لا توجد عمليات تنزيل أو تثبيت أو تحديث فعلية، والتوافق يحتاج مراجعة إصدار صورة النظام.</span></div>
-    <div className="module-toolbar glass">
-      <div className="module-search"><Search size={17}/><input value={query} onChange={e => setQuery(e.target.value)} placeholder="ابحث باسم البلجن أو وظيفته..." /></div>
+  const [copiedId, setCopiedId] = useState("");
+  const categories = ["الكل", ...new Set((view === "plugins" ? catalogEntries : commandEntries).map(item => item.category))];
+  const filteredPlugins = catalogEntries.filter(item =>
+    (category === "الكل" || item.category === category) &&
+    (item.name + " " + item.category + " " + item.path).toLowerCase().includes(query.toLowerCase())
+  );
+  const filteredCommands = commandEntries.filter(item =>
+    (category === "الكل" || item.category === category) &&
+    (commandType === "الكل" || item.type === commandType) &&
+    (item.name + " " + item.category + " " + item.path + " " + item.command).toLowerCase().includes(query.toLowerCase())
+  );
+  const copyCommand = async (item) => {
+    try {
+      await navigator.clipboard.writeText(item.command);
+      setCopiedId(item.id);
+      window.setTimeout(() => setCopiedId(current => current === item.id ? "" : current), 1800);
+    } catch {
+      setCopiedId("");
+    }
+  };
+
+  return <section className="module-page catalog-page">
+    <div className="catalog-switcher glass">
+      <button className={view === "plugins" ? "active" : ""} onClick={() => { setView("plugins"); setCategory("الكل"); setQuery(""); }}>
+        <Package size={17}/> البلجنات والأدوات <span>{catalogEntries.length.toLocaleString("ar-EG")}</span>
+      </button>
+      <button className={view === "commands" ? "active" : ""} onClick={() => { setView("commands"); setCategory("الكل"); setQuery(""); }}>
+        <Terminal size={17}/> مكتبة الأوامر <span>{commandEntries.length.toLocaleString("ar-EG")}</span>
+      </button>
+    </div>
+    <div className="module-toolbar glass catalog-toolbar">
+      <div className="module-search"><Search size={17}/><input value={query} onChange={e => setQuery(e.target.value)} placeholder={view === "plugins" ? "ابحث باسم البلجن أو الأداة أو المسار..." : "ابحث باسم البلجن أو الأمر أو القسم..."}/></div>
+      {view === "commands" && <div className="catalog-type-filter">
+        {[["الكل","الكل"],["install","التثبيت"],["remove","الإزالة"]].map(([value,label]) => <button key={value} className={commandType === value ? "selected" : ""} onClick={() => setCommandType(value)}>{label}</button>)}
+      </div>}
       <div className="category-pills">{categories.map(item => <button key={item} className={category === item ? "selected" : ""} onClick={() => setCategory(item)}>{item}</button>)}</div>
     </div>
-    <div className="module-summary"><strong>{filtered.length}</strong><span>إضافة في الكتالوج التجريبي</span><small>بيانات توضيحية غير مرتبطة بالرسيفر</small></div>
-    <div className="plugin-grid">{filtered.map(item => <article className="glass plugin-card" key={item.id}>
-      <div className="plugin-card-top"><span className="plugin-symbol"><Package size={20}/></span><span className="demo-tag">DEMO</span></div>
-      <div className="plugin-category">{item.category}</div><h3>{item.name}</h3><p>{item.description}</p>
-      <div className="plugin-meta"><span>الإصدار: {item.version}</span><span>{item.compatibility}</span></div>
-      <button className="secondary-button plugin-details-button" onClick={() => setSelected(item)}>عرض التفاصيل <ChevronLeft size={15}/></button>
-    </article>)}</div>
-    {filtered.length === 0 && <div className="glass empty-state">مفيش إضافات مطابقة للبحث الحالي.</div>}
-    {selected && <div className="modal-backdrop" onClick={() => setSelected(null)}><section className="glass plugin-modal" onClick={e => e.stopPropagation()}>
+    {view === "plugins" ? <>
+      <div className="module-summary"><strong>{filteredPlugins.length.toLocaleString("ar-EG")}</strong><span>بلجن وأداة</span><small>مرتبة حسب القسم</small></div>
+      <div className="catalog-grid">{filteredPlugins.map(item => <article className="glass catalog-card" key={item.id}>
+        <div className="catalog-card-head"><span className="plugin-symbol"><Package size={19}/></span><span className="catalog-category">{item.category}</span></div>
+        <h3>{item.name}</h3>
+        <p className="catalog-path" dir="ltr">{item.path || "—"}</p>
+        <button className="secondary-button catalog-open" onClick={() => setSelected(item)}>التفاصيل <ChevronLeft size={15}/></button>
+      </article>)}</div>
+      {filteredPlugins.length === 0 && <div className="glass empty-state">لا توجد نتائج مطابقة.</div>}
+    </> : <>
+      <div className="module-summary"><strong>{filteredCommands.length.toLocaleString("ar-EG")}</strong><span>أمر في النتائج</span><small>{commandType === "install" ? "أوامر التثبيت" : commandType === "remove" ? "أوامر الإزالة" : "التثبيت والإزالة"}</small></div>
+      <div className="catalog-command-grid">{filteredCommands.map(item => <article className="glass catalog-command-card" key={item.id}>
+        <div className="catalog-command-head"><div><span className="catalog-category">{item.category}</span><h3>{item.name}</h3></div><span className={"command-kind " + item.type}>{item.typeLabel}</span></div>
+        <code className="catalog-command-code" dir="ltr">{item.command}</code>
+        <div className="catalog-command-footer">
+          {item.sourceUrl ? <a href={item.sourceUrl} target="_blank" rel="noreferrer">المصدر <Link2 size={13}/></a> : <span/>}
+          <button className="secondary-button copy-command" onClick={() => copyCommand(item)}><Copy size={14}/>{copiedId === item.id ? "تم النسخ" : "نسخ الأمر"}</button>
+        </div>
+      </article>)}</div>
+      {filteredCommands.length === 0 && <div className="glass empty-state">لا توجد أوامر مطابقة.</div>}
+    </>}
+    {selected && <div className="modal-backdrop" onClick={() => setSelected(null)}><section className="glass plugin-modal catalog-detail-modal" onClick={e => e.stopPropagation()}>
       <button className="modal-close" onClick={() => setSelected(null)} aria-label="إغلاق"><X size={18}/></button>
-      <span className="plugin-symbol"><Package size={22}/></span><small>{selected.category} · بيانات تجريبية</small><h2>{selected.name}</h2><p>{selected.description}</p>
-      <div className="plugin-meta"><span>الإصدار: {selected.version}</span><span>{selected.compatibility}</span></div>
-      <div className="demo-notice"><AlertTriangle size={15}/><span>لا يمكن تثبيت هذا العنصر من الواجهة الحالية. راجع المصدر والتوافق يدويًا قبل أي استخدام فعلي.</span></div>
+      <span className="plugin-symbol"><Package size={22}/></span><small>{selected.category}</small><h2>{selected.name}</h2>
+      <div className="catalog-detail-path"><span>مسار العنصر</span><code dir="ltr">{selected.path || "—"}</code></div>
+      <div className="catalog-related-commands">
+        {commandEntries.filter(item => item.id === selected.id || item.id === selected.id + "-remove").map(item => <div key={item.id}>
+          <div className="catalog-command-head"><strong>{item.typeLabel}</strong><span className={"command-kind " + item.type}>{item.typeLabel}</span></div>
+          <code className="catalog-command-code" dir="ltr">{item.command}</code>
+          <button className="secondary-button copy-command" onClick={() => copyCommand(item)}><Copy size={14}/>{copiedId === item.id ? "تم النسخ" : "نسخ الأمر"}</button>
+        </div>)}
+      </div>
     </section></div>}
   </section>;
 }
