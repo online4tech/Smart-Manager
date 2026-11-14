@@ -5,7 +5,8 @@ import {
   LayoutDashboard, ListVideo, MemoryStick, Menu, Package, Search, Settings,
   ShieldCheck, Stethoscope, Tv, Wifi, X, Server, RefreshCw, LockKeyhole
 } from "lucide-react";
-import { demoDevice, metrics, findings } from "./data/demo";\nimport { getReceiverSnapshot, getConnectionCapabilities } from "./services/receiverAdapter";
+import { demoDevice, metrics, findings } from "./data/demo";
+import { getReceiverSnapshot, getConnectionCapabilities } from "./services/receiverAdapter";
 
 const scanReports = {
   full: {
