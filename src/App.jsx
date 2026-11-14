@@ -6,6 +6,7 @@ import {
   ShieldCheck, Stethoscope, Tv, Wifi, X, Server, RefreshCw, LockKeyhole, Link2
 } from "lucide-react";
 import { demoDevice, metrics, findings } from "./data/demo";
+import enigma2Catalog from "./data/enigma2-catalog.json";
 import { pairLocalBridge, getLocalBridgeStatus, connectLocalReceiver } from "./services/localBridge";
 import { getReceiverSnapshot, getConnectionCapabilities } from "./services/receiverAdapter";
 
@@ -129,40 +130,56 @@ function ReceiverDetails() {
 }
 
 
-const demoPlugins = [
-  { id: 1, name: "AutoBouquetsMaker", category: "القنوات", version: "3.1.2", compatibility: "يتطلب التحقق", description: "أداة لتنظيم الباقات وتحديث ترتيب القنوات.", tags: ["تنظيم", "قنوات"] },
-  { id: 2, name: "EPGImport", category: "دليل البرامج", version: "1.0.4", compatibility: "يتطلب التحقق", description: "إدارة مصادر دليل البرامج الإلكتروني EPG.", tags: ["EPG", "دليل البرامج"] },
-  { id: 3, name: "OpenWebif", category: "أدوات النظام", version: "مكوّن نظام", compatibility: "معلومات توضيحية", description: "واجهة ويب لإدارة بعض وظائف Enigma2 عند تفعيلها.", tags: ["واجهة ويب", "إدارة"] },
-  { id: 4, name: "SubtitlePlayer", category: "الوسائط", version: "غير محدد", compatibility: "يتطلب التحقق", description: "عرض وإدارة ملفات الترجمة أثناء تشغيل الوسائط.", tags: ["ترجمة", "وسائط"] },
-  { id: 5, name: "MediaPlayer", category: "الوسائط", version: "مكوّن نظام", compatibility: "معلومات توضيحية", description: "مشغل وسائط ضمن بيئة Enigma2.", tags: ["فيديو", "صوت"] },
-  { id: 6, name: "Backup Suite", category: "النسخ الاحتياطي", version: "1.0", compatibility: "يتطلب التحقق", description: "مفهوم توضيحي لإدارة النسخ الاحتياطية قبل الصيانة.", tags: ["نسخ احتياطي", "صيانة"] }
-];
+const catalogSectionTitles = Object.fromEntries(
+  (enigma2Catalog.main || []).map(item => [item.section, item.title])
+);
+
+const catalogEntries = Object.entries(enigma2Catalog)
+  .filter(([section, entries]) => section !== "main" && Array.isArray(entries))
+  .flatMap(([section, entries]) => entries.map((item, index) => ({
+    id: section + "-" + index,
+    section,
+    category: catalogSectionTitles[section] || section.replace(/[-_]/g, " "),
+    name: item.name || "عنصر بدون اسم",
+    command: item.cmd || "",
+    path: item.path || "",
+    removeCommand: item.remove_cmd || "",
+    sourceUrl: (item.cmd || "").match(/https?:\/\/[^\s"'|]+/)?.[0] || ""
+  })));
 
 function PluginStore() {
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState("الكل");
   const [selected, setSelected] = useState(null);
-  const categories = ["الكل", ...new Set(demoPlugins.map(item => item.category))];
-  const filtered = demoPlugins.filter(item => (category === "الكل" || item.category === category) && (item.name + " " + item.description + " " + item.tags.join(" ")).toLowerCase().includes(query.toLowerCase()));
+  const categories = ["الكل", ...new Set(catalogEntries.map(item => item.category))];
+  const filtered = catalogEntries.filter(item =>
+    (category === "الكل" || item.category === category) &&
+    (item.name + " " + item.category + " " + item.path + " " + item.command).toLowerCase().includes(query.toLowerCase())
+  );
+
   return <section className="module-page">
-    <div className="demo-notice"><AlertTriangle size={16}/><span>كتالوج تجريبي للعرض فقط؛ لا توجد عمليات تنزيل أو تثبيت أو تحديث فعلية، والتوافق يحتاج مراجعة إصدار صورة النظام.</span></div>
+    <div className="demo-notice"><AlertTriangle size={16}/><span>كتالوج مستورد من ملف البيانات المرفق. الأوامر والمصادر غير مراجعة أمنيًا أو من حيث التوافق؛ لا توجد عمليات تثبيت أو حذف أو تنفيذ من هذه الواجهة.</span></div>
     <div className="module-toolbar glass">
-      <div className="module-search"><Search size={17}/><input value={query} onChange={e => setQuery(e.target.value)} placeholder="ابحث باسم البلجن أو وظيفته..." /></div>
+      <div className="module-search"><Search size={17}/><input value={query} onChange={e => setQuery(e.target.value)} placeholder="ابحث باسم البلجن أو القسم أو مسار التثبيت..." /></div>
       <div className="category-pills">{categories.map(item => <button key={item} className={category === item ? "selected" : ""} onClick={() => setCategory(item)}>{item}</button>)}</div>
     </div>
-    <div className="module-summary"><strong>{filtered.length}</strong><span>إضافة في الكتالوج التجريبي</span><small>بيانات توضيحية غير مرتبطة بالرسيفر</small></div>
+    <div className="module-summary"><strong>{filtered.length.toLocaleString("ar-EG")}</strong><span>عنصر في مكتبة Enigma2</span><small>بيانات من الملف المرفق · غير مرتبطة بحالة الرسيفر</small></div>
     <div className="plugin-grid">{filtered.map(item => <article className="glass plugin-card" key={item.id}>
-      <div className="plugin-card-top"><span className="plugin-symbol"><Package size={20}/></span><span className="demo-tag">DEMO</span></div>
-      <div className="plugin-category">{item.category}</div><h3>{item.name}</h3><p>{item.description}</p>
-      <div className="plugin-meta"><span>الإصدار: {item.version}</span><span>{item.compatibility}</span></div>
-      <button className="secondary-button plugin-details-button" onClick={() => setSelected(item)}>عرض التفاصيل <ChevronLeft size={15}/></button>
+      <div className="plugin-card-top"><span className="plugin-symbol"><Package size={20}/></span><span className="demo-tag">مستورد</span></div>
+      <div className="plugin-category">{item.category}</div><h3>{item.name}</h3>
+      <p>{item.path ? "مسار العنصر: " + item.path : "لا يوجد مسار مسجل في الملف."}</p>
+      <div className="plugin-meta"><span>{item.command ? "يتضمن أمرًا" : "بدون أمر تثبيت"}</span><span>{item.removeCommand ? "يتضمن أمر إزالة" : "لا يوجد أمر إزالة"}</span></div>
+      <button className="secondary-button plugin-details-button" onClick={() => setSelected(item)}>عرض البيانات <ChevronLeft size={15}/></button>
     </article>)}</div>
-    {filtered.length === 0 && <div className="glass empty-state">مفيش إضافات مطابقة للبحث الحالي.</div>}
+    {filtered.length === 0 && <div className="glass empty-state">مفيش عناصر مطابقة للبحث الحالي.</div>}
     {selected && <div className="modal-backdrop" onClick={() => setSelected(null)}><section className="glass plugin-modal" onClick={e => e.stopPropagation()}>
       <button className="modal-close" onClick={() => setSelected(null)} aria-label="إغلاق"><X size={18}/></button>
-      <span className="plugin-symbol"><Package size={22}/></span><small>{selected.category} · بيانات تجريبية</small><h2>{selected.name}</h2><p>{selected.description}</p>
-      <div className="plugin-meta"><span>الإصدار: {selected.version}</span><span>{selected.compatibility}</span></div>
-      <div className="demo-notice"><AlertTriangle size={15}/><span>لا يمكن تثبيت هذا العنصر من الواجهة الحالية. راجع المصدر والتوافق يدويًا قبل أي استخدام فعلي.</span></div>
+      <span className="plugin-symbol"><Package size={22}/></span><small>{selected.category} · بيانات مستوردة وغير مراجعة</small><h2>{selected.name}</h2>
+      <div className="plugin-meta"><span>مسار العنصر</span><code dir="ltr">{selected.path || "غير مسجل"}</code></div>
+      {selected.sourceUrl && <p className="catalog-source">المصدر المذكور في الأمر: <a href={selected.sourceUrl} target="_blank" rel="noreferrer">{selected.sourceUrl}</a></p>}
+      {selected.command && <div className="catalog-command"><strong>أمر التثبيت المسجل — غير مُراجع</strong><code dir="ltr">{selected.command}</code></div>}
+      {selected.removeCommand && <div className="catalog-command"><strong>أمر الإزالة المسجل — غير مُراجع</strong><code dir="ltr">{selected.removeCommand}</code></div>}
+      <div className="demo-notice"><AlertTriangle size={15}/><span>هذه الأوامر منقولة كما وردت في الملف، ولم يتم فحص محتوى السكريبتات أو إثبات توافقها. لا تشغّلها مباشرة؛ خصوصًا أوامر التنزيل ثم تمرير الناتج إلى shell أو أوامر الحذف.</span></div>
     </section></div>}
   </section>;
 }
