@@ -76,7 +76,7 @@ function ReceiverDetails() {
           <div className="device-meta"><span>{snapshot.device.image}</span><i/><span>{snapshot.device.enigmaVersion}</span><i/><span>{snapshot.device.ip}</span></div>
         </div>
       </div>
-      <div className="device-status"><span className={snapshot.connected ? "live-dot" : "demo-status-dot"}/><div><strong>{snapshot.connected ? "متصل فعليًا" : "غير متصل"}</strong><small>{snapshot.connected ? "OpenWebif · قراءة فقط" : "لا توجد جلسة رسيفر محفوظة"}</small></div></div>
+      <div className="device-status"><span className={snapshot.connected ? "live-dot" : "offline-status-dot"}/><div><strong>{snapshot.connected ? "متصل فعليًا" : "غير متصل"}</strong><small>{snapshot.connected ? "OpenWebif · قراءة فقط" : "لا توجد جلسة رسيفر محفوظة"}</small></div></div>
     </section>
 
     {!snapshot.connected && <div className="connection-notice"><AlertTriangle size={16}/><span>اتصل بالرسيفر من زر الجسر المحلي لعرض بياناته الحقيقية.</span></div>}
@@ -612,7 +612,7 @@ export default function App() {
       <button className="nav-item compact"><span className="nav-icon"><CircleHelp size={18}/></span><span className="nav-copy"><strong>المساعدة والتوثيق</strong></span></button>
       <div className="sidebar-spacer"/>
       <div className="receiver-mini glass">
-        <div className="receiver-mini-top"><span className={liveSnapshot?.connected ? "live-dot" : "demo-status-dot"}/><span>{liveSnapshot?.connected ? "جهاز متصل" : "بانتظار الاتصال"}</span><span className="connection-status-tag">{liveSnapshot?.connected ? "LIVE" : "OFFLINE"}</span></div>
+        <div className="receiver-mini-top"><span className={liveSnapshot?.connected ? "live-dot" : "offline-status-dot"}/><span>{liveSnapshot?.connected ? "جهاز متصل" : "بانتظار الاتصال"}</span><span className="connection-status-tag">{liveSnapshot?.connected ? "LIVE" : "OFFLINE"}</span></div>
         <strong>{device.name}</strong>
         <small>{device.image}</small>
         <div className="receiver-ip"><Wifi size={13}/> {device.ip}</div>
@@ -627,7 +627,7 @@ export default function App() {
           <div className="breadcrumb">المنظومة <ChevronLeft size={14}/> <strong>{activeNav}</strong></div>
         </div>
         <div className="topbar-actions">
-          <LocalBridgeControl/><span className="connection-pill"><span className={liveSnapshot?.connected ? "live-dot" : "demo-status-dot"}/> {liveSnapshot?.connected ? "بيانات فعلية · قراءة فقط" : "بانتظار اتصال الرسيفر"}</span>
+          <LocalBridgeControl/><span className="connection-pill"><span className={liveSnapshot?.connected ? "live-dot" : "offline-status-dot"}/> {liveSnapshot?.connected ? "بيانات فعلية · قراءة فقط" : "بانتظار اتصال الرسيفر"}</span>
           <button className="icon-button" aria-label="بحث"><Search size={18}/></button>
           <button className="icon-button" aria-label="الإعدادات"><Settings size={18}/></button>
           <div className="avatar">O4</div>
@@ -650,7 +650,7 @@ export default function App() {
             <div className="device-visual"><Tv size={29}/><span className="device-signal"/></div>
             <div><div className="device-overline">الجهاز المحدد</div><h2>{device.name}</h2><div className="device-meta"><span>{device.image}</span><i/> <span>{device.enigmaVersion}</span><i/> <span>{device.ip}</span></div></div>
           </div>
-          <div className="device-status"><span className={liveSnapshot?.connected ? "live-dot" : "demo-status-dot"}/><div><strong>{liveSnapshot?.connected ? "متصل فعليًا" : "غير متصل"}</strong><small>{liveSnapshot?.connected ? "OpenWebif · قراءة فقط" : "لا توجد بيانات حية"}</small></div></div>
+          <div className="device-status"><span className={liveSnapshot?.connected ? "live-dot" : "offline-status-dot"}/><div><strong>{liveSnapshot?.connected ? "متصل فعليًا" : "غير متصل"}</strong><small>{liveSnapshot?.connected ? "OpenWebif · قراءة فقط" : "لا توجد بيانات حية"}</small></div></div>
         </section>
 
         {!liveSnapshot?.connected && <div className="connection-notice"><AlertTriangle size={16}/><span>لا توجد بيانات رسيفر حية حاليًا. اتصل بالجسر المحلي لقراءة المعلومات الفعلية.</span></div>}
