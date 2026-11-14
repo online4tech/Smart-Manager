@@ -162,6 +162,16 @@ function PluginStore() {
   };
 
   return <section className="module-page catalog-page">
+    <div className="glass bridge-download-strip">
+      <div className="bridge-download-copy">
+        <span className="bridge-kicker">ONLINE4TECH LOCAL BRIDGE</span>
+        <strong>قبل توصيل الرسيفر، حمّل الجسر وثبّته على الكمبيوتر</strong>
+        <small>يعمل في الخلفية ويتيح اتصالًا محليًا آمنًا من نفس الكمبيوتر.</small>
+      </div>
+      <a className="primary-button bridge-download-link" href="https://github.com/online4tech/Smart-Manager/releases/latest/download/Online4Tech-Bridge-Windows.zip">
+        <Package size={16}/> تحميل الجسر لويندوز
+      </a>
+    </div>
     <div className="catalog-switcher glass">
       <button className={view === "plugins" ? "active" : ""} onClick={() => { setView("plugins"); setCategory("الكل"); setQuery(""); }}>
         <Package size={17}/> البلجنات والأدوات <span>{catalogEntries.length.toLocaleString("ar-EG")}</span>
@@ -202,6 +212,11 @@ function PluginStore() {
       <button className="modal-close" onClick={() => setSelected(null)} aria-label="إغلاق"><X size={18}/></button>
       <span className="plugin-symbol"><Package size={22}/></span><small>{selected.category}</small><h2>{selected.name}</h2>
       <div className="catalog-detail-path"><span>مسار العنصر</span><code dir="ltr">{selected.path || "—"}</code></div>
+      <div className="catalog-install-actions">
+        <button className="primary-button" disabled title="التثبيت الفعلي غير مفعّل حتى اعتماد الحزمة والتحقق من توافقها">تثبيت على الرسيفر · قريبًا</button>
+        <a className="secondary-button" href="https://github.com/online4tech/Smart-Manager/releases/latest/download/Online4Tech-Bridge-Windows.zip"><Package size={14}/> تحميل الجسر</a>
+      </div>
+      <small className="catalog-install-note">زر التثبيت غير مفعّل حاليًا. سيتم تفعيله فقط للعناصر المعتمدة والمتوافقة، وبعد تأكيد المستخدم.</small>
       <div className="catalog-related-commands">
         {commandEntries.filter(item => item.id === selected.id || item.id === selected.id + "-remove").map(item => <div key={item.id}>
           <div className="catalog-command-head"><strong>{item.typeLabel}</strong><span className={"command-kind " + item.type}>{item.typeLabel}</span></div>
