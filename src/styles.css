@@ -266,3 +266,155 @@
 .package-safety-note{display:flex;align-items:flex-start;gap:8px;padding:11px 13px;border:1px solid rgba(96,165,250,.15);background:rgba(59,130,246,.045);border-radius:10px;color:#8fb8df;font-size:9px;line-height:1.8}
 .package-safety-note svg{flex-shrink:0;margin-top:2px}
 @media(max-width:760px){.catalog-switcher{display:grid;grid-template-columns:1fr}.catalog-switcher button{justify-content:flex-start}.package-upload-controls{grid-template-columns:1fr}.package-selected-name{min-height:18px}.package-upload-controls .primary-button{width:100%}.package-metadata-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+
+
+/* Accessibility pass: clearer contrast, larger Arabic type and comfortable controls */
+:root{
+  color:#f4f8ff;
+  --muted:#c0cfe2;
+  --line:rgba(205,224,246,.24);
+  --blue:#8bc4ff;
+  --cyan:#67e5f2;
+}
+html{font-size:16px;text-size-adjust:200%;-webkit-text-size-adjust:200%}
+body{
+  color:#f4f8ff;
+  font-family:"Cairo",Tahoma,Arial,sans-serif;
+  font-size:16px;
+  line-height:1.75;
+  background:
+    radial-gradient(ellipse at 78% -10%,rgba(30,91,150,.28),transparent 38%),
+    radial-gradient(ellipse at 0% 70%,rgba(27,74,119,.18),transparent 35%),
+    #07111f;
+}
+.glass{
+  background:linear-gradient(135deg,rgba(20,42,67,.97),rgba(12,28,48,.96));
+  border-color:rgba(201,222,246,.22);
+  box-shadow:0 12px 34px rgba(0,0,0,.22);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+}
+p{line-height:1.85}
+small{font-size:13px!important;line-height:1.7}
+button,.primary-button,.secondary-button,.bridge-open-button,.text-button,.link-button,
+.catalog-switcher button,.category-pills button,.catalog-type-filter button{
+  font-family:"Cairo",Tahoma,Arial,sans-serif;
+  font-size:14px;
+  line-height:1.5;
+}
+.primary-button{
+  min-height:46px;
+  color:#fff;
+  background:linear-gradient(120deg,#1767c4,#087da8);
+  border-color:#75baff;
+  box-shadow:0 5px 18px rgba(15,105,190,.28);
+  font-weight:800;
+}
+.secondary-button{
+  min-height:44px;
+  color:#e7f2ff;
+  border-color:rgba(190,218,247,.34);
+  background:rgba(157,194,231,.10);
+  font-weight:700;
+}
+button:disabled{opacity:.68}
+a{color:#9bd1ff}
+input,textarea,select{
+  color:#f6f9ff;
+  font-family:"Cairo",Tahoma,Arial,sans-serif;
+  font-size:16px!important;
+}
+input::placeholder,textarea::placeholder{color:#b0c2d8!important;opacity:1}
+:focus-visible{
+  outline:3px solid #ffd166!important;
+  outline-offset:3px;
+  box-shadow:0 0 0 2px #07111f!important;
+}
+.nav-item{min-height:62px;color:#d0dced}
+.nav-copy strong{font-size:15px}
+.nav-copy small{font-size:13px!important;color:#c0cfe2}
+.side-section-label,.receiver-mini-top,.receiver-mini>small,.receiver-ip,.sidebar-footer,
+.breadcrumb,.connection-pill,.device-overline,.device-meta,.device-status small,
+.section-heading p,.panel-heading p,.updated,.metric-detail,.metric-label,
+.scan-option small,.finding-copy p,.finding-copy small,.report-footer,
+.assistant-copy p,.module-summary,.module-summary small,.category-pills button,
+.catalog-type-filter button,.catalog-category,.catalog-path,.catalog-command-footer a,
+.catalog-install-note,.package-upload-hint,.package-selected-name,.package-hash small,
+.package-hash code,.package-not-approved,.package-empty span,.package-safety-note,
+.bridge-description,.bridge-capabilities>div,.bridge-message,.bridge-error,
+.bridge-safety-note,.bridge-receiver-details>div,.adapter-note,.service-row>small,
+.info-tile small,.resource-tile small,.connection-state small,.capability-list li,
+.table-heading p,.channel-table th,.channel-table td,.log-disclaimer,
+.log-finding p,.log-empty,.matched-lines>strong,.matched-lines code{
+  color:#c0cfe2;
+  font-size:13px!important;
+  line-height:1.8;
+}
+.page-heading h1{font-family:"Cairo",Tahoma,Arial,sans-serif;font-size:34px;line-height:1.4;color:#fff}
+.title-ar{font-size:19px;color:#d4e7fb}
+.page-heading p{font-size:15px;color:#c0cfe2}
+.eyebrow,.bridge-kicker,.assistant-label{font-size:12px;color:#a8d4ff;letter-spacing:.5px}
+.section-heading h3,.panel-heading h3,.table-heading h3{font-size:18px;color:#fff}
+.metric-label,.scan-option strong,.finding-copy strong,.assistant-copy h3,
+.package-panel-heading h3,.package-empty strong,.bridge-modal h2{font-size:15px;color:#f4f8ff}
+.metric-value,.resource-tile>strong,.channel-stats strong{font-size:30px;color:#fff}
+.metric-detail{margin-top:10px}
+.scan-option{min-height:62px;padding:12px;border-color:rgba(205,224,246,.2);background:rgba(8,22,39,.7)}
+.scan-option strong{font-size:14px}
+.finding-copy p,.recommendation p,.scan-result>p{font-size:14px;color:#d1deee;line-height:1.9}
+.scan-result>strong,.recommendation>strong{font-size:14px}
+.connection-notice{font-size:14px;color:#ffe3a3;border-color:rgba(255,209,102,.42);background:rgba(112,73,10,.28);line-height:1.8}
+.device-status strong,.bridge-status-card strong{font-size:14px;color:#a9f4cf}
+.info-tile strong,.resource-tile>strong,.service-row>span{font-size:15px;color:#f5f8ff}
+.module-search{min-height:50px;background:rgba(3,12,23,.68);border-color:rgba(205,224,246,.28)}
+.module-search input{font-size:16px!important}
+.category-pills button,.catalog-type-filter button{min-height:42px;padding:8px 14px;color:#d6e4f5;border-color:rgba(205,224,246,.25)}
+.category-pills button.selected,.catalog-type-filter button.selected{
+  color:#fff;background:#15599b;border-color:#83c4ff;font-weight:800;
+}
+.catalog-switcher button{min-height:48px;color:#d9e8f8;font-size:15px}
+.catalog-switcher button.active{color:#fff;background:linear-gradient(120deg,#174f91,#075c76);border-color:#8bc4ff}
+.catalog-card h3,.catalog-command-card h3,.plugin-card h3{font-size:16px;line-height:1.7;color:#fff}
+.catalog-card,.catalog-command-card,.package-upload-panel,.package-approved-panel,.panel,
+.channel-table-wrap,.log-tool{border-color:rgba(205,224,246,.24)}
+.catalog-command-code,.catalog-command code,.log-input,.matched-lines code{
+  color:#f0f6ff;background:#06101d;border-color:rgba(205,224,246,.3);
+  font-size:13px;line-height:1.8;
+}
+.package-panel-heading p,.package-stage-status,.package-metadata-grid small,
+.package-metadata-grid strong,.package-empty strong,.package-empty span{font-size:14px!important}
+.package-metadata-grid>div{background:rgba(5,17,31,.75);border-color:rgba(205,224,246,.22)}
+.package-not-approved,.package-safety-note{font-size:14px!important;color:#ffe3a3}
+.package-error,.bridge-error{font-size:14px!important;color:#ffd0d0}
+.package-stage-status{color:#c4f5dd}
+.package-upload-controls .primary-button{white-space:normal}
+.channel-table th{font-size:13px!important;color:#d6e6f7}
+.channel-table td{font-size:14px!important;color:#f0f5fc}
+.bridge-modal,.plugin-modal{background:linear-gradient(145deg,#142c47,#0c1d32);border-color:rgba(205,224,246,.28)}
+.bridge-endpoint,.bridge-code-input,.bridge-host-input,.log-input{
+  background:#050f1c;color:#fff;border-color:rgba(205,224,246,.34);
+}
+.bridge-capabilities span,.bridge-receiver-details span{color:#c0cfe2}
+.bridge-capabilities strong,.bridge-receiver-details b{color:#fff}
+.icon-button{width:44px;height:44px;color:#e8f3ff}
+.nav-item,.secondary-button,.primary-button,.bridge-open-button,
+.catalog-switcher button,.category-pills button,.catalog-type-filter button,
+.package-file-picker,.copy-command,.refresh-data{
+  min-height:44px;
+}
+button:hover:not(:disabled),a:hover{filter:brightness(1.12)}
+button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{
+  outline:3px solid #ffd166!important;outline-offset:3px;
+}
+@media(max-width:760px){
+  .page-heading h1{font-size:30px}
+  .page-heading p{font-size:15px}
+  .content{padding-top:22px}
+  .device-meta{font-size:13px!important}
+  .bridge-open-button{font-size:13px}
+  .catalog-switcher button{font-size:15px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
