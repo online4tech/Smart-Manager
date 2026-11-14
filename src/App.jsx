@@ -356,6 +356,8 @@ function LocalBridgeControl() {
       const result = await connectLocalReceiver(session, { host: receiverHost, scheme: receiverScheme });
       setReceiverInfo(result.receiver?.device || null);
       setBridgeStatus(previous => ({ ...(previous || {}), receiver: result.receiver }));
+      localStorage.setItem("o4t-receiver-config", JSON.stringify({ host: receiverHost.trim(), scheme: receiverScheme }));
+      window.dispatchEvent(new Event("o4t-receiver-updated"));
       setMessage("تم الاتصال بالرسيفر وقراءة بيانات OpenWebif فقط.");
     } catch (err) {
       setError(err.message || "تعذر قراءة بيانات الرسيفر.");
