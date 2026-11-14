@@ -17,7 +17,7 @@ import posixpath
 from pathlib import Path
 from collections import deque
 from threading import Lock
-from urllib.parse import urlsplit
+from urllib.parse import urlsplit, unquote
 
 HOST = "127.0.0.1"
 PORT = 8765
@@ -384,7 +384,7 @@ class Handler(BaseHTTPRequestHandler):
                 payload = self.rfile.read(size)
                 if len(payload) != size:
                     raise ValueError("ipk_size_invalid")
-                result = stage_ipk(payload, self.headers.get("X-Package-Name", "upload.ipk"))
+                result = stage_ipk(payload, unquote(self.headers.get("X-Package-Name", "upload.ipk")))
             except (ValueError, UnicodeDecodeError) as exc:
                 error = str(exc) or "ipk_invalid"
                 messages = {
