@@ -68,7 +68,7 @@ def user_data_root():
 
 def parse_ipk_metadata(payload):
     """Inspect an IPK ar archive without extracting or executing package content."""
-    if not payload.startswith(b"!<arch>\\n"):
+    if not payload.startswith(b"!<arch>\n"):
         raise ValueError("invalid_ipk_archive")
     offset = 8
     members = {}
@@ -76,7 +76,7 @@ def parse_ipk_metadata(payload):
         if offset + 60 > len(payload):
             raise ValueError("invalid_ipk_archive")
         header = payload[offset:offset + 60]
-        if header[58:60] != b"`\\n":
+        if header[58:60] != b"`\n":
             raise ValueError("invalid_ipk_archive")
         raw_name = header[:16].decode("ascii", "strict").strip()
         name = raw_name[:-1] if raw_name.endswith("/") else raw_name
@@ -364,11 +364,6 @@ class Handler(BaseHTTPRequestHandler):
         route = route_path(self.path)
         if not self.valid_host() or not self.valid_origin():
             return reply(self, 403, {"ok": False, "error": "request_not_allowed"})
-        data = self.read_json()
-        if data is None:
-            return reply(self, 400, {"ok": False, "error": "invalid_request"})
-
-
         if route == "/api/packages/stage":
             if not self.authorized():
                 return reply(self, 401, {"ok": False, "error": "unauthorized"}, True)
@@ -402,6 +397,11 @@ class Handler(BaseHTTPRequestHandler):
                 }
                 return reply(self, 400, {"ok": False, "error": error, "message": messages.get(error, "تم رفض ملف الحزمة.")}, True)
             return reply(self, 200, {"ok": True, "package": result}, True)
+
+        data = self.read_json()
+        if data is None:
+            return reply(self, 400, {"ok": False, "error": "invalid_request"})
+
 
         if route == "/api/trust":
             # Trust is initiated only by an explicit click in the official web app.
