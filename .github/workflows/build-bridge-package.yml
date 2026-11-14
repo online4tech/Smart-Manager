@@ -17,6 +17,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Test bridge route handling
+        run: python -m unittest discover -s tests -v
+      - name: Validate bridge syntax
+        run: python -m py_compile bridge-package/bridge.py
       - name: Build single ZIP package
         run: |
           mkdir -p dist
