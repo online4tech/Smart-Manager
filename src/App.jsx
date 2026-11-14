@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import {
   Activity, AlertTriangle, ArrowDownLeft, ArrowUpLeft, Bot, CheckCircle2,
-  ChevronLeft, CircleHelp, Clock3, Cpu, Database, FileSearch, HardDrive, Copy, Terminal,
+  ChevronLeft, ChevronDown, CircleHelp, Clock3, Cpu, Database, FileSearch, Filter, HardDrive, Copy, Terminal,
   LayoutDashboard, ListVideo, MemoryStick, Menu, Package, Search, Settings,
   ShieldCheck, Stethoscope, Tv, Wifi, X, Server, RefreshCw, LockKeyhole, Link2
 } from "lucide-react";
@@ -125,6 +125,7 @@ const approvedPackages = approvedPackagesData.packages || [];
 
 function PluginStore() {
   const [view, setView] = useState("plugins");
+  const [filtersOpen, setFiltersOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState("الكل");
   const [commandType, setCommandType] = useState("الكل");
@@ -137,6 +138,7 @@ function PluginStore() {
   const [installingPackage, setInstallingPackage] = useState(false);
   const [installResult, setInstallResult] = useState(null);
   const categories = ["الكل", ...new Set((view === "plugins" ? catalogEntries : commandEntries).map(item => item.category))];
+  const activeFilterCount = (category !== "الكل" ? 1 : 0) + (view === "commands" && commandType !== "الكل" ? 1 : 0);
   const matchingApprovedPackage = stagedPackage ? approvedPackages.find(item => item.package === stagedPackage.package && item.version === stagedPackage.version && item.architecture === stagedPackage.architecture && String(item.sha256 || "").toLowerCase() === String(stagedPackage.sha256 || "").toLowerCase()) : null;
   const filteredPlugins = catalogEntries.filter(item =>
     (category === "الكل" || item.category === category) &&
@@ -214,10 +216,22 @@ function PluginStore() {
     </div>
     {view !== "packages" && <div className="module-toolbar glass catalog-toolbar">
       <div className="module-search"><Search size={17}/><input value={query} onChange={e => setQuery(e.target.value)} placeholder={view === "plugins" ? "ابحث باسم البلجن أو الأداة أو المسار..." : "ابحث باسم البلجن أو الأمر أو القسم..."}/></div>
-      {view === "commands" && <div className="catalog-type-filter">
-        {[["الكل","الكل"],["install","التثبيت"],["remove","الإزالة"]].map(([value,label]) => <button key={value} className={commandType === value ? "selected" : ""} onClick={() => setCommandType(value)}>{label}</button>)}
+      <button
+        type="button"
+        className={`catalog-filter-toggle ${filtersOpen ? "expanded" : ""} ${activeFilterCount ? "has-active" : ""}`}
+        onClick={() => setFiltersOpen(open => !open)}
+        aria-expanded={filtersOpen}
+        aria-controls="catalog-filter-panel"
+      >
+        <span className="catalog-filter-toggle-label"><Filter size={17}/> الفلاتر والتصنيفات {activeFilterCount > 0 && <b>{activeFilterCount}</b>}</span>
+        <ChevronDown size={17} className="catalog-filter-chevron"/>
+      </button>
+      {filtersOpen && <div className="catalog-filter-panel" id="catalog-filter-panel">
+        {view === "commands" && <div className="catalog-type-filter">
+          {[["الكل","الكل"],["install","التثبيت"],["remove","الإزالة"]].map(([value,label]) => <button key={value} className={commandType === value ? "selected" : ""} onClick={() => setCommandType(value)}>{label}</button>)}
+        </div>}
+        <div className="category-pills">{categories.map(item => <button key={item} className={category === item ? "selected" : ""} onClick={() => setCategory(item)}>{item}</button>)}</div>
       </div>}
-      <div className="category-pills">{categories.map(item => <button key={item} className={category === item ? "selected" : ""} onClick={() => setCategory(item)}>{item}</button>)}</div>
     </div>}
     {view === "packages" ? <section className="package-center">
       <div className="glass package-upload-panel">
