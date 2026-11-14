@@ -1,0 +1,31 @@
+name: Build Smart Manager Bridge ZIP
+
+on:
+  push:
+    branches: ["main", "feature/standalone-local-bridge"]
+    paths:
+      - "bridge-package/**"
+      - ".github/workflows/build-bridge-package.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Build single ZIP package
+        run: |
+          mkdir -p dist
+          cd bridge-package
+          zip -r ../dist/Online4Tech-Smart-Manager-Bridge.zip .
+      - name: Upload ZIP
+        uses: actions/upload-artifact@v4
+        with:
+          name: Online4Tech-Smart-Manager-Bridge
+          path: dist/Online4Tech-Smart-Manager-Bridge.zip
+          if-no-files-found: error
+          retention-days: 30
