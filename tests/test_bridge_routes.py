@@ -1,13 +1,15 @@
 import ipaddress
 import io
 import tarfile
+import tempfile
 import sys
 import unittest
 from pathlib import Path
 from unittest.mock import patch
+import bridge
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "bridge-package"))
-from bridge import route_path, read_receiver_info, parse_ipk_metadata
+from bridge import route_path, read_receiver_info, parse_ipk_metadata, stage_ipk
 
 class RoutePathTests(unittest.TestCase):
     def test_health_path(self):
@@ -33,7 +35,7 @@ class ReceiverValidationTests(unittest.TestCase):
 
 
 class IpkInspectionTests(unittest.TestCase):
-    def make_ipk(self, control_text, member_name="control"):
+    def make_ipk(self, control_text, member_name="control", data_member_name="usr/share/example.txt"):
         tar_buffer = io.BytesIO()
         with tarfile.open(fileobj=tar_buffer, mode="w:gz") as archive:
             data = control_text.encode("utf-8")
@@ -43,7 +45,7 @@ class IpkInspectionTests(unittest.TestCase):
         data_buffer = io.BytesIO()
         with tarfile.open(fileobj=data_buffer, mode="w:gz") as data_archive:
             data = b"package payload"
-            info = tarfile.TarInfo("usr/share/example.txt")
+            info = tarfile.TarInfo(data_member_name)
             info.size = len(data)
             data_archive.addfile(info, io.BytesIO(data))
         members = [("debian-binary", b"2.0\n"), ("control.tar.gz", tar_buffer.getvalue()), ("data.tar.gz", data_buffer.getvalue())]
@@ -80,6 +82,27 @@ class IpkInspectionTests(unittest.TestCase):
         payload = self.make_ipk("Package: example\nVersion: 1\nArchitecture: all\n", "../control")
         with self.assertRaisesRegex(ValueError, "ipk_unsafe_path"):
             parse_ipk_metadata(payload)
+
+    def test_rejects_traversal_in_data_archive(self):
+        payload = self.make_ipk("Package: example\\nVersion: 1\\nArchitecture: all\\n", data_member_name="../escape")
+        with self.assertRaisesRegex(ValueError, "ipk_unsafe_path"):
+            parse_ipk_metadata(payload)
+
+    def test_stages_file_locally_without_enabling_install(self):
+        payload = self.make_ipk("Package: example\\nVersion: 1\\nArchitecture: all\\n")
+        with tempfile.TemporaryDirectory() as directory:
+            with patch.object(bridge, "user_data_root", return_value=Path(directory)):
+                result = stage_ipk(payload, "example.ipk")
+                saved = Path(directory) / "staging" / (result["sha256"] + ".ipk")
+                self.assertTrue(saved.is_file())
+                self.assertEqual(saved.read_bytes(), payload)
+                self.assertFalse(result["install_enabled"])
+                self.assertEqual(result["status"], "staged-not-approved")
+
+    def test_rejects_wrong_filename_extension(self):
+        payload = self.make_ipk("Package: example\\nVersion: 1\\nArchitecture: all\\n")
+        with self.assertRaisesRegex(ValueError, "ipk_extension_required"):
+            stage_ipk(payload, "example.zip")
 
     def test_rejects_invalid_package_name(self):
         payload = self.make_ipk("Package: BAD NAME\nVersion: 1\nArchitecture: all\n")
