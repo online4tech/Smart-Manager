@@ -86,7 +86,7 @@ def _verify_package_status(snapshot, package_id):
     query = urlencode({"command": "status", "package": package_id, "format": "json"})
     payload = _request(snapshot, "GET", "/ipkg?" + query, timeout=20)
     text = payload.decode("utf-8", "replace")
-    if re.search(r"(?im)^Status:\\s*install\\s+\\S+\\s+installed\\s*$", text):
+    if re.search(r"(?im)^Status:\s*install\s+\S+\s+installed\s*$", text):
         return True
     # Some OpenWebif builds wrap command output in JSON strings.
     try:
@@ -94,7 +94,7 @@ def _verify_package_status(snapshot, package_id):
         text = json.dumps(decoded, ensure_ascii=False)
     except ValueError:
         pass
-    return bool(re.search(r"(?i)Status:\\s*install\\s+\\S+\\s+installed", text))
+    return bool(re.search(r"(?i)Status:\s*install\s+\S+\s+installed", text))
 
 
 def install_approved_package(package_id, snapshot):
@@ -142,14 +142,14 @@ def install_approved_package(package_id, snapshot):
     filename = "o4t_" + expected["sha256"] + ".ipk"
     boundary = "----Online4Tech" + expected["sha256"][:24]
     chunks = [
-        ("--" + boundary + "\\r\\n").encode("ascii"),
-        ('Content-Disposition: form-data; name="rfile"; filename="' + filename + '"\\r\\n').encode("ascii"),
-        b"Content-Type: application/octet-stream\\r\\n\\r\\n",
+        ("--" + boundary + "\r\n").encode("ascii"),
+        ('Content-Disposition: form-data; name="rfile"; filename="' + filename + '"\r\n').encode("ascii"),
+        b"Content-Type: application/octet-stream\r\n\r\n",
         payload,
-        b"\\r\\n",
-        ("--" + boundary + "\\r\\n").encode("ascii"),
-        ('Content-Disposition: form-data; name="filename"\\r\\n\\r\\n' + filename + "\\r\\n").encode("ascii"),
-        ("--" + boundary + "--\\r\\n").encode("ascii"),
+        b"\r\n",
+        ("--" + boundary + "\r\n").encode("ascii"),
+        ('Content-Disposition: form-data; name="filename"\r\n\r\n' + filename + "\r\n").encode("ascii"),
+        ("--" + boundary + "--\r\n").encode("ascii"),
     ]
     upload_body = b"".join(chunks)
     uploaded = _request(snapshot, "POST", "/ipkg/upload", upload_body, "multipart/form-data; boundary=" + boundary, timeout=45)
