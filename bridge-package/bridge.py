@@ -8,6 +8,8 @@ import secrets
 import time
 import xml.etree.ElementTree as ET
 import ssl
+import os
+from pathlib import Path
 from collections import deque
 from threading import Lock
 from urllib.parse import urlsplit
@@ -17,10 +19,32 @@ PORT = 8765
 ALLOWED_ORIGIN = "https://online4tech.github.io"
 ALLOWED_HOSTS = {f"127.0.0.1:{PORT}", f"localhost:{PORT}"}
 MAX_BODY = 4096
-PAIR_CODE = secrets.token_urlsafe(6)[:8].upper()
-SESSION_TOKEN = None
-CSRF_TOKEN = None
-PAIR_USED = False
+def load_or_create_trust():
+    """Persist a per-user local trust token; never expose it in logs."""
+    if os.name == "nt":
+        root = Path(os.environ.get("LOCALAPPDATA", str(Path.home()))) / "Online4Tech" / "SmartManager"
+    else:
+        root = Path.home() / ".config" / "online4tech-smart-manager"
+    root.mkdir(parents=True, exist_ok=True)
+    token_file = root / "bridge-auth.json"
+    try:
+        saved = json.loads(token_file.read_text(encoding="utf-8"))
+        if len(saved.get("token", "")) >= 40 and len(saved.get("csrf", "")) >= 30:
+            return saved["token"], saved["csrf"]
+    except (OSError, ValueError, AttributeError):
+        pass
+    token = secrets.token_urlsafe(48)
+    csrf = secrets.token_urlsafe(32)
+    temp_file = token_file.with_suffix(".tmp")
+    temp_file.write_text(json.dumps({"token": token, "csrf": csrf}), encoding="utf-8")
+    try:
+        os.chmod(temp_file, 0o600)
+    except OSError:
+        pass
+    temp_file.replace(token_file)
+    return token, csrf
+
+SESSION_TOKEN, CSRF_TOKEN = load_or_create_trust()
 RECEIVER_SNAPSHOT = None
 ATTEMPTS = deque()
 LOCK = Lock()
@@ -130,7 +154,7 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_OPTIONS(self):
         route = route_path(self.path)
-        allowed = ("/api/pair", "/api/status", "/api/receiver/connect")
+        allowed = ("/api/trust", "/api/status", "/api/receiver/connect")
         if not self.valid_host() or not self.valid_origin() or route not in allowed:
             return reply(self, 403, {"ok": False, "error": "request_not_allowed"})
         self.send_response(204)
@@ -173,7 +197,7 @@ class Handler(BaseHTTPRequestHandler):
                     and secrets.compare_digest(csrf, CSRF_TOKEN or ""))
 
     def do_POST(self):
-        global SESSION_TOKEN, CSRF_TOKEN, PAIR_USED, RECEIVER_SNAPSHOT
+        global SESSION_TOKEN, CSRF_TOKEN, RECEIVER_SNAPSHOT
         route = route_path(self.path)
         if not self.valid_host() or not self.valid_origin():
             return reply(self, 403, {"ok": False, "error": "request_not_allowed"})
@@ -181,20 +205,12 @@ class Handler(BaseHTTPRequestHandler):
         if data is None:
             return reply(self, 400, {"ok": False, "error": "invalid_request"})
 
-        if route == "/api/pair":
-            now = time.time()
-            with LOCK:
-                while ATTEMPTS and now - ATTEMPTS[0] > 60:
-                    ATTEMPTS.popleft()
-                if len(ATTEMPTS) >= 5:
-                    return reply(self, 429, {"ok": False, "error": "too_many_attempts"}, True)
-                ATTEMPTS.append(now)
-                if PAIR_USED or not secrets.compare_digest(str(data.get("code", "")), PAIR_CODE):
-                    return reply(self, 401, {"ok": False, "error": "invalid_or_expired_code"}, True)
-                PAIR_USED = True
-                SESSION_TOKEN = secrets.token_urlsafe(32)
-                CSRF_TOKEN = secrets.token_urlsafe(24)
-            return reply(self, 200, {"ok": True, "token": SESSION_TOKEN, "csrf": CSRF_TOKEN, "mode": "read-only-webif"}, True)
+        if route == "/api/trust":
+            # Trust is initiated only by an explicit click in the official web app.
+            return reply(self, 200, {
+                "ok": True, "token": SESSION_TOKEN, "csrf": CSRF_TOKEN,
+                "mode": "local-user-trust", "capabilities": "read-only-webif"
+            }, True)
 
         if route in ("/api/status", "/api/receiver/connect"):
             if not self.authorized():
@@ -240,8 +256,8 @@ def main():
     print("=" * 58)
     print(" Online4Tech Smart Manager - Local Bridge")
     print(" عنوان التشغيل: http://127.0.0.1:8765")
-    print(" كود الاقتران لمرة واحدة:", PAIR_CODE)
-    print(" لا تغلق هذه النافذة أثناء الاستخدام.")
+    print(" يعمل محليًا على هذا الكمبيوتر فقط.")
+    print(" الثقة المحلية تُمنح من زر داخل الموقع؛ لا كلمة مرور أو كود ربط.")
     print(" الوضع الحالي: قراءة OpenWebif فقط؛ لا SSH أو أوامر أو كتابة.")
     print("=" * 58)
     try:
