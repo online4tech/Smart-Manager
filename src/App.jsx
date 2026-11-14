@@ -3,7 +3,7 @@ import {
   Activity, AlertTriangle, ArrowDownLeft, ArrowUpLeft, Bot, CheckCircle2,
   ChevronLeft, CircleHelp, Clock3, Cpu, Database, FileSearch, HardDrive,
   LayoutDashboard, ListVideo, MemoryStick, Menu, Package, Search, Settings,
-  ShieldCheck, Stethoscope, Tv, Wifi, X, Server, RefreshCw, LockKeyhole
+  ShieldCheck, Stethoscope, Tv, Wifi, X, Server, RefreshCw, LockKeyhole, Link2
 } from "lucide-react";
 import { demoDevice, metrics, findings } from "./data/demo";
 import { getReceiverSnapshot, getConnectionCapabilities } from "./services/receiverAdapter";
@@ -232,6 +232,98 @@ function LogAnalyzer() {
   </section>;
 }
 
+
+function LocalBridgeControl() {
+  const [open, setOpen] = useState(false);
+  const [code, setCode] = useState("");
+  const [session, setSession] = useState(null);
+  const [bridgeStatus, setBridgeStatus] = useState(null);
+  const [busy, setBusy] = useState(false);
+  const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
+
+  const pair = async () => {
+    setBusy(true); setError(""); setMessage("");
+    try {
+      const paired = await pairLocalBridge(code.trim());
+      const credentials = { token: paired.token, csrf: paired.csrf };
+      setSession(credentials);
+      setCode("");
+      setMessage("تم الاقتران مع الجسر المحلي بنجاح.");
+      try {
+        const status = await getLocalBridgeStatus(credentials);
+        setBridgeStatus(status);
+      } catch {
+        setBridgeStatus(null);
+        setMessage("تم الاقتران، لكن تعذر تحديث حالة الجسر. جرّب تحديث الحالة.");
+      }
+    } catch (err) {
+      setError(err.message || "تعذر الاتصال بالجسر المحلي.");
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const refreshStatus = async () => {
+    if (!session) return;
+    setBusy(true); setError("");
+    try {
+      const status = await getLocalBridgeStatus(session);
+      setBridgeStatus(status);
+      setMessage("تم تحديث حالة الجسر.");
+    } catch (err) {
+      setError(err.message || "تعذر تحديث حالة الجسر.");
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const disconnect = () => {
+    setSession(null); setBridgeStatus(null); setCode("");
+    setMessage("تم إنهاء الاقتران من هذه الجلسة.");
+    setError("");
+  };
+
+  return <>
+    <button className="bridge-open-button" onClick={() => setOpen(true)}>
+      <span className={session ? "bridge-dot paired" : "bridge-dot"} />
+      <Link2 size={15}/> {session ? "الجسر مقترن" : "ربط الجسر المحلي"}
+    </button>
+    {open && <div className="modal-backdrop bridge-backdrop" onClick={() => setOpen(false)}>
+      <section className="glass bridge-modal" onClick={e => e.stopPropagation()}>
+        <button className="modal-close" onClick={() => setOpen(false)} aria-label="إغلاق"><X size={18}/></button>
+        <div className="bridge-modal-icon"><Link2 size={22}/></div>
+        <span className="bridge-kicker">ONLINE4TECH LOCAL BRIDGE</span>
+        <h2>الاقتران مع الجسر المحلي</h2>
+        <p className="bridge-description">شغّل الجسر على نفس الكمبيوتر، ثم أدخل كود الاقتران الظاهر في نافذة التشغيل.</p>
+        <div className="bridge-endpoint" dir="ltr">http://127.0.0.1:8765</div>
+        {!session ? <>
+          <label className="bridge-label" htmlFor="bridge-pair-code">كود الاقتران لمرة واحدة</label>
+          <input id="bridge-pair-code" className="bridge-code-input" value={code} onChange={e => setCode(e.target.value.toUpperCase().slice(0, 8))} placeholder="أدخل الكود الظاهر في نافذة الجسر" autoComplete="off" spellCheck="false" />
+          <button className="primary-button bridge-submit" onClick={pair} disabled={busy || code.trim().length < 6}>{busy ? "جاري الاقتران..." : "اقتران آمن"}</button>
+        </> : <>
+          <div className="bridge-status-card">
+            <span className="bridge-dot paired"/>
+            <div><strong>الجسر المحلي مقترن</strong><small>تم حفظ بيانات الجلسة في ذاكرة الصفحة فقط</small></div>
+          </div>
+          {bridgeStatus && <div className="bridge-capabilities">
+            <div><span>حالة الجسر</span><strong>متصل</strong></div>
+            <div><span>الرسيفر</span><strong>{bridgeStatus.receiver?.connected ? "متصل" : "غير متصل"}</strong></div>
+            <div><span>SSH والأوامر</span><strong>غير مفعّلة</strong></div>
+          </div>}
+          <div className="bridge-actions">
+            <button className="secondary-button" onClick={refreshStatus} disabled={busy}>{busy ? "جاري التحديث..." : "تحديث الحالة"}</button>
+            <button className="secondary-button bridge-disconnect" onClick={disconnect}>إنهاء الاقتران</button>
+          </div>
+        </>}
+        {message && <div className="bridge-message">{message}</div>}
+        {error && <div className="bridge-error" role="alert">{error}</div>}
+        <div className="bridge-safety-note"><ShieldCheck size={15}/><span>المرحلة الحالية تقرأ حالة الاقتران فقط. لا يوجد اتصال بالرسيفر أو SSH أو تنفيذ أوامر أو تعديل ملفات.</span></div>
+      </section>
+    </div>}
+  </>;
+}
+
 export default function App() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scanState, setScanState] = useState("idle");
@@ -289,7 +381,7 @@ export default function App() {
           <div className="breadcrumb">المنظومة <ChevronLeft size={14}/> <strong>{activeNav}</strong></div>
         </div>
         <div className="topbar-actions">
-          <span className="connection-pill"><span className="live-dot"/> وضع العرض التجريبي</span>
+          <LocalBridgeControl/><span className="connection-pill"><span className="live-dot"/> وضع العرض التجريبي</span>
           <button className="icon-button" aria-label="بحث"><Search size={18}/></button>
           <button className="icon-button" aria-label="الإعدادات"><Settings size={18}/></button>
           <div className="avatar">O4</div>
