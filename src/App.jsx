@@ -127,6 +127,76 @@ function ReceiverDetails() {
   </div>;
 }
 
+
+const demoPlugins = [
+  { id: 1, name: "AutoBouquetsMaker", category: "القنوات", version: "3.1.2", compatibility: "يتطلب التحقق", description: "أداة لتنظيم الباقات وتحديث ترتيب القنوات.", tags: ["تنظيم", "قنوات"] },
+  { id: 2, name: "EPGImport", category: "دليل البرامج", version: "1.0.4", compatibility: "يتطلب التحقق", description: "إدارة مصادر دليل البرامج الإلكتروني EPG.", tags: ["EPG", "دليل البرامج"] },
+  { id: 3, name: "OpenWebif", category: "أدوات النظام", version: "مكوّن نظام", compatibility: "معلومات توضيحية", description: "واجهة ويب لإدارة بعض وظائف Enigma2 عند تفعيلها.", tags: ["واجهة ويب", "إدارة"] },
+  { id: 4, name: "SubtitlePlayer", category: "الوسائط", version: "غير محدد", compatibility: "يتطلب التحقق", description: "عرض وإدارة ملفات الترجمة أثناء تشغيل الوسائط.", tags: ["ترجمة", "وسائط"] },
+  { id: 5, name: "MediaPlayer", category: "الوسائط", version: "مكوّن نظام", compatibility: "معلومات توضيحية", description: "مشغل وسائط ضمن بيئة Enigma2.", tags: ["فيديو", "صوت"] },
+  { id: 6, name: "Backup Suite", category: "النسخ الاحتياطي", version: "1.0", compatibility: "يتطلب التحقق", description: "مفهوم توضيحي لإدارة النسخ الاحتياطية قبل الصيانة.", tags: ["نسخ احتياطي", "صيانة"] }
+];
+
+function PluginStore() {
+  const [query, setQuery] = useState("");
+  const [category, setCategory] = useState("الكل");
+  const [selected, setSelected] = useState(null);
+  const categories = ["الكل", ...new Set(demoPlugins.map(item => item.category))];
+  const filtered = demoPlugins.filter(item => (category === "الكل" || item.category === category) && (item.name + " " + item.description + " " + item.tags.join(" ")).toLowerCase().includes(query.toLowerCase()));
+  return <section className="module-page">
+    <div className="demo-notice"><AlertTriangle size={16}/><span>كتالوج تجريبي للعرض فقط؛ لا توجد عمليات تنزيل أو تثبيت أو تحديث فعلية، والتوافق يحتاج مراجعة إصدار صورة النظام.</span></div>
+    <div className="module-toolbar glass">
+      <div className="module-search"><Search size={17}/><input value={query} onChange={e => setQuery(e.target.value)} placeholder="ابحث باسم البلجن أو وظيفته..." /></div>
+      <div className="category-pills">{categories.map(item => <button key={item} className={category === item ? "selected" : ""} onClick={() => setCategory(item)}>{item}</button>)}</div>
+    </div>
+    <div className="module-summary"><strong>{filtered.length}</strong><span>إضافة في الكتالوج التجريبي</span><small>بيانات توضيحية غير مرتبطة بالرسيفر</small></div>
+    <div className="plugin-grid">{filtered.map(item => <article className="glass plugin-card" key={item.id}>
+      <div className="plugin-card-top"><span className="plugin-symbol"><Package size={20}/></span><span className="demo-tag">DEMO</span></div>
+      <div className="plugin-category">{item.category}</div><h3>{item.name}</h3><p>{item.description}</p>
+      <div className="plugin-meta"><span>الإصدار: {item.version}</span><span>{item.compatibility}</span></div>
+      <button className="secondary-button plugin-details-button" onClick={() => setSelected(item)}>عرض التفاصيل <ChevronLeft size={15}/></button>
+    </article>)}</div>
+    {filtered.length === 0 && <div className="glass empty-state">مفيش إضافات مطابقة للبحث الحالي.</div>}
+    {selected && <div className="modal-backdrop" onClick={() => setSelected(null)}><section className="glass plugin-modal" onClick={e => e.stopPropagation()}>
+      <button className="modal-close" onClick={() => setSelected(null)} aria-label="إغلاق"><X size={18}/></button>
+      <span className="plugin-symbol"><Package size={22}/></span><small>{selected.category} · بيانات تجريبية</small><h2>{selected.name}</h2><p>{selected.description}</p>
+      <div className="plugin-meta"><span>الإصدار: {selected.version}</span><span>{selected.compatibility}</span></div>
+      <div className="demo-notice"><AlertTriangle size={15}/><span>لا يمكن تثبيت هذا العنصر من الواجهة الحالية. راجع المصدر والتوافق يدويًا قبل أي استخدام فعلي.</span></div>
+    </section></div>}
+  </section>;
+}
+
+const demoChannels = [
+  { id: 1, name: "Demo News HD", satellite: "Astra 19.2°E", frequency: "11000", polarization: "H", symbolRate: "22000", type: "أخبار", quality: "HD" },
+  { id: 2, name: "Demo Sports", satellite: "Hotbird 13°E", frequency: "11585", polarization: "V", symbolRate: "27500", type: "رياضة", quality: "HD" },
+  { id: 3, name: "Demo Cinema", satellite: "Nilesat 7°W", frequency: "11727", polarization: "H", symbolRate: "27500", type: "أفلام", quality: "SD" },
+  { id: 4, name: "Demo Documentary", satellite: "Badr 26°E", frequency: "11919", polarization: "V", symbolRate: "27500", type: "وثائقي", quality: "HD" },
+  { id: 5, name: "Demo Kids", satellite: "Nilesat 7°W", frequency: "12015", polarization: "H", symbolRate: "27500", type: "أطفال", quality: "HD" },
+  { id: 6, name: "Demo Music", satellite: "Hotbird 13°E", frequency: "12149", polarization: "V", symbolRate: "27500", type: "موسيقى", quality: "SD" }
+];
+
+function ChannelIntelligence() {
+  const [query, setQuery] = useState("");
+  const [type, setType] = useState("الكل");
+  const [selected, setSelected] = useState(null);
+  const types = ["الكل", ...new Set(demoChannels.map(item => item.type))];
+  const filtered = demoChannels.filter(item => (type === "الكل" || item.type === type) && (item.name + " " + item.satellite + " " + item.frequency).toLowerCase().includes(query.toLowerCase()));
+  return <section className="module-page">
+    <div className="demo-notice"><AlertTriangle size={16}/><span>قائمة قنوات وهمية للتجربة فقط؛ لا يوجد اتصال بالرسيفر ولا يتم تعديل أو تصدير أي ملف قنوات.</span></div>
+    <div className="module-toolbar glass">
+      <div className="module-search"><Search size={17}/><input value={query} onChange={e => setQuery(e.target.value)} placeholder="ابحث باسم القناة أو القمر أو التردد..." /></div>
+      <div className="category-pills">{types.map(item => <button key={item} className={type === item ? "selected" : ""} onClick={() => setType(item)}>{item}</button>)}</div>
+    </div>
+    <div className="channel-stats"><article className="glass"><strong>{filtered.length}</strong><span>قناة في النتائج</span></article><article className="glass"><strong>{new Set(filtered.map(item => item.satellite)).size}</strong><span>أقمار صناعية</span></article><article className="glass"><strong>{new Set(filtered.map(item => item.type)).size}</strong><span>تصنيفات</span></article></div>
+    <div className="glass channel-table-wrap"><div className="table-heading"><div><h3>قائمة القنوات التجريبية</h3><p>بيانات عرض قابلة للبحث والتصفية</p></div><span className="demo-tag">DEMO DATA</span></div>
+      <div className="channel-table-scroll"><table className="channel-table"><thead><tr><th>اسم القناة</th><th>القمر</th><th>التردد</th><th>الاستقطاب</th><th>الترميز</th><th>التصنيف</th><th>الجودة</th><th></th></tr></thead>
+      <tbody>{filtered.map(item => <tr key={item.id}><td>{item.name}</td><td>{item.satellite}</td><td dir="ltr">{item.frequency}</td><td dir="ltr">{item.polarization}</td><td dir="ltr">{item.symbolRate}</td><td>{item.type}</td><td><span className="quality-tag">{item.quality}</span></td><td><button className="table-action" onClick={() => setSelected(item)}>تفاصيل</button></td></tr>)}</tbody></table></div>
+      {filtered.length === 0 && <div className="empty-state">لا توجد قنوات مطابقة للبحث.</div>}
+    </div>
+    {selected && <div className="modal-backdrop" onClick={() => setSelected(null)}><section className="glass plugin-modal" onClick={e => e.stopPropagation()}><button className="modal-close" onClick={() => setSelected(null)} aria-label="إغلاق"><X size={18}/></button><span className="plugin-symbol"><Tv size={22}/></span><small>تفاصيل قناة تجريبية</small><h2>{selected.name}</h2><p>{selected.satellite} · {selected.type} · {selected.quality}</p><div className="plugin-meta"><span>التردد: {selected.frequency} MHz</span><span>الاستقطاب: {selected.polarization}</span><span>معدل الترميز: {selected.symbolRate}</span></div></section></div>}
+  </section>;
+}
+
 export default function App() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scanState, setScanState] = useState("idle");
@@ -196,11 +266,11 @@ export default function App() {
           <div>
             <div className="eyebrow"><span className="eyebrow-line"/> {activeNav === "AI Doctor" ? "INTELLIGENT DIAGNOSTICS" : "ONLINE4TECH DEVICE CENTER"}</div>
             <h1>{activeNav === "AI Doctor" ? <>AI Doctor <span className="title-ar">طبيب الرسيفر الذكي</span></> : activeNav === "Smart Manager" ? <>Smart Manager <span className="title-ar">إدارة الجهاز</span></> : activeNav}</h1>
-            <p>{activeNav === "AI Doctor" ? "افحص جهازك، افهم المشاكل، واعرف الخطوة المناسبة قبل تنفيذ أي إصلاح." : activeNav === "Smart Manager" ? "تفاصيل الجهاز ومؤشرات النظام وحالة طبقة الاتصال." : "القسم قيد التجهيز ضمن منظومة Online4Tech."}</p>
+            <p>{activeNav === "AI Doctor" ? "افحص جهازك، افهم المشاكل، واعرف الخطوة المناسبة قبل تنفيذ أي إصلاح." : activeNav === "Smart Manager" ? "تفاصيل الجهاز ومؤشرات النظام وحالة طبقة الاتصال." : activeNav === "Plugin Store" ? "استكشف كتالوج الإضافات وصنّفها وراجع معلوماتها." : activeNav === "Channel Intelligence" ? "ابحث في القنوات التجريبية وصنّفها حسب القمر والتردد والنوع." : "القسم قيد التجهيز ضمن منظومة Online4Tech."}</p>
           </div>
           {activeNav === "AI Doctor" && <button className="primary-button" onClick={() => startScan("full")}><Activity size={17}/>{scanState === "complete" ? "إعادة الفحص التجريبي" : "ابدأ فحص النظام"}</button>}
         </section>
-        {activeNav === "Smart Manager" ? <ReceiverDetails/> : activeNav !== "AI Doctor" ? <section className="glass module-placeholder"><Package size={28}/><h2>{activeNav}</h2><p>سيتم تجهيز هذا القسم في المرحلة التالية مع الحفاظ على نفس واجهة المنظومة.</p><span>قيد التطوير · Demo Mode</span></section> : <>
+        {activeNav === "Smart Manager" ? <ReceiverDetails/> : activeNav === "Plugin Store" ? <PluginStore/> : activeNav === "Channel Intelligence" ? <ChannelIntelligence/> : activeNav !== "AI Doctor" ? <section className="glass module-placeholder"><Package size={28}/><h2>{activeNav}</h2><p>سيتم تجهيز هذا القسم في المرحلة التالية مع الحفاظ على نفس واجهة المنظومة.</p><span>قيد التطوير · Demo Mode</span></section> : <>
 
         <section className="device-banner glass">
           <div className="device-identity">
