@@ -135,6 +135,8 @@ export async function stagePackageUpload(file) {
         ipk_data_archive_invalid: "أرشيف ملفات الحزمة غير صالح أو غير مدعوم.",
         ipk_control_archive_too_large: "أرشيف بيانات التعريف أكبر من حدود الفحص.",
         ipk_data_archive_too_large: "محتوى الحزمة يتجاوز حدود الفحص الآمن.",
+        ipk_control_invalid: "تعذر قراءة بيانات تعريف الحزمة.",
+        ipk_control_too_large: "بيانات تعريف الحزمة أكبر من الحد المسموح.",
         ipk_unsafe_path: "الملف يحتوي على مسار داخلي غير آمن وتم رفضه.",
         ipk_package_invalid: "اسم الحزمة داخل الملف غير صالح.",
         ipk_version_invalid: "إصدار الحزمة غير صالح.",
