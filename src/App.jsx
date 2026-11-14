@@ -46,11 +46,25 @@ function ReceiverDetails() {
 
   const refreshDemo = async () => {
     setRefreshing(true);
-    try { setSnapshot(await getReceiverSnapshot()); }
-    finally { setRefreshing(false); }
+    try {
+      setSnapshot(await getReceiverSnapshot());
+    } catch {
+      setSnapshot(null);
+    } finally {
+      setRefreshing(false);
+    }
   };
 
-  useEffect(() => { refreshDemo(); }, []);
+  useEffect(() => {
+    refreshDemo();
+    const handle = () => refreshDemo();
+    window.addEventListener("o4t-receiver-updated", handle);
+    const interval = window.setInterval(refreshDemo, 30000);
+    return () => {
+      window.clearInterval(interval);
+      window.removeEventListener("o4t-receiver-updated", handle);
+    };
+  }, []);
 
   if (!snapshot) return <div className="glass receiver-details-loading">جاري قراءة بيانات الرسيفر...</div>;
 
@@ -74,7 +88,7 @@ function ReceiverDetails() {
         <article className="glass info-tile"><small>صورة النظام</small><strong>{snapshot.device.image}</strong></article>
         <article className="glass info-tile"><small>معمارية المعالج</small><strong>{snapshot.device.architecture}</strong></article>
         <article className="glass info-tile"><small>مدة التشغيل</small><strong>{snapshot.device.uptime}</strong></article>
-        <article className="glass info-tile"><small>عنوان الشبكة (تجريبي)</small><strong dir="ltr">{snapshot.device.ip}</strong></article>
+        <article className="glass info-tile"><small>عنوان الشبكة (من إعداد الاتصال)</small><strong dir="ltr">{snapshot.device.ip}</strong></article>
         <article className="glass info-tile"><small>آخر تحديث للبيانات</small><strong>{snapshot.device.lastSeen}</strong></article>
       </div>
     </section>
@@ -93,8 +107,8 @@ function ReceiverDetails() {
         <div className="panel-heading"><div><h3>طبقة الاتصال</h3><p>جاهزية الربط الآمن مستقبلًا</p></div><span className="panel-icon"><LockKeyhole size={19}/></span></div>
         <div className="connection-state"><span className="demo-status-dot"/><div><strong>{snapshot.connected ? "OpenWebif متصل" : "الجسر غير متصل بالرسيفر"}</strong><small>{snapshot.connected ? "تمت قراءة بيانات الرسيفر" : "لا توجد بيانات حية"}</small></div></div>
         <ul className="capability-list">
-          <li><CheckCircle2 size={14}/> قراءة بيانات العرض المحلية</li>
-          <li><X size={14}/> الاتصال بالشبكة غير مفعّل</li>
+          <li><CheckCircle2 size={14}/> قراءة بيانات OpenWebif الفعلية المتاحة</li>
+          <li><CheckCircle2 size={14}/> الاتصال المحلي بالرسيفر مفعّل</li>
           <li><X size={14}/> تنفيذ الأوامر وتعديل الملفات معطّل</li>
         </ul>
         <button className="secondary-button refresh-demo" onClick={refreshDemo} disabled={refreshing}><RefreshCw size={15}/>{refreshing ? "جاري التحديث..." : "تحديث البيانات الحقيقية"}</button>
