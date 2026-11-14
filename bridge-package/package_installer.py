@@ -108,11 +108,27 @@ def install_approved_package(package_id, snapshot):
         "version": str(approved.get("version", "")),
         "architecture": str(approved.get("architecture", "")),
         "sha256": str(approved.get("sha256", "")).lower(),
+        "size": approved.get("size"),
     }
     if not re.fullmatch(r"[A-Fa-f0-9]{64}", expected["sha256"]):
         raise ValueError("approved_package_digest_invalid")
-    if not expected["version"] or not expected["architecture"]:
+    if (not expected["version"] or not expected["architecture"]
+            or not isinstance(expected["size"], int) or expected["size"] < 1
+            or not str(approved.get("source", "")).startswith("https://")
+            or len(str(approved.get("provenance", "")).strip()) < 10):
         raise ValueError("approved_package_metadata_invalid")
+    supported_arches = approved.get("receiverArchitectures", [])
+    image_families = approved.get("imageFamilies", [])
+    image_versions = approved.get("supportedImageVersions", [])
+    dependencies = approved.get("dependencies", [])
+    if not isinstance(supported_arches, list) or not supported_arches:
+        raise ValueError("approved_receiver_architectures_missing")
+    if not isinstance(image_families, list) or not image_families:
+        raise ValueError("approved_image_families_missing")
+    if not isinstance(image_versions, list) or not image_versions:
+        raise ValueError("approved_image_versions_missing")
+    if not isinstance(dependencies, list) or any(not re.fullmatch(r"[a-z0-9][a-z0-9+.-]{0,127}", str(dep)) for dep in dependencies):
+        raise ValueError("approved_dependencies_invalid")
 
     from bridge import parse_ipk_metadata, user_data_root
     staged_path = user_data_root() / "staging" / (expected["sha256"] + ".ipk")
@@ -120,6 +136,8 @@ def install_approved_package(package_id, snapshot):
         size = staged_path.stat().st_size
         if size < 1 or size > MAX_PACKAGE_SIZE:
             raise ValueError("staged_package_size_invalid")
+        if size != expected["size"]:
+            raise ValueError("staged_package_size_mismatch")
         payload = staged_path.read_bytes()
     except OSError:
         raise ValueError("staged_package_missing")
@@ -131,13 +149,27 @@ def install_approved_package(package_id, snapshot):
     if metadata["package"] != package_id or metadata["version"] != expected["version"] or metadata["architecture"] != expected["architecture"]:
         raise ValueError("staged_package_metadata_mismatch")
 
-    supported_arches = approved.get("receiverArchitectures", [])
-    if not isinstance(supported_arches, list) or metadata["architecture"] not in supported_arches:
-        raise ValueError("receiver_architecture_not_approved")
+    if metadata["architecture"] != expected["architecture"]:
+        raise ValueError("staged_package_metadata_mismatch")
     device = snapshot.get("device") or {}
     receiver_arch = str(device.get("architecture") or "").strip()
-    if metadata["architecture"] != "all" and (not receiver_arch or receiver_arch not in supported_arches):
+    image_family = str(device.get("image_family") or "").strip().lower()
+    image_version = str(device.get("image") or "").strip()
+    if not receiver_arch:
         raise ValueError("receiver_architecture_unverified")
+    if receiver_arch not in supported_arches:
+        raise ValueError("receiver_architecture_not_approved")
+    if not image_family:
+        raise ValueError("receiver_image_family_unverified")
+    if image_family not in [str(value).strip().lower() for value in image_families]:
+        raise ValueError("receiver_image_family_not_approved")
+    if not image_version:
+        raise ValueError("receiver_image_version_unverified")
+    if image_version not in [str(value).strip() for value in image_versions]:
+        raise ValueError("receiver_image_version_not_approved")
+    for dependency in dependencies:
+        if not _verify_package_status(snapshot, dependency):
+            raise ValueError("package_dependency_missing")
 
     filename = "o4t_" + expected["sha256"] + ".ipk"
     boundary = "----Online4Tech" + expected["sha256"][:24]
