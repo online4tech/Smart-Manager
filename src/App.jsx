@@ -5,7 +5,6 @@ import {
   LayoutDashboard, ListVideo, MemoryStick, Menu, Package, Search, Settings,
   ShieldCheck, Stethoscope, Tv, Wifi, X, Server, RefreshCw, LockKeyhole, Link2
 } from "lucide-react";
-import { demoDevice, metrics, findings } from "./data/demo";
 import pluginsData from "./data/plugins.json";
 import commandsData from "./data/commands.json";
 import { trustLocalBridge, getLocalBridgeStatus, connectLocalReceiver } from "./services/localBridge";
@@ -71,30 +70,29 @@ function ReceiverDetails() {
 
   const refreshDemo = async () => {
     setRefreshing(true);
-    const data = await getReceiverSnapshot();
-    setSnapshot(data);
-    setRefreshing(false);
+    try { setSnapshot(await getReceiverSnapshot()); }
+    finally { setRefreshing(false); }
   };
 
   useEffect(() => { refreshDemo(); }, []);
 
-  if (!snapshot) return <div className="glass receiver-details-loading">جاري تحميل بيانات العرض...</div>;
+  if (!snapshot) return <div className="glass receiver-details-loading">جاري قراءة بيانات الرسيفر...</div>;
 
   return <div className="receiver-details-page">
     <section className="device-banner glass receiver-detail-hero">
       <div className="device-identity">
         <div className="device-visual"><Tv size={29}/><span className="device-signal"/></div>
-        <div><div className="device-overline">ملف الجهاز · وضع تجريبي</div><h2>{snapshot.device.name}</h2>
+        <div><div className="device-overline">ملف الجهاز · قراءة فعلية</div><h2>{snapshot.device.name}</h2>
           <div className="device-meta"><span>{snapshot.device.image}</span><i/><span>{snapshot.device.enigmaVersion}</span><i/><span>{snapshot.device.ip}</span></div>
         </div>
       </div>
-      <div className="device-status"><span className="demo-status-dot"/><div><strong>غير متصل فعليًا</strong><small>بيانات محلية للعرض فقط</small></div></div>
+      <div className="device-status"><span className={snapshot.connected ? "live-dot" : "demo-status-dot"}/><div><strong>{snapshot.connected ? "متصل فعليًا" : "غير متصل"}</strong><small>{snapshot.connected ? "OpenWebif · قراءة فقط" : "لا توجد جلسة رسيفر محفوظة"}</small></div></div>
     </section>
 
-    <div className="demo-notice"><AlertTriangle size={16}/><span>كل المعلومات في الصفحة أمثلة توضيحية. عنوان IP المعروض تجريبي ولا تتم محاولة الوصول إليه.</span></div>
+    {!snapshot.connected && <div className="demo-notice"><AlertTriangle size={16}/><span>اتصل بالرسيفر من زر الجسر المحلي لعرض بياناته الحقيقية.</span></div>}
 
     <section className="section-block">
-      <div className="section-heading"><div><h3>معلومات الجهاز</h3><p>بيانات التعريف والإصدار</p></div><span className="updated"><Database size={14}/> Demo Snapshot</span></div>
+      <div className="section-heading"><div><h3>معلومات الجهاز</h3><p>بيانات التعريف والإصدار من OpenWebif</p></div><span className="updated"><Database size={14}/> Live Snapshot</span></div>
       <div className="device-info-grid">
         <article className="glass info-tile"><small>اسم الجهاز</small><strong>{snapshot.device.model}</strong></article>
         <article className="glass info-tile"><small>صورة النظام</small><strong>{snapshot.device.image}</strong></article>
@@ -106,25 +104,25 @@ function ReceiverDetails() {
     </section>
 
     <section className="section-block">
-      <div className="section-heading"><div><h3>موارد النظام</h3><p>مؤشرات توضيحية وليست قراءة مباشرة</p></div></div>
+      <div className="section-heading"><div><h3>موارد النظام</h3><p>القيم التي لا يوفرها OpenWebif ستظهر كغير متاحة</p></div></div>
       <div className="resource-grid">{snapshot.resources.map(item => <article className="glass resource-tile" key={item.label}><span>{item.label}</span><strong>{item.value}</strong><small>{item.detail}</small></article>)}</div>
     </section>
 
     <section className="lower-grid receiver-lower-grid">
       <div className="glass panel">
-        <div className="panel-heading"><div><h3>الخدمات الأساسية</h3><p>حالة افتراضية للشرح</p></div><span className="panel-icon"><Server size={19}/></span></div>
+        <div className="panel-heading"><div><h3>الخدمات الأساسية</h3><p>الحالة المقروءة من الجهاز</p></div><span className="panel-icon"><Server size={19}/></span></div>
         <div className="service-list">{snapshot.services.map(service => <div className="service-row" key={service.name}><span>{service.name}</span><small>{service.state}</small></div>)}</div>
       </div>
       <div className="glass panel connection-panel">
         <div className="panel-heading"><div><h3>طبقة الاتصال</h3><p>جاهزية الربط الآمن مستقبلًا</p></div><span className="panel-icon"><LockKeyhole size={19}/></span></div>
-        <div className="connection-state"><span className="demo-status-dot"/><div><strong>Demo Adapter نشط</strong><small>لا يوجد اتصال شبكي أو Bridge</small></div></div>
+        <div className="connection-state"><span className="demo-status-dot"/><div><strong>{snapshot.connected ? "OpenWebif متصل" : "الجسر غير متصل بالرسيفر"}</strong><small>{snapshot.connected ? "تمت قراءة بيانات الرسيفر" : "لا توجد بيانات حية"}</small></div></div>
         <ul className="capability-list">
           <li><CheckCircle2 size={14}/> قراءة بيانات العرض المحلية</li>
           <li><X size={14}/> الاتصال بالشبكة غير مفعّل</li>
           <li><X size={14}/> تنفيذ الأوامر وتعديل الملفات معطّل</li>
         </ul>
-        <button className="secondary-button refresh-demo" onClick={refreshDemo} disabled={refreshing}><RefreshCw size={15}/>{refreshing ? "جاري التحديث..." : "تحديث بيانات العرض"}</button>
-        <small className="adapter-note">Provider: {capabilities.provider} · Network: disabled · Commands: disabled</small>
+        <button className="secondary-button refresh-demo" onClick={refreshDemo} disabled={refreshing}><RefreshCw size={15}/>{refreshing ? "جاري التحديث..." : "تحديث البيانات الحقيقية"}</button>
+        <small className="adapter-note">Provider: {capabilities.provider} · Network: read-only · Commands: disabled</small>
       </div>
     </section>
   </div>;
@@ -228,37 +226,68 @@ function PluginStore() {
   </section>;
 }
 
-const demoChannels = [
-  { id: 1, name: "Demo News HD", satellite: "Astra 19.2°E", frequency: "11000", polarization: "H", symbolRate: "22000", type: "أخبار", quality: "HD" },
-  { id: 2, name: "Demo Sports", satellite: "Hotbird 13°E", frequency: "11585", polarization: "V", symbolRate: "27500", type: "رياضة", quality: "HD" },
-  { id: 3, name: "Demo Cinema", satellite: "Nilesat 7°W", frequency: "11727", polarization: "H", symbolRate: "27500", type: "أفلام", quality: "SD" },
-  { id: 4, name: "Demo Documentary", satellite: "Badr 26°E", frequency: "11919", polarization: "V", symbolRate: "27500", type: "وثائقي", quality: "HD" },
-  { id: 5, name: "Demo Kids", satellite: "Nilesat 7°W", frequency: "12015", polarization: "H", symbolRate: "27500", type: "أطفال", quality: "HD" },
-  { id: 6, name: "Demo Music", satellite: "Hotbird 13°E", frequency: "12149", polarization: "V", symbolRate: "27500", type: "موسيقى", quality: "SD" }
-];
-
 function ChannelIntelligence() {
+  const [snapshot, setSnapshot] = useState(null);
   const [query, setQuery] = useState("");
-  const [type, setType] = useState("الكل");
-  const [selected, setSelected] = useState(null);
-  const types = ["الكل", ...new Set(demoChannels.map(item => item.type))];
-  const filtered = demoChannels.filter(item => (type === "الكل" || item.type === type) && (item.name + " " + item.satellite + " " + item.frequency).toLowerCase().includes(query.toLowerCase()));
+  const [selectedBouquet, setSelectedBouquet] = useState("الكل");
+  const [refreshing, setRefreshing] = useState(false);
+  const [error, setError] = useState("");
+
+  const refreshChannels = async () => {
+    setRefreshing(true);
+    setError("");
+    try {
+      const data = await getReceiverSnapshot();
+      setSnapshot(data);
+      if (!data.connected) setError(data.message || "اتصل بالرسيفر أولاً.");
+    } catch (err) {
+      setError(err.message || "تعذر قراءة قائمة القنوات.");
+    } finally {
+      setRefreshing(false);
+    }
+  };
+
+  useEffect(() => {
+    refreshChannels();
+    const handle = () => refreshChannels();
+    window.addEventListener("o4t-receiver-updated", handle);
+    return () => window.removeEventListener("o4t-receiver-updated", handle);
+  }, []);
+
+  const bouquets = snapshot?.datasets?.services?.services || [];
+  const bouquetNames = ["الكل", ...bouquets.map(item => item.servicename || "Bouquet")];
+  const channels = bouquets.flatMap(bouquet => (bouquet.subservices || []).map(service => ({
+    id: service.servicereference,
+    name: service.servicename || "قناة بدون اسم",
+    reference: service.servicereference || "",
+    bouquet: bouquet.servicename || "غير مصنف"
+  })));
+  const filtered = channels.filter(item =>
+    (selectedBouquet === "الكل" || item.bouquet === selectedBouquet) &&
+    (item.name + " " + item.reference + " " + item.bouquet).toLowerCase().includes(query.toLowerCase())
+  );
+
   return <section className="module-page">
-    <div className="demo-notice"><AlertTriangle size={16}/><span>قائمة قنوات وهمية للتجربة فقط؛ لا يوجد اتصال بالرسيفر ولا يتم تعديل أو تصدير أي ملف قنوات.</span></div>
+    {!snapshot?.connected && <div className="demo-notice"><AlertTriangle size={16}/><span>{error || "جاري التحقق من اتصال الرسيفر..."}</span></div>}
+    {snapshot?.connected && <div className="section-heading"><div><h3>قائمة القنوات الحقيقية</h3><p>مقروءة من باقات الرسيفر عبر OpenWebif · بدون تعديل</p></div><span className="updated"><Database size={14}/> Live data</span></div>}
     <div className="module-toolbar glass">
-      <div className="module-search"><Search size={17}/><input value={query} onChange={e => setQuery(e.target.value)} placeholder="ابحث باسم القناة أو القمر أو التردد..." /></div>
-      <div className="category-pills">{types.map(item => <button key={item} className={type === item ? "selected" : ""} onClick={() => setType(item)}>{item}</button>)}</div>
+      <div className="module-search"><Search size={17}/><input value={query} onChange={e => setQuery(e.target.value)} placeholder="ابحث باسم القناة أو مرجع الخدمة..." /></div>
+      <div className="category-pills">{bouquetNames.map(item => <button key={item} className={selectedBouquet === item ? "selected" : ""} onClick={() => setSelectedBouquet(item)}>{item}</button>)}</div>
     </div>
-    <div className="channel-stats"><article className="glass"><strong>{filtered.length}</strong><span>قناة في النتائج</span></article><article className="glass"><strong>{new Set(filtered.map(item => item.satellite)).size}</strong><span>أقمار صناعية</span></article><article className="glass"><strong>{new Set(filtered.map(item => item.type)).size}</strong><span>تصنيفات</span></article></div>
-    <div className="glass channel-table-wrap"><div className="table-heading"><div><h3>قائمة القنوات التجريبية</h3><p>بيانات عرض قابلة للبحث والتصفية</p></div><span className="demo-tag">DEMO DATA</span></div>
-      <div className="channel-table-scroll"><table className="channel-table"><thead><tr><th>اسم القناة</th><th>القمر</th><th>التردد</th><th>الاستقطاب</th><th>الترميز</th><th>التصنيف</th><th>الجودة</th><th></th></tr></thead>
-      <tbody>{filtered.map(item => <tr key={item.id}><td>{item.name}</td><td>{item.satellite}</td><td dir="ltr">{item.frequency}</td><td dir="ltr">{item.polarization}</td><td dir="ltr">{item.symbolRate}</td><td>{item.type}</td><td><span className="quality-tag">{item.quality}</span></td><td><button className="table-action" onClick={() => setSelected(item)}>تفاصيل</button></td></tr>)}</tbody></table></div>
-      {filtered.length === 0 && <div className="empty-state">لا توجد قنوات مطابقة للبحث.</div>}
+    <div className="channel-stats">
+      <article className="glass"><strong>{filtered.length.toLocaleString("ar-EG")}</strong><span>قناة في النتائج</span></article>
+      <article className="glass"><strong>{bouquets.length.toLocaleString("ar-EG")}</strong><span>باقة / قائمة</span></article>
+      <article className="glass"><strong>{snapshot?.connected ? "فعلي" : "—"}</strong><span>مصدر البيانات</span></article>
     </div>
-    {selected && <div className="modal-backdrop" onClick={() => setSelected(null)}><section className="glass plugin-modal" onClick={e => e.stopPropagation()}><button className="modal-close" onClick={() => setSelected(null)} aria-label="إغلاق"><X size={18}/></button><span className="plugin-symbol"><Tv size={22}/></span><small>تفاصيل قناة تجريبية</small><h2>{selected.name}</h2><p>{selected.satellite} · {selected.type} · {selected.quality}</p><div className="plugin-meta"><span>التردد: {selected.frequency} MHz</span><span>الاستقطاب: {selected.polarization}</span><span>معدل الترميز: {selected.symbolRate}</span></div></section></div>}
+    <div className="glass channel-table-wrap">
+      <div className="table-heading"><div><h3>قنوات الرسيفر</h3><p>الأسماء ومراجع الخدمة التي وفرها OpenWebif</p></div><button className="secondary-button" onClick={refreshChannels} disabled={refreshing}><RefreshCw size={14}/>{refreshing ? "جاري التحديث" : "تحديث"}</button></div>
+      <div className="channel-table-scroll"><table className="channel-table"><thead><tr><th>اسم القناة</th><th>الباقة</th><th>مرجع الخدمة</th></tr></thead>
+        <tbody>{filtered.map(item => <tr key={item.id}><td>{item.name}</td><td>{item.bouquet}</td><td dir="ltr">{item.reference}</td></tr>)}</tbody>
+      </table></div>
+      {snapshot?.connected && filtered.length === 0 && <div className="empty-state">لا توجد قنوات متاحة في الاستجابة الحالية أو لا توجد نتائج مطابقة.</div>}
+    </div>
   </section>;
 }
-
 
 const logRules = [
   { key: "disk", title: "مساحة التخزين", pattern: /no space left|disk full|not enough space|enospc/i, advice: "راجع مساحة التخزين من واجهة الجهاز، ولا تحذف ملفات النظام دون معرفة وظيفتها." },
@@ -307,8 +336,8 @@ function LocalBridgeControl() {
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
-  const [receiverHost, setReceiverHost] = useState("");
-  const [receiverScheme, setReceiverScheme] = useState("http");
+  const [receiverHost, setReceiverHost] = useState(() => { try { return JSON.parse(localStorage.getItem("o4t-receiver-config") || "null")?.host || ""; } catch { return ""; } });
+  const [receiverScheme, setReceiverScheme] = useState(() => { try { return JSON.parse(localStorage.getItem("o4t-receiver-config") || "null")?.scheme || "http"; } catch { return "http"; } });
   const [receiverInfo, setReceiverInfo] = useState(null);
 
   const pair = async () => {
@@ -356,6 +385,8 @@ function LocalBridgeControl() {
       const result = await connectLocalReceiver(session, { host: receiverHost, scheme: receiverScheme });
       setReceiverInfo(result.receiver?.device || null);
       setBridgeStatus(previous => ({ ...(previous || {}), receiver: result.receiver }));
+      localStorage.setItem("o4t-receiver-config", JSON.stringify({ host: receiverHost.trim(), scheme: receiverScheme }));
+      window.dispatchEvent(new Event("o4t-receiver-updated"));
       setMessage("تم الاتصال بالرسيفر وقراءة بيانات OpenWebif فقط.");
     } catch (err) {
       setError(err.message || "تعذر قراءة بيانات الرسيفر.");
@@ -366,6 +397,8 @@ function LocalBridgeControl() {
 
   const disconnect = () => {
     localStorage.removeItem("o4t-bridge-trust");
+    localStorage.removeItem("o4t-receiver-config");
+    window.dispatchEvent(new Event("o4t-receiver-updated"));
     setSession(null); setBridgeStatus(null); setReceiverInfo(null);
     setMessage("تم مسح بيانات الاتصال المحفوظة من هذا المتصفح.");
     setError("");
@@ -423,14 +456,63 @@ export default function App() {
   const [showDemo, setShowDemo] = useState(true);
   const [activeReport, setActiveReport] = useState(null);
   const [scanHistory, setScanHistory] = useState([]);
+  const [liveSnapshot, setLiveSnapshot] = useState(null);
 
-  const startScan = (type = "full") => {
-    const report = scanReports[type] || scanReports.full;
+  useEffect(() => {
+    let active = true;
+    const refresh = async () => {
+      try {
+        const data = await getReceiverSnapshot();
+        if (active) setLiveSnapshot(data);
+      } catch {
+        if (active) setLiveSnapshot(null);
+      }
+    };
+    refresh();
+    const handle = () => refresh();
+    window.addEventListener("o4t-receiver-updated", handle);
+    const interval = window.setInterval(refresh, 30000);
+    return () => {
+      active = false;
+      window.clearInterval(interval);
+      window.removeEventListener("o4t-receiver-updated", handle);
+    };
+  }, []);
+
+  const device = liveSnapshot?.device || { name: "لا يوجد رسيفر متصل", model: "—", image: "—", enigmaVersion: "—", ip: "—" };
+  const metricItems = [
+    { key: "cpu", label: "استخدام المعالج", value: liveSnapshot?.resources?.[0]?.value || "غير متاح", detail: "حسب البيانات التي يوفرها OpenWebif", amount: 0, tone: "blue" },
+    { key: "memory", label: "الذاكرة", value: liveSnapshot?.resources?.[1]?.value || "غير متاح", detail: "حسب البيانات التي يوفرها OpenWebif", amount: 0, tone: "cyan" },
+    { key: "storage", label: "التخزين", value: liveSnapshot?.resources?.[2]?.value || "غير متاح", detail: "حسب البيانات التي يوفرها OpenWebif", amount: 0, tone: "amber" },
+    { key: "services", label: "القنوات", value: liveSnapshot?.counts?.bouquets == null ? "غير متاح" : String(liveSnapshot.counts.bouquets), detail: "عدد الباقات المقروءة", amount: 0, tone: "green" }
+  ];
+  const liveFindings = liveSnapshot?.connected
+    ? [{ title: "اتصال OpenWebif نشط", description: "تمت قراءة بيانات الجهاز من الرسيفر مباشرة.", severity: "متصل", tone: "success", evidence: liveSnapshot.source }]
+    : [{ title: "لا توجد بيانات رسيفر حية", description: "اربط الجسر والرسيفر لعرض حالة فعلية بدلًا من عينات العرض.", severity: "بانتظار الاتصال", tone: "warning", evidence: "OpenWebif connection required" }];
+
+  const startScan = async (type = "full") => {
+    const snapshot = await getReceiverSnapshot();
+    setLiveSnapshot(snapshot);
+    const report = snapshot.connected
+      ? {
+          title: type === "full" ? "تحديث بيانات الجهاز" : scanReports[type]?.title || "قراءة بيانات الجهاز",
+          status: "تمت القراءة الفعلية",
+          summary: "تم تحديث بيانات OpenWebif المتاحة. هذا الفحص لا يدّعي قراءة السجلات أو قائمة البلجنات أو ملفات النظام.",
+          recommendation: "البيانات غير المتاحة عبر OpenWebif تظل معلّمة كغير متاحة، ولا يتم تنفيذ أي تغييرات على الرسيفر.",
+          checks: ["معلومات الجهاز", "حالة OpenWebif", "قوائم القنوات", "المؤقتات والتسجيلات المتاحة"]
+        }
+      : {
+          title: "تعذر بدء الفحص",
+          status: "الرسيفر غير متصل",
+          summary: snapshot.message || "لم يتم العثور على اتصال محفوظ بالرسيفر.",
+          recommendation: "افتح اتصال الجسر المحلي وأعد اختبار اتصال الرسيفر.",
+          checks: ["لم يتم تنفيذ فحص", "لا توجد بيانات فعلية"]
+        };
     const record = { ...report, id: Date.now(), time: new Date().toLocaleTimeString("ar-EG", { hour: "2-digit", minute: "2-digit" }) };
     setActiveReport(record);
     setScanHistory(previous => [record, ...previous].slice(0, 4));
     setScanState("complete");
-    setShowDemo(true);
+    setShowDemo(false);
   };
 
   return <div className="app-shell">
@@ -458,10 +540,10 @@ export default function App() {
       <button className="nav-item compact"><span className="nav-icon"><CircleHelp size={18}/></span><span className="nav-copy"><strong>المساعدة والتوثيق</strong></span></button>
       <div className="sidebar-spacer"/>
       <div className="receiver-mini glass">
-        <div className="receiver-mini-top"><span className="live-dot"/><span>جهاز تجريبي</span><span className="demo-tag">DEMO</span></div>
-        <strong>{demoDevice.name}</strong>
-        <small>{demoDevice.image}</small>
-        <div className="receiver-ip"><Wifi size={13}/> {demoDevice.ip}</div>
+        <div className="receiver-mini-top"><span className={liveSnapshot?.connected ? "live-dot" : "demo-status-dot"}/><span>{liveSnapshot?.connected ? "جهاز متصل" : "بانتظار الاتصال"}</span><span className="demo-tag">{liveSnapshot?.connected ? "LIVE" : "OFFLINE"}</span></div>
+        <strong>{device.name}</strong>
+        <small>{device.image}</small>
+        <div className="receiver-ip"><Wifi size={13}/> {device.ip}</div>
       </div>
       <div className="sidebar-footer">Online4Tech © 2026 <span>v0.1.0</span></div>
     </aside>
@@ -473,7 +555,7 @@ export default function App() {
           <div className="breadcrumb">المنظومة <ChevronLeft size={14}/> <strong>{activeNav}</strong></div>
         </div>
         <div className="topbar-actions">
-          <LocalBridgeControl/><span className="connection-pill"><span className="live-dot"/> وضع العرض التجريبي</span>
+          <LocalBridgeControl/><span className="connection-pill"><span className={liveSnapshot?.connected ? "live-dot" : "demo-status-dot"}/> {liveSnapshot?.connected ? "بيانات فعلية · قراءة فقط" : "بانتظار اتصال الرسيفر"}</span>
           <button className="icon-button" aria-label="بحث"><Search size={18}/></button>
           <button className="icon-button" aria-label="الإعدادات"><Settings size={18}/></button>
           <div className="avatar">O4</div>
@@ -485,26 +567,26 @@ export default function App() {
           <div>
             <div className="eyebrow"><span className="eyebrow-line"/> {activeNav === "AI Doctor" ? "INTELLIGENT DIAGNOSTICS" : "ONLINE4TECH DEVICE CENTER"}</div>
             <h1>{activeNav === "AI Doctor" ? <>AI Doctor <span className="title-ar">طبيب الرسيفر الذكي</span></> : activeNav === "Smart Manager" ? <>Smart Manager <span className="title-ar">إدارة الجهاز</span></> : activeNav}</h1>
-            <p>{activeNav === "AI Doctor" ? "افحص جهازك، افهم المشاكل، واعرف الخطوة المناسبة قبل تنفيذ أي إصلاح." : activeNav === "Smart Manager" ? "تفاصيل الجهاز ومؤشرات النظام وحالة طبقة الاتصال." : activeNav === "Plugin Store" ? "استكشف كتالوج الإضافات وصنّفها وراجع معلوماتها." : activeNav === "Channel Intelligence" ? "ابحث في القنوات التجريبية وصنّفها حسب القمر والتردد والنوع." : "القسم قيد التجهيز ضمن منظومة Online4Tech."}</p>
+            <p>{activeNav === "AI Doctor" ? "افحص جهازك، افهم المشاكل، واعرف الخطوة المناسبة قبل تنفيذ أي إصلاح." : activeNav === "Smart Manager" ? "تفاصيل الجهاز ومؤشرات النظام وحالة طبقة الاتصال." : activeNav === "Plugin Store" ? "استكشف كتالوج الإضافات وصنّفها وراجع معلوماتها." : activeNav === "Channel Intelligence" ? "ابحث في باقات وقنوات الرسيفر المقروءة عبر OpenWebif." : "القسم قيد التجهيز ضمن منظومة Online4Tech."}</p>
           </div>
-          {activeNav === "AI Doctor" && <button className="primary-button" onClick={() => startScan("full")}><Activity size={17}/>{scanState === "complete" ? "إعادة الفحص التجريبي" : "ابدأ فحص النظام"}</button>}
+          {activeNav === "AI Doctor" && <button className="primary-button" onClick={() => startScan("full")}><Activity size={17}/>{scanState === "complete" ? "تحديث الفحص" : "قراءة بيانات الجهاز"}</button>}
         </section>
         {activeNav === "Smart Manager" ? <ReceiverDetails/> : activeNav === "Plugin Store" ? <PluginStore/> : activeNav === "Channel Intelligence" ? <ChannelIntelligence/> : activeNav !== "AI Doctor" ? <section className="glass module-placeholder"><Package size={28}/><h2>{activeNav}</h2><p>سيتم تجهيز هذا القسم في المرحلة التالية مع الحفاظ على نفس واجهة المنظومة.</p><span>قيد التطوير · Demo Mode</span></section> : <>
 
         <section className="device-banner glass">
           <div className="device-identity">
             <div className="device-visual"><Tv size={29}/><span className="device-signal"/></div>
-            <div><div className="device-overline">الجهاز المحدد</div><h2>{demoDevice.name}</h2><div className="device-meta"><span>{demoDevice.image}</span><i/> <span>{demoDevice.version}</span><i/> <span>{demoDevice.ip}</span></div></div>
+            <div><div className="device-overline">الجهاز المحدد</div><h2>{device.name}</h2><div className="device-meta"><span>{device.image}</span><i/> <span>{device.enigmaVersion}</span><i/> <span>{device.ip}</span></div></div>
           </div>
-          <div className="device-status"><span className="live-dot"/><div><strong>متصل تجريبياً</strong><small>بيانات توضيحية وليست اتصالاً حقيقياً</small></div></div>
+          <div className="device-status"><span className={liveSnapshot?.connected ? "live-dot" : "demo-status-dot"}/><div><strong>{liveSnapshot?.connected ? "متصل فعليًا" : "غير متصل"}</strong><small>{liveSnapshot?.connected ? "OpenWebif · قراءة فقط" : "لا توجد بيانات حية"}</small></div></div>
           <button className="text-button" onClick={() => setShowDemo(!showDemo)}>{showDemo ? "إخفاء التنبيه" : "عرض التنبيه"} <ArrowUpLeft size={15}/></button>
         </section>
 
-        {showDemo && <div className="demo-notice"><AlertTriangle size={16}/><span>وضع تجريبي: كل الأرقام ونتائج الفحص المعروضة أمثلة ثابتة. لم يتم الاتصال بأي رسيفر ولم يتم تنفيذ أوامر عليه.</span><button onClick={() => setShowDemo(false)} aria-label="إغلاق"><X size={15}/></button></div>}
+        {!liveSnapshot?.connected && <div className="demo-notice"><AlertTriangle size={16}/><span>لا توجد بيانات رسيفر حية حاليًا. اتصل بالجسر المحلي لقراءة المعلومات الفعلية.</span></div>}
 
         <section className="section-block">
-          <div className="section-heading"><div><h3>نظرة عامة على حالة الجهاز</h3><p>مؤشرات النظام الأساسية</p></div><span className="updated"><Clock3 size={14}/> بيانات تجريبية</span></div>
-          <div className="metrics-grid">{metrics.map(item => <MetricCard key={item.key} item={item}/>)}</div>
+          <div className="section-heading"><div><h3>نظرة عامة على حالة الجهاز</h3><p>مؤشرات النظام الأساسية</p></div><span className="updated"><Clock3 size={14}/> {liveSnapshot?.connected ? "بيانات OpenWebif" : "لا توجد بيانات حية"}</span></div>
+          <div className="metrics-grid">{metricItems.map(item => <MetricCard key={item.key} item={item}/>)}</div>
         </section>
 
         <section className="lower-grid">
@@ -521,19 +603,19 @@ export default function App() {
           <div className="glass panel findings-panel">
             <div className="panel-heading"><div><h3>آخر نتائج التشخيص</h3><p>ملخص الملاحظات المكتشفة</p></div><button className="link-button">عرض التقرير <ArrowUpLeft size={14}/></button></div>
             {scanState === "complete" && activeReport && <div className="scan-result">
-              <div className="scan-complete"><CheckCircle2 size={16}/> اكتمل الفحص التجريبي: {activeReport.title}</div>
+              <div className="scan-complete"><CheckCircle2 size={16}/> {activeReport.status}: {activeReport.title}</div>
               <strong>{activeReport.status}</strong>
               <p>{activeReport.summary}</p>
               <div className="report-checks">{activeReport.checks.map(item => <span key={item}><CheckCircle2 size={12}/>{item}</span>)}</div>
               <div className="recommendation"><strong>الخطوة المقترحة</strong><p>{activeReport.recommendation}</p></div>
-              <small className="report-time">وقت إنشاء التقرير: {activeReport.time} · بيانات تجريبية محلية</small>
+              <small className="report-time">وقت إنشاء التقرير: {activeReport.time} · قراءة فعلية أو حالة عدم اتصال</small>
             </div>}
-            <div className="findings-list">{findings.map((f, i) => <div className="finding" key={i}>
+            <div className="findings-list">{liveFindings.map((f, i) => <div className="finding" key={i}>
               <span className={`finding-icon ${f.tone}`}>{f.tone === "warning" ? <AlertTriangle size={17}/> : <CheckCircle2 size={17}/>}</span>
               <div className="finding-copy"><strong>{f.title}</strong><p>{f.description}</p><small>الدليل: {f.evidence}</small></div>
               <span className={`severity ${f.tone}`}>{f.severity}</span>
             </div>)}</div>
-            <div className="report-footer"><Database size={14}/> نتائج محلية تجريبية <span>•</span> لا توجد تغييرات على الجهاز</div>
+            <div className="report-footer"><Database size={14}/> {liveSnapshot?.connected ? "مصدر البيانات: OpenWebif" : "بانتظار اتصال الرسيفر"} <span>•</span> وضع قراءة فقط</div>
             {scanHistory.length > 0 && <div className="scan-history">
               <strong>سجل الفحوصات في الجلسة الحالية</strong>
               {scanHistory.map(item => <div className="history-row" key={item.id}><span>{item.title}</span><small>{item.time}</small></div>)}
@@ -550,7 +632,7 @@ export default function App() {
         </section>
 
         </>}
-        <footer className="page-footer"><span>ONLINE4TECH SMART ECOSYSTEM</span><span>واجهة أولية • بيانات تجريبية • v0.1.0</span></footer>
+        <footer className="page-footer"><span>ONLINE4TECH SMART ECOSYSTEM</span><span>OpenWebif read-only • Online4Tech Smart Ecosystem • v0.1.0</span></footer>
       </div>
     </main>
   </div>;
