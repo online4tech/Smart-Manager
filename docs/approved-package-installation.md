@@ -24,5 +24,13 @@ The general plugin catalog and command library are reference material only. They
 ## SSH transport requirements
 Any future SSH transport must use a dedicated local key, strict host-key verification/pinning, no password storage in the website, no agent forwarding, bounded timeouts, and a narrowly scoped operation interface. If the receiver cannot provide a verifiable host key, the connection must fail closed.
 
+## Local staging capability
+- The Plugin Store includes a local IPK staging screen.
+- The browser sends the selected IPK only to the user's local bridge at `127.0.0.1:8765`; the bridge stores it under the user's local application-data directory in `staging/`.
+- Upload is limited to 32 MiB and requires the authenticated official-site origin and local bridge token/CSRF headers.
+- The bridge inspects the IPK ar structure, reads the control metadata, checks control/data tar member paths, and computes SHA-256. It does not extract files, run scripts, contact a package source, or send the file to the receiver.
+- A staged file is explicitly marked `staged-not-approved`. It is not added to `approved-packages.json` and cannot be installed.
+- The allowlist remains empty until a human review verifies provenance, source, exact digest, receiver architecture, image compatibility, and dependencies.
+
 ## Current capability
-The bridge remains OpenWebif read-only. This change does not enable SSH, upload, package installation, package removal, or command execution.
+OpenWebif access remains read-only. Local IPK staging is enabled only on the user's computer. SSH, receiver-side upload, package installation/removal, and command execution remain disabled.
