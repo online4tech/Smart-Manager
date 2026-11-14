@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Activity, AlertTriangle, ArrowDownLeft, ArrowUpLeft, Bot, CheckCircle2,
   ChevronLeft, CircleHelp, Clock3, Cpu, Database, FileSearch, HardDrive,
   LayoutDashboard, ListVideo, MemoryStick, Menu, Package, Search, Settings,
-  ShieldCheck, Stethoscope, Tv, Wifi, X
+  ShieldCheck, Stethoscope, Tv, Wifi, X, Server, RefreshCw, LockKeyhole
 } from "lucide-react";
-import { demoDevice, metrics, findings } from "./data/demo";
+import { demoDevice, metrics, findings } from "./data/demo";\nimport { getReceiverSnapshot, getConnectionCapabilities } from "./services/receiverAdapter";
 
 const scanReports = {
   full: {
@@ -57,6 +57,73 @@ function MetricCard({ item }) {
     <div className="progress"><span className={item.tone} style={{width: `${item.amount}%`}} /></div>
     <div className="metric-detail">{item.detail}</div>
   </article>;
+}
+
+
+function ReceiverDetails() {
+  const [snapshot, setSnapshot] = useState(null);
+  const [refreshing, setRefreshing] = useState(false);
+  const capabilities = getConnectionCapabilities();
+
+  const refreshDemo = async () => {
+    setRefreshing(true);
+    const data = await getReceiverSnapshot();
+    setSnapshot(data);
+    setRefreshing(false);
+  };
+
+  useEffect(() => { refreshDemo(); }, []);
+
+  if (!snapshot) return <div className="glass receiver-details-loading">جاري تحميل بيانات العرض...</div>;
+
+  return <div className="receiver-details-page">
+    <section className="device-banner glass receiver-detail-hero">
+      <div className="device-identity">
+        <div className="device-visual"><Tv size={29}/><span className="device-signal"/></div>
+        <div><div className="device-overline">ملف الجهاز · وضع تجريبي</div><h2>{snapshot.device.name}</h2>
+          <div className="device-meta"><span>{snapshot.device.image}</span><i/><span>{snapshot.device.enigmaVersion}</span><i/><span>{snapshot.device.ip}</span></div>
+        </div>
+      </div>
+      <div className="device-status"><span className="demo-status-dot"/><div><strong>غير متصل فعليًا</strong><small>بيانات محلية للعرض فقط</small></div></div>
+    </section>
+
+    <div className="demo-notice"><AlertTriangle size={16}/><span>كل المعلومات في الصفحة أمثلة توضيحية. عنوان IP المعروض تجريبي ولا تتم محاولة الوصول إليه.</span></div>
+
+    <section className="section-block">
+      <div className="section-heading"><div><h3>معلومات الجهاز</h3><p>بيانات التعريف والإصدار</p></div><span className="updated"><Database size={14}/> Demo Snapshot</span></div>
+      <div className="device-info-grid">
+        <article className="glass info-tile"><small>اسم الجهاز</small><strong>{snapshot.device.model}</strong></article>
+        <article className="glass info-tile"><small>صورة النظام</small><strong>{snapshot.device.image}</strong></article>
+        <article className="glass info-tile"><small>معمارية المعالج</small><strong>{snapshot.device.architecture}</strong></article>
+        <article className="glass info-tile"><small>مدة التشغيل</small><strong>{snapshot.device.uptime}</strong></article>
+        <article className="glass info-tile"><small>عنوان الشبكة (تجريبي)</small><strong dir="ltr">{snapshot.device.ip}</strong></article>
+        <article className="glass info-tile"><small>آخر تحديث للبيانات</small><strong>{snapshot.device.lastSeen}</strong></article>
+      </div>
+    </section>
+
+    <section className="section-block">
+      <div className="section-heading"><div><h3>موارد النظام</h3><p>مؤشرات توضيحية وليست قراءة مباشرة</p></div></div>
+      <div className="resource-grid">{snapshot.resources.map(item => <article className="glass resource-tile" key={item.label}><span>{item.label}</span><strong>{item.value}</strong><small>{item.detail}</small></article>)}</div>
+    </section>
+
+    <section className="lower-grid receiver-lower-grid">
+      <div className="glass panel">
+        <div className="panel-heading"><div><h3>الخدمات الأساسية</h3><p>حالة افتراضية للشرح</p></div><span className="panel-icon"><Server size={19}/></span></div>
+        <div className="service-list">{snapshot.services.map(service => <div className="service-row" key={service.name}><span>{service.name}</span><small>{service.state}</small></div>)}</div>
+      </div>
+      <div className="glass panel connection-panel">
+        <div className="panel-heading"><div><h3>طبقة الاتصال</h3><p>جاهزية الربط الآمن مستقبلًا</p></div><span className="panel-icon"><LockKeyhole size={19}/></span></div>
+        <div className="connection-state"><span className="demo-status-dot"/><div><strong>Demo Adapter نشط</strong><small>لا يوجد اتصال شبكي أو Bridge</small></div></div>
+        <ul className="capability-list">
+          <li><CheckCircle2 size={14}/> قراءة بيانات العرض المحلية</li>
+          <li><X size={14}/> الاتصال بالشبكة غير مفعّل</li>
+          <li><X size={14}/> تنفيذ الأوامر وتعديل الملفات معطّل</li>
+        </ul>
+        <button className="secondary-button refresh-demo" onClick={refreshDemo} disabled={refreshing}><RefreshCw size={15}/>{refreshing ? "جاري التحديث..." : "تحديث بيانات العرض"}</button>
+        <small className="adapter-note">Provider: {capabilities.provider} · Network: disabled · Commands: disabled</small>
+      </div>
+    </section>
+  </div>;
 }
 
 export default function App() {
@@ -126,12 +193,13 @@ export default function App() {
       <div className="content">
         <section className="page-heading">
           <div>
-            <div className="eyebrow"><span className="eyebrow-line"/> INTELLIGENT DIAGNOSTICS</div>
-            <h1>AI Doctor <span className="title-ar">طبيب الرسيفر الذكي</span></h1>
-            <p>افحص جهازك، افهم المشاكل، واعرف الخطوة المناسبة قبل تنفيذ أي إصلاح.</p>
+            <div className="eyebrow"><span className="eyebrow-line"/> {activeNav === "AI Doctor" ? "INTELLIGENT DIAGNOSTICS" : "ONLINE4TECH DEVICE CENTER"}</div>
+            <h1>{activeNav === "AI Doctor" ? <>AI Doctor <span className="title-ar">طبيب الرسيفر الذكي</span></> : activeNav === "Smart Manager" ? <>Smart Manager <span className="title-ar">إدارة الجهاز</span></> : activeNav}</h1>
+            <p>{activeNav === "AI Doctor" ? "افحص جهازك، افهم المشاكل، واعرف الخطوة المناسبة قبل تنفيذ أي إصلاح." : activeNav === "Smart Manager" ? "تفاصيل الجهاز ومؤشرات النظام وحالة طبقة الاتصال." : "القسم قيد التجهيز ضمن منظومة Online4Tech."}</p>
           </div>
-          <button className="primary-button" onClick={() => startScan("full")}><Activity size={17}/>{scanState === "complete" ? "إعادة الفحص التجريبي" : "ابدأ فحص النظام"}</button>
+          {activeNav === "AI Doctor" && <button className="primary-button" onClick={() => startScan("full")}><Activity size={17}/>{scanState === "complete" ? "إعادة الفحص التجريبي" : "ابدأ فحص النظام"}</button>}
         </section>
+        {activeNav === "Smart Manager" ? <ReceiverDetails/> : activeNav !== "AI Doctor" ? <section className="glass module-placeholder"><Package size={28}/><h2>{activeNav}</h2><p>سيتم تجهيز هذا القسم في المرحلة التالية مع الحفاظ على نفس واجهة المنظومة.</p><span>قيد التطوير · Demo Mode</span></section> : <>
 
         <section className="device-banner glass">
           <div className="device-identity">
@@ -189,6 +257,7 @@ export default function App() {
           <button className="secondary-button" disabled>قريباً <ArrowDownLeft size={15}/></button>
         </section>
 
+        </>}
         <footer className="page-footer"><span>ONLINE4TECH SMART ECOSYSTEM</span><span>واجهة أولية • بيانات تجريبية • v0.1.0</span></footer>
       </div>
     </main>
