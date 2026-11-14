@@ -99,6 +99,17 @@ class IpkInspectionTests(unittest.TestCase):
                 self.assertFalse(result["install_enabled"])
                 self.assertEqual(result["status"], "staged-not-approved")
 
+    def test_rejects_when_staging_package_count_limit_is_reached(self):
+        payload = self.make_ipk("Package: example\\nVersion: 1\\nArchitecture: all\\n")
+        with tempfile.TemporaryDirectory() as directory:
+            staging = Path(directory) / "staging"
+            staging.mkdir()
+            for index in range(50):
+                (staging / f"existing-{index}.ipk").write_bytes(b"x")
+            with patch.object(bridge, "user_data_root", return_value=Path(directory)):
+                with self.assertRaisesRegex(ValueError, "staging_quota_exceeded"):
+                    stage_ipk(payload, "example.ipk")
+
     def test_rejects_wrong_filename_extension(self):
         payload = self.make_ipk("Package: example\nVersion: 1\nArchitecture: all\n")
         with self.assertRaisesRegex(ValueError, "ipk_extension_required"):
