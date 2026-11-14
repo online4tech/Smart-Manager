@@ -4,6 +4,7 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 import json, secrets, time
 from collections import deque
 from threading import Lock
+from urllib.parse import urlsplit
 
 HOST = "127.0.0.1"
 PORT = 8765
@@ -43,7 +44,8 @@ class Handler(BaseHTTPRequestHandler):
         return self.headers.get("Origin") == ALLOWED_ORIGIN
 
     def do_OPTIONS(self):
-        if not self.valid_host() or not self.valid_origin() or self.path not in ("/api/pair", "/api/status"):
+        route = urlsplit(self.path).path
+        if not self.valid_host() or not self.valid_origin() or route not in ("/api/pair", "/api/status"):
             return reply(self, 403, {"ok": False, "error": "request_not_allowed"})
         self.send_response(204)
         self.send_header("Access-Control-Allow-Origin", ALLOWED_ORIGIN)
@@ -55,9 +57,10 @@ class Handler(BaseHTTPRequestHandler):
         self.end_headers()
 
     def do_GET(self):
+        route = urlsplit(self.path).path
         if not self.valid_host():
             return reply(self, 403, {"ok": False, "error": "host_not_allowed"})
-        if self.path == "/health":
+        if route == "/health":
             return reply(self, 200, {"ok": True, "service": "Online4Tech Smart Manager Bridge", "version": "1.0.0", "bind": "127.0.0.1", "receiver_connected": False})
         return reply(self, 404, {"ok": False, "error": "not_found"})
 
@@ -75,12 +78,13 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_POST(self):
         global SESSION_TOKEN, CSRF_TOKEN, PAIR_USED
+        route = urlsplit(self.path).path
         if not self.valid_host() or not self.valid_origin():
             return reply(self, 403, {"ok": False, "error": "request_not_allowed"})
         data = self.read_json()
         if data is None:
             return reply(self, 400, {"ok": False, "error": "invalid_request"})
-        if self.path == "/api/pair":
+        if route == "/api/pair":
             now = time.time()
             with LOCK:
                 while ATTEMPTS and now - ATTEMPTS[0] > 60:
@@ -94,7 +98,7 @@ class Handler(BaseHTTPRequestHandler):
                 SESSION_TOKEN = secrets.token_urlsafe(32)
                 CSRF_TOKEN = secrets.token_urlsafe(24)
             return reply(self, 200, {"ok": True, "token": SESSION_TOKEN, "csrf": CSRF_TOKEN, "mode": "read-only-starter"}, True)
-        if self.path == "/api/status":
+        if route == "/api/status":
             token = self.headers.get("X-Bridge-Token", "")
             csrf = self.headers.get("X-CSRF-Token", "")
             if not SESSION_TOKEN or not secrets.compare_digest(token, SESSION_TOKEN) or not secrets.compare_digest(csrf, CSRF_TOKEN or ""):
