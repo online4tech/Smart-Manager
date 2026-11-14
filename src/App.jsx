@@ -64,8 +64,14 @@ export default function App() {
   const [scanState, setScanState] = useState("idle");
   const [activeNav, setActiveNav] = useState("AI Doctor");
   const [showDemo, setShowDemo] = useState(true);
+  const [activeReport, setActiveReport] = useState(null);
+  const [scanHistory, setScanHistory] = useState([]);
 
-  const startScan = () => {
+  const startScan = (type = "full") => {
+    const report = scanReports[type] || scanReports.full;
+    const record = { ...report, id: Date.now(), time: new Date().toLocaleTimeString("ar-EG", { hour: "2-digit", minute: "2-digit" }) };
+    setActiveReport(record);
+    setScanHistory(previous => [record, ...previous].slice(0, 4));
     setScanState("complete");
     setShowDemo(true);
   };
