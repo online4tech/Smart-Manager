@@ -667,3 +667,14 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
   .catalog-filter-toggle{min-height:46px;padding:10px 12px}
   .catalog-filter-panel{padding:11px;gap:11px}
 }
+
+
+/* Guarded install entry points */
+.catalog-card-actions{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin-top:auto}
+.catalog-card-actions .catalog-open{margin-top:0;align-self:auto}
+.catalog-install-trigger{display:inline-flex;align-items:center;justify-content:center;gap:6px}
+.package-install-request{padding:16px;border:1px solid rgba(96,165,250,.22);border-radius:14px;background:linear-gradient(120deg,rgba(37,99,235,.12),rgba(15,23,42,.55))}
+.package-install-request .package-panel-heading{margin-bottom:10px}
+.package-install-request .package-panel-heading h3{color:#dcecff}
+.package-install-request .package-not-approved{margin-top:8px}
+@media(max-width:620px){.catalog-card-actions{width:100%}.catalog-card-actions>*{flex:1}.package-install-request{padding:13px}}
