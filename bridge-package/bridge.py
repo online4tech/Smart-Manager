@@ -195,7 +195,7 @@ def read_receiver_dataset(snapshot, dataset):
             connection.close()
 
 class Handler(BaseHTTPRequestHandler):
-    server_version = "O4TLocalBridge/1.1"
+    server_version = "O4TLocalBridge/1.2"
 
     def log_message(self, fmt, *args):
         # Do not log request bodies, pairing codes, or session headers.
@@ -227,7 +227,7 @@ class Handler(BaseHTTPRequestHandler):
         if route_path(self.path) == "/health":
             return reply(self, 200, {
                 "ok": True, "service": "Online4Tech Smart Manager Bridge",
-                "version": "1.1.0", "bind": "127.0.0.1",
+                "version": "1.2.0", "bind": "127.0.0.1",
                 "receiver_connected": bool(RECEIVER_SNAPSHOT and RECEIVER_SNAPSHOT.get("connected"))
             })
         return reply(self, 404, {"ok": False, "error": "not_found"})
