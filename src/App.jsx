@@ -352,14 +352,14 @@ function LocalBridgeControl() {
   const disconnect = () => {
     localStorage.removeItem("o4t-bridge-trust");
     setSession(null); setBridgeStatus(null); setReceiverInfo(null);
-    setMessage("تم إلغاء الثقة المحلية من هذه الجلسة.");
+    setMessage("تم مسح بيانات الاتصال المحفوظة من هذا المتصفح.");
     setError("");
   };
 
   return <>
     <button className="bridge-open-button" onClick={() => setOpen(true)}>
       <span className={session ? "bridge-dot paired" : "bridge-dot"} />
-      <Link2 size={15}/> {session ? "الجسر مقترن" : "ربط الجسر المحلي"}
+      <Link2 size={15}/> {session ? "الجسر موثوق" : "اتصال الجسر المحلي"}
     </button>
     {open && <div className="modal-backdrop bridge-backdrop" onClick={() => setOpen(false)}>
       <section className="glass bridge-modal" onClick={e => e.stopPropagation()}>
@@ -374,7 +374,7 @@ function LocalBridgeControl() {
         </> : <>
           <div className="bridge-status-card">
             <span className="bridge-dot paired"/>
-            <div><strong>الجسر المحلي مقترن</strong><small>الثقة محفوظة على هذا المتصفح لهذا الكمبيوتر</small></div>
+            <div><strong>الجسر المحلي موثوق</strong><small>الثقة محفوظة على هذا المتصفح لهذا الكمبيوتر</small></div>
           </div>
           {bridgeStatus && <div className="bridge-capabilities">
             <div><span>حالة الجسر</span><strong>متصل</strong></div>
