@@ -336,8 +336,8 @@ function LocalBridgeControl() {
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
-  const [receiverHost, setReceiverHost] = useState("");
-  const [receiverScheme, setReceiverScheme] = useState("http");
+  const [receiverHost, setReceiverHost] = useState(() => { try { return JSON.parse(localStorage.getItem("o4t-receiver-config") || "null")?.host || ""; } catch { return ""; } });
+  const [receiverScheme, setReceiverScheme] = useState(() => { try { return JSON.parse(localStorage.getItem("o4t-receiver-config") || "null")?.scheme || "http"; } catch { return "http"; } });
   const [receiverInfo, setReceiverInfo] = useState(null);
 
   const pair = async () => {
@@ -397,6 +397,8 @@ function LocalBridgeControl() {
 
   const disconnect = () => {
     localStorage.removeItem("o4t-bridge-trust");
+    localStorage.removeItem("o4t-receiver-config");
+    window.dispatchEvent(new Event("o4t-receiver-updated"));
     setSession(null); setBridgeStatus(null); setReceiverInfo(null);
     setMessage("تم مسح بيانات الاتصال المحفوظة من هذا المتصفح.");
     setError("");
