@@ -36,7 +36,7 @@ async function bridgeRequest(path, { body, token, csrf } = {}) {
     return data;
   } catch (error) {
     if (error.name === "AbortError") throw new Error("انتهت مهلة الاتصال بالجسر. تأكد أنه يعمل على هذا الكمبيوتر.");
-    if (error instanceof TypeError) throw new Error("تعذر الوصول للجسر المحلي. شغّل start.bat واسمح للمتصفح بالوصول إلى الشبكة المحلية إذا طلب ذلك.");
+    if (error instanceof TypeError) throw new Error("تعذر الوصول للجسر المحلي. شغّل برنامج Online4Tech Bridge واسمح للمتصفح بالوصول إلى الشبكة المحلية إذا طلب ذلك.");
     throw error;
   } finally {
     window.clearTimeout(timeout);
