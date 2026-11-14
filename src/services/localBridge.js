@@ -127,6 +127,7 @@ export async function stagePackageUpload(file) {
       const messages = {
         unauthorized: "انتهت الثقة المحلية. أعد الاتصال بالجسر.",
         ipk_size_invalid: "حجم الملف غير صالح أو يتجاوز 32 ميجابايت.",
+        staging_quota_exceeded: "مساحة staging المحلية ممتلئة؛ راجع الملفات المحفوظة قبل رفع المزيد.",
         ipk_content_type_invalid: "نوع الملف غير مدعوم.",
         invalid_ipk_archive: "الملف ليس حزمة IPK سليمة.",
         ipk_control_missing: "بيانات تعريف الحزمة غير موجودة داخل الملف.",
