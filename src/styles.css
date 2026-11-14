@@ -418,3 +418,167 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
 }
+
+
+/* Plugin Store layout polish: clear spacing, grouped controls and no crowded buttons */
+.catalog-page{
+  gap:18px;
+}
+.catalog-page > .glass,
+.catalog-page > .module-toolbar,
+.catalog-page > .catalog-switcher,
+.catalog-page > .package-center{
+  min-width:0;
+}
+.catalog-switcher{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  align-items:stretch;
+  gap:12px;
+  padding:12px;
+  border-radius:16px;
+}
+.catalog-switcher button{
+  min-width:0;
+  min-height:58px;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:9px;
+  padding:12px 16px;
+  border:1px solid rgba(190,218,247,.2);
+  border-radius:12px;
+  background:rgba(5,17,31,.42);
+  white-space:normal;
+  text-align:center;
+}
+.catalog-switcher button span{
+  flex:0 0 auto;
+  margin-inline-start:3px;
+}
+.catalog-switcher button.active{
+  box-shadow:inset 0 0 0 1px rgba(139,196,255,.16),0 6px 18px rgba(0,0,0,.16);
+}
+.catalog-toolbar{
+  display:grid;
+  gap:16px;
+  padding:16px;
+  border-radius:16px;
+}
+.catalog-toolbar .module-search{
+  width:100%;
+  min-width:0;
+}
+.catalog-type-filter,
+.category-pills{
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:9px;
+  min-width:0;
+}
+.catalog-type-filter button,
+.category-pills button{
+  margin:0;
+  max-width:100%;
+  white-space:normal;
+  border-radius:10px;
+}
+.package-center{
+  gap:18px;
+}
+.package-upload-panel,
+.package-approved-panel{
+  padding:22px;
+  border-radius:16px;
+}
+.package-upload-controls{
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  align-items:stretch;
+  gap:12px;
+}
+.package-file-picker{
+  min-height:50px;
+  padding:12px 16px;
+  border-radius:11px;
+  font-size:14px;
+  white-space:normal;
+  text-align:center;
+}
+.package-selected-name{
+  display:flex;
+  align-items:center;
+  min-height:50px;
+  padding:10px 14px;
+  border:1px solid rgba(190,218,247,.18);
+  border-radius:11px;
+  background:rgba(4,15,28,.42);
+  white-space:normal;
+  overflow-wrap:anywhere;
+}
+.package-upload-controls .primary-button{
+  grid-column:1 / -1;
+  width:100%;
+  min-height:50px;
+  border-radius:11px;
+}
+.package-upload-hint{
+  margin-top:14px;
+}
+.package-stage-result{
+  display:grid;
+  gap:12px;
+  padding:18px;
+  margin-top:18px;
+}
+.package-stage-status{
+  margin:0;
+}
+.package-metadata-grid{
+  gap:12px;
+}
+.package-not-approved{
+  padding:12px 14px;
+  border:1px solid rgba(245,200,121,.2);
+  border-radius:10px;
+  background:rgba(112,73,10,.12);
+}
+.package-install-button{
+  width:100%;
+  justify-content:center;
+}
+.package-approved-list{
+  display:grid;
+  gap:10px;
+}
+.package-approved-item{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:10px;
+  padding:13px 15px;
+  border:1px solid rgba(190,218,247,.18);
+  border-radius:11px;
+  background:rgba(4,15,28,.38);
+}
+.package-safety-note{
+  gap:12px;
+  padding:14px 16px;
+  border-radius:12px;
+}
+@media(max-width:900px){
+  .catalog-switcher{grid-template-columns:1fr;gap:9px}
+  .catalog-switcher button{justify-content:flex-start;text-align:right}
+}
+@media(max-width:620px){
+  .catalog-page{gap:14px}
+  .catalog-switcher,.catalog-toolbar{padding:12px}
+  .catalog-switcher button{min-height:54px;padding:12px}
+  .package-upload-panel,.package-approved-panel{padding:15px}
+  .package-upload-controls{grid-template-columns:1fr;gap:10px}
+  .package-selected-name{min-height:44px}
+  .package-upload-controls .primary-button{grid-column:auto}
+  .package-metadata-grid{grid-template-columns:1fr 1fr;gap:8px}
+  .package-approved-item{align-items:flex-start;flex-direction:column}
+  .catalog-type-filter button,.category-pills button{flex:0 0 auto}
+}
