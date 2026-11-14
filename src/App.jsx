@@ -8,7 +8,7 @@ import {
 import { demoDevice, metrics, findings } from "./data/demo";
 import pluginsData from "./data/plugins.json";
 import commandsData from "./data/commands.json";
-import { pairLocalBridge, getLocalBridgeStatus, connectLocalReceiver } from "./services/localBridge";
+import { trustLocalBridge, getLocalBridgeStatus, connectLocalReceiver } from "./services/localBridge";
 import { getReceiverSnapshot, getConnectionCapabilities } from "./services/receiverAdapter";
 
 const scanReports = {
@@ -282,8 +282,12 @@ function LogAnalyzer() {
 
 function LocalBridgeControl() {
   const [open, setOpen] = useState(false);
-  const [code, setCode] = useState("");
-  const [session, setSession] = useState(null);
+  const [session, setSession] = useState(() => {
+    try {
+      const saved = JSON.parse(localStorage.getItem("o4t-bridge-trust") || "null");
+      return saved?.token && saved?.csrf ? saved : null;
+    } catch { return null; }
+  });
   const [bridgeStatus, setBridgeStatus] = useState(null);
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState("");
@@ -295,18 +299,18 @@ function LocalBridgeControl() {
   const pair = async () => {
     setBusy(true); setError(""); setMessage("");
     try {
-      const paired = await pairLocalBridge(code.trim());
-      const credentials = { token: paired.token, csrf: paired.csrf };
+      const trusted = await trustLocalBridge();
+      const credentials = { token: trusted.token, csrf: trusted.csrf };
+      localStorage.setItem("o4t-bridge-trust", JSON.stringify(credentials));
       setSession(credentials);
-      setCode("");
-      setMessage("تم الاقتران مع الجسر المحلي بنجاح.");
+      setMessage("تم تفعيل الثقة المحلية على هذا المتصفح. لن تحتاج كود ربط مرة أخرى.");
       try {
         const status = await getLocalBridgeStatus(credentials);
         setBridgeStatus(status);
         setReceiverInfo(status.receiver?.device || null);
       } catch {
         setBridgeStatus(null);
-        setMessage("تم الاقتران، لكن تعذر تحديث حالة الجسر. جرّب تحديث الحالة.");
+        setMessage("تم حفظ الثقة المحلية، لكن تعذر تحديث حالة الجسر.");
       }
     } catch (err) {
       setError(err.message || "تعذر الاتصال بالجسر المحلي.");
@@ -346,8 +350,9 @@ function LocalBridgeControl() {
   };
 
   const disconnect = () => {
-    setSession(null); setBridgeStatus(null); setReceiverInfo(null); setCode("");
-    setMessage("تم إنهاء الاقتران من هذه الجلسة.");
+    localStorage.removeItem("o4t-bridge-trust");
+    setSession(null); setBridgeStatus(null); setReceiverInfo(null);
+    setMessage("تم إلغاء الثقة المحلية من هذه الجلسة.");
     setError("");
   };
 
@@ -361,17 +366,15 @@ function LocalBridgeControl() {
         <button className="modal-close" onClick={() => setOpen(false)} aria-label="إغلاق"><X size={18}/></button>
         <div className="bridge-modal-icon"><Link2 size={22}/></div>
         <span className="bridge-kicker">ONLINE4TECH LOCAL BRIDGE</span>
-        <h2>الاقتران مع الجسر المحلي</h2>
-        <p className="bridge-description">شغّل الجسر على نفس الكمبيوتر، ثم أدخل كود الاقتران الظاهر في نافذة التشغيل.</p>
+        <h2>الاتصال بالجسر المحلي</h2>
+        <p className="bridge-description">شغّل الجسر مرة واحدة على نفس الكمبيوتر، ثم اضغط اتصال. لا تحتاج كلمة مرور أو أرقام ربط.</p>
         <div className="bridge-endpoint" dir="ltr">http://127.0.0.1:8765</div>
         {!session ? <>
-          <label className="bridge-label" htmlFor="bridge-pair-code">كود الاقتران لمرة واحدة</label>
-          <input id="bridge-pair-code" className="bridge-code-input" value={code} onChange={e => setCode(e.target.value.toUpperCase().slice(0, 8))} placeholder="أدخل الكود الظاهر في نافذة الجسر" autoComplete="off" spellCheck="false" />
-          <button className="primary-button bridge-submit" onClick={pair} disabled={busy || code.trim().length < 6}>{busy ? "جاري الاقتران..." : "اقتران آمن"}</button>
+          <button className="primary-button bridge-submit" onClick={pair} disabled={busy}>{busy ? "جاري الاتصال..." : "اتصال آمن بالجسر"}</button>
         </> : <>
           <div className="bridge-status-card">
             <span className="bridge-dot paired"/>
-            <div><strong>الجسر المحلي مقترن</strong><small>تم حفظ بيانات الجلسة في ذاكرة الصفحة فقط</small></div>
+            <div><strong>الجسر المحلي مقترن</strong><small>الثقة محفوظة على هذا المتصفح لهذا الكمبيوتر</small></div>
           </div>
           {bridgeStatus && <div className="bridge-capabilities">
             <div><span>حالة الجسر</span><strong>متصل</strong></div>
@@ -392,7 +395,7 @@ function LocalBridgeControl() {
         </>}
         {message && <div className="bridge-message">{message}</div>}
         {error && <div className="bridge-error" role="alert">{error}</div>}
-        <div className="bridge-safety-note"><ShieldCheck size={15}/><span>قراءة معلومات OpenWebif فقط من IP محلي خاص. لا SSH ولا أوامر ولا تعديل ملفات ولا تثبيت أو حذف ولا نسخ احتياطي. لا تدخل كلمة مرور الرسيفر في هذه النسخة.</span></div>
+        <div className="bridge-safety-note"><ShieldCheck size={15}/><span>قراءة معلومات OpenWebif فقط من IP محلي خاص. لا SSH ولا أوامر ولا تعديل ملفات ولا تثبيت أو حذف في هذه المرحلة.</span></div>
       </section>
     </div>}
   </>;
