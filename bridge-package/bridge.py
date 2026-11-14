@@ -197,7 +197,7 @@ class Handler(BaseHTTPRequestHandler):
                     and secrets.compare_digest(csrf, CSRF_TOKEN or ""))
 
     def do_POST(self):
-        global SESSION_TOKEN, CSRF_TOKEN, PAIR_USED, RECEIVER_SNAPSHOT
+        global SESSION_TOKEN, CSRF_TOKEN, RECEIVER_SNAPSHOT
         route = route_path(self.path)
         if not self.valid_host() or not self.valid_origin():
             return reply(self, 403, {"ok": False, "error": "request_not_allowed"})
