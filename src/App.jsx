@@ -6,7 +6,7 @@ import {
   ShieldCheck, Stethoscope, Tv, Wifi, X, Server, RefreshCw, LockKeyhole, Link2
 } from "lucide-react";
 import { demoDevice, metrics, findings } from "./data/demo";
-import { pairLocalBridge, getLocalBridgeStatus } from "./services/localBridge";
+import { pairLocalBridge, getLocalBridgeStatus, connectLocalReceiver } from "./services/localBridge";
 import { getReceiverSnapshot, getConnectionCapabilities } from "./services/receiverAdapter";
 
 const scanReports = {
@@ -242,6 +242,9 @@ function LocalBridgeControl() {
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
+  const [receiverHost, setReceiverHost] = useState("");
+  const [receiverScheme, setReceiverScheme] = useState("http");
+  const [receiverInfo, setReceiverInfo] = useState(null);
 
   const pair = async () => {
     setBusy(true); setError(""); setMessage("");
@@ -254,6 +257,7 @@ function LocalBridgeControl() {
       try {
         const status = await getLocalBridgeStatus(credentials);
         setBridgeStatus(status);
+        setReceiverInfo(status.receiver?.device || null);
       } catch {
         setBridgeStatus(null);
         setMessage("تم الاقتران، لكن تعذر تحديث حالة الجسر. جرّب تحديث الحالة.");
@@ -271,6 +275,7 @@ function LocalBridgeControl() {
     try {
       const status = await getLocalBridgeStatus(session);
       setBridgeStatus(status);
+      setReceiverInfo(status.receiver?.device || null);
       setMessage("تم تحديث حالة الجسر.");
     } catch (err) {
       setError(err.message || "تعذر تحديث حالة الجسر.");
@@ -279,8 +284,23 @@ function LocalBridgeControl() {
     }
   };
 
+  const connectReceiver = async () => {
+    if (!session) return;
+    setBusy(true); setError(""); setMessage("");
+    try {
+      const result = await connectLocalReceiver(session, { host: receiverHost, scheme: receiverScheme });
+      setReceiverInfo(result.receiver?.device || null);
+      setBridgeStatus(previous => ({ ...(previous || {}), receiver: result.receiver }));
+      setMessage("تم الاتصال بالرسيفر وقراءة بيانات OpenWebif فقط.");
+    } catch (err) {
+      setError(err.message || "تعذر قراءة بيانات الرسيفر.");
+    } finally {
+      setBusy(false);
+    }
+  };
+
   const disconnect = () => {
-    setSession(null); setBridgeStatus(null); setCode("");
+    setSession(null); setBridgeStatus(null); setReceiverInfo(null); setCode("");
     setMessage("تم إنهاء الاقتران من هذه الجلسة.");
     setError("");
   };
@@ -312,6 +332,13 @@ function LocalBridgeControl() {
             <div><span>الرسيفر</span><strong>{bridgeStatus.receiver?.connected ? "متصل" : "غير متصل"}</strong></div>
             <div><span>SSH والأوامر</span><strong>غير مفعّلة</strong></div>
           </div>}
+          <div className="bridge-receiver-form">
+            <label className="bridge-label" htmlFor="receiver-host">عنوان IP الرسيفر داخل الشبكة</label>
+            <input id="receiver-host" className="bridge-code-input bridge-host-input" value={receiverHost} onChange={e => setReceiverHost(e.target.value.trim())} placeholder="192.168.1.50" dir="ltr" autoComplete="off" spellCheck="false" />
+            <div className="bridge-scheme-row"><label htmlFor="receiver-scheme">طريقة الاتصال</label><select id="receiver-scheme" value={receiverScheme} onChange={e => setReceiverScheme(e.target.value)}><option value="http">HTTP · 80</option><option value="https">HTTPS · 443</option></select></div>
+            <button className="primary-button bridge-submit" onClick={connectReceiver} disabled={busy || !receiverHost.trim()}>{busy ? "جاري الفحص..." : "اختبار اتصال قراءة فقط"}</button>
+            {receiverInfo && <div className="bridge-receiver-details"><strong>تمت قراءة بيانات الرسيفر</strong><div><span>الموديل</span><b>{receiverInfo.model || receiverInfo.name || "غير متاح"}</b></div><div><span>صورة النظام</span><b>{receiverInfo.image || "غير متاحة"}</b></div><div><span>إصدار Enigma2</span><b>{receiverInfo.enigma_version || "غير متاح"}</b></div><div><span>Kernel</span><b>{receiverInfo.kernel || "غير متاح"}</b></div></div>}
+          </div>
           <div className="bridge-actions">
             <button className="secondary-button" onClick={refreshStatus} disabled={busy}>{busy ? "جاري التحديث..." : "تحديث الحالة"}</button>
             <button className="secondary-button bridge-disconnect" onClick={disconnect}>إنهاء الاقتران</button>
@@ -319,7 +346,7 @@ function LocalBridgeControl() {
         </>}
         {message && <div className="bridge-message">{message}</div>}
         {error && <div className="bridge-error" role="alert">{error}</div>}
-        <div className="bridge-safety-note"><ShieldCheck size={15}/><span>المرحلة الحالية تقرأ حالة الاقتران فقط. لا يوجد اتصال بالرسيفر أو SSH أو تنفيذ أوامر أو تعديل ملفات.</span></div>
+        <div className="bridge-safety-note"><ShieldCheck size={15}/><span>قراءة معلومات OpenWebif فقط من IP محلي خاص. لا SSH ولا أوامر ولا تعديل ملفات ولا تثبيت أو حذف ولا نسخ احتياطي. لا تدخل كلمة مرور الرسيفر في هذه النسخة.</span></div>
       </section>
     </div>}
   </>;

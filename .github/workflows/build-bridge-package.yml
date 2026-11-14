@@ -1,0 +1,40 @@
+name: Build Smart Manager Bridge ZIP
+
+on:
+  push:
+    branches: ["main", "feature/standalone-local-bridge", "feature/receiver-readonly-webif"]
+    paths:
+      - "bridge-package/**"
+      - "tests/**"
+      - ".github/workflows/build-bridge-package.yml"
+  pull_request:
+    branches: ["main"]
+    paths:
+      - "bridge-package/**"
+      - "tests/**"
+      - ".github/workflows/build-bridge-package.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Test bridge routes and receiver validation
+        run: python -B -m unittest discover -s tests -v
+      - name: Validate bridge syntax
+        run: python -c "import ast,pathlib; ast.parse(pathlib.Path('bridge-package/bridge.py').read_text(encoding='utf-8'))"
+      - name: Build ZIP package
+        run: |
+          mkdir -p dist
+          cd bridge-package
+          zip -r ../dist/Online4Tech-Smart-Manager-Bridge.zip . -x '*/__pycache__/*' '*.pyc'
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Online4Tech-Smart-Manager-Bridge
+          path: dist/Online4Tech-Smart-Manager-Bridge.zip
+          if-no-files-found: error
+          retention-days: 30
