@@ -40,21 +40,21 @@ class IpkInspectionTests(unittest.TestCase):
             info = tarfile.TarInfo(member_name)
             info.size = len(data)
             archive.addfile(info, io.BytesIO(data))
-        members = [("debian-binary", b"2.0\\n"), ("control.tar.gz", tar_buffer.getvalue())]
-        output = bytearray(b"!<arch>\\n")
+        members = [("debian-binary", b"2.0\n"), ("control.tar.gz", tar_buffer.getvalue())]
+        output = bytearray(b"!<arch>\n")
         for name, data in members:
             header = (
                 name.ljust(16) + "0".ljust(12) + "0".ljust(6) + "0".ljust(6)
-                + "100644".ljust(8) + str(len(data)).ljust(10) + "`\\n"
+                + "100644".ljust(8) + str(len(data)).ljust(10) + "`\n"
             ).encode("ascii")
             output.extend(header)
             output.extend(data)
             if len(data) % 2:
-                output.extend(b"\\n")
+                output.extend(b"\n")
         return bytes(output)
 
     def test_reads_valid_control_metadata(self):
-        payload = self.make_ipk("Package: enigma2-plugin-example\\nVersion: 1.2.3\\nArchitecture: all\\n")
+        payload = self.make_ipk("Package: enigma2-plugin-example\nVersion: 1.2.3\nArchitecture: all\n")
         self.assertEqual(parse_ipk_metadata(payload), {
             "package": "enigma2-plugin-example",
             "version": "1.2.3",
@@ -66,17 +66,17 @@ class IpkInspectionTests(unittest.TestCase):
             parse_ipk_metadata(b"not an ipk")
 
     def test_rejects_missing_control(self):
-        payload = self.make_ipk("Package: example\\nVersion: 1\\nArchitecture: all\\n", "not-control")
+        payload = self.make_ipk("Package: example\nVersion: 1\nArchitecture: all\n", "not-control")
         with self.assertRaisesRegex(ValueError, "ipk_control_missing"):
             parse_ipk_metadata(payload)
 
     def test_rejects_traversal_in_control_archive(self):
-        payload = self.make_ipk("Package: example\\nVersion: 1\\nArchitecture: all\\n", "../control")
+        payload = self.make_ipk("Package: example\nVersion: 1\nArchitecture: all\n", "../control")
         with self.assertRaisesRegex(ValueError, "ipk_unsafe_path"):
             parse_ipk_metadata(payload)
 
     def test_rejects_invalid_package_name(self):
-        payload = self.make_ipk("Package: BAD NAME\\nVersion: 1\\nArchitecture: all\\n")
+        payload = self.make_ipk("Package: BAD NAME\nVersion: 1\nArchitecture: all\n")
         with self.assertRaisesRegex(ValueError, "ipk_package_invalid"):
             parse_ipk_metadata(payload)
 
